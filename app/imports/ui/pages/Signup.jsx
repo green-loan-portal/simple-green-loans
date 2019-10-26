@@ -31,12 +31,40 @@ class Signup extends React.Component {
     });
   }
 
+  userRegistered() {
+    Meteor.startup(function () {
+      console.log("Passed2");
+      // process.env.MAIL_URL = "smtp://postmaster%40sandbox5ecff102054b492ab4b6959e3394e2ab.mailgun.org:7f50dcf8a84ee0a19a43f40d50a082a7-2dfb0afe-5b4fe61e@smtp.mailgun.org:587"
+      // process.env.MAIL_URL = `smtps://17buih%40gmail.com:${Meteor.settings.wileysGmailPassword}@smtp.gmail.com:465`;
+      process.env.MAIL_URL = `smtps://${Meteor.settings.automatedEmailInfo.email}%40gmail.com:${Meteor.settings.automatedEmailInfo.passwords}@smtp.gmail.com:465`;
+
+      let myHTMLString = "<center><img src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png' width='50%' /></center><br>";
+      myHTMLString += "Dear Wiley,<br><br>";
+      myHTMLString += "Thank you for signing up at <a href=\"https://gems.hawaii.gov\">GEMS.hawaii.gov</a>. In order for you to register, please <a href=\"https://www.test.com\">click here</a> to verify your account.<br>";
+      myHTMLString += "We are looking forward hearing you soon.<br><br>";
+      myHTMLString += "Cheers,<br>GEMS Hawaii Team";
+
+      console.log("Passed3");
+      try {
+        Email.send({
+          to: "wileyb@hawaii.edu",
+          from: "Hawaii GEMS",
+          subject: "GEMS - Email Confirmation",
+          html: myHTMLString
+        });
+        console.log("Sent");
+      } catch (e) {
+        console.log("Email error: " + e);
+      }
+    });
+  }
+
   /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     }
     return (
       <Container>
@@ -65,7 +93,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button content="Submit"/>
+                <Form.Button content="Submit" />
               </Segment>
             </Form>
             <Message>
@@ -74,12 +102,12 @@ class Signup extends React.Component {
             {this.state.error === '' ? (
               ''
             ) : (
-              <Message
-                error
-                header="Registration was not successful"
-                content={this.state.error}
-              />
-            )}
+                <Message
+                  error
+                  header="Registration was not successful"
+                  content={this.state.error}
+                />
+              )}
           </Grid.Column>
         </Grid>
       </Container>
