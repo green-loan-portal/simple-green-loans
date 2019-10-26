@@ -7,7 +7,7 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "wileyb@hawaii.edu", "condition": "excellent" }
   ],
 
-  "wileysGmailPassword": [
-    { "password": ""}
+  "automatedEmailInfo": [
+    { "email": "gemshawaii19", "password": "Manoa#2019"}
   ]
 }
