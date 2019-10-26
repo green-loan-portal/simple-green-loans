@@ -36,7 +36,7 @@ class Signup extends React.Component {
       console.log("Passed2");
       // process.env.MAIL_URL = "smtp://postmaster%40sandbox5ecff102054b492ab4b6959e3394e2ab.mailgun.org:7f50dcf8a84ee0a19a43f40d50a082a7-2dfb0afe-5b4fe61e@smtp.mailgun.org:587"
       // process.env.MAIL_URL = `smtps://17buih%40gmail.com:${Meteor.settings.wileysGmailPassword}@smtp.gmail.com:465`;
-      process.env.MAIL_URL = `smtps://${Meteor.settings.automatedEmailInfo.email}%40gmail.com:${Meteor.settings.automatedEmailInfo.passwords}@smtp.gmail.com:465`;
+      process.env.MAIL_URL = `smtps://${Meteor.settings.automatedEmailInfo.email}%40gmail.com:${Meteor.settings.automatedEmailInfo.password}@smtp.gmail.com:465`;
 
       let myHTMLString = "<center><img src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png' width='50%' /></center><br>";
       myHTMLString += "Dear Wiley,<br><br>";
