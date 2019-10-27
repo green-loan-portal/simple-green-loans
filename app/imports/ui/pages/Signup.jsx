@@ -29,6 +29,7 @@ class Signup extends React.Component {
       } else {
         this.setState({ error: '', redirectToReferer: true });
 
+        // Send confirmation email if no errors occured when creating a new account
         Meteor.call('sendConfirmationEmail', email, function (error) {
           console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
         });
