@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react';
 
-export default class MiddleHP extends React.Component {
+export default class SignupHP extends React.Component {
   render() {
     return (
         <Segment placeholder>

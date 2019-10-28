@@ -2,8 +2,13 @@
   alignment: center;
   border: none;
 }
-
-.LogoHP {
+.gemsLogo {
+  padding-right: 100px;
   border: none;
   box-shadow: none;
+  padding-top: 100px;
+}
+
+#footer {
+  padding-top: 100px;
 }
