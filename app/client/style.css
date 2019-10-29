@@ -1,0 +1,14 @@
+.ui.borderless.middle.Menu {
+  alignment: center;
+  border: none;
+}
+.gemsLogo {
+  padding-right: 100px;
+  border: none;
+  box-shadow: none;
+  padding-top: 100px;
+}
+
+#footer {
+  padding-top: 100px;
+}

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
@@ -27,6 +28,11 @@ class Signup extends React.Component {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: '', redirectToReferer: true });
+
+        // Send confirmation email if no errors occured when creating a new account
+        Meteor.call('sendConfirmationEmail', email, function (error) {
+          console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+        });
       }
     });
   }
@@ -36,7 +42,7 @@ class Signup extends React.Component {
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     }
     return (
       <Container>
@@ -65,7 +71,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button content="Submit"/>
+                <Form.Button content="Submit" />
               </Segment>
             </Form>
             <Message>
@@ -74,12 +80,12 @@ class Signup extends React.Component {
             {this.state.error === '' ? (
               ''
             ) : (
-              <Message
-                error
-                header="Registration was not successful"
-                content={this.state.error}
-              />
-            )}
+                <Message
+                  error
+                  header="Registration was not successful"
+                  content={this.state.error}
+                />
+              )}
           </Grid.Column>
         </Grid>
       </Container>
