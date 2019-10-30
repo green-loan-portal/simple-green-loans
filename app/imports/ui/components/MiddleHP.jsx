@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Grid, Segment } from 'semantic-ui-react';
 
 export default class MiddleHP extends React.Component {
   render() {
     return (
+        <Container>
         <Segment placeholder>
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
@@ -32,6 +33,7 @@ export default class MiddleHP extends React.Component {
 
           <Divider vertical>Or</Divider>
         </Segment>
+        </Container>
     );
   }
 }
