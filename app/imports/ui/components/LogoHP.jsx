@@ -5,7 +5,7 @@ export default class LogoHP extends React.Component {
   render() {
     return (
         <Container>
-          <Menu style={{ paddingTop: '10px', border: 'none' }}>
+          <Menu style={{ paddingTop: '10px' }}>
             <Image
                 src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png'
                 position='left'
@@ -15,7 +15,7 @@ export default class LogoHP extends React.Component {
                 Hawaii Green Infrastructure Authority
               </Menu.Item>
               <Menu.Item as='p' position='left'
-                         style={{ color: '#395878', paddingTop: '-20px' }}>
+                         style={{ paddingTop: '-20px' }}>
                 GEMS Financing Program
               </Menu.Item>
             </div>

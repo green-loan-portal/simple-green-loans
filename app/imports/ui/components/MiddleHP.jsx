@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Divider, Form, Grid, Segment, Header } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Grid, Segment, Header, List } from 'semantic-ui-react';
 
 export default class MiddleHP extends React.Component {
   render() {
@@ -10,6 +10,17 @@ export default class MiddleHP extends React.Component {
             Welcome to the GEMS Application!
           </Header>
           <p>Aloha! We have recently overhauled our GEM$ loan application process!</p>
+          <p>Changes and features include:</p>
+          <List bulleted>
+            <List.Item>
+              Completely web-based application, no more frustrating PDF applications!
+            </List.Item>
+            <List.Item>
+              Account creation for easier management of your application!
+            </List.Item>
+          </List>
+          <p>Please use the options on the bottom to create an account for a new loan application,
+            or to sign in to your existing account!</p>
         <Segment placeholder>
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
