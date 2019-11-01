@@ -5,7 +5,6 @@ import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Label, Button } from 'semantic-ui-react';
 
 class SeventhInfo extends React.Component {
-
   render() {
     return (
       <Container>
@@ -35,7 +34,7 @@ class SeventhInfo extends React.Component {
               <Form.Input label="Relationship to Applicant" width={6} />
             </Form.Group>
             <Button className="float-right">Save & Next &gt;</Button>
-            <Button className="float-right">Save & Quit</Button>
+            <Button className="float-right">Save & Exit</Button>
             <Button className="float-right">&lt; Previous</Button>
           </Container>
         </Form>
@@ -45,7 +44,6 @@ class SeventhInfo extends React.Component {
 }
 
 class EightInfo extends React.Component {
-
   render() {
     return (
       <Container>
@@ -71,7 +69,7 @@ class EightInfo extends React.Component {
             <Form.Input label="Property Management Company Address" placeholder='Street, City, State, Zip' width={8} required />
           </Form.Group>
           <Button className="float-right">Save & Next &gt;</Button>
-          <Button className="float-right">Save & Quit</Button>
+          <Button className="float-right">Save & Exit</Button>
           <Button className="float-right">&lt; Previous</Button>
         </Form>
       </Container>
@@ -79,8 +77,8 @@ class EightInfo extends React.Component {
   }
 }
 
-class NinthInfo extends React.Component {
 
+class NinthInfo extends React.Component {
   render() {
     return (
       <Container>
@@ -117,16 +115,31 @@ class NinthInfo extends React.Component {
           all or part of the applicant's income derives from any public assistance program; or because the applicant has in good faith exercised any
           right under the Consumer Credit Protection Act. The federal agency that administers compliance with this law concerning this creditor is
           the Federal Trade Commission Consumer Response Center Washington, DC 20580 1‐877‐FTC‐HELP (1‐877‐382‐4357) TDD: 1‐866‐
-            653‐4261 <a href="https://www.ftc.gov" target="_blank">www.ftc.gov.</a></p>
+            653‐4261 <a href="https://www.ftc.gov" target="_blank" rel="noopener noreferrer">www.ftc.gov.</a></p>
           <p>By signing this Application, I confirm that I have received HGIA’s Privacy Notice as part of this Application packet. I also agree that I may,
           but am not required to, agree to and accept the terms of this Application by electronic means, and that my submission of this Application
 by electronic means shall be sufficient evidence of my agreement to do so by electronic means</p>
           <Form.Group>
-            <Form.Input label="Applicant’s Signature" placeholder='To be Updated' width={12} required />
-            <Form.Input label="Date" type="date" value="YYYY-MM-DD" width={4} />
+            <Form.Input label="Applicant’s Signature" placeholder='To be Updated' width={12} className="application-signature" required>
+              <canvas id="sig-canvas" className="set-canvas-width">
+                Please use another browser in order to sign this form.
+		 		      </canvas>
+            </Form.Input>
+            <Form id="require-margin">
+              <Form.Input label="Date" type="date" id="getDate"></Form.Input>
+              <br />
+              <Form.Group>
+                <Form.Input>
+                  <Button className="green" id="sig-submitBtn">Submit Signature</Button>
+                </Form.Input>
+                <Form.Input>
+                  <Button className="green" id="sig-clearBtn">Clear Signature</Button>
+                </Form.Input>
+              </Form.Group>
+            </Form>
           </Form.Group>
           <Button className="float-right">Save & Next &gt;</Button>
-          <Button className="float-right">Save & Quit</Button>
+          <Button className="float-right">Save & Exit</Button>
           <Button className="float-right">&lt; Previous</Button>
         </Form>
       </Container>
