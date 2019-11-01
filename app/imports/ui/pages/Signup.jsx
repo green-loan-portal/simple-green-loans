@@ -71,6 +71,15 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
+                <Form.Input
+                    label="Confirm Password"
+                    icon="lock"
+                    iconPosition="left"
+                    name="confirm password"
+                    placeholder="Confirm Password"
+                    type="password"
+                    onChange={this.handleChange}
+                />
                 <Form.Button content="Submit" />
               </Segment>
             </Form>
