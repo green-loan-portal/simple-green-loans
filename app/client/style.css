@@ -7,3 +7,34 @@
   border: none;
   box-shadow: none;
 }
+
+/* START: 7th to 9th Form Section */
+
+.add-margin-top-40px {
+  margin-top: 40px;
+}
+
+.add-margin-top-30vh {
+  margin-top: 30vh;
+}
+
+.float-right {
+  float: right;
+}
+
+#sig-canvas {
+  border: 1px solid rgba(34, 36, 38, .15);
+  border-radius: 6px;
+  cursor: crosshair;
+}
+
+.red {
+  background: red;
+}
+
+#require-margin {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+/* END: 7th to 9th Form Section */
