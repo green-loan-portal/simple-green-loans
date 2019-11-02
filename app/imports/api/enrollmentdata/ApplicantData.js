@@ -7,7 +7,7 @@ const ApplicantData = new Mongo.Collection('ApplicantData');
 
 /** Define a schema to specify the structure of each document in the collection. */
 const ApplicantDataSchema = new SimpleSchema({
-  applicantName: String,
+  email: String,
   dob: String,
 }, { tracker: Tracker });
 

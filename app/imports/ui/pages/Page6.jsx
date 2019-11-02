@@ -10,7 +10,7 @@ import { StudentData } from '../../api/studentdata/StudentData';
 import { ApplicantData } from '../../api/enrollmentdata/ApplicantData';
 
 /** Renders the Page for adding a document. */
-class CreateStudent extends React.Component {
+class Page6 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,7 +30,7 @@ class CreateStudent extends React.Component {
     if (insertError) {
       swal('Error', insertError.message, 'error');
     } else {
-      ApplicantData.insert({ applicantName, dob },
+      ApplicantData.insert({ email, dob },
           (error) => {
             insertError = error;
           });
@@ -38,7 +38,7 @@ class CreateStudent extends React.Component {
         swal('Error', insertError.message, 'error');
       } else {
         swal('Success', 'The student record was created.', 'success');
-        this.setState({ applicantName });
+        this.setState({ email });
         formRef.reset();
       }
     }
@@ -89,4 +89,4 @@ class CreateStudent extends React.Component {
   }
 }
 
-export default CreateStudent;
+export default Page6;
