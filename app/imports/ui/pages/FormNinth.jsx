@@ -81,10 +81,6 @@ class Ninth extends React.Component {
             </Container>
         );
     }
-
-    // addSignatureJS() {
-    //     ExpandCanvas();
-    // }
 }
 
 export default Ninth;
