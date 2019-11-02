@@ -2,6 +2,7 @@ import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { ExpandCanvas } from "../js/userSignature";
 
 class Ninth extends React.Component {
 
@@ -76,14 +77,14 @@ class Ninth extends React.Component {
                     </div>
                 </Form>
                 <div className="add-margin-top-40px"></div>
-                <div>{this.addSignatureJS()}</div>
+                <div>{ExpandCanvas()}</div>
             </Container>
         );
     }
 
-    addSignatureJS() {
-        import '../js/userSignature'
-    }
+    // addSignatureJS() {
+    //     ExpandCanvas();
+    // }
 }
 
 export default Ninth;
