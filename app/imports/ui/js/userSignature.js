@@ -10,7 +10,8 @@
             };
     })();
 
-    setTimeout(function () { // wait for 0.25 sec to load up
+    setTimeout(function () { // wait for 0.5 sec to load up
+        console.log("Waited 0.5sec");
         var canvas = document.getElementById("sig-canvas");
         var ctx = canvas.getContext("2d");
 
@@ -36,7 +37,6 @@
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-        console.log(`${mm}-${dd}-${yyyy}`);
         document.getElementById('getDate').value = `${yyyy}-${mm}-${dd}`;
         document.getElementById('getDate').disabled = true;
 
@@ -156,6 +156,6 @@
             // sigText.value = dataUrl;
             sigImage.setAttribute('src', dataUrl);
         }, false);
-    }, 250);
+    }, 1000);
 
 })();

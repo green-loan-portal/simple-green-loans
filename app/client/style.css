@@ -2,11 +2,11 @@
   alignment: center;
   border: none;
 }
+
 .gemsLogo {
   padding-right: 100px;
   border: none;
   box-shadow: none;
-<<<<<<< HEAD
   padding-top: 100px;
 }
 
@@ -28,6 +28,10 @@
   float: right;
 }
 
+.align-right {
+  text-align: right;
+}
+
 #sig-canvas {
   border: 1px solid rgba(34, 36, 38, .15);
   border-radius: 6px;
@@ -44,8 +48,6 @@
 }
 
 /* END: 7th to 9th Form Section */
-=======
-}
 
 .sizeOf {
   padding-left: 125px;
@@ -75,4 +77,3 @@
 .formFills {
   padding-bottom: 25px;
 }
->>>>>>> origin/John

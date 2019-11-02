@@ -19,7 +19,7 @@ class Eighth extends React.Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Input label="Property Manager Name"
-                                    placeholder='First, Middle, Last' width={8} required />
+                            placeholder='First, Middle, Last' width={8} required />
                         <Form.Input type='email' label='Email' width={8} required />
                         <Form.Input label="Work Phone" width={4} />
                         <Form.Input label="Cell Phone" width={4} />
@@ -27,17 +27,19 @@ class Eighth extends React.Component {
                     <Form.Group>
                         <Form.Input label="Property Management Company Name" width={8} required />
                         <Form.Input label="Property Management Company Address"
-                                    placeholder='Street, City, State, Zip' width={8} required />
+                            placeholder='Street, City, State, Zip' width={8} required />
                     </Form.Group>
-                    <Button className="float-right">
-                        <Link to="/formninth">Save & Next &gt;</Link>
-                    </Button>
-                    <Button className="float-right">
-                        <Link to="">Save & Exit</Link>
-                    </Button>
-                    <Button className="float-right">
-                        <Link to="/formseventh">&lt; Previous</Link>
-                    </Button>
+                    <div className="align-right">
+                        <Button>
+                            <Link to="/formseventh">&lt; Previous</Link>
+                        </Button>
+                        <Button>
+                            <Link to="">Save & Exit</Link>
+                        </Button>
+                        <Button>
+                            <Link to="/formninth" rel="noopener noreferrer">Save & Next &gt;</Link>
+                        </Button>
+                    </div>
                 </Form>
                 <div className="add-margin-top-40px"></div>
             </Container>

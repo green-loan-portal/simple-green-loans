@@ -12,7 +12,7 @@ class Seventh extends React.Component {
                     <Header as="h3" className="dividing header">
                         7. APPLICANT&#39;S INFORMATION
                         <Label className="float-right green">
-                          Note: The Applicant is the person named on the utility account named in Section 2.
+                            Note: The Applicant is the person named on the utility account named in Section 2.
                         </Label>
                     </Header>
 
@@ -29,7 +29,7 @@ class Seventh extends React.Component {
                         />
                         <Form.Input
                             label="All Parties Names"
-        placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
+                            placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
                             width={16} />
                         <Form.Group>
                             <Form.Input label='Other Owner(s)' width={10} />
@@ -39,19 +39,21 @@ class Seventh extends React.Component {
                             <Form.Input label='Other Owner(s)' width={10} />
                             <Form.Input label='Relationship to Applicant' width={6} />
                         </Form.Group>
-                        <Button className="float-right">
-                            <Link to="/formeighth">Save & Next &gt;</Link>
-                        </Button>
-                        <Button className="float-right">
-                            <Link to="">Save & Exit</Link>
-                        </Button>
-                        <Button className="float-right">
-                            <Link to="/formsixth">&lt; Previous</Link>
-                        </Button>
+
+                        <div className="align-right">
+                            <Button>
+                                <Link to="/formsixth">&lt; Previous</Link>
+                            </Button>
+                            <Button>
+                                <Link to="">Save & Exit</Link>
+                            </Button>
+                            <Button>
+                                <Link to="/formeighth">Save & Next &gt;</Link>
+                            </Button>
+                        </div>
                     </Container>
                 </Form>
                 <div className="add-margin-top-40px"></div>
-                <script src="userSignature.js"></script>
             </Container>
         );
     }

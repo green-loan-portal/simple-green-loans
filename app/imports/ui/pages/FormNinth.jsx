@@ -63,23 +63,25 @@ class Ninth extends React.Component {
                             </Form.Group>
                         </Form>
                     </Form.Group>
-                    <Button className="float-right">
-                        <Link to="">Save & Next &gt;</Link>
-                    </Button>
-                    <Button className="float-right">
-                        <Link to="">Save & Exit</Link>
-                    </Button>
-                    <Button className="float-right">
-                        <Link to="/formeighth">&lt; Previous</Link>
-                    </Button>
+                    <div className="align-right">
+                        <Button>
+                            <Link to="/formeighth">&lt; Previous</Link>
+                        </Button>
+                        <Button>
+                            <Link to="">Save & Exit</Link>
+                        </Button>
+                        <Button>
+                            <Link to="">Save & Next &gt;</Link>
+                        </Button>
+                    </div>
                 </Form>
                 <div className="add-margin-top-40px"></div>
-                <div>{this.addScript()}</div>
+                <div>{this.addSignatureJS()}</div>
             </Container>
         );
     }
 
-    addScript() {
+    addSignatureJS() {
         import '../js/userSignature'
     }
 }
