@@ -19,6 +19,7 @@ import FormSeventh from '../pages/FormSeventh';
 import FormEighth from '../pages/FormEighth';
 import FormNinth from '../pages/FormNinth';
 import ProfilePage from '../pages/ProfilePage';
+import AuthorizationPage from '../components/Discretion';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,9 +33,10 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <ProtectedRoute path="/profile" component={ProfilePage}/>
               <Route path="/signup" component={Signup}/>
-              <Route path="/formseventh" component={FormSeventh}/>
-              <Route path="/formeighth" component={FormEighth}/>
-              <Route path="/formninth" component={FormNinth}/>
+              <ProtectedRoute path="/formseventh" component={FormSeventh}/>
+              <ProtectedRoute path="/formeighth" component={FormEighth}/>
+              <ProtectedRoute path="/formninth" component={FormNinth}/>
+              <ProtectedRoute path="/authorizationpage" component={AuthorizationPage}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
