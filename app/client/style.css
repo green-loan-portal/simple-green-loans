@@ -1,7 +1,9 @@
 .ui.borderless.middle.Menu {
   alignment: center;
   border: none;
+  background-color: #395878 !important;
 }
+
 .gemsLogo {
   padding-right: 100px;
   border: none;
@@ -11,4 +13,68 @@
 
 #footer {
   padding-top: 100px;
+}
+
+/* START: 7th to 9th Form Section */
+
+.add-margin-top-40px {
+  margin-top: 40px;
+}
+
+.add-margin-top-30vh {
+  margin-top: 30vh;
+}
+
+.float-right {
+  float: right;
+}
+
+.align-right {
+  text-align: right;
+}
+
+#sig-canvas {
+  border: 1px solid rgba(34, 36, 38, .15);
+  border-radius: 6px;
+  cursor: crosshair;
+}
+
+.red {
+  background: red;
+}
+
+#require-margin {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+/* END: 7th to 9th Form Section */
+
+.sizeOf {
+  padding-left: 125px;
+  padding-right: 125px;
+  border: medium;
+  padding-bottom: 25px;
+}
+
+.legalDiscretion {
+  max-height: 200px;
+  font-family: 'sans-serif';
+  font-size: medium;
+  overflow-y: scroll;
+  border: black;
+}
+
+.termsAndConditions {
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
+
+.title {
+  font-family: 'sans-serif';
+  text-align: center;
+}
+
+.formFills {
+  padding-bottom: 25px;
 }

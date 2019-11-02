@@ -21,15 +21,128 @@ class ListStuff extends React.Component {
           <Header as="h2" textAlign="center">List Stuff</Header>
           <Table celled>
             <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Condition</Table.HeaderCell>
-                <Table.HeaderCell>Edit</Table.HeaderCell>
-              </Table.Row>
+
+              { /**
+
+
+               <Table.Row>
+               <Table.HeaderCell>Column</Table.HeaderCell>
+               <Table.HeaderCell>Name</Table.HeaderCell>
+               <Table.HeaderCell>Quantity</Table.HeaderCell>
+               <Table.HeaderCell>Condition</Table.HeaderCell>
+               <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
+               <Table.HeaderCell>otherHDYHA</Table.HeaderCell>
+               <Table.HeaderCell>Edit</Table.HeaderCell>
+               </Table.Row>
+
+               <Table celled structured>
+               <Table.Header>
+               <Table.Row>
+               <Table.HeaderCell rowSpan='2'>Name</Table.HeaderCell>
+               <Table.HeaderCell rowSpan='2'>Type</Table.HeaderCell>
+               <Table.HeaderCell rowSpan='2'>Files</Table.HeaderCell>
+               <Table.HeaderCell colSpan='3'>Languages</Table.HeaderCell>
+               </Table.Row>
+               <Table.Row>
+               <Table.HeaderCell>Ruby</Table.HeaderCell>
+               <Table.HeaderCell>JavaScript</Table.HeaderCell>
+               <Table.HeaderCell>Python</Table.HeaderCell>
+               </Table.Row>
+               </Table.Header>
+
+               <Table.Body>
+               <Table.Row>
+               <Table.Cell>Alpha Team</Table.Cell>
+               <Table.Cell>Project 1</Table.Cell>
+               <Table.Cell textAlign='right'>2</Table.Cell>
+               <Table.Cell textAlign='center'>
+               <Icon color='green' name='checkmark' size='large'/>
+               </Table.Cell>
+               <Table.Cell/>
+               <Table.Cell/>
+               </Table.Row>
+               <Table.Row>
+               <Table.Cell rowSpan='3'>Beta Team</Table.Cell>
+               <Table.Cell>Project 1</Table.Cell>
+               <Table.Cell textAlign='right'>52</Table.Cell>
+               <Table.Cell textAlign='center'>
+               <Icon color='green' name='checkmark' size='large'/>
+               </Table.Cell>
+               <Table.Cell/>
+               <Table.Cell/>
+               </Table.Row>
+               <Table.Row>
+               <Table.Cell>Project 2</Table.Cell>
+               <Table.Cell textAlign='right'>12</Table.Cell>
+               <Table.Cell/>
+               <Table.Cell textAlign='center'>
+               <Icon color='green' name='checkmark' size='large'/>
+               </Table.Cell>
+               <Table.Cell/>
+               </Table.Row>
+               <Table.Row>
+               <Table.Cell>Project 3</Table.Cell>
+               <Table.Cell textAlign='right'>21</Table.Cell>
+               <Table.Cell textAlign='center'>
+               <Icon color='green' name='checkmark' size='large'/>
+               </Table.Cell>
+               <Table.Cell/>
+               <Table.Cell/>
+               </Table.Row>
+               </Table.Body>
+               </Table>
+               */}
+
+
+              <Table definition>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell/>
+                    <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
+                    <Table.HeaderCell>Which of these do you have in your home?</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Cell rowSpan='1'>Questions Go Here</Table.Cell>
+                    <Table.Cell>Answer</Table.Cell>
+                    <Table.Cell>Answer</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                  </Table.Row>
+
+                  <Table.Row>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                  </Table.Row>
+
+                </Table.Body>
+              </Table>
+
+              {
+                /**
+                 <Table.Column>
+                 <Table.HeaderCell inverted >Side Column</Table.HeaderCell>
+                 </Table.Column>
+                 */}
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+
+              {
+                /**
+                 { this.props.stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff}/>) }
+                 */}
+
             </Table.Body>
           </Table>
         </Container>
