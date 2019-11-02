@@ -20,6 +20,7 @@ import FormNinth from '../pages/FormNinth';
 import ProfilePage from '../pages/ProfilePage';
 import AuthorizationPage from '../components/Discretion';
 import Page6 from '../pages/Page6';
+import MiddleInformation from '../components/MiddleInformation';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -30,9 +31,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={HomePageHP}/>
               <Route path="/newform6" component={Page6}/>
+              <Route exact path="/information" component={MiddleInformation}/>
               <Route path="/signin" component={Signin}/>
-              <ProtectedRoute path="/profile" component={ProfilePage}/>
               <Route path="/signup" component={Signup}/>
+              <ProtectedRoute path="/profile" component={ProfilePage}/>
               <ProtectedRoute path="/formseventh" component={FormSeventh}/>
               <ProtectedRoute path="/formeighth" component={FormEighth}/>
               <ProtectedRoute path="/formninth" component={FormNinth}/>
