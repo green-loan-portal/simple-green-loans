@@ -1,5 +1,5 @@
-*.iml
 .idea
+*.iml
 .DS_Store
 node_modules
-settings.production.json
+settings.production.jason
