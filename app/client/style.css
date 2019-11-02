@@ -1,6 +1,7 @@
 .ui.borderless.middle.Menu {
   alignment: center;
   border: none;
+  background-color: #395878 !important;
 }
 
 .gemsLogo {
