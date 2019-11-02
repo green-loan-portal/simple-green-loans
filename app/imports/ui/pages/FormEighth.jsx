@@ -3,7 +3,6 @@ import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-/** Render a Not Found page if the user enters a URL that doesn't match any route. */
 class Eighth extends React.Component {
     render() {
         return (

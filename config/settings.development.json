@@ -1,5 +1,6 @@
 {
   "defaultAccounts": [
+    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "wileyb@hawaii.edu", "password": "changeme", "role": "admin" }
   ],
 
