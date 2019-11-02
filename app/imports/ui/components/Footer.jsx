@@ -6,7 +6,7 @@ class Footer extends React.Component {
     const divStyle = { paddingTop: '15px' };
     return (
         <footer>
-          <div style={divStyle} className="ui center aligned container">
+          <div style={divStyle} className="ui center aligned container" id={'footer'}>
             <hr />
               Department of Information and Computer Sciences <br />
               University of Hawaii<br />

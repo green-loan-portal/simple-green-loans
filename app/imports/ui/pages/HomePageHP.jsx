@@ -1,6 +1,7 @@
 import React from 'react';
-import MiddleHP from '../components/MiddleHP';
+import SignupHP from '../components/SignupHP';
 import LogoHP from '../components/LogoHP';
+import Middle1HP from '../components/Middle1HP';
 
 export default class HomePageHP extends React.Component {
 
@@ -8,7 +9,8 @@ export default class HomePageHP extends React.Component {
     return (
         <div>
           <LogoHP/>
-          <MiddleHP/>
+          <Middle1HP/>
+          <SignupHP/>
         </div>
     );
   }
