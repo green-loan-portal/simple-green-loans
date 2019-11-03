@@ -31,13 +31,13 @@ class Eighth extends React.Component {
                     </Form.Group>
                     <div className="align-right">
                         <Button>
-                            <Link to="/formseventh">&lt; Previous</Link>
+                            <Link to="/form/7">&lt; Previous</Link>
                         </Button>
                         <Button>
                             <Link to="">Save & Exit</Link>
                         </Button>
                         <Button>
-                            <Link to="/formninth" rel="noopener noreferrer">Save & Next &gt;</Link>
+                            <Link to="/form/9" rel="noopener noreferrer">Save & Next &gt;</Link>
                         </Button>
                     </div>
                 </Form>

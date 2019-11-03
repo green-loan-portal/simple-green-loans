@@ -66,13 +66,13 @@ class Ninth extends React.Component {
                     </Form.Group>
                     <div className="align-right">
                         <Button>
-                            <Link to="/formeighth">&lt; Previous</Link>
+                            <Link to="/form/8">&lt; Previous</Link>
                         </Button>
                         <Button>
                             <Link to="">Save & Exit</Link>
                         </Button>
                         <Button>
-                            <Link to="">Save & Next &gt;</Link>
+                            <Link to="/authorization">Save & Next &gt;</Link>
                         </Button>
                     </div>
                 </Form>

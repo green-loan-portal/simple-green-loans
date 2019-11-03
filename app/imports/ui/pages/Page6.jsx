@@ -1,13 +1,15 @@
 import React from 'react';
-import { Grid, Segment, Header, Form, Message } from 'semantic-ui-react';
+import { Grid, Segment, Header, Form, Message, Button, Container } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { StudentFormSchema as formSchema } from '../forms/StudentFormInfo';
 import { StudentData } from '../../api/studentdata/StudentData';
 import { ApplicantData } from '../../api/enrollmentdata/ApplicantData';
+
 
 /** Renders the Page for adding a document. */
 class Page6 extends React.Component {
@@ -48,6 +50,9 @@ class Page6 extends React.Component {
   render() {
     let fRef = null;
     return (
+        <Container>
+          <div className="add-margin-top-40px"></div>
+          <Form>
         <Grid container centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">6. Data For Program Reporting Purposes</Header>
@@ -85,6 +90,20 @@ class Page6 extends React.Component {
             {this.state.name ? <Message>Edit <a href={`/#/student/${this.state.name}`}>this data</a></Message> : ''}
           </Grid.Column>
         </Grid>
+          <div className="align-right">
+            <Button>
+              <Link to="/form/5">&lt; Previous</Link>
+            </Button>
+            <Button>
+              <Link to="">Save & Exit</Link>
+            </Button>
+            <Button>
+              <Link to="/form/7">Save & Next &gt;</Link>
+            </Button>
+          </div>
+          </Form>
+          <div className="add-margin-top-40px"></div>
+        </Container>
     );
   }
 }

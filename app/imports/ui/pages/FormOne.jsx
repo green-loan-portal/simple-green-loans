@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Grid, Segment, Header, Form } from 'semantic-ui-react';
+import { Grid, Segment, Header, Form, Button, Container } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -9,6 +9,7 @@ import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import BoolField from 'uniforms-unstyled/BoolField';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import SimpleSchema from 'simpl-schema';
@@ -71,7 +72,7 @@ const formSchema = new SimpleSchema({
 });
 
 /** Renders the Page for adding a document. */
-class AddStuff extends React.Component {
+class FormOne extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
@@ -92,9 +93,12 @@ class AddStuff extends React.Component {
   render() {
     let fRef = null;
     return (
+        <Container>
+          <div className="add-margin-top-40px"></div>
+          <Form>
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Add Stuff</Header>
+            <Header as="h2" textAlign="center">1.Pre-Application Survey</Header>
             <AutoForm ref={ref => {
               fRef = ref;
             }} schema={formSchema} onSubmit={data => this.submit(data, fRef)}>
@@ -152,9 +156,19 @@ class AddStuff extends React.Component {
             </AutoForm>
           </Grid.Column>
         </Grid>
-
-    );
+            <div className="align-right">
+              <Button>
+                <Link to="">Save & Exit</Link>
+              </Button>
+              <Button>
+                <Link to="/form/6">Save & Next &gt;</Link>
+              </Button>
+            </div>
+          </Form>
+              <div className="add-margin-top-40px"></div>
+        </Container>
+  );
   }
-}
+  }
 
-export default AddStuff;
+  export default FormOne;

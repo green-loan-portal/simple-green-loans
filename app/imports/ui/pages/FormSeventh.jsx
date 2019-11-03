@@ -42,13 +42,13 @@ class Seventh extends React.Component {
 
                         <div className="align-right">
                             <Button>
-                                <Link to="/formsixth">&lt; Previous</Link>
+                                <Link to="/form/6">&lt; Previous</Link>
                             </Button>
                             <Button>
                                 <Link to="">Save & Exit</Link>
                             </Button>
                             <Button>
-                                <Link to="/formeighth">Save & Next &gt;</Link>
+                                <Link to="/form/8">Save & Next &gt;</Link>
                             </Button>
                         </div>
                     </Container>
