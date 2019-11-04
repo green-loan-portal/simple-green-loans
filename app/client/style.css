@@ -43,9 +43,9 @@
   background: red;
 }
 
-#require-margin {
-  margin-left: .5rem;
-  margin-right: .5rem;
+.require-margin {
+  margin-left: .5rem !important;
+  margin-right: .5rem !important;
 }
 
 /* END: 7th to 9th Form Section */
