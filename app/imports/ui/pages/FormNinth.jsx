@@ -6,7 +6,7 @@ import { ExpandCanvas } from "../js/userSignature";
 import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
-import HiddenField from 'uniforms-semantic/HiddenField';
+import TextField from 'uniforms-semantic/TextField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -15,9 +15,9 @@ import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Sec
 class Ninth extends React.Component {
   submit(data) {
     const { userSignature } = data;
-    const owner = Meteor.user().username;
-    const date = new Date().toJSON().split("T")[0];
-    console.log(owner + "; " + date);
+    console.log(userSignature);
+    // const owner = Meteor.user().username;
+    // const todaysDate = new Date().toJSON().split("T")[0];
     // Section9DB.insert({
     //   owner, userSignature, todaysDate
     // }, (error) => {
@@ -33,7 +33,7 @@ class Ninth extends React.Component {
     return (
       <Container>
         <div className="add-margin-top-40px"></div>
-        <Header as="h3" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
+        <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
         GEM$ Program. By signing below, I certify that all information provided on this Application is true, correct and complete. If necessary, I
@@ -88,19 +88,24 @@ class Ninth extends React.Component {
               </Form.Input>
             </div>
           </Form.Group>
-          <HiddenField name='userSignature' id='mySignature' value='' />
+          <TextField
+            name='userSignature'
+            id='customer-signature'
+            showInlineError={true}
+          />
 
           <div className="align-right">
             <Button>
-              <Link to="/formeighth">&lt; Previous</Link>
+              <Link to="/form/8">&lt; Previous</Link>
             </Button>
             {/* <Button>
               <Link to="">Save & Exit</Link>
             </Button> */}
             {/* <Button type='button' id='submitFieldForm'>click here</Button> */}
-            <SubmitField value='Submit' />
+            <SubmitField type='hidden' value='Submit' id='submitFormHidden' />
+            <Button type='button' id='saveBtn'>Save</Button>
             <Button>
-              <Link to="">Save & Next &gt;</Link>
+              <Link to="/authorization">Save & Next &gt;</Link>
             </Button>
           </div>
           <ErrorsField />

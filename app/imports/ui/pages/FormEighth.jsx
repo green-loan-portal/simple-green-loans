@@ -34,7 +34,7 @@ class Eighth extends React.Component {
     return (
       <Container>
         <div className="add-margin-top-40px"></div>
-        <Header as="h3" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
+        <Header as="h2" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
 
         <AutoForm schema={Section8DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <Form.Group>
@@ -55,18 +55,18 @@ class Eighth extends React.Component {
             </div>
             <div className="four wide field">
               <NumField
+                decimal={false}
                 name='landlordPhoneHome'
                 label='Home Phone'
                 placeholder='Only numbers'
-                decimal={false}
                 />
             </div>
             <div className="four wide field">
               <NumField
+                decimal={false}
                 name='landlordPhoneCell'
                 label='Cell Phone'
                 placeholder='Only numbers'
-                decimal={false}
               />
             </div>
           </Form.Group>
@@ -89,18 +89,18 @@ class Eighth extends React.Component {
             </div>
             <div className="four wide field">
               <NumField
+                decimal={false}
                 name='propertyManagerPhoneHome'
                 label='Home Phone'
                 placeholder='Only numbers'
-                decimal={false}
               />
             </div>
             <div className="four wide field">
               <NumField
+                decimal={false}
                 name='propertyManagerPhoneCell'
                 label='Cell Phone'
                 placeholder='Only numbers'
-                decimal={false}
               />
             </div>
           </Form.Group>
@@ -125,14 +125,14 @@ class Eighth extends React.Component {
 
           <div className="align-right">
             <Button>
-              <Link to="/formseventh">&lt; Previous</Link>
+              <Link to="/form/7">&lt; Previous</Link>
             </Button>
             <SubmitField value='Submit' />
             {/* <Button>
               <Link to="">Save & Exit</Link>
             </Button> */}
             <Button>
-              <Link to="/formninth" rel="noopener noreferrer">Save & Next &gt;</Link>
+              <Link to="/form/9" rel="noopener noreferrer">Save & Next &gt;</Link>
             </Button>
           </div>
           <ErrorsField />

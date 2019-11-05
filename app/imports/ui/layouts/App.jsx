@@ -15,11 +15,12 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import FormSeventh from '../pages/FormSeventh';
+import FormOne from '../pages/FormOne';
 import FormEighth from '../pages/FormEighth';
 import FormNinth from '../pages/FormNinth';
 import ProfilePage from '../pages/ProfilePage';
 import AuthorizationPage from '../components/Discretion';
-import Page6 from '../pages/Page6';
+import FormSix from '../pages/FormSix';
 import MiddleInformation from '../components/MiddleInformation';
 import NavBar from '../components/NavBar';
 
@@ -32,15 +33,16 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomePageHP} />
-            <Route path="/newform6" component={Page6} />
             <Route exact path="/information" component={MiddleInformation} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <ProtectedRoute path="/profile" component={ProfilePage} />
-            <ProtectedRoute path="/formseventh" component={FormSeventh} />
-            <ProtectedRoute path="/formeighth" component={FormEighth} />
-            <ProtectedRoute path="/formninth" component={FormNinth} />
-            <ProtectedRoute path="/authorizationpage" component={AuthorizationPage} />
+            <ProtectedRoute path="/form/1" component={FormOne} />
+            <ProtectedRoute path="/form/6" component={FormSix} />
+            <ProtectedRoute path="/form/7" component={FormSeventh} />
+            <ProtectedRoute path="/form/8" component={FormEighth} />
+            <ProtectedRoute path="/form/9" component={FormNinth} />
+            <ProtectedRoute path="/authorization" component={AuthorizationPage} />
             <ProtectedRoute path="/list" component={ListStuff} />
             <ProtectedRoute path="/add" component={AddStuff} />
             <ProtectedRoute path="/edit/:_id" component={EditStuff} />

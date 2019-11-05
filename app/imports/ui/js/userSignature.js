@@ -141,7 +141,7 @@ export function ExpandCanvas() {
     }
 
     // Set up the UI
-    var mySignature = document.getElementById('mySignature');
+    var customerSignature = document.getElementById('customer-signature');
     var clearBtn = document.getElementById('sig-clearBtn');
     var submitBtn = document.getElementById('submitFieldForm');
     clearBtn.addEventListener('click', function (e) {
@@ -152,9 +152,9 @@ export function ExpandCanvas() {
 
     submitBtn.addEventListener('click', function (e) {
       var dataUrl = canvas.toDataURL();
-      mySignature.textContent = dataUrl;
-      mySignature.value = dataUrl;
-      console.log("worked");
+      // customerSignature.textContent = dataURL;
+      customerSignature.value = dataUrl;
+      document.getElementById('submitFormHidden').click();
       // sigImage.setAttribute('src', dataUrl);
     }, false);
   }, 250);
