@@ -6,6 +6,7 @@ import { ExpandCanvas } from "../js/userSignature";
 import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
+import HiddenField from 'uniforms-semantic/HiddenField';
 import TextField from 'uniforms-semantic/TextField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -87,12 +88,13 @@ class Ninth extends React.Component {
               </Form.Input>
             </div>
           </Form.Group>
-          <TextField
+          {/* <TextField
             name='userSignature'
             id='customer-signature'
             showInlineError={true}
-          />
+          /> */}
 
+          <TextField id="userSignatureField" name="userSignature" showInlineError={true} />
           <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
@@ -101,7 +103,7 @@ class Ninth extends React.Component {
               <Link to="">Save & Exit</Link>
             </Button> */}
             {/* <Button type='button' id='submitFieldForm'>click here</Button> */}
-            <SubmitField type='hidden' value='Submit' id='submitFormHidden' />
+            <SubmitField value='Submit' id='submitFormHidden' />
             <Button type='button' id='saveBtn'>Save</Button>
             <Button>
               <Link to="/authorization">Save & Next &gt;</Link>
