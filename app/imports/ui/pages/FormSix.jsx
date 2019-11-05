@@ -36,7 +36,6 @@ class FormSix extends React.Component {
   render() {
     return (
       <Container>
-        <div className="add-margin-top-40px"></div>
         <Header as="h2" className="dividing header">6. Data For Program Reporting Purposes</Header>
         <AutoForm schema={Section6DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <div className="sixteen wide field">
@@ -101,7 +100,7 @@ class FormSix extends React.Component {
             </div>
           </Form.Group>
 
-          <div className="align-right">
+          <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/5">&lt; Previous</Link>
             </Button>
@@ -112,7 +111,6 @@ class FormSix extends React.Component {
           </div>
           <ErrorsField value='Submit' />
         </AutoForm>
-        <div className="add-margin-top-40px"></div>
       </Container>
     );
   }

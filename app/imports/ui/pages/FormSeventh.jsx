@@ -76,7 +76,6 @@ class Seventh extends React.Component {
     return (
       <Container>
         {this.addHeader()}
-        <div className="add-margin-top-40px"></div>
         <Header as="h2" className="dividing header">
           7. APPLICANT&#39;S INFORMATION
           <Label className="float-right green">
@@ -141,7 +140,7 @@ class Seventh extends React.Component {
               />
             </Form.Group> */}
 
-            <div className="align-right">
+            <div className="align-right add-margin-top-20px">
               <Button>
                 <Link to="/form/6">&lt; Previous</Link>
               </Button>
@@ -153,7 +152,6 @@ class Seventh extends React.Component {
             </div>
           </Container>
         </AutoForm>
-        <div className="add-margin-top-40px"></div>
       </Container>
     );
   }

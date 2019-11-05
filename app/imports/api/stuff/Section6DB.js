@@ -8,19 +8,19 @@ const Section6DB = new Mongo.Collection('Section6DB');
 /** Define a schema to specify the structure of each document in the collection; without owner */
 const Section6DBSchemaWithoutOwner = new SimpleSchema({
     income: { label: 'Annual Household Income', type: String },
-    totalOccupants: { label: 'Total number of occupants in the home', type: Number, defaultValue: '' },
-    numAdults: { label: 'Of this number, how many are adults?', type: Number, defaultValue: '' },
-    numRetired: { label: 'How many of the adults are retired?', type: Number, defaultValue: '' },
-    numChildrenBelow5: { label: 'Amount of children age 5 or younger', type: Number, defaultValue: '' },
-    numChildren6to12: { label: 'Amount of children ages 6 to 12', type: Number, defaultValue: '' },
-    numChildren13to17: { label: 'Amount of children ages 13 to 17', type: Number, defaultValue: '' },
-    membersNotHomeDay: { label: 'Number of HH members at work/school during the day', type: Number, defaultValue: '' },
-    membersNotHomeNight: { label: 'Number of HH members at work/school during the night', type: Number, defaultValue: '' },
-    membersHomeDay: { label: 'Number of HH members home during the day', type: Number, defaultValue: '' },
-    membersHomeWork: { label: 'Number of HH members working from home', type: Number, defaultValue: '' },
+    totalOccupants: { label: 'Total number of occupants in the home', type: Number },
+    numAdults: { label: 'Of this number, how many are adults?', type: Number },
+    numRetired: { label: 'How many of the adults are retired?', type: Number },
+    numChildrenBelow5: { label: 'Amount of children age 5 or younger', type: Number },
+    numChildren6to12: { label: 'Amount of children ages 6 to 12', type: Number },
+    numChildren13to17: { label: 'Amount of children ages 13 to 17', type: Number },
+    membersNotHomeDay: { label: 'Number of HH members at work/school during the day', type: Number },
+    membersNotHomeNight: { label: 'Number of HH members at work/school during the night', type: Number },
+    membersHomeDay: { label: 'Number of HH members home during the day', type: Number },
+    membersHomeWork: { label: 'Number of HH members working from home', type: Number },
     employerName: { label: 'Employer name', type: String, optional: false },
     occupation: { label: 'Occupation/Position', type: String, optional: false },
-    workPhone: { label: 'Work Phone Number', type: Number, defaultValue: '' },
+    workPhone: { label: 'Work Phone Number', type: Number },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */

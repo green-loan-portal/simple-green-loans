@@ -33,7 +33,6 @@ class Eighth extends React.Component {
   render() {
     return (
       <Container>
-        <div className="add-margin-top-40px"></div>
         <Header as="h2" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
 
         <AutoForm schema={Section8DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
@@ -59,7 +58,7 @@ class Eighth extends React.Component {
                 name='landlordPhoneHome'
                 label='Home Phone'
                 placeholder='Only numbers'
-                />
+              />
             </div>
             <div className="four wide field">
               <NumField
@@ -123,7 +122,7 @@ class Eighth extends React.Component {
             </div>
           </Form.Group>
 
-          <div className="align-right">
+          <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/7">&lt; Previous</Link>
             </Button>
@@ -137,7 +136,6 @@ class Eighth extends React.Component {
           </div>
           <ErrorsField />
         </AutoForm>
-        <div className="add-margin-top-40px"></div>
       </Container>
     );
   }

@@ -32,7 +32,6 @@ class Ninth extends React.Component {
   render() {
     return (
       <Container>
-        <div className="add-margin-top-40px"></div>
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
@@ -94,7 +93,7 @@ class Ninth extends React.Component {
             showInlineError={true}
           />
 
-          <div className="align-right">
+          <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
             </Button>
@@ -111,7 +110,6 @@ class Ninth extends React.Component {
           <ErrorsField />
         </AutoForm>
 
-        <div className="add-margin-top-40px"></div>
         <div>{ExpandCanvas()}</div>
       </Container>
     );

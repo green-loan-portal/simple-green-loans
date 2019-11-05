@@ -79,96 +79,95 @@ class FormOne extends React.Component {
     const { name, quantity, condition, otherHDYHA } = data; // EDIT THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
     const owner = Meteor.user().username;
     Stuffs.insert({ name, quantity, condition, otherHDYHA, owner }, // EDIT THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            swal('Success', 'Item added successfully', 'success');
-            formRef.reset();
-          }
-        });
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Item added successfully', 'success');
+          formRef.reset();
+        }
+      });
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
     return (
-        <Container>
-          <div className="add-margin-top-40px"></div>
-          <Form>
-        <Grid container centered>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">1.Pre-Application Survey</Header>
-            <AutoForm ref={ref => {
-              fRef = ref;
-            }} schema={formSchema} onSubmit={data => this.submit(data, fRef)}>
-              <Segment>
-                <Form.Group width='equal'>
-                  <TextField name='name'/>
-                  <NumField name='quantity' decimal={false}/>
-                  <SelectField name='condition'/>
-                </Form.Group>
-                <section>
-                  <SelectField checkboxes name='howDidYouHearAboutUs'/>
-                </section>
-                <TextField name='otherHDYHA'/>
-                <BoolField name='washer' fluid label='Washer'/>
-                <NumField name='ageOfWasher' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='dryer'/>
-                <NumField name='ageOfDryer' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='kitchenRefrigerator'/>
-                <NumField name='ageOfKitchenRefrigerator' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='secondRefrigerator'/>
-                <NumField name='ageOfSecondRefrigerator' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='chestFreezer'/>
-                <NumField name='ageOfChestFreezer' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='solarHWHeater'/>
-                <NumField name='ageOfSolarHWHeater' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='PVSystem'/>
-                <NumField name='ageOfPVSystem' decimal={false} label={false} placeholder={'Age of washer'}/>
-                <BoolField name='LEDCFLBulbs'/>
-                <BoolField name='WIFI'/>
-                <SelectField checkboxes name='interestedInInstalling'/>
-                <TextField name='otherInterestedInInstalling'/>
-                <SelectField checkboxes name='assistanceFrom'/>
-                <TextField name='assistanceFromOther'/>
+      <Container>
+        <Form>
+          <Grid container centered>
+            <Grid.Column>
+              <Header as="h2" textAlign="center">1.Pre-Application Survey</Header>
+              <AutoForm ref={ref => {
+                fRef = ref;
+              }} schema={formSchema} onSubmit={data => this.submit(data, fRef)}>
+                <Segment>
+                  <Form.Group width='equal'>
+                    <TextField name='name' />
+                    <NumField name='quantity' decimal={false} />
+                    <SelectField name='condition' />
+                  </Form.Group>
+                  <section>
+                    <SelectField checkboxes name='howDidYouHearAboutUs' />
+                  </section>
+                  <TextField name='otherHDYHA' />
+                  <BoolField name='washer' fluid label='Washer' />
+                  <NumField name='ageOfWasher' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='dryer' />
+                  <NumField name='ageOfDryer' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='kitchenRefrigerator' />
+                  <NumField name='ageOfKitchenRefrigerator' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='secondRefrigerator' />
+                  <NumField name='ageOfSecondRefrigerator' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='chestFreezer' />
+                  <NumField name='ageOfChestFreezer' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='solarHWHeater' />
+                  <NumField name='ageOfSolarHWHeater' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='PVSystem' />
+                  <NumField name='ageOfPVSystem' decimal={false} label={false} placeholder={'Age of washer'} />
+                  <BoolField name='LEDCFLBulbs' />
+                  <BoolField name='WIFI' />
+                  <SelectField checkboxes name='interestedInInstalling' />
+                  <TextField name='otherInterestedInInstalling' />
+                  <SelectField checkboxes name='assistanceFrom' />
+                  <TextField name='assistanceFromOther' />
 
 
-                <TextField name='anyoneYouKnowName'/>
-                <TextField name='anyoneYouKnowPhone'/>
-                <TextField name='anyoneYouKnowEmail'/>
-                <TextField name='nameOnUtilAcc'/>
-                <NumField name='utilAccNum' decimal={false} label={'util account num'}/>
+                  <TextField name='anyoneYouKnowName' />
+                  <TextField name='anyoneYouKnowPhone' />
+                  <TextField name='anyoneYouKnowEmail' />
+                  <TextField name='nameOnUtilAcc' />
+                  <NumField name='utilAccNum' decimal={false} label={'util account num'} />
 
-                <SelectField checkboxes name='energyImpWouldLikeToInstall'/>
-                <TextField name='approvedContractorName'/>
-                <TextField name='approvedContractorContact'/>
-                <TextField name='installAddress'/>
+                  <SelectField checkboxes name='energyImpWouldLikeToInstall' />
+                  <TextField name='approvedContractorName' />
+                  <TextField name='approvedContractorContact' />
+                  <TextField name='installAddress' />
 
-                <SelectField checkboxes name='whichIsland'/>
+                  <SelectField checkboxes name='whichIsland' />
 
-                <SelectField checkboxes name='typeOfResidence'/>
-                <TextField name='typeOfResidenceOther'/>
+                  <SelectField checkboxes name='typeOfResidence' />
+                  <TextField name='typeOfResidenceOther' />
 
-                <SubmitField value='Submit'/>
-                <ErrorsField/>
-              </Segment>
-            </AutoForm>
-          </Grid.Column>
-        </Grid>
-            <div className="align-right">
-              <Button>
-                <Link to="">Save & Exit</Link>
-              </Button>
-              <Button>
-                <Link to="/form/6">Save & Next &gt;</Link>
-              </Button>
-            </div>
-          </Form>
-              <div className="add-margin-top-40px"></div>
-        </Container>
-  );
+                  <SubmitField value='Submit' />
+                  <ErrorsField />
+                </Segment>
+              </AutoForm>
+            </Grid.Column>
+          </Grid>
+
+          <div className="align-right add-margin-top-20px">
+            <Button>
+              <Link to="">Save & Exit</Link>
+            </Button>
+            <Button>
+              <Link to="/form/6">Save & Next &gt;</Link>
+            </Button>
+          </div>
+        </Form>
+      </Container>
+    );
   }
-  }
+}
 
-  export default FormOne;
+export default FormOne;
