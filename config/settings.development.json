@@ -5,6 +5,9 @@
   ],
 
   "defaultData": [
+    { "name": "Boogie Board", "quantity": 2, "owner": "wileyb@hawaii.edu", "condition": "excellent",
+      "howDidYouHearAboutUs": [],"otherHDYHA": ""
+    }
   ],
 
   "automatedEmailInfo": [

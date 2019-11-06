@@ -141,16 +141,27 @@ export function ExpandCanvas() {
     }
 
     // Set up the UI
+<<<<<<< HEAD
     var customerSignature = document.getElementById("userSignatureField");
     var clearBtn = document.getElementById('sig-clearBtn');
     var submitBtn = document.getElementById('submitFieldForm');
 
     clearBtn.addEventListener('click', function (e) {
       clearCanvas();
+=======
+    // var sigText = document.getElementById("sig-dataUrl");
+    var sigImage = document.getElementById("sig-image");
+    var clearBtn = document.getElementById("sig-clearBtn");
+    var submitBtn = document.getElementById("sig-submitBtn");
+    clearBtn.addEventListener('click', function (e) {
+      clearCanvas();
+      // sigText.innerHTML = "Data URL for your signature will go here!";
+      sigImage.setAttribute('src', "");
+>>>>>>> parent of e8ac617... Finished section 8's database; fix minor things with 7 & 9
     }, false);
-
     submitBtn.addEventListener('click', function (e) {
       var dataUrl = canvas.toDataURL();
+<<<<<<< HEAD
 
       console.log(dataUrl);
       // customerSignature.textContent = dataURL;
@@ -160,6 +171,10 @@ export function ExpandCanvas() {
       //   document.getElementById('submitFormHidden').click();
       // }, 500);
       // sigImage.setAttribute('src', dataUrl);
+=======
+      // sigText.value = dataUrl;
+      sigImage.setAttribute('src', dataUrl);
+>>>>>>> parent of e8ac617... Finished section 8's database; fix minor things with 7 & 9
     }, false);
   }, 250);
 };

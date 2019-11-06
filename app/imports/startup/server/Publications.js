@@ -1,11 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+<<<<<<< HEAD
 import '../../api/stuff/Section2DB';
 import '../../api/stuff/Section6DB';
 import '../../api/stuff/Section7DB';
 import '../../api/stuff/Section8DB';
 import '../../api/stuff/Section9DB';
+=======
+>>>>>>> parent of e8ac617... Finished section 8's database; fix minor things with 7 & 9
 
 /** This subscription publishes only the documents associated with the logged in user */
 Meteor.publish('Stuff', function publish() {
