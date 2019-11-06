@@ -94,7 +94,11 @@ class Ninth extends React.Component {
             showInlineError={true}
           />
 
+<<<<<<< HEAD
           <div className="align-right">
+=======
+          <div className="align-right add-margin-top-20px">
+>>>>>>> parent of 899afb5... updated
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
             </Button>

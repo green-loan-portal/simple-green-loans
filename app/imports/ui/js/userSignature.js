@@ -143,15 +143,19 @@ export function ExpandCanvas() {
     // Set up the UI
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     var customerSignature = document.getElementById("userSignatureField");
 =======
     var mySignature = document.getElementById('mySignature');
 >>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
+=======
+    var customerSignature = document.getElementById('customer-signature');
+>>>>>>> parent of 899afb5... updated
     var clearBtn = document.getElementById('sig-clearBtn');
     var submitBtn = document.getElementById('submitFieldForm');
-
     clearBtn.addEventListener('click', function (e) {
       clearCanvas();
+<<<<<<< HEAD
 =======
     // var sigText = document.getElementById("sig-dataUrl");
     var sigImage = document.getElementById("sig-image");
@@ -162,9 +166,14 @@ export function ExpandCanvas() {
       // sigText.innerHTML = "Data URL for your signature will go here!";
       sigImage.setAttribute('src', "");
 >>>>>>> parent of e8ac617... Finished section 8's database; fix minor things with 7 & 9
+=======
+      // sigText.innerHTML = "Data URL for your signature will go here!";
+      // sigImage.setAttribute('src', "");
+>>>>>>> parent of 899afb5... updated
     }, false);
     submitBtn.addEventListener('click', function (e) {
       var dataUrl = canvas.toDataURL();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -180,6 +189,11 @@ export function ExpandCanvas() {
       mySignature.value = dataUrl;
       console.log("worked");
 >>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
+=======
+      // customerSignature.textContent = dataURL;
+      customerSignature.value = dataUrl;
+      document.getElementById('submitFormHidden').click();
+>>>>>>> parent of 899afb5... updated
       // sigImage.setAttribute('src', dataUrl);
 =======
       // sigText.value = dataUrl;
