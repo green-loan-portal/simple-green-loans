@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1320b09-ab17-40ac-bf68-ef4ba0d58622" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/add-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/add-stuff-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/admin-landing-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/admin-list-stuff-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/edit-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/edit-stuff-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/landing-after-login-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/landing-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/list-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/list-stuff-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/meteor-application-template-react-youtube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/meteor-application-template-youtube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/not-authorized-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/register-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/signin-page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +31,7 @@
     <property name="js.meteor.library.cached" value="$PROJECT_DIR$/app/.meteor" />
     <property name="js.meteor.library.was.enabled" value="true" />
     <property name="js.meteor.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hacc-free-labor" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -84,11 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572333032657</updated>
-      <workItem from="1572333034021" duration="41308000" />
-      <workItem from="1572654904978" duration="3983000" />
-      <workItem from="1573026604529" duration="65000" />
-      <workItem from="1573026715019" duration="483000" />
-      <workItem from="1573027613142" duration="312000" />
+      <workItem from="1572333034021" duration="42624000" />
     </task>
     <servers />
   </component>
@@ -100,9 +75,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>

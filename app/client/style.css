@@ -1,0 +1,9 @@
+.ui.borderless.middle.Menu {
+  alignment: center;
+  border: none;
+}
+
+.LogoHP {
+  border: none;
+  box-shadow: none;
+}

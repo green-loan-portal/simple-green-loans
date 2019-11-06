@@ -1,0 +1,38 @@
+{
+  "name": "meteor-application-template-react",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.5.4",
+    "classnames": "^2.2.6",
+    "core-js": "^3.1.4",
+    "graphql": "^0.8.2",
+    "meteor-node-stubs": "^0.4.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-addons-pure-render-mixin": "^15.6.2",
+    "react-dom": "^16.8.6",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3",
+    "simpl-schema": "^1.5.5",
+    "sweetalert": "^2.1.2",
+    "uniforms": "^2.2.0",
+    "uniforms-bridge-simple-schema-2": "^2.2.0",
+    "uniforms-semantic": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "eslint-utils": ">=1.4.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-meteor": "^5.1.0",
+    "eslint-plugin-react": "^7.14.2"
+  },
+  "scripts": {
+    "start": "meteor --no-release-check --settings ../config/settings.development.json",
+    "lint": "eslint --quiet --ext .jsx --ext .js ./imports"
+  }
+}
