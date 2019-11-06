@@ -71,6 +71,7 @@ const StuffSchema = new SimpleSchema({
     allowedValues: AppFormValues.energyImpWouldLikeToInstall,
   },
   approvedContractorName: String,
+  
   approvedContractorContact: String,
   installAddress: String,
   whichIsland: { type: String, allowedValues: AppFormValues.whichIsland },
