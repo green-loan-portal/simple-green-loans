@@ -72,7 +72,7 @@ const formSchema = new SimpleSchema({
 });
 
 /** Renders the Page for adding a document. */
-class Form1 extends React.Component {
+class FormOne extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
@@ -163,7 +163,7 @@ class Form1 extends React.Component {
               <Link to="">Save & Exit</Link>
             </Button>
             <Button>
-              <Link to="/form/2">Save & Next &gt;</Link>
+              <Link to="/form/6">Save & Next &gt;</Link>
             </Button>
           </div>
         </Form>
@@ -193,7 +193,11 @@ class Form1 extends React.Component {
   }
 
 <<<<<<< HEAD:app/imports/ui/forms/Form1.jsx
+<<<<<<< HEAD:app/imports/ui/forms/Form1.jsx
 export default Form1;
 =======
   export default FormOne;
 >>>>>>> parent of 99fb843... Updated minor layouts:app/imports/ui/pages/FormOne.jsx
+=======
+export default FormOne;
+>>>>>>> parent of 2bc5508... Finished section 2-9 except 7 & 9. Moved all forms to imports/ui/forms directory:app/imports/ui/pages/FormOne.jsx

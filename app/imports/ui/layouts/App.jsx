@@ -15,6 +15,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Form1 from '../forms/Form1';
 import Form2 from '../forms/Form2';
 import Form6 from '../forms/Form6';
@@ -32,6 +33,16 @@ import AuthorizationPage from '../components/Discretion';
 import Page6 from '../pages/Page6';
 import MiddleInformation from '../components/MiddleInformation';
 >>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
+=======
+import FormSeventh from '../pages/FormSeventh';
+import FormOne from '../pages/FormOne';
+import FormEighth from '../pages/FormEighth';
+import FormNinth from '../pages/FormNinth';
+import ProfilePage from '../pages/ProfilePage';
+import AuthorizationPage from '../components/Discretion';
+import FormSix from '../pages/FormSix';
+import MiddleInformation from '../components/MiddleInformation';
+>>>>>>> parent of 2bc5508... Finished section 2-9 except 7 & 9. Moved all forms to imports/ui/forms directory
 import NavBar from '../components/NavBar';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -44,15 +55,18 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={HomePageHP} />
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            <Route exact path="/information" component={MiddleInformation} />
+>>>>>>> parent of 2bc5508... Finished section 2-9 except 7 & 9. Moved all forms to imports/ui/forms directory
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <ProtectedRoute path="/profile" component={ProfilePage} />
-            <ProtectedRoute path="/form/1" component={Form1} />
-            <ProtectedRoute path="/form/2" component={Form2} />
-            <ProtectedRoute path="/form/6" component={Form6} />
-            <ProtectedRoute path="/form/7" component={Form7} />
-            <ProtectedRoute path="/form/8" component={Form8} />
-            <ProtectedRoute path="/form/9" component={Form9} />
+            <ProtectedRoute path="/form/1" component={FormOne} />
+            <ProtectedRoute path="/form/6" component={FormSix} />
+            <ProtectedRoute path="/form/7" component={FormSeventh} />
+            <ProtectedRoute path="/form/8" component={FormEighth} />
+            <ProtectedRoute path="/form/9" component={FormNinth} />
             <ProtectedRoute path="/authorization" component={AuthorizationPage} />
 =======
             <Route path="/newform6" component={Page6} />

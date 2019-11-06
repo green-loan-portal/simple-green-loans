@@ -3,7 +3,10 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import '../../api/stuff/Section2DB';
+=======
+>>>>>>> parent of 2bc5508... Finished section 2-9 except 7 & 9. Moved all forms to imports/ui/forms directory
 import '../../api/stuff/Section6DB';
 =======
 >>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
