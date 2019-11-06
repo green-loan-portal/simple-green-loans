@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Header, Grid } from 'semantic-ui-react';
+import { List, Grid } from 'semantic-ui-react';
 
 export default class Middle1HP extends React.Component {
   render() {
@@ -15,8 +15,7 @@ export default class Middle1HP extends React.Component {
                 initiative designed by the Hawaii State Energy Office to make clean energy improvements more
                 affordable and accessible for Hawaii consumers. The program provides low-cost capital to finance solar
                 photovoltaic systems and other clean energy improvements for those who may otherwise have difficulty
-                obtaining financing for these projects. Low-credit homeowners and renters, as well as nonprofits and
-                small businesses are among those who will qualify for project financing through GEMS.
+                obtaining financing for these projects.
               </Grid.Column>
               <Grid.Column>
                 Elligibility

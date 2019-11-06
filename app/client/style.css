@@ -1,4 +1,4 @@
-.ui.borderless.middle.Menu {
+.ui.borderless.top.Menu {
   alignment: center;
   border: none;
   background-color: #395878 !important;
@@ -85,4 +85,18 @@
 
 .formFills {
   padding-bottom: 25px;
+}
+
+#LogoHome {
+  border: none;
+  box-shadow: none;
+  position: center;
+  alignment: center;
+  padding-top: 20px;
+}
+
+.LogoTitle {
+  font-size: 30px;
+  alignment: center;
+
 }
