@@ -13,7 +13,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { Section6DB, Section6DBSchemaWithoutOwner } from '/imports/api/stuff/Section6DB';
 
 /** Renders the Page for adding a document. */
-class FormSix extends React.Component {
+class Form6 extends React.Component {
 
   submit(data) {
     const owner = Meteor.user().username;
@@ -42,78 +42,78 @@ class FormSix extends React.Component {
             <NumField
               decimal={true}
               name='income'
-              showInlineError={true}
+              showInlineError={false}
               placeholder={'Please include income of all person(s) occupying the home'} />
           </div>
 
           <Form.Group>
-            <div className="ten wide field">
-              <NumField decimal={false} name='totalOccupants' showInlineError={true} placeholder={'Total occupants'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='numAdults' showInlineError={true} placeholder={'Total adults'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='numRetired' showInlineError={true} placeholder={'Total retired adults'} />
-            </div>
+            <NumField className='ten wide field'
+              decimal={false} name='totalOccupants' showInlineError={false} placeholder={'Total occupants'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='numAdults' showInlineError={false} placeholder={'Total adults'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='numRetired' showInlineError={false} placeholder={'Total retired adults'}
+            />
           </Form.Group>
 
           <Form.Group>
-            <div className="ten wide field">
-              <NumField decimal={false} name='numChildrenBelow5' showInlineError={true} placeholder={'Children ages below 5'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='numChildren6to12' showInlineError={true} placeholder={'Children ages 6 - 12'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='numChildren13to17' showInlineError={true} placeholder={'Children ages 13 - 17'} />
-            </div>
+            <NumField className='ten wide field'
+              decimal={false} name='numChildrenBelow5' showInlineError={false} placeholder={'Children ages below 5'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='numChildren6to12' showInlineError={false} placeholder={'Children ages 6 - 12'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='numChildren13to17' showInlineError={false} placeholder={'Children ages 13 - 17'}
+            />
           </Form.Group>
 
           <Form.Group>
-            <div className="ten wide field">
-              <NumField decimal={false} name='membersNotHomeDay' showInlineError={true} placeholder={'# people not home day'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='membersNotHomeNight' showInlineError={true} placeholder={'# people not home night'} />
-            </div>
+            <NumField className='ten wide field'
+              decimal={false} name='membersNotHomeDay' showInlineError={false} placeholder={'# people not home day'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='membersNotHomeNight' showInlineError={false} placeholder={'# people not home night'}
+            />
           </Form.Group>
 
           <Form.Group>
-            <div className="ten wide field">
-              <NumField decimal={false} name='membersHomeDay' showInlineError={true} placeholder={'# people home during day'} />
-            </div>
-            <div className="ten wide field">
-              <NumField decimal={false} name='membersHomeWork' showInlineError={true} placeholder={'# people work from home'} />
-            </div>
+            <NumField className='ten wide field'
+              decimal={false} name='membersHomeDay' showInlineError={false} placeholder={'# people home during day'}
+            />
+            <NumField className='ten wide field'
+              decimal={false} name='membersHomeWork' showInlineError={false} placeholder={'# people work from home'}
+            />
           </Form.Group>
 
           <Form.Group>
             <div className="seven wide field">
-              <TextField name='employerName' showInlineError={true} />
+              <TextField name='employerName' showInlineError={false} />
             </div>
             <div className="seven wide field">
-              <TextField name='occupation' showInlineError={true} />
+              <TextField name='occupation' showInlineError={false} />
             </div>
             <div className="seven wide field">
-              <NumField decimal={false} name='workPhone' showInlineError={true} />
+              <NumField decimal={false} name='workPhone' showInlineError={false} />
             </div>
           </Form.Group>
 
+          <ErrorsField value='Submit' />
           <div className="align-right add-margin-top-20px">
             <Button>
-              <Link to="/form/5">&lt; Previous</Link>
+              <Link to="/form/2">&lt; Previous</Link>
             </Button>
             <SubmitField value='Submit' />
             <Button>
               <Link to="/form/7">Save & Next &gt;</Link>
             </Button>
           </div>
-          <ErrorsField value='Submit' />
         </AutoForm>
       </Container>
     );
   }
 }
 
-export default FormSix;
+export default Form6;

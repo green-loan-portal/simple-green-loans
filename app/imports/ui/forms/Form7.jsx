@@ -12,7 +12,7 @@ import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { Section7DB, Section7DBSchemaWithoutOwner } from '/imports/api/stuff/Section7DB';
 
-class Seventh extends React.Component {
+class Form7 extends React.Component {
   modifyOwners = () => {
     let newDiv = document.createElement("div");
 
@@ -78,7 +78,7 @@ class Seventh extends React.Component {
         {this.addHeader()}
         <Header as="h2" className="dividing header">
           7. APPLICANT&#39;S INFORMATION
-          <Label className="float-right green">
+          <Label className="green">
             Note: The Applicant is the person named on the utility account named in Section 2.
           </Label>
         </Header>
@@ -90,22 +90,20 @@ class Seventh extends React.Component {
               <TextField
                 name='email'
                 label='Email'
-                showInlineError={true}
+                showInlineError={false}
               />
-              <div className="five wide field">
-                <NumField
-                  decimal={false}
-                  name='phoneHome'
-                  label='Home Phone'
-                />
-              </div>
-              <div className="five wide field">
-                <NumField
-                  decimal={false}
-                  name='phoneMobile'
-                  label='Mobile Phone'
-                />
-              </div>
+              <NumField
+                className='five wide field'
+                decimal={false}
+                name='phoneHome'
+                label='Home Phone'
+              />
+              <NumField
+                className='five wide field'
+                decimal={false}
+                name='phoneMobile'
+                label='Mobile Phone'
+              />
             </Form.Group>
 
             <Form.Input
@@ -140,6 +138,7 @@ class Seventh extends React.Component {
               />
             </Form.Group> */}
 
+            <ErrorsField />
             <div className="align-right add-margin-top-20px">
               <Button>
                 <Link to="/form/6">&lt; Previous</Link>
@@ -148,7 +147,6 @@ class Seventh extends React.Component {
               <Button>
                 <Link to="/form/8">Save & Next &gt;</Link>
               </Button>
-              <ErrorsField />
             </div>
           </Container>
         </AutoForm>
@@ -157,6 +155,6 @@ class Seventh extends React.Component {
   }
 }
 
-export default Seventh;
+export default Form7;
 
 {/* <div class="one wide field"><label></label><button type="button"><i aria-hidden="true" class="primary trash large icon"></i></button></div> */ }

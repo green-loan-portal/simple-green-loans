@@ -13,7 +13,7 @@ import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
 
-class Ninth extends React.Component {
+class Form9 extends React.Component {
   submit(data) {
     const { userSignature } = data;
     console.log(userSignature);
@@ -91,10 +91,11 @@ class Ninth extends React.Component {
           {/* <TextField
             name='userSignature'
             id='customer-signature'
-            showInlineError={true}
+            showInlineError={false}
           /> */}
 
-          <TextField id="userSignatureField" name="userSignature" showInlineError={true} />
+          <TextField id="userSignatureField" name="userSignature" showInlineError={false} />
+          <ErrorsField />
           <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
@@ -109,7 +110,6 @@ class Ninth extends React.Component {
               <Link to="/authorization">Save & Next &gt;</Link>
             </Button>
           </div>
-          <ErrorsField />
         </AutoForm>
 
         <div>{ExpandCanvas()}</div>
@@ -118,4 +118,4 @@ class Ninth extends React.Component {
   }
 }
 
-export default Ninth;
+export default Form9;

@@ -72,7 +72,7 @@ const formSchema = new SimpleSchema({
 });
 
 /** Renders the Page for adding a document. */
-class FormOne extends React.Component {
+class Form1 extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
@@ -161,7 +161,7 @@ class FormOne extends React.Component {
               <Link to="">Save & Exit</Link>
             </Button>
             <Button>
-              <Link to="/form/6">Save & Next &gt;</Link>
+              <Link to="/form/2">Save & Next &gt;</Link>
             </Button>
           </div>
         </Form>
@@ -170,4 +170,4 @@ class FormOne extends React.Component {
   }
 }
 
-export default FormOne;
+export default Form1;
