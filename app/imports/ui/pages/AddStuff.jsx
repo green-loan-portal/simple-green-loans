@@ -152,6 +152,7 @@ class AddStuff extends React.Component {
             </AutoForm>
           </Grid.Column>
         </Grid>
+
     );
   }
 }

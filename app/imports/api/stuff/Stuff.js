@@ -26,14 +26,14 @@ export const AppFormValues = {
 /** Define a schema to specify the structure of each document in the collection. */
 const StuffSchema = new SimpleSchema({
 
-  name: String,
-  quantity: { type: Number, optional: true },
+  // name: String,
+  // quantity: { type: Number, optional: true },
   owner: String,
-  condition: {
-    type: String,
-    allowedValues: ['excellent', 'good', 'fair', 'poor'],
-    defaultValue: 'good',
-  },
+  // condition: {
+  //   type: String,
+  //   allowedValues: ['excellent', 'good', 'fair', 'poor'],
+  //   defaultValue: 'good',
+  // },
   otherHDYHA: String,
   howDidYouHearAboutUs: { type: Array },
   'howDidYouHearAboutUs.$': { type: String, optional: true, allowedValues: AppFormValues.howDidYouHearAbout },
@@ -76,6 +76,9 @@ const StuffSchema = new SimpleSchema({
   whichIsland: { type: String, allowedValues: AppFormValues.whichIsland },
   typeOfResidence: { type: String, optional: true, allowedValues: AppFormValues.typeOfResidence },
   typeOfResidenceOther: String,
+  email: { type: String, optional: true },
+  homephone: { type: Number, optional: true },
+  mobilephone: { type: Number, optional: true },
 
 }, { tracker: Tracker });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header, Container, Grid, Segment, Divider, Button } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 
 export default class ProfilePage extends React.Component {
   render() {
@@ -13,7 +14,7 @@ export default class ProfilePage extends React.Component {
               <Grid.Row verticalAlign='middle'>
                 <Grid.Column>
                   <Header as="h1">View/Finish Your Application</Header>
-                  <Button>Click Here</Button>
+                  <Button as={NavLink} exact to="/form/1">Click Here</Button>
                 </Grid.Column>
 
                 <Grid.Column>
