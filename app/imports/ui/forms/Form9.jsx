@@ -8,7 +8,10 @@ import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import HiddenField from 'uniforms-semantic/HiddenField';
+<<<<<<< HEAD:app/imports/ui/forms/Form9.jsx
 import TextField from 'uniforms-semantic/TextField';
+=======
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9:app/imports/ui/pages/FormNinth.jsx
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -17,9 +20,9 @@ import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Sec
 class Form9 extends React.Component {
   submit(data) {
     const { userSignature } = data;
-    console.log(userSignature);
-    // const owner = Meteor.user().username;
-    // const todaysDate = new Date().toJSON().split("T")[0];
+    const owner = Meteor.user().username;
+    const date = new Date().toJSON().split("T")[0];
+    console.log(owner + "; " + date);
     // Section9DB.insert({
     //   owner, userSignature, todaysDate
     // }, (error) => {
@@ -34,7 +37,12 @@ class Form9 extends React.Component {
   render() {
     return (
       <Container>
+<<<<<<< HEAD:app/imports/ui/forms/Form9.jsx
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
+=======
+        <div className="add-margin-top-40px"></div>
+        <Header as="h3" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9:app/imports/ui/pages/FormNinth.jsx
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
         GEM$ Program. By signing below, I certify that all information provided on this Application is true, correct and complete. If necessary, I
@@ -89,26 +97,34 @@ class Form9 extends React.Component {
               </Form.Input>
             </div>
           </Form.Group>
+<<<<<<< HEAD:app/imports/ui/forms/Form9.jsx
           {/* <TextField
             name='userSignature'
             id='customer-signature'
             showInlineError={false}
           /> */}
+=======
+          <HiddenField name='userSignature' id='mySignature' value='' />
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9:app/imports/ui/pages/FormNinth.jsx
 
           <TextField id="userSignatureField" name="userSignature" showInlineError={false} />
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
             <Button>
-              <Link to="/form/8">&lt; Previous</Link>
+              <Link to="/formeighth">&lt; Previous</Link>
             </Button>
             {/* <Button>
               <Link to="">Save & Exit</Link>
             </Button> */}
             {/* <Button type='button' id='submitFieldForm'>click here</Button> */}
+<<<<<<< HEAD:app/imports/ui/forms/Form9.jsx
             <SubmitField value='Submit' id='submitFormHidden' />
             <Button type='button' id='saveBtn'>Save</Button>
+=======
+            <SubmitField value='Submit' />
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9:app/imports/ui/pages/FormNinth.jsx
             <Button>
-              <Link to="/authorization">Save & Next &gt;</Link>
+              <Link to="">Save & Next &gt;</Link>
             </Button>
           </div>
         </AutoForm>

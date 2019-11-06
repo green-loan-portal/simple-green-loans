@@ -15,7 +15,7 @@ const Section7DBSchemaWithoutOwner = new SimpleSchema({
 
 /** Define a schema to specify the structure of each document in the collection. */
 const Section7DBSchema = new SimpleSchema({
-  owner: { type: String, unique: true },
+  owner: {type: String, unique: true},
   email: String,
   phoneHome: { type: Number, optional: true },
   phoneMobile: { type: Number, optional: true },

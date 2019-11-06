@@ -2,8 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import '../../api/stuff/Section2DB';
 import '../../api/stuff/Section6DB';
+=======
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
 import '../../api/stuff/Section7DB';
 import '../../api/stuff/Section8DB';
 import '../../api/stuff/Section9DB';

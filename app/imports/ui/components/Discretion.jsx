@@ -1,7 +1,6 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Form, Checkbox, Button, Header } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 
 export default class Discretion extends React.Component {
   render() {
@@ -90,17 +89,16 @@ export default class Discretion extends React.Component {
                 label={<label>I have read and understand the nature of this authorization.</label>}
             />
           </Form>
-          <div className="align-right">
-            <Button>
-              <Link to="/form/9">&lt; Previous</Link>
-            </Button>
-            <Button>
-              <Link to="">Save & Exit</Link>
-            </Button>
-            <Button>
-              <Link to="/profile">Submit</Link>
-            </Button>
-          </div>
+          <Button
+              content='Previous'
+              icon='left arrow'
+              labelPosition='left'
+          />
+          <Button
+              content='Next'
+              icon='right arrow'
+              labelPosition='right'
+          />
           <div>{this.addScript()}</div>
         </Container>
     );

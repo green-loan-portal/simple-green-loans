@@ -142,7 +142,11 @@ export function ExpandCanvas() {
 
     // Set up the UI
 <<<<<<< HEAD
+<<<<<<< HEAD
     var customerSignature = document.getElementById("userSignatureField");
+=======
+    var mySignature = document.getElementById('mySignature');
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
     var clearBtn = document.getElementById('sig-clearBtn');
     var submitBtn = document.getElementById('submitFieldForm');
 
@@ -162,6 +166,7 @@ export function ExpandCanvas() {
     submitBtn.addEventListener('click', function (e) {
       var dataUrl = canvas.toDataURL();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       console.log(dataUrl);
       // customerSignature.textContent = dataURL;
@@ -170,6 +175,11 @@ export function ExpandCanvas() {
       // setTimeout(function () {
       //   document.getElementById('submitFormHidden').click();
       // }, 500);
+=======
+      mySignature.textContent = dataUrl;
+      mySignature.value = dataUrl;
+      console.log("worked");
+>>>>>>> parent of ad84aeb... Finished Section 6 & 8. Need to update/fix section 7 & 9
       // sigImage.setAttribute('src', dataUrl);
 =======
       // sigText.value = dataUrl;
