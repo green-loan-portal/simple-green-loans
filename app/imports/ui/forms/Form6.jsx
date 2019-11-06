@@ -36,6 +36,7 @@ class Form6 extends React.Component {
   render() {
     return (
       <Container>
+        <div className="add-margin-top-40px"></div>
         <Header as="h2" className="dividing header">6. Data For Program Reporting Purposes</Header>
         <AutoForm schema={Section6DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <div className="sixteen wide field">
@@ -100,8 +101,12 @@ class Form6 extends React.Component {
             </div>
           </Form.Group>
 
+<<<<<<< HEAD:app/imports/ui/forms/Form6.jsx
           <ErrorsField value='Submit' />
           <div className="align-right add-margin-top-20px">
+=======
+          <div className="align-right">
+>>>>>>> parent of 99fb843... Updated minor layouts:app/imports/ui/pages/FormSix.jsx
             <Button>
               <Link to="/form/2">&lt; Previous</Link>
             </Button>
@@ -111,6 +116,7 @@ class Form6 extends React.Component {
             </Button>
           </div>
         </AutoForm>
+        <div className="add-margin-top-40px"></div>
       </Container>
     );
   }

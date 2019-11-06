@@ -68,7 +68,11 @@ class Eighth extends React.Component {
     return (
       <Container>
         <div className="add-margin-top-40px"></div>
+<<<<<<< HEAD
         <Header as="h3" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
+=======
+        <Header as="h2" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
+>>>>>>> parent of 99fb843... Updated minor layouts
 
         <AutoForm schema={Section8DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <Form.Group>
@@ -92,7 +96,10 @@ class Eighth extends React.Component {
                 name='landlordPhoneHome'
                 label='Home Phone'
                 placeholder='Only numbers'
+<<<<<<< HEAD
                 decimal={false}
+=======
+>>>>>>> parent of 99fb843... Updated minor layouts
                 />
             </div>
             <div className="four wide field">

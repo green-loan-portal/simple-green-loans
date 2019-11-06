@@ -87,8 +87,14 @@ export default Seventh;
   render() {
     return (
       <Container>
+<<<<<<< HEAD
         <div className="add-margin-top-40px"></div>
         <Header as="h3" className="dividing header">
+=======
+        {this.addHeader()}
+        <div className="add-margin-top-40px"></div>
+        <Header as="h2" className="dividing header">
+>>>>>>> parent of 99fb843... Updated minor layouts
           7. APPLICANT&#39;S INFORMATION
           <Label className="float-right green">
             Note: The Applicant is the person named on the utility account named in Section 2.
