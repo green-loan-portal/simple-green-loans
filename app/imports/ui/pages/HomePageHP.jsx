@@ -2,6 +2,7 @@ import React from 'react';
 import SignupHP from '../components/SignupHP';
 import LogoHP from '../components/LogoHP';
 import Middle1HP from '../components/Middle1HP';
+import MiddleMenu from '../components/MiddleMenu';
 
 export default class HomePageHP extends React.Component {
 
@@ -9,6 +10,7 @@ export default class HomePageHP extends React.Component {
     return (
         <div>
           <LogoHP/>
+          <MiddleMenu/>
           <Middle1HP/>
           <SignupHP/>
         </div>

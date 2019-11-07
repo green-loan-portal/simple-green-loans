@@ -29,13 +29,14 @@ export default class SignupHP extends React.Component {
   }
 
   render() {
+    const topPadding = { paddingTop: '10px' };
     const { from } = { from: { pathname: '/Profile' } };
     if (this.state.redirectToReferer) {
       return <Redirect to={from}/>;
     }
     return (
         <Segment placeholder>
-          <Grid columns={2} relaxed='very' stackable>
+          <Grid columns={2} relaxed='very' stackable className={topPadding}>
             <Grid.Column>
               <Form onSubmit={this.submit}>
                 <Form.Input
