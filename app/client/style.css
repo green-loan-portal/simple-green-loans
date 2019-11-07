@@ -130,3 +130,9 @@
   alignment: center;
 
 }
+
+
+.ui.checkbox.new-line {
+  display: block !important;
+  margin-top: 0.85rem;
+}
