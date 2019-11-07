@@ -1,6 +1,9 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Form, Checkbox, Button, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import { ExpandCanvas } from '../js/userSignature';
 
 export default class Discretion extends React.Component {
   render() {
@@ -73,33 +76,38 @@ export default class Discretion extends React.Component {
                 width={6}
             />
             <Form.Group>
-              <Form.Input label="Applicant’s Signature" placeholder='To be Updated' width={12} className="application-signature" required>
+              <Form.Input label="Applicant’s Signature" width={12} className="application-signature" required>
                 <canvas id="sig-canvas" className="set-canvas-width">
                   Please use another browser in order to sign this form.
                 </canvas>
               </Form.Input>
-              <Form.Input
-                  required
-                  label='Date'
-                  width={4}
-              />
+
+              <div className='four wide field'>
+                <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>
+                <br />
+                <Form.Input>
+                  <Button type="button" className="green sixteen wide field require-margin" id="sig-clearBtn">Clear Signature</Button>
+                </Form.Input>
+                <br />
+                <Form.Input>
+                  <Button type='button' className='green sixteen wide field require-margin' id='submitFieldForm'>Upload Signature</Button>
+                </Form.Input>
+              </div>
             </Form.Group>
-            <Form.Field
-                control={Checkbox}
-                label={<label>I have read and understand the nature of this authorization.</label>}
-            />
           </Form>
-          <Button
-              content='Previous'
-              icon='left arrow'
-              labelPosition='left'
-          />
-          <Button
-              content='Next'
-              icon='right arrow'
-              labelPosition='right'
-          />
+          <div className="align-right">
+            <Button>
+              <Link to="/form/9">&lt; Previous</Link>
+            </Button>
+            <Button>
+              <Link to="">Save & Exit</Link>
+            </Button>
+            <Button>
+              <Link to="/profile">Submit</Link>
+            </Button>
+          </div>
           <div>{this.addScript()}</div>
+          <div>{ExpandCanvas()}</div>
         </Container>
     );
   }

@@ -3,10 +3,10 @@ import React from 'react';
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class Footer extends React.Component {
   render() {
-    const divStyle = { paddingTop: '15px' };
+    const divStyle = { paddingTop: '45px' };
     return (
         <footer>
-          <div style={divStyle} className="ui center aligned container">
+          <div style={divStyle} className="ui center aligned container" id={'footer'}>
             <hr />
               Department of Information and Computer Sciences <br />
               University of Hawaii<br />
