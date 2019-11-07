@@ -139,7 +139,7 @@ class Form1 extends React.Component {
                       name='ageOfDryer'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of dryer'}
                   />
                 </Form.Group>
               </section>
@@ -157,7 +157,7 @@ class Form1 extends React.Component {
                       name='ageOfKitchenRefrigerator'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of kitchen refrigerator'}
                   />
                 </Form.Group>
               </section>
@@ -175,7 +175,7 @@ class Form1 extends React.Component {
                       name='ageOfSecondRefrigerator'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of second refrigerator'}
                   />
                 </Form.Group>
               </section>
@@ -193,7 +193,7 @@ class Form1 extends React.Component {
                       name='ageOfChestFreezer'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of chest freezer'}
                   />
                 </Form.Group>
               </section>
@@ -210,7 +210,7 @@ class Form1 extends React.Component {
                       name='ageOfSolarHWHeater'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of solar hot water heater'}
                   />
                 </Form.Group>
               </section>
@@ -227,7 +227,7 @@ class Form1 extends React.Component {
                       name='ageOfPVSystem'
                       decimal={false}
                       label={false}
-                      placeholder={'Age of washer'}
+                      placeholder={'Age of PV system'}
                   />
                 </Form.Group>
               </section>
