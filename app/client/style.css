@@ -21,6 +21,26 @@
   margin-bottom: 20px;
 }
 
+.ui.form input[type=checkbox] {
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 100%!important;
+  outline: 0;
+  z-index: 3;
+  width: 30px;
+  height: 17px;
+  background: white;
+
+
+}
+.bool-field-style {
+  padding-bottom: 5px;
+}
+
+
+
 /* END: 1st Form Section */
 
 

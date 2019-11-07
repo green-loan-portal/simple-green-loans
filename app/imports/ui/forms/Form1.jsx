@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 // import { Stuffs } from '/imports/api/stuff/Stuff';
 import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -15,6 +15,8 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 // import SimpleSchema from 'simpl-schema';
 // import { Section1DB } from '../../api/stuff/Stuff';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
+import { BaseField, nothing } from 'uniforms';
+//import schema from './DisplayIfFieldSchema';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -72,6 +74,10 @@ class Form1 extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
+
+    // eslint-disable-next-line max-len
+    const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
+    DisplayIf.contextTypes = BaseField.contextTypes;
     return (
 
         <Container>
@@ -85,7 +91,6 @@ class Form1 extends React.Component {
                */}
             </Header>
             <div className='add-margin-top-10px'/>
-
             <strong>How did you hear about us?</strong>
             <SelectField
                 checkboxes
@@ -95,80 +100,143 @@ class Form1 extends React.Component {
             <Form.Group>
               <TextField
                   name='otherHDYHA'
-                  label='Other'
+                  label={false}
+                  placeholder={'Other'}
               />
             </Form.Group>
 
             <Divider className="divider-props"/>
+            <strong>Which of these do you have in your home?</strong>
             <BoolField
+                className='bool-field-style'
                 name='washer'
                 label='Washer'
                 showInlineError={false} // ???????????????????????????wat this do
             />
-            <NumField
-                name='ageOfWasher'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+
+            <DisplayIf condition={context => context.model.washer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfWasher'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
             <BoolField
+                className='bool-field-style'
                 name='dryer'
             />
-            <NumField
-                name='ageOfDryer'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+            <DisplayIf condition={context => context.model.dryer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfDryer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+
             <BoolField
+                className='bool-field-style'
                 name='kitchenRefrigerator'
             />
-            <NumField
-                name='ageOfKitchenRefrigerator'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+            <DisplayIf condition={context => context.model.kitchenRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfKitchenRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
             <BoolField
+                className='bool-field-style'
                 name='secondRefrigerator'
             />
-            <NumField
-                name='ageOfSecondRefrigerator'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+
+            <DisplayIf condition={context => context.model.secondRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSecondRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
             <BoolField
+                className='bool-field-style'
                 name='chestFreezer'
             />
-            <NumField
-                name='ageOfChestFreezer'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+
+            <DisplayIf condition={context => context.model.chestFreezer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfChestFreezer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
             <BoolField
+                className='bool-field-style'
                 name='solarHWHeater'
             />
-            <NumField
-                name='ageOfSolarHWHeater'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+            <DisplayIf condition={context => context.model.solarHWHeater}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSolarHWHeater'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
             <BoolField
+                className='bool-field-style'
                 name='PVSystem'
             />
-            <NumField
-                name='ageOfPVSystem'
-                decimal={false}
-                label={false}
-                placeholder={'Age of washer'}
-            />
+
+            <DisplayIf condition={context => context.model.PVSystem}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfPVSystem'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
             <BoolField
+                className='bool-field-style'
                 name='LEDCFLBulbs'
             />
             <BoolField
+                className='bool-field-style'
                 name='WIFI'
             />
 
@@ -176,43 +244,61 @@ class Form1 extends React.Component {
             <Divider className="divider-props"/>
 
 
+            <strong>Which energy savings product(s) would you most likely be interested in installing within the next
+              three (3) years?</strong>
             <SelectField
                 checkboxes
                 name='interestedInInstalling'
+                label={false}
             />
             <Form.Group>
               <TextField
                   name='otherInterestedInInstalling'
+                  label={false}
+                  placeholder={'Other'}
               />
             </Form.Group>
 
             <Divider className="divider-props"/>
 
-
+            <strong>Where are you most likely to go to get assistance or training regarding managing energy costs and
+              finances?</strong>
             <SelectField
                 checkboxes
                 name='assistanceFrom'
+                label={false}
             />
 
 
             <Form.Group>
               <TextField
                   name='assistanceFromOther'
+                  label={false}
+                  placeholder={'Other'}
               />
             </Form.Group>
 
 
             <Divider className="divider-props"/>
 
-            <Form.Group>
+            <strong>
+              Is there anyone you know that could benefit from lowering their energy costs?</strong>
+
+            <Form.Group widths='equal'>
               <TextField
                   name='anyoneYouKnowName'
+                  label={false}
+                  placeholder={'First, Middle, Last'}
               />
               <TextField
                   name='anyoneYouKnowPhone'
+                  label={false}
+                  placeholder={'Phone number'}
               />
               <TextField
                   name='anyoneYouKnowEmail'
+                  label={false}
+                  placeholder={'Email'}
               />
             </Form.Group>
 
