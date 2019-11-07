@@ -9,7 +9,7 @@ class Footer extends React.Component {
         <footer>
           <Container>
           <Grid verticalAlign="middle">
-            <Grid.Row columns="two" style={footerPadding}>
+            <Grid.Row columns="two" style={footerPadding} inverted>
               <Grid.Column>
                 Test Footer
                 <hr/>
