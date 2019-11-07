@@ -18,12 +18,12 @@ export default class Form2 extends React.Component {
   submit(data) {
     const {
       firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions, metWithApprovedContractor,
-      contractorName, contactName, streetAddress, islandLocation, residenceType
+      contractorName, contactName, streetAddress, islandLocation, residenceType,
     } = data;
     const owner = Meteor.user().username;
     Section2DB.insert({
       owner, firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
-      metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType
+      metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType,
     }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
