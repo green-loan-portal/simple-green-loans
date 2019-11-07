@@ -1,6 +1,6 @@
 import React from 'react';
-import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Grid, Segment, Header, Form, Button, Container, Label, Divider } from 'semantic-ui-react';
+// import { Stuffs } from '/imports/api/stuff/Stuff';
+import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -64,7 +64,7 @@ class Form1 extends React.Component {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            swal('Success', 'Item added successfully', 'success');
+            swal('Success', 'Saved successfully', 'success');
             formRef.reset();
           }
         });
@@ -87,116 +87,120 @@ class Form1 extends React.Component {
             <div className='add-margin-top-10px'/>
 
             <strong>How did you hear about us?</strong>
-              <SelectField
-                  checkboxes
-                  name='howDidYouHearAboutUs'
-                  label={false}
-              />
-
-              <Form.Group>
+            <SelectField
+                checkboxes
+                name='howDidYouHearAboutUs'
+                label={false}
+            />
+            <Form.Group>
               <TextField
-                  //className="five wide field"
                   name='otherHDYHA'
                   label='Other'
               />
-              </Form.Group>
-
-
+            </Form.Group>
 
             <Divider className="divider-props"/>
-
-
             <BoolField
-                  //className="five wide field"
-                  name='washer'
-                  label='Washer'
-                  showInlineError={false} // ???????????????????????????wat this do
-              />
-              <NumField
-                  name='ageOfWasher'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='dryer'
-              />
-              <NumField
-                  name='ageOfDryer'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='kitchenRefrigerator'
-              />
-              <NumField
-                  name='ageOfKitchenRefrigerator'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='secondRefrigerator'
-              />
-              <NumField
-                  name='ageOfSecondRefrigerator'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='chestFreezer'
-              />
-              <NumField
-                  name='ageOfChestFreezer'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='solarHWHeater'
-              />
-              <NumField
-                  name='ageOfSolarHWHeater'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='PVSystem'
-              />
-              <NumField
-                  name='ageOfPVSystem'
-                  decimal={false}
-                  label={false}
-                  placeholder={'Age of washer'}
-              />
-              <BoolField
-                  name='LEDCFLBulbs'
-              />
-              <BoolField
-                  name='WIFI'
-              />
+                name='washer'
+                label='Washer'
+                showInlineError={false} // ???????????????????????????wat this do
+            />
+            <NumField
+                name='ageOfWasher'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='dryer'
+            />
+            <NumField
+                name='ageOfDryer'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='kitchenRefrigerator'
+            />
+            <NumField
+                name='ageOfKitchenRefrigerator'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='secondRefrigerator'
+            />
+            <NumField
+                name='ageOfSecondRefrigerator'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='chestFreezer'
+            />
+            <NumField
+                name='ageOfChestFreezer'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='solarHWHeater'
+            />
+            <NumField
+                name='ageOfSolarHWHeater'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='PVSystem'
+            />
+            <NumField
+                name='ageOfPVSystem'
+                decimal={false}
+                label={false}
+                placeholder={'Age of washer'}
+            />
+            <BoolField
+                name='LEDCFLBulbs'
+            />
+            <BoolField
+                name='WIFI'
+            />
 
 
             <Divider className="divider-props"/>
+
+
+            <SelectField
+                checkboxes
+                name='interestedInInstalling'
+            />
             <Form.Group>
-              <SelectField
-                  checkboxes
-                  name='interestedInInstalling'
-              />
               <TextField
                   name='otherInterestedInInstalling'
               />
-              <SelectField
-                  checkboxes
-                  name='assistanceFrom'
-              />
+            </Form.Group>
+
+            <Divider className="divider-props"/>
+
+
+            <SelectField
+                checkboxes
+                name='assistanceFrom'
+            />
+
+
+            <Form.Group>
               <TextField
                   name='assistanceFromOther'
               />
             </Form.Group>
+
 
             <Divider className="divider-props"/>
 
@@ -218,12 +222,14 @@ class Form1 extends React.Component {
 
             <ErrorsField/>
             <div className="align-right add-margin-top-20px">
+              {/**
+               <Button>
+               <Link to="/form/1">&lt; Previous</Link>
+               </Button>
+               <SubmitField value='Submit'/>
+               */}
               <Button>
-                <Link to="/form/1">&lt; Previous</Link>
-              </Button>
-              <SubmitField value='Submit'/>
-              <Button>
-                <Link to="/form/6">Save & Next &gt;</Link>
+                <Link to="/form/2">Save & Next &gt;</Link>
               </Button>
             </div>
           </AutoForm>
