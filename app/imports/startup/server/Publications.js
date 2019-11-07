@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+import '../../api/stuff/Section2DB';
 import '../../api/stuff/Section6DB';
 import '../../api/stuff/Section7DB';
 import '../../api/stuff/Section8DB';

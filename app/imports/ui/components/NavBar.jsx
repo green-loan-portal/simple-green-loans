@@ -15,6 +15,7 @@ class NavBar extends React.Component {
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Image src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png' size='small'></Image>
         </Menu.Item>
+        <Menu.Item as={NavLink} activeClassName='active' exact to='/authorization' key='authorization'>AuthPage</Menu.Item>
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]

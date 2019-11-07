@@ -114,5 +114,4 @@ export default class Discretion extends React.Component {
   addScript() {
     import '../js/userSignature'
   }
-
 }
