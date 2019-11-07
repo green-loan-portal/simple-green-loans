@@ -21,7 +21,7 @@ const Section8DBSchemaWithoutOwner = new SimpleSchema({
 
 /** Define a schema to specify the structure of each document in the collection. */
 const Section8DBSchema = new SimpleSchema({
-  owner: {type: String, unique: true},
+  owner: {type: String, unique: false},
   landlordName: String,
   landlordEmail: String,
   landlordPhoneHome: { type: Number, optional: true },
