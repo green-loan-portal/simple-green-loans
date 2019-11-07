@@ -91,7 +91,7 @@ class Form1 extends React.Component {
                */}
             </Header>
             <div className='add-margin-top-10px'/>
-            <strong>How did you hear about us?</strong>
+            <h3>How did you hear about us?</h3>
             <SelectField
                 checkboxes
                 name='howDidYouHearAboutUs'
@@ -106,7 +106,8 @@ class Form1 extends React.Component {
             </Form.Group>
 
             <Divider className="divider-props"/>
-            <strong>Which of these do you have in your home?</strong>
+
+            <h3>Which of these do you have in your home?</h3>
             <BoolField
                 className='bool-field-style'
                 name='washer'
@@ -244,8 +245,8 @@ class Form1 extends React.Component {
             <Divider className="divider-props"/>
 
 
-            <strong>Which energy savings product(s) would you most likely be interested in installing within the next
-              three (3) years?</strong>
+            <h3>Which energy savings product(s) would you most likely be interested in installing within the next
+              three (3) years?</h3>
             <SelectField
                 checkboxes
                 name='interestedInInstalling'
@@ -261,8 +262,9 @@ class Form1 extends React.Component {
 
             <Divider className="divider-props"/>
 
-            <strong>Where are you most likely to go to get assistance or training regarding managing energy costs and
-              finances?</strong>
+
+            <h3>Where are you most likely to go to get assistance or training regarding managing energy costs and
+              finances?</h3>
             <SelectField
                 checkboxes
                 name='assistanceFrom'
@@ -281,8 +283,8 @@ class Form1 extends React.Component {
 
             <Divider className="divider-props"/>
 
-            <strong>
-              Is there anyone you know that could benefit from lowering their energy costs?</strong>
+
+            <h3>Is there anyone you know that could benefit from lowering their energy costs?</h3>
 
             <Form.Group widths='equal'>
               <TextField
