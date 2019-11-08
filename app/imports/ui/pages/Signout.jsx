@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 export default class Signout extends React.Component {
   render() {
     Meteor.logout();
-    swal('Bye, come back soon!', 'You have logged out successfully!', 'success');
+    swal('You have logged out successfully!', 'Bye, see you soon!', 'success');
     return (
       <Redirect to='/'/>
     );
