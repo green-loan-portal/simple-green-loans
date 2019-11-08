@@ -49,8 +49,7 @@ export default class Middle1HP extends React.Component {
             </List.Item>
           </List>
           <p style={{ paddingBottom: '50px' }}>
-            Please use the options on the bottom to create an account for a new loan application,
-            or to sign in to your existing account!
+            Login to your existing account, or create a new one to start a new application!
           </p>
           </Container>
         </div>
