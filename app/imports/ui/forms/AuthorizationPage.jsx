@@ -2,58 +2,68 @@ import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Form, Checkbox, Button, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { ExpandCanvas } from '../js/userSignature';
+import swal from 'sweetalert';
+import SelectField from 'uniforms-semantic/SelectField';
+import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
+import { AuthorizationDB, AuthorizationDBWithoutOwner } from '/imports/api/stuff/AuthorizationDB';
 
-export default class AuthorizationPage extends React.Component {
+class AuthorizationPage extends React.Component {
+  submit(data) {
+    const owner = Meteor.user().username;
+    const {
+      customerName, todaysDate, serviceAddress, utility, utilityAccountNumber
+    } = data;
+    AuthorizationDB.insert({ customerName, todaysDate, serviceAddress, utility, utilityAccountNumber
+    }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Authorization page saved successfully', 'success');
+      }
+    });
+  }
+
   render() {
     return (
         <Container center className='sizeOf'>
+          <AutoForm schema={AuthorizationDBWithoutOwner} onSubmit={data => this.submit(data)}>
           <p className='title'>
             <Header>AUTHORIZATION FOR RELEASE OF INFORMATION</Header>
             <strong>HGIA Green Energy Money $aver On-Bill Program (Eligibility and Ongoing Participation)</strong>
           </p>
+
           <Form className='formFills'>
             <Form.Group>
-              <Form.Input
-                  required
-                  error={{ content: 'Please enter your name as seen on utility bill.'}}
+              <TextField
+                  name='customerName'
                   label='Customer Name'
                   placeholder='Name as seen on utility bill'
                   width={6}
-              />
-              <Form.Input
-                  required
-                  error={{ content: 'Please enter the current date.'}}
-                  label='Date'
-                  width={4}
+                  showInlineError={false}
               />
             </Form.Group>
-            <Form.Input
-                required
-                error={{ content: 'Please enter a valid Service Address'}}
+            <TextField
+                name='serviceAddress'
                 label='Service Address'
                 width={8}
+                showInlineError={false}
             />
-            <Form.Group grouped required>
-              <label>Utility: </label>
-              <Form.Field
-                  control={Checkbox}
-                  label={<label>Hawaiian Electric</label>}
-              />
-              <Form.Field
-                  control={Checkbox}
-                  label={<label>Maui Electric</label>}
-              />
-              <Form.Field
-                  control={Checkbox}
-                  label={<label>Hawaiian Electric Light</label>}
-              />
-            </Form.Group>
-            <Form.Input
-                required
+            <SelectField
+                label='Utility (Check all that apply)'
+                checkboxes
+                showInlineError={false}
+                name='utility'
+            />
+            <TextField
                 fluid label='Utility Account Number'
+                showInlineError={false}
                 width={6}
+                name='utilityAccountNumber'
             />
           </Form>
           <Container center className='legalDiscretion'>
@@ -75,6 +85,11 @@ export default class AuthorizationPage extends React.Component {
                 placeholder='Name as seen on utility bill'
                 width={6}
             />
+            <Form.Field
+                required
+                control={Checkbox}
+                label={<label>I have read and understand the nature of this authorization.</label>}
+            />
             <Form.Group>
               <Form.Input label="Applicant’s Signature" width={12} className="application-signature" required>
                 <canvas id="sig-canvas" className="set-canvas-width">
@@ -83,7 +98,7 @@ export default class AuthorizationPage extends React.Component {
               </Form.Input>
               <div className='four wide field'>
                 <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>
-                <br/>
+                <br />
                 <Form.Input>
                   <Button type="button" className="green sixteen wide field require-margin" id="sig-clearBtn">Clear Signature</Button>
                 </Form.Input>
@@ -92,45 +107,24 @@ export default class AuthorizationPage extends React.Component {
                   <Button type='button' className='green sixteen wide field require-margin' id='submitFieldForm'>Upload Signature</Button>
                 </Form.Input>
               </div>
-              </Form.Group>
-                {/* <TextField
-                name='userSignature'
-                id='customer-signature'
-                showInlineError={false}
-                /> */}
-
-              <TextField id="userSignatureField" name="userSignature" showInlineError={false} />
-              <div className="align-right add-margin-top-20px">
-                <Button>
-                  <Link to="/form/8">&lt; Previous</Link>
-                </Button>
-                {/* <Button>
-                 <Link to="">Save & Exit</Link>
-                 </Button> */}
-                {/* <Button type='button' id='submitFieldForm'>click here</Button> */}
-                <SubmitField value='Submit' id='submitFormHidden' />
-                <Button type='button' id='saveBtn'>Save</Button>
-                <Button>
-                  <Link to="/authorization">Save & Next &gt;</Link>
-                </Button>
-              </div>
-            <Form.Field
-                control={Checkbox}
-                label={<label>I have read and understand the nature of this authorization.</label>}
-            />
+            </Form.Group>
           </Form>
           <div className="align-right">
             <Button>
               <Link to="/form/9">&lt; Previous</Link>
             </Button>
             <Button>
-              <Link to="">Save & Exit</Link>
+              <Link to="/form/authorization">Save & Exit</Link>
             </Button>
             <Button>
               <Link to="/profile">Submit</Link>
             </Button>
           </div>
           <div>{this.addScript()}</div>
+          <div>{ExpandCanvas()}</div>
+            <ErrorsField />
+          <SubmitField value='Submit' />
+          </AutoForm>
         </Container>
     );
   }
@@ -138,3 +132,4 @@ export default class AuthorizationPage extends React.Component {
     import '../js/userSignature'
   }
 }
+export default AuthorizationPage;

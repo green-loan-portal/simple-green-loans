@@ -75,7 +75,6 @@ class Form9 extends React.Component {
                 Please use another browser in order to sign this form.
               </canvas>
             </Form.Input>
-
             <div className='four wide field'>
               <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>
               <br />
@@ -107,11 +106,10 @@ class Form9 extends React.Component {
             <SubmitField value='Submit' id='submitFormHidden' />
             <Button type='button' id='saveBtn'>Save</Button>
             <Button>
-              <Link to="form/authorization">Save & Next &gt;</Link>
+              <Link to="/form/authorization">Save & Next &gt;</Link>
             </Button>
           </div>
         </AutoForm>
-
         <div>{ExpandCanvas()}</div>
       </Container>
     );

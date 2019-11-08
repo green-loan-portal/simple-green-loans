@@ -78,8 +78,7 @@ export default class Form2 extends React.Component {
           <SelectField
             label='What GEM$ Approved Energy Improvement would you like to install? (Check all that apply)'
             checkboxes
-            showInlineError={false}
-            name='energyImprovementOptions'
+            showInlineError={false} name='energyImprovementOptions'
           />
 
           {/* NEW SECTION */}

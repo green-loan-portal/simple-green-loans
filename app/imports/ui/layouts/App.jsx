@@ -42,7 +42,7 @@ class App extends React.Component {
             <ProtectedRoute path="/form/7" component={Form7} />
             <ProtectedRoute path="/form/8" component={Form8} />
             <ProtectedRoute path="/form/9" component={Form9} />
-            <ProtectedRoute path="form/authorization" component={AuthorizationPage} />
+            <ProtectedRoute path="/form/authorization" component={AuthorizationPage} />
             <ProtectedRoute path="/list" component={ListStuff} />
             <ProtectedRoute path="/add" component={AddStuff} />
             <ProtectedRoute path="/edit/:_id" component={EditStuff} />
