@@ -20,11 +20,6 @@ import Form6 from '../forms/Form6';
 import Form7 from '../forms/Form7';
 import Form8 from '../forms/Form8';
 import Form9 from '../forms/Form9';
-import EditForm1 from '../forms/EditForm1';
-import EditForm2 from '../forms/EditForm2';
-import EditForm6 from '../forms/EditForm6';
-import EditForm7 from '../forms/EditForm7';
-import EditForm8 from '../forms/EditForm8';
 import ProfilePage from '../pages/ProfilePage';
 import AuthorizationPage from '../components/Discretion';
 import NavBar from '../components/NavBar';
@@ -41,11 +36,6 @@ class App extends React.Component {
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <ProtectedRoute path="/profile" component={ProfilePage} />
-            <ProtectedRoute exact path="/form/1/edit/:_id" component={EditForm1} />
-            <ProtectedRoute exact path="/form/2/edit/:_id" component={EditForm2} />
-            <ProtectedRoute exact path="/form/6/edit/:_id" component={EditForm6} />
-            <ProtectedRoute exact path="/form/7/edit/:_id" component={EditForm7} />
-            <ProtectedRoute exact path="/form/8/edit/:_id" component={EditForm8} />
             <ProtectedRoute exact path="/form/1" component={Form1} />
             <ProtectedRoute exact path="/form/2" component={Form2} />
             <ProtectedRoute exact path="/form/6" component={Form6} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Header, Form, Button, Container } from 'semantic-ui-react';
+import { Header, Form, Button, Container, Loader } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
@@ -10,34 +10,68 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Section6DB, Section6DBSchemaWithoutOwner } from '/imports/api/stuff/Section6DB';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Section6DB, Section6DBSchemaWithoutOwner } from '../../api/stuff/Section6DB';
 
 /** Renders the Page for adding a document. */
 class Form6 extends React.Component {
 
   submit(data) {
-    const owner = Meteor.user().username;
     const { income, totalOccupants, numAdults, numRetired, numChildrenBelow5, numChildren6to12, numChildren13to17,
       membersNotHomeDay, membersNotHomeNight, membersHomeDay, membersHomeWork, employerName, occupation, workPhone } = data;
 
-    Section6DB.insert({
-      owner, income, totalOccupants, numAdults, numRetired, numChildrenBelow5, numChildren6to12, numChildren13to17,
-      membersNotHomeDay, membersNotHomeNight, membersHomeDay, membersHomeWork, employerName, occupation, workPhone
-    }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Section #6 saved successfully', 'success');
+    // check to see if account is already in the database.
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
       }
-    });
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
+
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section6DB.insert({
+        owner, income, totalOccupants, numAdults, numRetired, numChildrenBelow5, numChildren6to12, numChildren13to17,
+        membersNotHomeDay, membersNotHomeNight, membersHomeDay, membersHomeWork, employerName, occupation, workPhone
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #6 saved successfully', 'success');
+        }
+      });
+    }
+    else {
+      Section6DB.update({ _id: this.props.doc._id }, {
+        $set: {
+          income, totalOccupants, numAdults, numRetired, numChildrenBelow5, numChildren6to12, numChildren13to17,
+          membersNotHomeDay, membersNotHomeNight, membersHomeDay, membersHomeWork, employerName, occupation, workPhone
+        }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #6 updated successfully', 'success');
+        }
+      });
+    }
+  }
+
+  render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-  render() {
+  renderPage() {
     return (
       <Container>
         <Header as="h2" className="dividing header">6. Data For Program Reporting Purposes</Header>
-        <AutoForm schema={Section6DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
+
+        <AutoForm schema={Section6DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <div className="sixteen wide field">
             <NumField
               decimal={true}
@@ -116,4 +150,25 @@ class Form6 extends React.Component {
   }
 }
 
-export default Form6;
+/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+Form6.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Form6');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  console.log(Section6DB.findOne({ owner: profile }));
+  return {
+    doc: Section6DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form6);

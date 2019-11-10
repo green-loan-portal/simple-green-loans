@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 // import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
+import { Header, Form, Button, Container, Divider, Loader } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -12,11 +12,10 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-// import SimpleSchema from 'simpl-schema';
-// import { Section1DB } from '../../api/stuff/Stuff';
-import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { BaseField, nothing } from 'uniforms';
-//import schema from './DisplayIfFieldSchema';
+import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -25,53 +24,57 @@ class Form1 extends React.Component {
 
   /** On submit, insert the data. */
   submit(data) {
-    const {
-      howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
+    const { howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
       kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
       chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
       LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
-      assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
-    } = data;
-    const owner = Meteor.user().username;
-    Section1DB.insert({
-      owner,
-      howDidYouHearAboutUs,
-      otherHDYHA,
-      washer,
-      ageOfWasher,
-      dryer,
-      ageOfDryer,
-      kitchenRefrigerator,
-      ageOfKitchenRefrigerator,
-      secondRefrigerator,
-      ageOfSecondRefrigerator,
-      chestFreezer,
-      ageOfChestFreezer,
-      solarHWHeater,
-      ageOfSolarHWHeater,
-      PVSystem,
-      ageOfPVSystem,
-      LEDCFLBulbs,
-      WIFI,
-      interestedInInstalling,
-      otherInterestedInInstalling,
-      assistanceFrom,
-      assistanceFromOther,
-      anyoneYouKnowName,
-      anyoneYouKnowPhone,
-      anyoneYouKnowEmail,
-      nameOnUtilAcc,
-    },
-      (error) => {
+      assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc } = data;
+
+    // check to see if account is already in the database.
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
+      }
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
+
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section1DB.insert({
+        owner, howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
+        kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
+        chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
+        LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
+        assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
+      }, (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Saved successfully', 'success');
+          swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
+    }
+    else {
+      Section1DB.update({ _id: this.props.doc._id }, {
+        $set: {
+          howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
+          kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
+          chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
+          LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
+          assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
+        }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #1 updated successfully', 'success');
+        }
+      });
+    }
   }
-
-  renderPage
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
@@ -82,7 +85,7 @@ class Form1 extends React.Component {
     return (
 
       <Container>
-        <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
+        <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <Header as='h2' className='dividing header'>
             1. Pre-Application Survey
               {/** }
@@ -315,11 +318,6 @@ class Form1 extends React.Component {
 
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
-            {/**
-               <Button>
-               <Link to="/form/1">&lt; Previous</Link>
-               </Button>
-              */}
             <SubmitField value='Submit' />
             <Button>
               <Link to="/form/2">Save & Next &gt;</Link>
@@ -331,4 +329,25 @@ class Form1 extends React.Component {
   }
 }
 
-export default Form1;
+/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+Form1.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Form1');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  console.log(Section1DB.findOne({ owner: profile }));
+  return {
+    doc: Section1DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form1);
