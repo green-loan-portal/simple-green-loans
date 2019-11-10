@@ -1,6 +1,6 @@
-import React from 'react';
-import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Grid, Segment, Header, Form, Button, Container } from 'semantic-ui-react';
+import React, { Children } from 'react';
+// import { Stuffs } from '/imports/api/stuff/Stuff';
+import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -12,160 +12,316 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import SimpleSchema from 'simpl-schema';
-import { AppFormValues } from '../../api/stuff/Stuff';
+// import SimpleSchema from 'simpl-schema';
+// import { Section1DB } from '../../api/stuff/Stuff';
+import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
+import { BaseField, nothing } from 'uniforms';
+//import schema from './DisplayIfFieldSchema';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
-const formSchema = new SimpleSchema({
-  name: { type: String, optional: true },
-  quantity: { type: Number, optional: true },
-  condition: {
-    type: String,
-    allowedValues: ['excellent', 'good', 'fair', 'poor'],
-    defaultValue: 'good',
-    optional: true,
-  },
-
-  otherHDYHA: { type: String, optional: true },
-  howDidYouHearAboutUs: { type: Array },
-  'howDidYouHearAboutUs.$': { type: String, optional: true, allowedValues: AppFormValues.howDidYouHearAbout },
-  washer: { type: Boolean, optional: true },
-  ageOfWasher: { type: Number, optional: true },
-  dryer: { type: Boolean, optional: true },
-  ageOfDryer: { type: Number, optional: true },
-  kitchenRefrigerator: { type: Boolean, optional: true },
-  ageOfKitchenRefrigerator: { type: Number, optional: true },
-  secondRefrigerator: { type: Boolean, optional: true },
-  ageOfSecondRefrigerator: { type: Number, optional: true },
-  chestFreezer: { type: Boolean, optional: true },
-  ageOfChestFreezer: { type: Number, optional: true },
-  solarHWHeater: { type: Boolean, optional: true },
-  ageOfSolarHWHeater: { type: Number, optional: true },
-  PVSystem: { type: Boolean, optional: true },
-  ageOfPVSystem: { type: Number, optional: true },
-  LEDCFLBulbs: { type: Boolean, optional: true },
-  WIFI: { type: Boolean, optional: true },
-  interestedInInstalling: { type: Array },
-  'interestedInInstalling.$': { type: String, optional: true, allowedValues: AppFormValues.interestedInInstalling },
-  otherInterestedInInstalling: { type: String, optional: true },
-  assistanceFrom: { type: Array },
-  'assistanceFrom.$': { type: String, optional: true, allowedValues: AppFormValues.assistanceFrom },
-  assistanceFromOther: { type: String, optional: true },
-  anyoneYouKnowName: { type: String, optional: true },
-  anyoneYouKnowPhone: { type: Number, optional: true },
-  anyoneYouKnowEmail: { type: String, optional: true },
-  nameOnUtilAcc: { type: String, optional: true },
-  utilAccNum: { type: Number, optional: true },
-  energyImpWouldLikeToInstall: { type: Array },
-  'energyImpWouldLikeToInstall.$': {
-    type: String,
-    optional: true,
-    allowedValues: AppFormValues.energyImpWouldLikeToInstall,
-  },
-  approvedContractorName: { type: String, optional: true },
-  approvedContractorContact: { type: String, optional: true },
-  installAddress: { type: String, optional: true },
-  whichIsland: { type: String, allowedValues: AppFormValues.whichIsland },
-  typeOfResidence: { type: String, optional: true, allowedValues: AppFormValues.typeOfResidence },
-  typeOfResidenceOther: { type: String, optional: true },
-
-});
 
 /** Renders the Page for adding a document. */
 class Form1 extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { name, quantity, condition, otherHDYHA } = data; // EDIT THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    const {
+      howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
+      kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
+      chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
+      LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
+      assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
+    } = data;
     const owner = Meteor.user().username;
-    Stuffs.insert({ name, quantity, condition, otherHDYHA, owner }, // EDIT THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
-        }
-      });
+    Section1DB.insert({
+          owner,
+          howDidYouHearAboutUs,
+          otherHDYHA,
+          washer,
+          ageOfWasher,
+          dryer,
+          ageOfDryer,
+          kitchenRefrigerator,
+          ageOfKitchenRefrigerator,
+          secondRefrigerator,
+          ageOfSecondRefrigerator,
+          chestFreezer,
+          ageOfChestFreezer,
+          solarHWHeater,
+          ageOfSolarHWHeater,
+          PVSystem,
+          ageOfPVSystem,
+          LEDCFLBulbs,
+          WIFI,
+          interestedInInstalling,
+          otherInterestedInInstalling,
+          assistanceFrom,
+          assistanceFromOther,
+          anyoneYouKnowName,
+          anyoneYouKnowPhone,
+          anyoneYouKnowEmail,
+          nameOnUtilAcc,
+        },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'Saved successfully', 'success');
+            formRef.reset();
+          }
+        });
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
-    let fRef = null;
+
+    // eslint-disable-next-line max-len
+    const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
+    DisplayIf.contextTypes = BaseField.contextTypes;
     return (
-      <Container>
-        <Form>
-          <Grid container centered>
-            <Grid.Column>
-              <Header as="h2" textAlign="center">1.Pre-Application Survey</Header>
-              <AutoForm ref={ref => {
-                fRef = ref;
-              }} schema={formSchema} onSubmit={data => this.submit(data, fRef)}>
-                <Segment>
-                  <Form.Group width='equal'>
-                    <TextField name='name' />
-                    <NumField name='quantity' decimal={false} />
-                    <SelectField name='condition' />
-                  </Form.Group>
-                  <section>
-                    <SelectField checkboxes name='howDidYouHearAboutUs' />
-                  </section>
-                  <TextField name='otherHDYHA' />
-                  <BoolField name='washer' fluid label='Washer' />
-                  <NumField name='ageOfWasher' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='dryer' />
-                  <NumField name='ageOfDryer' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='kitchenRefrigerator' />
-                  <NumField name='ageOfKitchenRefrigerator' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='secondRefrigerator' />
-                  <NumField name='ageOfSecondRefrigerator' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='chestFreezer' />
-                  <NumField name='ageOfChestFreezer' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='solarHWHeater' />
-                  <NumField name='ageOfSolarHWHeater' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='PVSystem' />
-                  <NumField name='ageOfPVSystem' decimal={false} label={false} placeholder={'Age of washer'} />
-                  <BoolField name='LEDCFLBulbs' />
-                  <BoolField name='WIFI' />
-                  <SelectField checkboxes name='interestedInInstalling' />
-                  <TextField name='otherInterestedInInstalling' />
-                  <SelectField checkboxes name='assistanceFrom' />
-                  <TextField name='assistanceFromOther' />
+
+        <Container>
+          <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
+            <Header as='h2' className='dividing centered header'>
+              Pre-Application Survey
+              {/** }
+               <Label className="green">
+               Note: The person named on the electric utility account should be the Applicant
+               </Label>
+               */}
+            </Header>
+            <div className='add-margin-top-10px'/>
+            <h3>How did you hear about us?</h3>
+            <SelectField
+                checkboxes
+                name='howDidYouHearAboutUs'
+                label={false}
+            />
+            <Form.Group>
+              <TextField
+                  name='otherHDYHA'
+                  label={false}
+                  placeholder={'Other'}
+              />
+            </Form.Group>
+
+            <Divider className="divider-props"/>
+
+            <h3>Which of these do you have in your home?</h3>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='washer'
+                label='Washer'
+                showInlineError={false} // ???????????????????????????wat this do
+            />
+
+            <DisplayIf condition={context => context.model.washer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfWasher'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='dryer'
+            />
+            <DisplayIf condition={context => context.model.dryer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfDryer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of dryer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
 
 
-                  <TextField name='anyoneYouKnowName' />
-                  <TextField name='anyoneYouKnowPhone' />
-                  <TextField name='anyoneYouKnowEmail' />
-                  <TextField name='nameOnUtilAcc' />
-                  <NumField name='utilAccNum' decimal={false} label={'util account num'} />
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='kitchenRefrigerator'
+            />
+            <DisplayIf condition={context => context.model.kitchenRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfKitchenRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of kitchen refrigerator'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
 
-                  <SelectField checkboxes name='energyImpWouldLikeToInstall' />
-                  <TextField name='approvedContractorName' />
-                  <TextField name='approvedContractorContact' />
-                  <TextField name='installAddress' />
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='secondRefrigerator'
+            />
 
-                  <SelectField checkboxes name='whichIsland' />
+            <DisplayIf condition={context => context.model.secondRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSecondRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of second refrigerator'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
 
-                  <SelectField checkboxes name='typeOfResidence' />
-                  <TextField name='typeOfResidenceOther' />
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='chestFreezer'
+            />
 
-                  <SubmitField value='Submit' />
-                  <ErrorsField />
-                </Segment>
-              </AutoForm>
-            </Grid.Column>
-          </Grid>
+            <DisplayIf condition={context => context.model.chestFreezer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfChestFreezer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of chest freezer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
 
-          <div className="align-right add-margin-top-20px">
-            <Button>
-              <Link to="">Save & Exit</Link>
-            </Button>
-            <Button>
-              <Link to="/form/2">Save & Next &gt;</Link>
-            </Button>
-          </div>
-        </Form>
-      </Container>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='solarHWHeater'
+            />
+            <DisplayIf condition={context => context.model.solarHWHeater}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSolarHWHeater'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of solar hot water heater'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='PVSystem'
+            />
+
+            <DisplayIf condition={context => context.model.PVSystem}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfPVSystem'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of PV system'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='LEDCFLBulbs'
+            />
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='WIFI'
+            />
+
+
+            <Divider className="divider-props"/>
+
+
+            <h3>Which energy savings product(s) would you most likely be interested in installing within the next
+              three (3) years?</h3>
+            <SelectField
+                checkboxes
+                name='interestedInInstalling'
+                label={false}
+            />
+            <Form.Group>
+              <TextField
+                  name='otherInterestedInInstalling'
+                  label={false}
+                  placeholder={'Other'}
+              />
+            </Form.Group>
+
+            <Divider className="divider-props"/>
+
+
+            <h3>Where are you most likely to go to get assistance or training regarding managing energy costs and
+              finances?</h3>
+            <SelectField
+                checkboxes
+                name='assistanceFrom'
+                label={false}
+            />
+
+
+            <Form.Group>
+              <TextField
+                  name='assistanceFromOther'
+                  label={false}
+                  placeholder={'Other'}
+              />
+            </Form.Group>
+
+
+            <Divider className="divider-props"/>
+
+
+            <h3>Is there anyone you know that could benefit from lowering their energy costs?</h3>
+
+            <Form.Group widths='equal'>
+              <TextField
+                  name='anyoneYouKnowName'
+                  label={false}
+                  placeholder={'First, Middle, Last'}
+              />
+              <TextField
+                  name='anyoneYouKnowPhone'
+                  label={false}
+                  placeholder={'Phone number'}
+              />
+              <TextField
+                  name='anyoneYouKnowEmail'
+                  label={false}
+                  placeholder={'Email'}
+              />
+            </Form.Group>
+
+
+            {/* NEW SECTION */}
+
+
+            <ErrorsField/>
+            <div className="align-right add-margin-top-20px">
+              {/**
+               <Button>
+               <Link to="/form/1">&lt; Previous</Link>
+               </Button>
+               <SubmitField value='Submit'/>
+               */}
+              <Button>
+                <Link to="/form/2">Save & Next &gt;</Link>
+              </Button>
+            </div>
+          </AutoForm>
+        </Container>
     );
   }
 }
