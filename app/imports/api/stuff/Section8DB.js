@@ -7,31 +7,15 @@ const Section8DB = new Mongo.Collection('Section8DB');
 
 /** Define a schema to specify the structure of each document in the collection; without owner */
 const Section8DBSchemaWithoutOwner = new SimpleSchema({
-  landlordName: String,
-  landlordEmail: String,
-  landlordPhoneHome: { type: Number, optional: true },
-  landlordPhoneCell: { type: Number, optional: true },
-  propertyManagerName: String,
-  propertyManagerEmail: String,
-  propertyManagerPhoneHome: { type: Number, optional: true },
-  propertyManagerPhoneCell: { type: Number, optional: true },
-  propertyManagementCompanyName: String,
-  propertyManagementCompanyAddress: String,
+  taxCreditClaimer: String,
+  taxCreditClaimerRelationship: { type: String, required: false },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */
 const Section8DBSchema = new SimpleSchema({
-  owner: { type: String, unique: false },
-  landlordName: String,
-  landlordEmail: String,
-  landlordPhoneHome: { type: Number, optional: true },
-  landlordPhoneCell: { type: Number, optional: true },
-  propertyManagerName: String,
-  propertyManagerEmail: String,
-  propertyManagerPhoneHome: { type: Number, optional: true },
-  propertyManagerPhoneCell: { type: Number, optional: true },
-  propertyManagementCompanyName: String,
-  propertyManagementCompanyAddress: String,
+  owner: String,
+  taxCreditClaimer: String,
+  taxCreditClaimerRelationship: { type: String, required: false },
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

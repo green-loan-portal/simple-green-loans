@@ -1,5 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
+import '../../api/stuff/Section1DB';
+import '../../api/stuff/Section2DB';
+import '../../api/stuff/Section6DB';
+import '../../api/stuff/Section7DB';
+import '../../api/stuff/Section8DB';
+import '../../api/stuff/Section9DB';
 
 /* eslint-disable no-console */
 

@@ -129,3 +129,6 @@ class Form9 extends React.Component {
 }
 
 export default Form9;
+
+
+// https://www.meteor.com/tutorials/blaze/update-and-remove
