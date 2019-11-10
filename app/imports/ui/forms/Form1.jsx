@@ -164,7 +164,7 @@ class Form1 extends React.Component {
             </DisplayIf>
 
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='secondRefrigerator'
             />
 
@@ -182,7 +182,7 @@ class Form1 extends React.Component {
             </DisplayIf>
 
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='chestFreezer'
             />
 
@@ -200,7 +200,7 @@ class Form1 extends React.Component {
             </DisplayIf>
 
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='solarHWHeater'
             />
             <DisplayIf condition={context => context.model.solarHWHeater}>
@@ -216,7 +216,7 @@ class Form1 extends React.Component {
               </section>
             </DisplayIf>
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='PVSystem'
             />
 
@@ -233,11 +233,11 @@ class Form1 extends React.Component {
               </section>
             </DisplayIf>
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='LEDCFLBulbs'
             />
             <BoolField
-                className='bool-field-style'
+                className='bool-field-style ui checkbox new-line'
                 name='WIFI'
             />
 
