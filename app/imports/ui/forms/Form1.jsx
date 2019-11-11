@@ -126,6 +126,7 @@ class Form1 extends React.Component {
                   name='ageOfWasher'
                   decimal={false}
                   label={false}
+<<<<<<< HEAD
                   placeholder={'Age of washer'}
                 />
               </Form.Group>
@@ -254,6 +255,153 @@ class Form1 extends React.Component {
 
 
           <h3>Which energy savings product(s) would you most likely be interested in installing within the next
+=======
+                  placeholder={'Other'}
+              />
+            </Form.Group>
+
+            <Divider className="divider-props"/>
+
+            <h3>Which of these do you have in your home?</h3>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='washer'
+                label='Washer'
+                showInlineError={false} // ???????????????????????????wat this do
+            />
+
+            <DisplayIf condition={context => context.model.washer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfWasher'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of washer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='dryer'
+            />
+            <DisplayIf condition={context => context.model.dryer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfDryer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of dryer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='kitchenRefrigerator'
+            />
+            <DisplayIf condition={context => context.model.kitchenRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfKitchenRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of kitchen refrigerator'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='secondRefrigerator'
+            />
+
+            <DisplayIf condition={context => context.model.secondRefrigerator}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSecondRefrigerator'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of second refrigerator'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='chestFreezer'
+            />
+
+            <DisplayIf condition={context => context.model.chestFreezer}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfChestFreezer'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of chest freezer'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='solarHWHeater'
+            />
+            <DisplayIf condition={context => context.model.solarHWHeater}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfSolarHWHeater'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of solar hot water heater'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='PVSystem'
+            />
+
+            <DisplayIf condition={context => context.model.PVSystem}>
+              <section>
+                <Form.Group>
+                  <NumField
+                      name='ageOfPVSystem'
+                      decimal={false}
+                      label={false}
+                      placeholder={'Age of PV system'}
+                  />
+                </Form.Group>
+              </section>
+            </DisplayIf>
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='LEDCFLBulbs'
+            />
+            <BoolField
+                className='bool-field-style ui checkbox new-line'
+                name='WIFI'
+            />
+
+
+            <Divider className="divider-props"/>
+
+
+            <h3>Which energy savings product(s) would you most likely be interested in installing within the next
+>>>>>>> cbafaf1e0a210cfc16aa3a0ba95e6d63b2e6584e
               three (3) years?</h3>
           <SelectField
             checkboxes

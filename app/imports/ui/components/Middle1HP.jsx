@@ -1,12 +1,13 @@
 import React from 'react';
-import { List, Grid } from 'semantic-ui-react';
+import { List, Header, Grid, Container } from 'semantic-ui-react';
 
 export default class Middle1HP extends React.Component {
   render() {
-    const gridStyle = { height: '500px' };
+    const gridStyle = { height: '300px' };
     return (
         <div className={'introuction'}>
-          <Grid container verticalAlign="middle" style={gridStyle}>
+          <Container>
+          <Grid verticalAlign="middle" style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
                 What is GEMS?
@@ -33,6 +34,23 @@ export default class Middle1HP extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
+          <Header centered as='h2'>
+            New Application Process!
+          </Header>
+          <p>Aloha! We have recently overhauled our GEM$ loan application process!</p>
+          <p>Changes and features include:</p>
+          <List bulleted>
+            <List.Item>
+              Completely web-based application, no more frustrating PDF applications!
+            </List.Item>
+            <List.Item>
+              Account creation for easier management of your application!
+            </List.Item>
+          </List>
+          <p style={{ paddingBottom: '50px' }}>
+            Login to your existing account, or create a new one to start a new application!
+          </p>
+          </Container>
         </div>
     );
   }
