@@ -1,6 +1,6 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Form, Header, Container, Label, Button, Icon } from 'semantic-ui-react';
+import { Form, Header, Container, Label, Button, Icon, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -10,72 +10,63 @@ import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Section7DB, Section7DBSchemaWithoutOwner } from '/imports/api/stuff/Section7DB';
 
 class Form7 extends React.Component {
-  modifyOwners = () => {
-    let newDiv = document.createElement("div");
-
-    newDiv.innerHTML = `
-    <div class="fields modify-owners">
-      <div class="sixteen wide field">
-          <label>Name</label>
-          <div class="ui input">
-              <input type="text" class="owner-name" />
-          </div>
-      </div>
-      <div class="nine wide field">
-          <label>Relationship to Applicant</label>
-          <div class="ui input">
-              <input type="text" class="owner-relationship" />
-          </div>
-      </div>
-      <div class="one wide field">
-          <button type="button" class="ui red icon button child-owners" style="margin-top: 55%">
-            <i aria-hidden="true" class="trash icon"></i>
-          </button>
-      </div>
-    </div>`;
-
-    // remove child when trash button (".child-owners") is clicked
-    $("#adding-owners").on("click", ".child-owners", function () {
-      $(this).closest(".modify-owners").remove();
-    });
-
-    $('.owner-name').on("input", function () {
-      console.log('"list": [{"owner-name": "' + $(this).val() + '", "owner-relationship": "' + $('.owner-name')[0].closest(".fields").children[1].children[1].children[0].value + '"}]');
-    });
-
-    // add a brand new child
-    let div = document.getElementById('adding-owners');
-    div.appendChild(newDiv);
-  }
 
   submit(data) {
-    const { email, phoneHome, phoneMobile } = data;
-    const owner = Meteor.user().username;
-    Section7DB.insert({ owner, email, phoneHome, phoneMobile }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Section #9 saved successfully', 'success');
+    const { email, phoneHome, phoneMobile, mailingAddress, partiesNames, otherOwner1,
+      otherOwnerRelationship1, otherOwner2, otherOwnerRelationship2 } = data;
+
+    // check to see if account is already in the database.
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
       }
-    });
-  }
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
 
-  addHeader = function () {
-    var head = document.getElementsByTagName('head')[0];
-
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
-    head.appendChild(script);
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section7DB.insert({
+        owner, email, phoneHome, phoneMobile, mailingAddress, partiesNames, otherOwner1,
+        otherOwnerRelationship1, otherOwner2, otherOwnerRelationship2
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #7 saved successfully', 'success');
+        }
+      });
+    }
+    else {
+      Section7DB.update({ _id: this.props.doc._id }, {
+        $set: {
+          email, phoneHome, phoneMobile, mailingAddress, partiesNames, otherOwner1,
+          otherOwnerRelationship1, otherOwner2, otherOwnerRelationship2
+        }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #7 updated successfully', 'success');
+        }
+      });
+    }
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
       <Container>
-        {this.addHeader()}
         <Header as="h2" className="dividing header">
           7. APPLICANT&#39;S INFORMATION
           <Label className="green">
@@ -83,7 +74,7 @@ class Form7 extends React.Component {
           </Label>
         </Header>
 
-        <AutoForm schema={Section7DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
+        <AutoForm schema={Section7DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
 
           <Container>
             <Form.Group widths="equal">
@@ -106,37 +97,45 @@ class Form7 extends React.Component {
               />
             </Form.Group>
 
-            <Form.Input
+            <TextField
+              className='sixteen wide field'
               name='mailingAddress'
               label='Mailing Address'
               placeholder='(if different from Installation Address in Section 5)'
-              width={16}
             />
 
-            <Form.Input
+            <TextField
+              className='sixteen wide field'
               name='partiesNames'
               label='All Parties Names'
               placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
-              width={16}
             />
 
-            <Button type="button" id="add-owners-btn" primary onClick={this.modifyOwners}>add other owner(s)</Button>
-
-            {/* <Button icon color='red'>
-              <Icon name='trash' />
-            </Button> */}
-
-            <div id="adding-owners"></div>
-            {/* <Form.Group>
-              <Form.Input
-                label='Name'
-                width={10}
+            <Form.Group>
+              <TextField
+                className='eight wide field'
+                name='otherOwner1'
+                label='Other Owner(s)'
               />
-              <Form.Input
+              <TextField
+                className='eight wide field'
+                name='otherOwnerRelationship1'
                 label='Relationship to Applicant'
-                width={6}
               />
-            </Form.Group> */}
+            </Form.Group>
+
+            <Form.Group>
+              <TextField
+                className='eight wide field'
+                name='otherOwner2'
+                label='Other Owner(s)'
+              />
+              <TextField
+                className='eight wide field'
+                name='otherOwnerRelationship2'
+                label='Relationship to Applicant'
+              />
+            </Form.Group>
 
             <ErrorsField />
             <div className="align-right add-margin-top-20px">
@@ -155,6 +154,25 @@ class Form7 extends React.Component {
   }
 }
 
-export default Form7;
+/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+Form7.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
 
-{/* <div class="one wide field"><label></label><button type="button"><i aria-hidden="true" class="primary trash large icon"></i></button></div> */ }
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Form7');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  console.log(Section7DB.findOne({ owner: profile }));
+  return {
+    doc: Section7DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form7);

@@ -1,4 +1,4 @@
-.ui.borderless.middle.Menu {
+.ui.borderless.top.Menu {
   alignment: center;
   border: none;
   background-color: #395878 !important;
@@ -21,29 +21,23 @@
   margin-bottom: 20px;
 }
 
-.ui.form input[type=checkbox] {
+.ui.form input[type="checkbox"] {
   cursor: pointer;
   position: relative;
   top: 0;
   left: 0;
-  opacity: 100%!important;
+  opacity: 100% !important;
   outline: 0;
   z-index: 3;
   width: 30px;
   height: 17px;
   background: white;
-
-
 }
 .bool-field-style {
   padding-bottom: 5px;
 }
 
-
-
 /* END: 1st Form Section */
-
-
 
 /* START: 7th to 9th Form Section */
 
@@ -72,7 +66,7 @@
 }
 
 #sig-canvas {
-  border: 1px solid rgba(34, 36, 38, .15);
+  border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 6px;
   cursor: crosshair;
 }
@@ -82,8 +76,8 @@
 }
 
 .require-margin {
-  margin-left: .5rem !important;
-  margin-right: .5rem !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
 
 /* END: 7th to 9th Form Section */
@@ -97,7 +91,7 @@
 
 .legalDiscretion {
   max-height: 200px;
-  font-family: 'sans-serif';
+  font-family: "sans-serif";
   font-size: medium;
   overflow-y: scroll;
   border: black;
@@ -109,12 +103,29 @@
 }
 
 .title {
-  font-family: 'sans-serif';
+  font-family: "sans-serif";
   text-align: center;
 }
 
 .formFills {
   padding-bottom: 25px;
+}
+
+.ui.checkbox.new-line {
+  display: block !important;
+  margin-top: 0.85rem;
+}
+#LogoHome {
+  border: none;
+  box-shadow: none;
+  position: center;
+  alignment: center;
+  padding-top: 20px;
+}
+
+.LogoTitle {
+  font-size: 30px;
+  alignment: center;
 }
 
 .ui.checkbox.new-line {

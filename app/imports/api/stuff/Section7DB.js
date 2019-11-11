@@ -11,15 +11,25 @@ const Section7DBSchemaWithoutOwner = new SimpleSchema({
   phoneHome: { type: Number, optional: true },
   phoneMobile: { type: Number, optional: true },
   mailingAddress: { type: String, optional: true },
+  partiesNames: { type: String, optional: true },
+  otherOwner1: { type: String, optional: true },
+  otherOwnerRelationship1: { type: String, optional: true },
+  otherOwner2: { type: String, optional: true },
+  otherOwnerRelationship2: { type: String, optional: true },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */
 const Section7DBSchema = new SimpleSchema({
-  owner: { type: String, unique: true },
+  owner: String,
   email: String,
   phoneHome: { type: Number, optional: true },
   phoneMobile: { type: Number, optional: true },
   mailingAddress: { type: String, optional: true },
+  partiesNames: { type: String, optional: true },
+  otherOwner1: { type: String, optional: true },
+  otherOwnerRelationship1: { type: String, optional: true },
+  otherOwner2: { type: String, optional: true },
+  otherOwnerRelationship2: { type: String, optional: true },
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

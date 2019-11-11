@@ -30,9 +30,19 @@ class Form9 extends React.Component {
     // });
   }
 
+  addHeader = function () {
+    var head = document.getElementsByTagName('head')[0];
+
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+    head.appendChild(script);
+  }
+
   render() {
     return (
       <Container>
+        {this.addHeader()}
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
@@ -119,3 +129,6 @@ class Form9 extends React.Component {
 }
 
 export default Form9;
+
+
+// https://www.meteor.com/tutorials/blaze/update-and-remove

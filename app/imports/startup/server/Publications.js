@@ -1,21 +1,34 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
-import '../../api/stuff/Section1DB';
-import '../../api/stuff/Section2DB';
-import '../../api/stuff/Section6DB';
-import '../../api/stuff/Section7DB';
-import '../../api/stuff/Section8DB';
-import '../../api/stuff/Section9DB';
+import { Section1DB } from '../../api/stuff/Section1DB';
+import { Section2DB } from '../../api/stuff/Section2DB';
+import { Section6DB } from '../../api/stuff/Section6DB';
+import { Section7DB } from '../../api/stuff/Section7DB';
+import { Section8DB } from '../../api/stuff/Section8DB';
+// import { Section9DB } from '../../api/stuff/Section9DB';
+
 
 /** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Stuff', function publish() {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Stuffs.find({ owner: username });
-  }
-  return this.ready();
+let forms = {
+  "Stuff": Stuffs,
+  "Form1": Section1DB,
+  "Form2": Section2DB,
+  "Form6": Section6DB,
+  "Form7": Section7DB,
+  "Form8": Section8DB
+};
+
+Object.keys(forms).forEach(key => {
+  Meteor.publish(key, function publish() {
+    if (this.userId) {
+      const username = Meteor.users.findOne(this.userId).username;
+      return forms[key].find({ owner: username });
+    }
+    return this.ready();
+  });
 });
+
 
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {

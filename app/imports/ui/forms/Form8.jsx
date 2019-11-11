@@ -1,116 +1,82 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Form, Header, Container, Button } from 'semantic-ui-react';
+import { Header, Container, Button, Label, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import NumField from 'uniforms-semantic/NumField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Section8DB, Section8DBSchemaWithoutOwner } from '/imports/api/stuff/Section8DB';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Section8DB, Section8DBSchemaWithoutOwner } from '../../api/stuff/Section8DB';
 
 class Form8 extends React.Component {
 
   submit(data) {
-    const { landlordName, landlordEmail, landlordPhoneHome, landlordPhoneCell, propertyManagerName, propertyManagerEmail, propertyManagerPhoneHome,
-      propertyManagerPhoneCell, propertyManagementCompanyName, propertyManagementCompanyAddress } = data;
-    const owner = Meteor.user().username;
-    Section8DB.insert({
-      owner, landlordName, landlordEmail, landlordPhoneHome, landlordPhoneCell, propertyManagerName, propertyManagerEmail,
-      propertyManagerPhoneHome, propertyManagerPhoneCell, propertyManagementCompanyName, propertyManagementCompanyAddress
-    }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Section #8 saved successfully', 'success');
+    const { taxCreditClaimer, taxCreditClaimerRelationship } = data;
+
+    // check to see if account is already in the database.
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
       }
-    });
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
+
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section8DB.insert({ owner, taxCreditClaimer, taxCreditClaimerRelationship }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #8 saved successfully', 'success');
+        }
+      });
+    }
+    else {
+      Section8DB.update({ _id: this.props.doc._id }, {
+        $set: { taxCreditClaimer, taxCreditClaimerRelationship }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #8 updated successfully', 'success');
+        }
+      });
+    }
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
       <Container>
-        <Header as="h2" className="dividing header">8. LANDLORD OR PROPERTY MANAGER INFORMATION</Header>
+        <Header as="h2" className="dividing header">8. SYSTEM OWNER (For Solar Tax Credits)</Header>
+        <Label color='red'>Please check with your tax advisor. Please also have the name of the system owner added to the EI contract (along with the utility account holder).</Label>
 
-        <AutoForm schema={Section8DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
-          <Form.Group>
-            <TextField
-              className='eight wide field'
-              name='landlordName'
-              label='Landlord Name'
-              placeholder='First, Middle, Last'
-              showInlineError={false}
-            />
-            <TextField
-              className='eight wide field'
-              name='landlordEmail'
-              label='Email'
-              showInlineError={false}
-            />
-            <NumField
-              className='four wide field'
-              decimal={false}
-              name='landlordPhoneHome'
-              label='Home Phone'
-              placeholder='Only numbers'
-            />
-            <NumField
-              className='four wide field'
-              decimal={false}
-              name='landlordPhoneCell'
-              label='Cell Phone'
-              placeholder='Only numbers'
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <TextField
-              className='eight wide field'
-              name='propertyManagerName'
-              label='Property Manager Name'
-              placeholder='First, Middle, Last'
-              showInlineError={false}
-            />
-            <TextField
-              className='eight wide field'
-              name='propertyManagerEmail'
-              label='Email'
-              showInlineError={false}
-            />
-            <NumField
-              className='four wide field'
-              decimal={false}
-              name='propertyManagerPhoneHome'
-              label='Home Phone'
-              placeholder='Only numbers'
-            />
-            <NumField
-              className='four wide field'
-              decimal={false}
-              name='propertyManagerPhoneCell'
-              label='Cell Phone'
-              placeholder='Only numbers'
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <TextField
-              className='eight wide field'
-              name='propertyManagementCompanyName'
-              label='Property Management Company Name'
-              showInlineError={false}
-            />
-            <TextField
-              className='eight wide field'
-              name='propertyManagementCompanyAddress'
-              label='Property Management Company Address'
-              placeholder='Street, City, State, Zip'
-              showInlineError={false}
-            />
-          </Form.Group>
+        <div className='add-margin-top-20px'></div>
+        <AutoForm schema={Section8DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
+          <TextField
+            className='sixteen wide field'
+            name='taxCreditClaimer'
+            label='Name of Entity(ies) or Person(s) who will claim Tax Credit:'
+            placeholder='Person 1, Person 2, Person 3, ...'
+            showInlineError={false}
+          />
+          <TextField
+            className='sixteen wide field'
+            name='taxCreditClaimerRelationship'
+            label='If the entity(ies) or person(s) claiming the Tax Credit is not one of the Property Owner(s), please indicate relationship to Owner(s): '
+            showInlineError={false}
+          />
 
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
@@ -131,4 +97,28 @@ class Form8 extends React.Component {
   }
 }
 
-export default Form8;
+/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+Form8.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  // const documentId = match.params._id;
+  // Get access to Stuff documents.
+
+  const subscription = Meteor.subscribe('Form8');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  console.log(Section8DB.findOne({ owner: profile }));
+  return {
+    doc: Section8DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form8);
