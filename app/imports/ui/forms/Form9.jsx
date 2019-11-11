@@ -10,16 +10,18 @@ import TextField from 'uniforms-semantic/TextField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
+// import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { ExpandCanvas } from "../js/userSignature";
-import { Section2DB } from '../../api/stuff/Section2DB';
+import { ExpandCanvas } from '../js/userSignature';
+import { Section9DB, Section9DBSchemaWithoutOwner } from '../../api/stuff/Section9DB';
+// import { Section9DB } from '../../api/stuff/Section9DB';
 // import { Section9DB } from '../../api/stuff/Section9DB';
 
 class Form9 extends React.Component {
   submit(data) {
-    const {  } = data;
+    const { userSignature, todaysDate } = data;
+
 
     // check to see if account is already in the database.
     let tmp = null;
@@ -27,15 +29,14 @@ class Form9 extends React.Component {
       if (typeof this.props.doc.owner !== undefined) {
         tmp = this.props.doc.owner;
       }
-    }
-    catch (e) {
+    } catch (e) {
       tmp = 'not-defined'
     }
 
     if (tmp === 'not-defined') {
       let owner = Meteor.user().username;
-      Section2DB.insert({
-        owner,
+      Section9DB.insert({
+        owner, userSignature, todaysDate,
 
       }, (error) => {
         if (error) {
@@ -44,13 +45,11 @@ class Form9 extends React.Component {
           swal('Success', 'Section #6 saved successfully', 'success');
         }
       });
-    }
-    else {
-      Section2DB.update({ _id: this.props.doc._id }, {
+    } else {
+      Section9DB.update({ _id: this.props.doc._id }, {
         $set: {
-          firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
-          metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType
-        }
+          userSignature, todaysDate,
+        },
       }, (error) => {
         if (error) {
           swal('Error', error.message, 'error');
