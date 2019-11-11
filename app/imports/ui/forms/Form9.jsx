@@ -31,12 +31,33 @@ class Form9 extends React.Component {
   }
 
   addHeader = function () {
-    var head = document.getElementsByTagName('head')[0];
+    // var head = document.getElementsByTagName('head')[0];
 
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
-    head.appendChild(script);
+    // var script = document.createElement('script');
+    // script.type = 'text/javascript';
+    // script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+    // head.appendChild(script);
+  }
+
+  saveImageUser = function () {
+    setTimeout(function() {
+      let elementIsClicked = false; // declare the variable that tracks the state
+      function clickHandler() { // declare a function that updates the state
+        elementIsClicked = true;
+        console.log(elementIsClicked);
+        let canvas = document.getElementById('sig-canvas').toDataURL(); 
+        Meteor.call('saveImageUser', Meteor.userId(), canvas);
+        console.log(Meteor.userId());
+      }
+  
+      var element = document.getElementById('sig-canvas'); // grab a reference to your element
+      if (element) {
+        element.addEventListener('click', clickHandler); // associate the function above with the click event
+      }
+    }, 500);
+
+    // console.log(document.getElementById('sig-canvas'));
+    // var canvas = document.getElementById('sig-canvas').toDataURL(); 
   }
 
   render() {
@@ -80,11 +101,12 @@ class Form9 extends React.Component {
 
         <AutoForm schema={Section9DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <Form.Group>
-            <Form.Input name='userSignature' label="Applicant’s Signature" width={12} className="application-signature" required>
+            <Form.Input label="Applicant’s Signature" width={12} className="application-signature" required>
               <canvas id="sig-canvas" className="set-canvas-width">
                 Please use another browser in order to sign this form.
               </canvas>
             </Form.Input>
+
             <div className='four wide field'>
               <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>
               <br />
@@ -97,29 +119,21 @@ class Form9 extends React.Component {
               </Form.Input>
             </div>
           </Form.Group>
-          {/* <TextField
-            name='userSignature'
-            id='customer-signature'
-            showInlineError={false}
-          /> */}
 
-          {/* <TextField id="userSignatureField" name="userSignature" showInlineError={false} /> */}
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
             </Button>
-            {/* <Button>
-              <Link to="">Save & Exit</Link>
-            </Button> */}
-            {/* <Button type='button' id='submitFieldForm'>click here</Button> */}
-            <SubmitField value='Submit' id='submitFormHidden' />
+
+            <SubmitField value='Submit' id='submitFormHidden' onClick={this.saveImageUser()} />
             <Button type='button' id='saveBtn'>Save</Button>
             <Button>
-              <Link to="/form/authorization">Save & Next &gt;</Link>
+              <Link to="/authorization">Save & Next &gt;</Link>
             </Button>
           </div>
         </AutoForm>
+
         <div>{ExpandCanvas()}</div>
       </Container>
     );

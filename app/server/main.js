@@ -22,4 +22,10 @@ Meteor.methods({
             html: myHTMLString,
         });
     },
+
+    'saveImageUser': function (userId, img) {
+        Meteor.users.update({ _id: userId },
+            $set: { 'signature': img, }
+        })
+    },
 });
