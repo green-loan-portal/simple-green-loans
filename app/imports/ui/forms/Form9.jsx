@@ -80,7 +80,7 @@ class Form9 extends React.Component {
 
         <AutoForm schema={Section9DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <Form.Group>
-            <Form.Input label="Applicant’s Signature" width={12} className="application-signature" required>
+            <Form.Input name='userSignature' label="Applicant’s Signature" width={12} className="application-signature" required>
               <canvas id="sig-canvas" className="set-canvas-width">
                 Please use another browser in order to sign this form.
               </canvas>
@@ -104,7 +104,7 @@ class Form9 extends React.Component {
             showInlineError={false}
           /> */}
 
-          <TextField id="userSignatureField" name="userSignature" showInlineError={false} />
+          {/* <TextField id="userSignatureField" name="userSignature" showInlineError={false} /> */}
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
             <Button>
