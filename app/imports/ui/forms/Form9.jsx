@@ -30,9 +30,19 @@ class Form9 extends React.Component {
     // });
   }
 
+  addHeader = function () {
+    var head = document.getElementsByTagName('head')[0];
+
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+    head.appendChild(script);
+  }
+
   render() {
     return (
       <Container>
+        {this.addHeader()}
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
@@ -70,7 +80,7 @@ class Form9 extends React.Component {
 
         <AutoForm schema={Section9DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
           <Form.Group>
-            <Form.Input label="Applicant’s Signature" width={12} className="application-signature" required>
+            <Form.Input name='userSignature' label="Applicant’s Signature" width={12} className="application-signature" required>
               <canvas id="sig-canvas" className="set-canvas-width">
                 Please use another browser in order to sign this form.
               </canvas>
@@ -93,7 +103,7 @@ class Form9 extends React.Component {
             showInlineError={false}
           /> */}
 
-          <TextField id="userSignatureField" name="userSignature" showInlineError={false} />
+          {/* <TextField id="userSignatureField" name="userSignature" showInlineError={false} /> */}
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
             <Button>
@@ -117,3 +127,6 @@ class Form9 extends React.Component {
 }
 
 export default Form9;
+
+
+// https://www.meteor.com/tutorials/blaze/update-and-remove

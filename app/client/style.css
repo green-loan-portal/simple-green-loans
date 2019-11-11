@@ -1,5 +1,5 @@
-.ui.borderless.middle.Menu {
-  alignment: center;
+.ui.borderless.top.Menu {
+  align-content: center;
   border: none;
   background-color: #395878 !important;
 }
@@ -14,6 +14,36 @@
 #footer {
   padding-top: 100px;
 }
+
+/* 1st Form Section */
+.ui.divider.divider-props {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.ui.form input[type=checkbox] {
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 100%!important;
+  outline: 0;
+  z-index: 3;
+  width: 30px;
+  height: 17px;
+  background: white;
+
+
+}
+.bool-field-style {
+  padding-bottom: 5px;
+}
+
+
+
+/* END: 1st Form Section */
+
+
 
 /* START: 7th to 9th Form Section */
 
@@ -85,4 +115,21 @@
 
 .formFills {
   padding-bottom: 25px;
+}
+
+.ui.checkbox.new-line {
+  display: block !important;
+  margin-top: 0.85rem;
+}
+
+#LogoHome {
+  border: none;
+  box-shadow: none;
+  padding-right: 10px;
+  padding-top: 20px;
+}
+
+.LogoTitle {
+  font-size: 30px;
+  alignment: center;
 }

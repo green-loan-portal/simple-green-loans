@@ -20,15 +20,6 @@ class Footer extends React.Component {
                 Excepteur sint occaecat cupidatat non proident, sunt
                   in culpa qui officia deserunt mollit anim id est laborum</p>
               </Grid.Column>
-              <Grid.Column textAlign='right'>
-                <p>Testing footer</p>
-                <List bulleted>
-                  <List.Item>AHHHHHHHHH 1</List.Item>
-                  <List.Item>AHHHHHHHHHH 2</List.Item>
-                  <List.Item>AHHHHHHHHHH 3</List.Item>
-                  <List.Item>AHHHHHHHHHHHH 4</List.Item>
-                </List>
-              </Grid.Column>
             </Grid.Row>
           </Grid>
           </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Container, Form, Button, Label } from 'semantic-ui-react';
+import { Header, Container, Form, Button, Label, Loader } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { Link } from 'react-router-dom';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -10,40 +10,74 @@ import SelectField from 'uniforms-semantic/SelectField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Section2DB, Section2DBSchemaWithoutOwner } from '/imports/api/stuff/Section2DB';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Section2DB, Section2DBSchemaWithoutOwner } from '../../api/stuff/Section2DB';
 
 
-export default class Form2 extends React.Component {
-
+class Form2 extends React.Component {
   submit(data) {
-    const {
-      firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions, metWithApprovedContractor,
-      contractorName, contactName, streetAddress, islandLocation, residenceType
-    } = data;
-    const owner = Meteor.user().username;
-    Section2DB.insert({
-      owner, firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
-      metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType
-    }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Section #2-5 saved successfully', 'success');
+    const { firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
+      metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType } = data;
+
+    // check to see if account is already in the database.
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
       }
-    });
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
+
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section2DB.insert({
+        owner, firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
+        metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType
+
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #6 saved successfully', 'success');
+        }
+      });
+    }
+    else {
+      Section2DB.update({ _id: this.props.doc._id }, {
+        $set: {
+          firstName, middleName, lastName, utilityAccountNumber, energyImprovementOptions,
+          metWithApprovedContractor, contractorName, contactName, streetAddress, islandLocation, residenceType
+        }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #6 updated successfully', 'success');
+        }
+      });
+    }
   }
 
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
 
       <Container>
-        <AutoForm schema={Section2DBSchemaWithoutOwner} onSubmit={data => this.submit(data)}>
-          <Header as='h2' className='dividing header'>
-            2. RATEPAYER INFORMATION
-            <Label className="green">
-              Note: The person named on the electric utility account should be the Applicant
-            </Label>
-          </Header>
+        <Header as='h2' className='dividing header'>
+          2. RATEPAYER INFORMATION
+          <Label className="green">
+            Note: The person named on the electric utility account should be the Applicant
+          </Label>
+        </Header>
+
+        <AutoForm schema={Section2DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
 
           <strong>Please print name exactly as it appears on your utility bill.</strong>
           <div className='add-margin-top-10px'></div>
@@ -151,3 +185,27 @@ export default class Form2 extends React.Component {
     );
   }
 }
+
+
+/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+Form2.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Form2');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  console.log(Section2DB.findOne({ owner: profile }));
+  return {
+    doc: Section2DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form2);

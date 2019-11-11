@@ -9,8 +9,8 @@ export default class HomePageHP extends React.Component {
   render() {
     return (
         <div>
-          <LogoHP/>
           <MiddleMenu/>
+          <LogoHP/>
           <Middle1HP/>
           <SignupHP/>
         </div>

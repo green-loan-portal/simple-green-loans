@@ -1,3 +1,5 @@
+
+
 export function ExpandCanvas() {
   window.requestAnimFrame = (function (callback) {
     return window.requestAnimationFrame ||
@@ -154,7 +156,8 @@ export function ExpandCanvas() {
 
       console.log(dataUrl);
       // customerSignature.textContent = dataURL;
-      customerSignature.value = dataUrl;
+      // customerSignature.value = dataUrl;
+      $("#userSignatureField").val(dataUrl);
       console.log(customerSignature.value);
       // setTimeout(function () {
       //   document.getElementById('submitFormHidden').click();
