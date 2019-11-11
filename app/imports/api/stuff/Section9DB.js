@@ -8,14 +8,14 @@ const Section9DB = new Mongo.Collection('Section9DB');
 /** Define a schema to specify the structure of each document in the collection; without owner */
 const Section9DBSchemaWithoutOwner = new SimpleSchema({
     userSignature: { type: String },
-    todaysDate: { type: Date },
+    // todaysDate: { type: Date },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */
 const Section9DBSchema = new SimpleSchema({
     owner: String,
     userSignature: String,
-    todaysDate: String,
+    // todaysDate: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

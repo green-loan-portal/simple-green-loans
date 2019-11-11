@@ -20,7 +20,7 @@ import { Section9DB, Section9DBSchemaWithoutOwner } from '../../api/stuff/Sectio
 
 class Form9 extends React.Component {
   submit(data) {
-    const { userSignature, todaysDate } = data;
+    const { userSignature } = data;
 
 
     // check to see if account is already in the database.
@@ -36,7 +36,7 @@ class Form9 extends React.Component {
     if (tmp === 'not-defined') {
       let owner = Meteor.user().username;
       Section9DB.insert({
-        owner, userSignature, todaysDate,
+        owner, userSignature,
 
       }, (error) => {
         if (error) {
@@ -48,7 +48,7 @@ class Form9 extends React.Component {
     } else {
       Section9DB.update({ _id: this.props.doc._id }, {
         $set: {
-          userSignature, todaysDate,
+          userSignature,
         },
       }, (error) => {
         if (error) {
