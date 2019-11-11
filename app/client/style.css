@@ -121,3 +121,15 @@
   display: block !important;
   margin-top: 0.85rem;
 }
+
+#LogoHome {
+  border: none;
+  box-shadow: none;
+  padding-right: 10px;
+  padding-top: 20px;
+}
+
+.LogoTitle {
+  font-size: 30px;
+  alignment: center;
+}

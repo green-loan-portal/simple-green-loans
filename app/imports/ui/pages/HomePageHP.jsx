@@ -11,7 +11,6 @@ export default class HomePageHP extends React.Component {
         <div>
           <MiddleMenu/>
           <LogoHP/>
-          <MiddleMenu/>
           <Middle1HP/>
           <SignupHP/>
         </div>
