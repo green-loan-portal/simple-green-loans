@@ -37,22 +37,6 @@ export default class Middle1HP extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-          <Header centered as='h2'>
-            New Application Process!
-          </Header>
-          <p>Aloha! We have recently overhauled our GEM$ loan application process!</p>
-          <p>Changes and features include:</p>
-          <List bulleted>
-            <List.Item>
-              Completely web-based application, no more frustrating PDF applications!
-            </List.Item>
-            <List.Item>
-              Account creation for easier management of your application!
-            </List.Item>
-          </List>
-          <p style={{ paddingBottom: '50px' }}>
-            Login to your existing account, or create a new one to start a new application!
-          </p>
           </Container>
         </div>
     );
