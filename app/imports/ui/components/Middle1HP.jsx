@@ -7,7 +7,7 @@ export default class Middle1HP extends React.Component {
     return (
         <div className={'introuction'}>
           <Container>
-          <Grid verticalAlign="middle" style={gridStyle}>
+          <Grid verticalAlign='middle' style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
                 What is GEMS?
@@ -29,6 +29,9 @@ export default class Middle1HP extends React.Component {
                   <List.Item>Households must be Low and Moderate-Income (LMI) (Defined as 140% Area Median Income per
                     the U.S. Department of Housing & Urban Development and Hawaii Housing Finance & Development
                     Corporation’s guidelines)
+                  </List.Item>
+                  <List.Item href='http://gems.hawaii.gov/'>
+                    Additional information can be found here
                   </List.Item>
                 </List>
               </Grid.Column>
