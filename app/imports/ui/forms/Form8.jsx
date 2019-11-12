@@ -115,7 +115,6 @@ export default withTracker(({ match }) => {
   const subscription = Meteor.subscribe('Form8');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
-  console.log(Section8DB.findOne({ owner: profile }));
   return {
     doc: Section8DB.findOne({ owner: profile }),
     ready: subscription.ready(),

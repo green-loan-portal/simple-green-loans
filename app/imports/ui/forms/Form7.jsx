@@ -169,7 +169,6 @@ export default withTracker(({ match }) => {
   const subscription = Meteor.subscribe('Form7');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
-  console.log(Section7DB.findOne({ owner: profile }));
   return {
     doc: Section7DB.findOne({ owner: profile }),
     ready: subscription.ready(),

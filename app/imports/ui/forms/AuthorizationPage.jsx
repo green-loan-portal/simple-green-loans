@@ -30,7 +30,7 @@ class AuthorizationPage extends React.Component {
 
   render() {
     return (
-        <Container center className='sizeOf'>
+        <Container className='sizeOf'>
           <AutoForm schema={AuthorizationDBWithoutOwner} onSubmit={data => this.submit(data)}>
           <p className='title'>
             <Header>AUTHORIZATION FOR RELEASE OF INFORMATION</Header>
