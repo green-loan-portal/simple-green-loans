@@ -12,7 +12,7 @@ export function ExpandCanvas() {
       };
   })();
 
-  setTimeout(function () { // wait for 0.25 sec to load up
+  setTimeout(function () { // wait for 0.3 sec to load up
     var canvas = document.getElementById("sig-canvas");
     var ctx = canvas.getContext("2d");
 
@@ -143,26 +143,10 @@ export function ExpandCanvas() {
     }
 
     // Set up the UI
-    var customerSignature = document.getElementById("userSignatureField");
     var clearBtn = document.getElementById('sig-clearBtn');
-    var submitBtn = document.getElementById('submitFieldForm');
 
     clearBtn.addEventListener('click', function (e) {
       clearCanvas();
     }, false);
-
-    submitBtn.addEventListener('click', function (e) {
-      var dataUrl = canvas.toDataURL();
-
-      console.log(dataUrl);
-      // customerSignature.textContent = dataURL;
-      // customerSignature.value = dataUrl;
-      $("#userSignatureField").val(dataUrl);
-      console.log(customerSignature.value);
-      // setTimeout(function () {
-      //   document.getElementById('submitFormHidden').click();
-      // }, 500);
-      // sigImage.setAttribute('src', dataUrl);
-    }, false);
-  }, 250);
+  }, 500);
 };

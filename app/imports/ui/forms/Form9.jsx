@@ -1,69 +1,77 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Form, Header, Container, Button } from 'semantic-ui-react';
+import { Form, Header, Container, Button, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { ExpandCanvas } from "../js/userSignature";
 import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import HiddenField from 'uniforms-semantic/HiddenField';
-import TextField from 'uniforms-semantic/TextField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
 
 class Form9 extends React.Component {
+
   submit(data) {
-    const { userSignature } = data;
-    console.log(userSignature);
-    // const owner = Meteor.user().username;
-    // const todaysDate = new Date().toJSON().split("T")[0];
-    // Section9DB.insert({
-    //   owner, userSignature, todaysDate
-    // }, (error) => {
-    //   if (error) {
-    //     swal('Error', error.message, 'error');
-    //   } else {
-    //     swal('Success', 'Section #9 saved successfully', 'success');
-    //   }
-    // });
-  }
+    const { timestamp } = data;
+    let owner = Meteor.user().username;
+    let canvas = document.getElementById('sig-canvas')
+    let signature = canvas.toDataURL();
 
-  addHeader = function () {
-    // var head = document.getElementsByTagName('head')[0];
+    const blank = document.createElement('canvas');
+    blank.width = canvas.width;
+    blank.height = canvas.height;
 
-    // var script = document.createElement('script');
-    // script.type = 'text/javascript';
-    // script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
-    // head.appendChild(script);
-  }
+    // check to see if the signature canvas is empty
+    if (canvas.toDataURL() === blank.toDataURL()) {
+      swal('Error', "Please sign the form", 'error');
+      return;
+    }
 
-  saveImageUser = function () {
-    setTimeout(function() {
-      let elementIsClicked = false; // declare the variable that tracks the state
-      function clickHandler() { // declare a function that updates the state
-        elementIsClicked = true;
-        console.log(elementIsClicked);
-        let canvas = document.getElementById('sig-canvas').toDataURL(); 
-        Meteor.call('saveImageUser', Meteor.userId(), canvas);
-        console.log(Meteor.userId());
+    let tmp = null;
+    try {
+      if (typeof this.props.doc.owner !== undefined) {
+        tmp = this.props.doc.owner;
       }
-  
-      var element = document.getElementById('sig-canvas'); // grab a reference to your element
-      if (element) {
-        element.addEventListener('click', clickHandler); // associate the function above with the click event
-      }
-    }, 500);
+    }
+    catch (e) {
+      tmp = 'not-defined'
+    }
 
-    // console.log(document.getElementById('sig-canvas'));
-    // var canvas = document.getElementById('sig-canvas').toDataURL(); 
+    if (tmp === 'not-defined') {
+      let owner = Meteor.user().username;
+      Section9DB.insert({ owner, timestamp, signature }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #9 saved successfully', 'success');
+        }
+      });
+    }
+    else {
+      Section9DB.update({ _id: this.props.doc._id }, {
+        $set: { owner, timestamp, signature }
+      }, (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Section #9 updated successfully', 'success');
+        }
+      });
+    }
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
       <Container>
-        {this.addHeader()}
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
@@ -109,13 +117,10 @@ class Form9 extends React.Component {
 
             <div className='four wide field'>
               <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>
+              <HiddenField name='timestamp' value={new Date()} />
               <br />
               <Form.Input>
                 <Button type="button" className="green sixteen wide field require-margin" id="sig-clearBtn">Clear Signature</Button>
-              </Form.Input>
-              <br />
-              <Form.Input>
-                <Button type='button' className='green sixteen wide field require-margin' id='submitFieldForm'>Upload Signature</Button>
               </Form.Input>
             </div>
           </Form.Group>
@@ -125,9 +130,7 @@ class Form9 extends React.Component {
             <Button>
               <Link to="/form/8">&lt; Previous</Link>
             </Button>
-
-            <SubmitField value='Submit' id='submitFormHidden' onClick={this.saveImageUser()} />
-            <Button type='button' id='saveBtn'>Save</Button>
+            <SubmitField value='Submit' id='submitFormHidden' />
             <Button>
               <Link to="/authorization">Save & Next &gt;</Link>
             </Button>
@@ -140,7 +143,20 @@ class Form9 extends React.Component {
   }
 }
 
-export default Form9;
+Form9.propTypes = {
+  doc: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
 
 
-// https://www.meteor.com/tutorials/blaze/update-and-remove
+export default withTracker(({ match }) => {
+  const subscription = Meteor.subscribe('Form9');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  return {
+    doc: Section9DB.findOne({ owner: profile }),
+    ready: subscription.ready(),
+  };
+
+})(Form9);
