@@ -3,11 +3,11 @@ import { List, Header, Grid, Container } from 'semantic-ui-react';
 
 export default class Middle1HP extends React.Component {
   render() {
-    const gridStyle = { height: '300px' };
+    const gridStyle = { margin: '35px 0' };
     return (
         <div className={'introuction'}>
           <Container>
-          <Grid verticalAlign='middle' style={gridStyle}>
+          <Grid style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
                 What is GEMS?
@@ -19,7 +19,7 @@ export default class Middle1HP extends React.Component {
                 obtaining financing for these projects.
               </Grid.Column>
               <Grid.Column>
-                Elligibility
+                Eligibility
                 <hr/>
                 <List bulleted>
                   <List.Item>Must be a Hawaiian Electric, Maui Electric, or Hawaiian Electric Light Company customer on
