@@ -9,13 +9,13 @@ export default class LogoHP extends React.Component {
             <Grid.Row>
                 <Image id={'LogoHome'}
                     src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png'
-                    link='https://gems.hawaii.gov/'/>
+                    href='https://gems.hawaii.gov/'/>
             </Grid.Row>
             <Grid.Row className={'LogoTitle'}>
               <p>Hawaii Green Infrastructure Authority</p>
             </Grid.Row>
             <Grid.Row className={'LogoTitle'}>
-              <p>GEM$ Financing Program</p>
+              <p>GEM$ Financing Program Loan Application Portal</p>
             </Grid.Row>
           </Grid>
         </Container>
