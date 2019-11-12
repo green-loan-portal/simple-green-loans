@@ -131,5 +131,9 @@
 
 .LogoTitle {
   font-size: 30px;
+<<<<<<< HEAD
   align-content: center;
+=======
+  alignment: center;
+>>>>>>> bf79dd2890f25a97eeb6aca51c1b98b681072a45
 }
