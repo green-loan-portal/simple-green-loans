@@ -4,7 +4,7 @@ import { Image, Container, Grid } from 'semantic-ui-react';
 export default class LogoHP extends React.Component {
   render() {
     return (
-        <Container centered>
+        <Container>
           <Grid centered rows={3}>
             <Grid.Row>
                 <Image id={'LogoHome'}

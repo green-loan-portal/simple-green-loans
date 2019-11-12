@@ -7,6 +7,7 @@ import { Section6DB } from '../../api/stuff/Section6DB';
 import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
+import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 
 
 /** This subscription publishes only the documents associated with the logged in user */
@@ -18,6 +19,7 @@ let forms = {
   "Form7": Section7DB,
   "Form8": Section8DB,
   "Form9": Section9DB,
+  "AuthorizationDB": AuthorizationDB,
 };
 
 Object.keys(forms).forEach(key => {

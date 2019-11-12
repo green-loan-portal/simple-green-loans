@@ -5,12 +5,12 @@ import { Grid, List, Menu, Image, Container } from 'semantic-ui-react';
 class Footer extends React.Component {
   render() {
     return (
-        <Container className='footer'>
+        <Container className='footer add-margin-top-20px'>
           <Grid columns={3}>
             <Grid.Column>
               <Menu.Item>CONTACT US</Menu.Item>
               <hr/>
-              <List textAlign='left'>
+              <List>
                 <List.Item>(808) 587-3868</List.Item>
                 <List.Item>dbedt.gems@hawaii.gov</List.Item>
               </List>
@@ -18,7 +18,7 @@ class Footer extends React.Component {
             <Grid.Column>
               <Menu.Item>POLICIES</Menu.Item>
               <hr/>
-              <List textAlign='left'>
+              <List>
                 <List.Item><a href="https://portal.ehawaii.gov/page/terms-of-use/">Terms of Use</a></List.Item>
                 <List.Item><a href="https://portal.ehawaii.gov/page/accessibility/">Accessibility</a></List.Item>
                 <List.Item><a href="https://portal.ehawaii.gov/page/privacy-policy/">Privacy Policy</a></List.Item>

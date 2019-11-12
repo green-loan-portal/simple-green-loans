@@ -36,7 +36,7 @@ export default class SignupHP extends React.Component {
     }
     return (
         <Segment placeholder>
-          <Grid columns={2} relaxed='very' stackable className={topPadding}>
+          <Grid columns={2} relaxed='very' stackable style={topPadding}>
             <Grid.Column>
               <Form onSubmit={this.submit}>
                 <Form.Input

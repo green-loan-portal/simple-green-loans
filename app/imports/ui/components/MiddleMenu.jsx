@@ -6,7 +6,7 @@ export default class MiddleMenu extends React.Component {
     return (
         <Container>
         <Menu fluid widths={5} className='borderless top menu'>
-          <Grid position='left' container fitted>
+          <Grid position='left' container>
             <Menu.Item href='https://gems.hawaii.gov/participate-now/for-homeowners/'>
               Residential
             </Menu.Item>

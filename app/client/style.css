@@ -48,15 +48,15 @@
 /* START: 7th to 9th Form Section */
 
 .add-margin-top-10px {
-  margin-top: 10px;
+  margin-top: 10px !important;
 }
 
 .add-margin-top-20px {
-  margin-top: 20px;
+  margin-top: 20px !important;
 }
 
 .add-margin-top-40px {
-  margin-top: 40px;
+  margin-top: 40px !important;
 }
 
 .add-margin-top-30vh {
@@ -88,17 +88,8 @@
 
 /* END: 7th to 9th Form Section */
 
-.sizeOf {
-  padding-left: 125px;
-  padding-right: 125px;
-  border: medium;
-  padding-bottom: 25px;
-}
-
 .legalDiscretion {
-  max-height: 200px;
-  font-family: 'sans-serif';
-  font-size: medium;
+  max-height: 250px;
   overflow-y: scroll;
   border: black;
 }
@@ -109,12 +100,7 @@
 }
 
 .title {
-  font-family: 'sans-serif';
   text-align: center;
-}
-
-.formFills {
-  padding-bottom: 25px;
 }
 
 .ui.checkbox.new-line {
