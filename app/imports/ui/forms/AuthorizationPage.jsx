@@ -14,6 +14,7 @@ import ErrorsField from 'uniforms-semantic/ErrorsField';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { AuthorizationDB, AuthorizationDBWithoutOwner } from '/imports/api/stuff/AuthorizationDB';
+import ProgressBar from '../components/ProgressBar';
 
 class AuthorizationPage extends React.Component {
 
@@ -83,6 +84,7 @@ class AuthorizationPage extends React.Component {
     const header5Style = { margin: '0px', marginTop: '7px' };
     return (
       <Container>
+        <ProgressBar />
         <Header as='h2' className='title' style={headerStyle}>AUTHORIZATION FOR RELEASE OF INFORMATION</Header>
         <Header as='h5' style={header5Style} className='title dividing header'>HGIA Green Energy Money $aver On-Bill Program (Eligibility and Ongoing Participation)</Header>
 

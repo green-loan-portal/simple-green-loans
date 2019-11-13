@@ -12,6 +12,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section8DB, Section8DBSchemaWithoutOwner } from '../../api/stuff/Section8DB';
+import ProgressBar from '../components/ProgressBar';
 
 class Form8 extends React.Component {
 
@@ -59,6 +60,7 @@ class Form8 extends React.Component {
   renderPage() {
     return (
       <Container>
+        <ProgressBar />
         <Header as="h2" className="dividing header">8. SYSTEM OWNER (For Solar Tax Credits)</Header>
         <Label color='red'>Please check with your tax advisor. Please also have the name of the system owner added to the EI contract (along with the utility account holder).</Label>
 

@@ -13,6 +13,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section2DB, Section2DBSchemaWithoutOwner } from '../../api/stuff/Section2DB';
+import ProgressBar from '../components/ProgressBar';
 
 
 class Form2 extends React.Component {
@@ -70,6 +71,7 @@ class Form2 extends React.Component {
     return (
 
       <Container>
+        <ProgressBar />
         <Header as='h2' className='dividing header'>
           2. RATEPAYER INFORMATION
           <Label className="green">
@@ -85,24 +87,28 @@ class Form2 extends React.Component {
             <TextField
               className="five wide field"
               name='firstName'
-              label='First Name'
+              label={false}
+              placeholder={'First Name'}
               showInlineError={false}
             />
             <TextField
               className="five wide field"
               name='middleName'
-              label='Middle Name'
+              label={false}
+              placeholder={'Middle Name'}
             />
             <TextField
               className="five wide field"
               name='lastName'
-              label='Last Name'
+              label={false}
+              placeholder={'Last Name'}
               showInlineError={false}
             />
             <TextField
               className="five wide field"
               name='utilityAccountNumber'
-              label='Utility Account Number'
+              label={false}
+              placeholder={'Utility Account Number'}
             />
           </Form.Group>
 
@@ -129,13 +135,15 @@ class Form2 extends React.Component {
           <Form.Group>
             <TextField
               className="eight wide field"
-              label='Contractor Name'
               name='contractorName'
+              label={false}
+              placeholder={'Contractor Name'}
             />
             <TextField
               className="eight wide field"
-              label='Contact Name'
               name='contactName'
+              label={false}
+              placeholder={'Contact Name'}
             />
           </Form.Group>
 

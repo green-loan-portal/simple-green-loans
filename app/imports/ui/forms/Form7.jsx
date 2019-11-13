@@ -13,6 +13,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section7DB, Section7DBSchemaWithoutOwner } from '/imports/api/stuff/Section7DB';
+import ProgressBar from '../components/ProgressBar';
 
 class Form7 extends React.Component {
 
@@ -67,6 +68,7 @@ class Form7 extends React.Component {
   renderPage() {
     return (
       <Container>
+        <ProgressBar />
         <Header as="h2" className="dividing header">
           7. APPLICANT&#39;S INFORMATION
           <Label className="green">

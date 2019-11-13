@@ -13,6 +13,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
+import ProgressBar from '../components/ProgressBar';
 
 class Form9 extends React.Component {
 
@@ -72,6 +73,7 @@ class Form9 extends React.Component {
   renderPage() {
     return (
       <Container>
+        <ProgressBar />
         <Header as="h2" className="dividing header">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
 
         <div className='legalDiscretion'>

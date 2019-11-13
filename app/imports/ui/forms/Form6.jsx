@@ -13,6 +13,7 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section6DB, Section6DBSchemaWithoutOwner } from '../../api/stuff/Section6DB';
+import ProgressBar from '../components/ProgressBar';
 
 /** Renders the Page for adding a document. */
 class Form6 extends React.Component {
@@ -69,6 +70,7 @@ class Form6 extends React.Component {
   renderPage() {
     return (
       <Container>
+        <ProgressBar />
         <Header as="h2" className="dividing header">6. Data For Program Reporting Purposes</Header>
 
         <AutoForm schema={Section6DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
