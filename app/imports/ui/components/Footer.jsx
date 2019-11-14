@@ -30,7 +30,6 @@ class Footer extends React.Component {
                   size='tiny'
                   className="StateLogo centered"
               />
-              <p className='add-margin-top-10px'>Copyright © 2019, State of Hawaii. All rights reserved.</p>
             </Grid.Column>
           </Grid>
         </Container>
