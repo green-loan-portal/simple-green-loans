@@ -36,7 +36,14 @@ Object.keys(forms).forEach(key => {
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Stuffs.find();
+    return Section1DB.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish('StuffAdmin1', function publish() {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Section2DB.find();
   }
   return this.ready();
 });
