@@ -18,6 +18,8 @@ import { BaseField, nothing } from 'uniforms';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
 import ProgressBar from '../components/ProgressBar';
 import { PdfFile } from '../pages/PdfFile';
+import exportToExcel from '../components/exportToExcel';
+import { exportToCsv } from '../../api/stuff/possibleNewCsV';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -325,10 +327,14 @@ class Form1 extends React.Component {
               <Button>
                 <Link to="/form/2">Save & Next &gt;</Link>
               </Button>
+              <Button onClick={exportToCsv}>
+                export to CSV
+              </Button>
 
             </div>
           </AutoForm>
           <PdfFile/>
+
         </Container>
     );
   }
