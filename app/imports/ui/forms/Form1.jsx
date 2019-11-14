@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 import { BaseField, nothing } from 'uniforms';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
 import ProgressBar from '../components/ProgressBar';
+import { PdfFile } from '../pages/PdfFile';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -324,8 +325,10 @@ class Form1 extends React.Component {
               <Button>
                 <Link to="/form/2">Save & Next &gt;</Link>
               </Button>
+
             </div>
           </AutoForm>
+          <PdfFile/>
         </Container>
     );
   }
