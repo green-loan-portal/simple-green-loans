@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 import Form1 from '../../ui/forms/Form1';
 import { Section1DB } from './Section1DB';
 
-
+// let form1Array = Section1DB.find().fetch({ owner: 1 });
+console.log(form1Array);
 var Results = [
 
   ["Col1", "Col2", "Col3", "Col4"],
   ["Data", 50, 100, 500],
   ["Data", -100, 20, 100],
-
 
 ];
 
@@ -25,7 +25,6 @@ export const exportToCsv = function () {
     CsvString += "\r\n";
   });
 
-
   CsvString = "data:application/csv," + encodeURIComponent(CsvString);
   var x = document.createElement("A");
   x.setAttribute("href", CsvString);
@@ -34,16 +33,15 @@ export const exportToCsv = function () {
   x.click();
 }
 
-
 /**
-Form1.propTypes = {
+ Form1.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
 
-export default withTracker(({ match }) => {
+ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
@@ -56,4 +54,4 @@ export default withTracker(({ match }) => {
   };
 
 })(Form1);
-*/
+ */
