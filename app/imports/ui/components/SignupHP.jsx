@@ -29,55 +29,59 @@ export default class SignupHP extends React.Component {
   }
 
   render() {
+    return Meteor.user() ? '' : this.renderPage();
+  }
+
+  renderPage() {
     const topPadding = { paddingTop: '10px' };
     const { from } = { from: { pathname: '/Profile' } };
     if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     }
     return (
-        <Segment placeholder>
-          <Grid columns={2} relaxed='very' stackable style={topPadding}>
-            <Grid.Column>
-              <Form onSubmit={this.submit}>
-                <Form.Input
-                    icon='user'
-                    iconPosition='left'
-                    label='Username'
-                    placeholder='Username'
-                    name="email"
-                    type="email"
-                    onChange={this.handleChange}
-                />
-                <Form.Input
-                    icon='lock'
-                    iconPosition='left'
-                    label='Password'
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleChange}
-                />
-                <Form.Button content='Login' primary/>
-              </Form>
+      <Segment placeholder>
+        <Grid columns={2} relaxed='very' stackable style={topPadding}>
+          <Grid.Column>
+            <Form onSubmit={this.submit}>
+              <Form.Input
+                icon='user'
+                iconPosition='left'
+                label='Username'
+                placeholder='Username'
+                name="email"
+                type="email"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                icon='lock'
+                iconPosition='left'
+                label='Password'
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={this.handleChange}
+              />
+              <Form.Button content='Login' primary />
+            </Form>
 
-              {this.state.error === '' ? (
-                  ''
-              ) : (
-                  <Message
-                      error
-                      header="Login was not successful"
-                      content={this.state.error}
-                  />
+            {this.state.error === '' ? (
+              ''
+            ) : (
+                <Message
+                  error
+                  header="Login was not successful"
+                  content={this.state.error}
+                />
               )}
-            </Grid.Column>
+          </Grid.Column>
 
-            <Grid.Column verticalAlign='middle'>
-              <Button content='Sign up' icon='signup' size='big' as={NavLink} exact to="/signup"/>
-            </Grid.Column>
-          </Grid>
+          <Grid.Column verticalAlign='middle'>
+            <Button content='Sign up' icon='signup' size='big' as={NavLink} exact to="/signup" />
+          </Grid.Column>
+        </Grid>
 
-          <Divider vertical>Or</Divider>
-        </Segment>
+        <Divider vertical>Or</Divider>
+      </Segment>
     );
   }
 }
