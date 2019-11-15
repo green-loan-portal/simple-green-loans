@@ -2,11 +2,6 @@ import React from 'react';
 import { Menu, Grid, Container } from 'semantic-ui-react';
 
 export default class MiddleMenu extends React.Component {
-  changeMarginBottom() {
-    setTimeout(function() {
-      document.getElementById('margin-bottom-navbar').style.marginBottom = '15px';
-    }, 100)
-  }
 
   render() {
     return (
@@ -26,7 +21,6 @@ export default class MiddleMenu extends React.Component {
             </Menu.Item>
           </Grid>
         </Menu>
-        {this.changeMarginBottom()}
       </Container>
     );
   }

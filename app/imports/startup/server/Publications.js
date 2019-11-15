@@ -36,14 +36,14 @@ Object.keys(forms).forEach(key => {
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Section1DB.find();
+    return [Meteor.users.find(), Section1DB.find(), Section2DB.find(), Section6DB.find(), Section7DB.find(), Section8DB.find(), Section9DB.find(), AuthorizationDB.find()];
   }
   return this.ready();
 });
 
-Meteor.publish('StuffAdmin1', function publish() {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Section2DB.find();
-  }
-  return this.ready();
-});
+// Meteor.publish('StuffAdmin1', function publish() {
+//   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+//     return Section2DB.find();
+//   }
+//   return this.ready();
+// });
