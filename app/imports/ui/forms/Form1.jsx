@@ -19,8 +19,6 @@ import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Sec
 import ProgressBar from '../components/ProgressBar';
 import { exportToCsv2, collectdata } from '../../api/stuff/CsvScript';
 
-
-
 /** Create a schema to specify the structure of the data to appear in the form. */
 
 /** Renders the Page for adding a document. */
@@ -58,7 +56,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          // swal('Success', 'Section #1 saved successfully', 'success');
+          swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
     } else {
@@ -74,7 +72,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          // swal('Success', 'Section #1 updated successfully', 'success');
+          swal('Success', 'Section #1 updated successfully', 'success');
         }
       });
     }
@@ -89,7 +87,7 @@ class Form1 extends React.Component {
     return (
 
         <Container>
-          <ProgressBar />
+          <ProgressBar/>
           <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Header as='h2' className='dividing header'>
               <strong>1. PRE-APPLICATION SURVEY</strong>
@@ -328,10 +326,9 @@ class Form1 extends React.Component {
                 <Link to="/form/2">Save & Next &gt;</Link>
               </Button>
 
-              <Button onClick={collectdata}>
+              <Button onClick={collectdata} className='exportButton'>
                 Export to Excel
               </Button>
-
 
 
             </div>
