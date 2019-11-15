@@ -17,9 +17,7 @@ import PropTypes from 'prop-types';
 import { BaseField, nothing } from 'uniforms';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
 import ProgressBar from '../components/ProgressBar';
-import { PdfFile } from '../pages/PdfFile';
-import exportToExcel from '../components/exportToExcel';
-import { exportToCsv } from '../../api/stuff/possibleNewCsV';
+import { exportToCsv2, collectdata } from '../../api/stuff/CsvScript';
 
 
 
@@ -60,7 +58,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 saved successfully', 'success');
+          // swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
     } else {
@@ -76,7 +74,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 updated successfully', 'success');
+          // swal('Success', 'Section #1 updated successfully', 'success');
         }
       });
     }
@@ -329,14 +327,15 @@ class Form1 extends React.Component {
               <Button>
                 <Link to="/form/2">Save & Next &gt;</Link>
               </Button>
-              <Button onClick={exportToCsv}>
-                export to CSV
+
+              <Button onClick={collectdata}>
+                Export to Excel
               </Button>
+
 
 
             </div>
           </AutoForm>
-          <PdfFile/>
 
         </Container>
     );
