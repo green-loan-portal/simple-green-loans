@@ -1,7 +1,7 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Label, Button, Icon, Loader } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -140,14 +140,11 @@ class Form7 extends React.Component {
             </Form.Group>
 
             <ErrorsField />
+
             <div className="align-right add-margin-top-20px">
-              <Button>
-                <Link to="/form/6">&lt; Previous</Link>
-              </Button>
-              <SubmitField value='Submit' disabled={false} />
-              <Button>
-                <Link to="/form/8">Save & Next &gt;</Link>
-              </Button>
+              <Button as={NavLink} exact to="/form/6">&lt; Previous</Button>
+              <Button as={NavLink} exact to="/form/8">Next &gt;</Button>
+              <SubmitField value="Save" className="green" />
             </div>
           </Container>
         </AutoForm>

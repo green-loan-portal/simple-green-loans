@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Container, Form, Button, Label, Loader } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import { Link } from 'react-router-dom';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
@@ -42,7 +42,7 @@ class Form2 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #6 saved successfully', 'success');
+          swal('Success', 'Section #2 saved successfully', 'success');
         }
       });
     }
@@ -56,7 +56,7 @@ class Form2 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #6 updated successfully', 'success');
+          swal('Success', 'Section #2 updated successfully', 'success');
         }
       });
     }
@@ -180,13 +180,9 @@ class Form2 extends React.Component {
 
           <ErrorsField />
           <div className="align-right add-margin-top-20px">
-            <Button>
-              <Link to="/form/1">&lt; Previous</Link>
-            </Button>
-            <SubmitField value='Submit' />
-            <Button>
-              <Link to="/form/6">Save & Next &gt;</Link>
-            </Button>
+            <Button as={NavLink} exact to="/form/1">&lt; Previous</Button>
+            <Button as={NavLink} exact to="/form/6">Next &gt;</Button>
+            <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
       </Container >

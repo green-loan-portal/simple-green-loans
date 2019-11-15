@@ -7,7 +7,7 @@ import SubmitField from 'uniforms-semantic/SubmitField';
 import NumField from 'uniforms-semantic/NumField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
@@ -136,15 +136,12 @@ class Form6 extends React.Component {
             </div>
           </Form.Group>
 
-          <ErrorsField value='Submit' />
+          <ErrorsField />
+
           <div className="align-right add-margin-top-20px">
-            <Button>
-              <Link to="/form/2">&lt; Previous</Link>
-            </Button>
-            <SubmitField value='Submit' />
-            <Button>
-              <Link to="/form/7">Save & Next &gt;</Link>
-            </Button>
+            <Button as={NavLink} exact to="/form/2">&lt; Previous</Button>
+            <Button as={NavLink} exact to="/form/7">Next &gt;</Button>
+            <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
       </Container>

@@ -38,29 +38,22 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">List Stuff (Admin)</Header>
+        <Header as="h2" textAlign="center">Records (Admin)</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
-              {/* <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Condition</Table.HeaderCell> */}
-              {/* <Table.HeaderCell>Owner Name</Table.HeaderCell> */}
               <Table.HeaderCell>Customer Name</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
               <Table.HeaderCell>otherHDYHA</Table.HeaderCell>
+              <Table.HeaderCell>Edit</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {/* {this.props.stuff2.filter(stuff => "stuff: " + stuff + "; " + stuff.owner)} */}
             {this.props.stuffs.map((stuff, index) => <StuffItemAdmin key={index}
               stuff={stuff}
-              stuff2={this.props.stuff2.filter(myStuff2 => (myStuff2.owner == stuff.owner))}
-              />)} 
-            {/* {this.myFunction()} */}
-            {/* {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)} */}
-            {/* {this.props.stuff2.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)} */}
+              stuff2={this.props.stuff2.find(myStuff2 => (myStuff2.owner == stuff.owner))}
+            />)}
           </Table.Body>
         </Table>
       </Container>

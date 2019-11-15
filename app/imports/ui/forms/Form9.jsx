@@ -1,7 +1,7 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Button, Loader } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ExpandCanvas } from "../js/userSignature";
 import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
@@ -130,14 +130,11 @@ class Form9 extends React.Component {
           </Form.Group>
 
           <ErrorsField />
+
           <div className="align-right add-margin-top-20px">
-            <Button>
-              <Link to="/form/8">&lt; Previous</Link>
-            </Button>
-            <SubmitField value='Submit' id='submitFormHidden' />
-            <Button>
-              <Link to="/authorization">Save & Next &gt;</Link>
-            </Button>
+            <Button as={NavLink} exact to="/form/8">&lt; Previous</Button>
+            <Button as={NavLink} exact to="/authorization">Next &gt;</Button>
+            <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
 

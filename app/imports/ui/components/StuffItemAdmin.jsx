@@ -7,15 +7,11 @@ class StuffItemAdmin extends React.Component {
   render() {
     return (
         <Table.Row>
-          {console.log("okay:  " + this.props.stuff.owner)}
-          {console.log("okaye:  " + Object.keys(this.props.stuff2))}
-          {/* <Table.Cell>{this.props.stuff.name}</Table.Cell>
-          <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-          <Table.Cell>{this.props.stuff.condition}</Table.Cell> */}
-          <Table.Cell>{this.props.stuff2} {this.props.stuff2}</Table.Cell>
+          <Table.Cell>{this.props.stuff2? `${this.props.stuff2.firstName} ${this.props.stuff2.middleName} ${this.props.stuff2.lastName}` : '[In progress...]'}</Table.Cell>
           <Table.Cell>{this.props.stuff.owner}</Table.Cell>
           <Table.Cell>{this.props.stuff.howDidYouHearAboutUs.join(", ")}</Table.Cell>
           <Table.Cell>{this.props.stuff.otherHDYHA}</Table.Cell>
+          <Table.Cell><a href=''>Click to Edit</a></Table.Cell>
         </Table.Row>
     );
   }
