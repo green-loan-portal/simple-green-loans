@@ -7,7 +7,7 @@ import Form1 from '../../ui/forms/Form1';
 import { Section1DB } from './Section1DB';
 
 // let form1Array = Section1DB.find().fetch({ owner: 1 });
-console.log(form1Array);
+// console.log(form1Array);
 var Results = [
 
   ["Col1", "Col2", "Col3", "Col4"],

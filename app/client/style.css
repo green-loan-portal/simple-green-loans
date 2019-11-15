@@ -1,3 +1,7 @@
+#margin-bottom-navbar {
+  margin-bottom: 40px;
+}
+
 .ui.borderless.top.Menu {
   align-content: center;
   border: none;
@@ -18,6 +22,7 @@
 }
 
 /* 1st Form Section */
+
 .ui.divider.divider-props {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -34,18 +39,13 @@
   width: 30px;
   height: 17px;
   background: white;
-
-
 }
+
 .bool-field-style {
   padding-bottom: 5px;
 }
 
-
-
 /* END: 1st Form Section */
-
-
 
 /* START: 7th to 9th Form Section */
 
@@ -132,6 +132,10 @@
 .hawaii-background {
   background: url("https://images.unsplash.com/photo-1460355591219-452ee2548432?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80") bottom fixed;
   background-size: auto;
-  height: 500px;
+  height: 520px;
   padding-top: 20px;
+}
+
+.color-white {
+  color: rgba(255, 255, 255, .9);
 }
