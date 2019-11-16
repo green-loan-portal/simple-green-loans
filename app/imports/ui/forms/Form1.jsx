@@ -326,7 +326,6 @@ class Form1 extends React.Component {
             </Button>
           </div>
         </AutoForm>
-        <PdfFile />
       </Container >
     );
   }

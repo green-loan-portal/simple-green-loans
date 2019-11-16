@@ -32,6 +32,11 @@ class AllForms extends React.Component {
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js';
       script.async = true;
       document.body.appendChild(script);
+      var script2 = document.createElement('script');
+      script2.type = 'text/javascript';
+      script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js';
+      script2.async = true;
+      document.body.appendChild(script2);
     }
     loadScript();
   }
@@ -40,15 +45,32 @@ class AllForms extends React.Component {
     var element = document.getElementById("clickbind");
     console.log("works1");
     if (element) {
-      console.log("works");
+      console.log("woo");
       element.addEventListener("click", function () {
-        var pdf = new jsPDF('p', 'pt', 'letter');
-        pdf.canvas.height = 72 * 11;
-        pdf.canvas.width = 72 * 8.5;
 
-        pdf.fromHTML(document.body);
+        domtoimage.toPng(document.getElementById('root'))
+          .then(function (blob) {
+            var pdf = new jsPDF('l', 'pt', [document.getElementById('root').width(), document.getElementById('root').height()]);
 
-        pdf.save('test.pdf');
+            pdf.addImage(blob, 'PNG', 0, 0, document.getElementById('root').width(), document.getElementById('root').height());
+            pdf.save("test.pdf");
+
+            that.options.api.optionsChanged();
+          });
+        // var pdf = new jsPDF('p', 'pt', 'a4');
+        // pdf.addHTML(document.body, function () {
+        //   pdf.save('web.pdf');
+        // });
+
+
+        // console.log(document.getElementById("root"));
+        // pdf.fromHTML(document.getElementById("root"), 1, 1, {
+        // var doc = new jsPDF();
+        // doc.fromHTML($('#lppresults')[0], 15, 15, {
+        //   width: 170
+        // }, function () {
+        //   doc.save('sample-file.pdf');
+        // });
       });
     }
   };
