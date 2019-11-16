@@ -48,15 +48,10 @@ class AllForms extends React.Component {
       console.log("woo");
       element.addEventListener("click", function () {
 
-        domtoimage.toPng(document.getElementById('root'))
-          .then(function (blob) {
-            var pdf = new jsPDF('l', 'pt', [document.getElementById('root').width(), document.getElementById('root').height()]);
-
-            pdf.addImage(blob, 'PNG', 0, 0, document.getElementById('root').width(), document.getElementById('root').height());
-            pdf.save("test.pdf");
-
-            that.options.api.optionsChanged();
-          });
+        var pdf = new jsPDF('p', 'pt', 'a4');
+        pdf.fromHTML(document.getElementById("root"), function () {
+          pdf.save('test.pdf');
+        });
         // var pdf = new jsPDF('p', 'pt', 'a4');
         // pdf.addHTML(document.body, function () {
         //   pdf.save('web.pdf');

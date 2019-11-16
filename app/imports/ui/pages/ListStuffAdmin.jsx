@@ -31,13 +31,14 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>Customer Name</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
-              <Table.HeaderCell>Section 1</Table.HeaderCell>
-              <Table.HeaderCell>Section 2-5</Table.HeaderCell>
-              <Table.HeaderCell>Section 6</Table.HeaderCell>
-              <Table.HeaderCell>Section 7</Table.HeaderCell>
-              <Table.HeaderCell>Section 8</Table.HeaderCell>
-              <Table.HeaderCell>Section 9</Table.HeaderCell>
+              <Table.HeaderCell>#1</Table.HeaderCell>
+              <Table.HeaderCell>#2-5</Table.HeaderCell>
+              <Table.HeaderCell>#6</Table.HeaderCell>
+              <Table.HeaderCell>#7</Table.HeaderCell>
+              <Table.HeaderCell>#8</Table.HeaderCell>
+              <Table.HeaderCell>#9</Table.HeaderCell>
               <Table.HeaderCell>Authorization</Table.HeaderCell>
+              <Table.HeaderCell>Send Reminder</Table.HeaderCell>
               <Table.HeaderCell>View</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
