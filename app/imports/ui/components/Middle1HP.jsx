@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Header, Grid, Container } from 'semantic-ui-react';
+import { List, Grid, Container } from 'semantic-ui-react';
 
 export default class Middle1HP extends React.Component {
   render() {
@@ -10,7 +10,7 @@ export default class Middle1HP extends React.Component {
           <Grid style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
-                What is GEMS?
+                <p className="headers">What is GEMS?</p>
                 <hr/>
                 The Green Energy Market Securitization Program (GEMS) is an innovative, sustainable green financing
                 initiative designed by the Hawaii State Energy Office to make clean energy improvements more
@@ -19,7 +19,7 @@ export default class Middle1HP extends React.Component {
                 obtaining financing for these projects.
               </Grid.Column>
               <Grid.Column>
-                Eligibility
+                <p className="headers">Eligibility</p>
                 <hr/>
                 <List bulleted>
                   <List.Item>Must be a Hawaiian Electric, Maui Electric, or Hawaiian Electric Light Company customer on
