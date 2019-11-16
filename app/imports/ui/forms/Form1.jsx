@@ -17,11 +17,7 @@ import PropTypes from 'prop-types';
 import { BaseField, nothing } from 'uniforms';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
 import ProgressBar from '../components/ProgressBar';
-import { PdfFile } from '../pages/PdfFile';
-import exportToExcel from '../components/exportToExcel';
-import { exportToCsv } from '../../api/stuff/possibleNewCsV';
-
-
+import { exportToCsv2, collectdata } from '../../api/stuff/CsvScript';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -90,12 +86,21 @@ class Form1 extends React.Component {
     DisplayIf.contextTypes = BaseField.contextTypes;
     return (
 
+<<<<<<< HEAD
       <Container>
         <ProgressBar />
         <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <Header as='h2' className='dividing header'>
             <strong>1. PRE-APPLICATION SURVEY</strong>
             {/** }
+=======
+        <Container>
+          <ProgressBar/>
+          <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
+            <Header as='h2' className='dividing header'>
+              <strong>1. PRE-APPLICATION SURVEY</strong>
+              {/** }
+>>>>>>> origin/madeAProgressBar
                <Label className="green">
                Note: The person named on the electric utility account should be the Applicant
                </Label>
@@ -325,7 +330,9 @@ class Form1 extends React.Component {
             <Button as={NavLink} exact to="/profile">&lt; Previous</Button>
             <Button as={NavLink} exact to="/form/2">Next &gt;</Button>
             <SubmitField value="Save" className="green" />
-            <Button onClick={exportToCsv}>export to CSV</Button>
+            <Button onClick={collectdata} className='exportButton'>
+              Export to Excel
+            </Button>
           </div>
         </AutoForm>
         <PdfFile />
