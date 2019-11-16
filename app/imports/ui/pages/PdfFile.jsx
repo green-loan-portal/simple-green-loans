@@ -37,4 +37,5 @@ export const PdfFile = () => (
     </PDFViewer>
 );
 
-export default ReactDOM.render(<PdfFile />, document.getElementById('root'));
+export default PdfFile;
+// ReactDOM.render(<PdfFile />, document.getElementById('root'));

@@ -57,8 +57,16 @@
   margin-top: 20px !important;
 }
 
+.add-margin-top-30px {
+  margin-top: 30px !important;
+}
+
 .add-margin-top-40px {
   margin-top: 40px !important;
+}
+
+.add-margin-top-50px {
+  margin-top: 50px !important;
 }
 
 .add-margin-top-30vh {
@@ -138,4 +146,8 @@
 
 .color-white {
   color: rgba(255, 255, 255, .9);
+}
+
+.darkOutline {
+  border: 1px dashed #021a40;
 }
