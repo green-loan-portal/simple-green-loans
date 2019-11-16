@@ -22,7 +22,7 @@
     "uniforms": "^2.2.0",
     "uniforms-bridge-simple-schema-2": "^2.2.0",
     "uniforms-semantic": "^2.2.0",
-    "uniforms-unstyled": "^2.5.0"
+    "uniforms-unstyled": "^2.6.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",

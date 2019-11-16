@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
-
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -41,8 +40,11 @@ class Signup extends React.Component {
     }
   }
 
-  /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
+    return Meteor.user() ? <Redirect to={'/profile'} /> : this.renderPage();
+  }
+  /** Display the signup form. Redirect to add page after successful registration and login. */
+  renderPage() {
     const { from } = this.props.location.state || { from: { pathname: '/profile' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {

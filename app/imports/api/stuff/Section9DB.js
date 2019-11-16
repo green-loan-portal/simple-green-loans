@@ -20,4 +20,4 @@ const Section9DBSchema = new SimpleSchema({
 Section9DB.attachSchema(Section9DBSchema);
 
 /** Make the collection and schema available to other code. */
-export { Section9DB, Section9DBSchemaWithoutOwner };
+export { Section9DB, Section9DBSchema, Section9DBSchemaWithoutOwner };
