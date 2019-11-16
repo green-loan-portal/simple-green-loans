@@ -25,6 +25,34 @@ import { Section9DB } from '/imports/api/stuff/Section9DB';
 /** Renders the Page for adding a document. */
 class AllForms extends React.Component {
 
+  loadScript() {
+    function loadScript() {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    loadScript();
+  }
+
+  onClick() {
+    var element = document.getElementById("clickbind");
+    console.log("works1");
+    if (element) {
+      console.log("works");
+      element.addEventListener("click", function () {
+        var pdf = new jsPDF('p', 'pt', 'letter');
+        pdf.canvas.height = 72 * 11;
+        pdf.canvas.width = 72 * 8.5;
+
+        pdf.fromHTML(document.body);
+
+        pdf.save('test.pdf');
+      });
+    }
+  };
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
@@ -34,6 +62,7 @@ class AllForms extends React.Component {
     // eslint-disable-next-line max-len
     const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
+    this.loadScript();
     return (
       <div>
         <Container>
@@ -572,8 +601,10 @@ class AllForms extends React.Component {
               {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>}
             </Grid.Column>
           </Grid.Row>
-
         </Container>
+
+        <Button id='clickbind' onClick={this.onClick}>Print</Button>
+        {/* {this.onClick()} */}
       </div >
     );
   }
