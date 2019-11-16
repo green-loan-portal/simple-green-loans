@@ -255,9 +255,7 @@ class Form6 extends React.Component {
           <div className="align-right add-margin-top-20px">
             <Button as={NavLink} exact to="/form/2">&lt; Previous</Button>
             <Button as={NavLink} exact to="/form/7">Next &gt;</Button>
-            <Button onClick={collectdata} className='exportButton'>
-              Export to Excel
-            </Button>
+
             <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
