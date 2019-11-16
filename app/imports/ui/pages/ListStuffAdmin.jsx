@@ -77,7 +77,7 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>#8</Table.HeaderCell>
               <Table.HeaderCell>#9</Table.HeaderCell>
               <Table.HeaderCell>Authorization</Table.HeaderCell>
-              <Table.HeaderCell>View</Table.HeaderCell>
+              <Table.HeaderCell>PDF</Table.HeaderCell>
               <Table.HeaderCell>Excel</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
