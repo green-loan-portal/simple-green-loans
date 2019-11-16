@@ -86,21 +86,12 @@ class Form1 extends React.Component {
     DisplayIf.contextTypes = BaseField.contextTypes;
     return (
 
-<<<<<<< HEAD
       <Container>
         <ProgressBar />
         <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <Header as='h2' className='dividing header'>
             <strong>1. PRE-APPLICATION SURVEY</strong>
             {/** }
-=======
-        <Container>
-          <ProgressBar/>
-          <AutoForm schema={Section1DBSchemaWithoutOwner} onSubmit={data => this.submit(data)} model={this.props.doc}>
-            <Header as='h2' className='dividing header'>
-              <strong>1. PRE-APPLICATION SURVEY</strong>
-              {/** }
->>>>>>> origin/madeAProgressBar
                <Label className="green">
                Note: The person named on the electric utility account should be the Applicant
                </Label>
