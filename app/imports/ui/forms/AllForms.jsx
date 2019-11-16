@@ -1,16 +1,12 @@
 import React, { Children } from 'react';
 // import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Header, Form, Button, Container, Loader, Label, Image } from 'semantic-ui-react';
+import { Header, Form, Button, Container, Loader, Label, Image, Grid } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
 import SelectField from 'uniforms-semantic/SelectField';
-import SubmitField from 'uniforms-semantic/SubmitField';
-import ErrorsField from 'uniforms-semantic/ErrorsField';
 import BoolField from 'uniforms-unstyled/BoolField';
-import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { NavLink } from 'react-router-dom';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -20,12 +16,6 @@ import { Section2DBSchemaWithoutOwner, Section2DB } from '/imports/api/stuff/Sec
 import { Section6DBSchemaWithoutOwner, Section6DB } from '/imports/api/stuff/Section6DB';
 import { Section7DBSchemaWithoutOwner, Section7DB } from '/imports/api/stuff/Section7DB';
 import { Section8DBSchemaWithoutOwner, Section8DB } from '/imports/api/stuff/Section8DB';
-import { Section9DBSchema, Section9DB } from '/imports/api/stuff/Section9DB';
-import { PdfFile } from '../pages/PdfFile';
-import exportToExcel from '../components/exportToExcel';
-import { exportToCsv } from '../../api/stuff/possibleNewCsV';
-
-
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -570,15 +560,15 @@ class AllForms extends React.Component {
           <br />
 
           <strong>Signature:</strong>
-          <Form.Group>
-            <div className="four wide field">
-              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>}
-            </div>
-            <div className="twelve wide field">
-              {this.props.doc5 ? <Image className='darkOutline' src={this.props.doc5.signature} /> : <div className='ui red'>*No signature</div>}
-            </div>
 
-          </Form.Group>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              {this.props.doc5 ? <Image className='darkOutline' src={this.props.doc5.signature} /> : <div className='ui red'>*No signature</div>}
+            </Grid.Column>
+            <Grid.Column>
+              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>}
+            </Grid.Column>
+          </Grid.Row>
 
         </Container>
       </div >
