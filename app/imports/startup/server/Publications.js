@@ -40,10 +40,3 @@ Meteor.publish('StuffAdmin', function publish() {
   }
   return this.ready();
 });
-
-// Meteor.publish('StuffAdmin1', function publish() {
-//   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-//     return Section2DB.find();
-//   }
-//   return this.ready();
-// });

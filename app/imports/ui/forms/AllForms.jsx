@@ -16,6 +16,9 @@ import { Section2DBSchemaWithoutOwner, Section2DB } from '/imports/api/stuff/Sec
 import { Section6DBSchemaWithoutOwner, Section6DB } from '/imports/api/stuff/Section6DB';
 import { Section7DBSchemaWithoutOwner, Section7DB } from '/imports/api/stuff/Section7DB';
 import { Section8DBSchemaWithoutOwner, Section8DB } from '/imports/api/stuff/Section8DB';
+import { Section9DB } from '/imports/api/stuff/Section9DB';
+
+
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
