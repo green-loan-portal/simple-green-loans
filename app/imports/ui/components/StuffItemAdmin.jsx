@@ -5,26 +5,6 @@ import { collectdata } from '../../api/stuff/CsvScript';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 class StuffItemAdmin extends React.Component {
-  // unfinishedSections() {
-  //   let sectionsUnfinished = [];
-  //   let myArray = [this.props.section1, this.props.section2, this.props.section6,
-  //   this.props.section7, this.props.section8, this.props.section9, this.props.sectionAuthorization];
-
-  //   myArray.forEach((element, index) => element ? '' : sectionsUnfinished.push(element));
-
-  //   console.log("unfinished from " + this.props.stuff.username, myArray);
-  //   return (sectionsUnfinished.length == 0) ? false : sectionsUnfinished;
-  // }
-
-  // onButtonClick() {
-  //   let div = document.getElementById(this.props.stuff._id);
-  //   if (div) {
-  //     console.log("added");
-  //     div.addEventListener('click', function () {
-  //       console.log("shits clicked");
-  //     });
-  //   }
-  // }
 
   render() {
     // const unfinishedSections = this.unfinishedSections();
