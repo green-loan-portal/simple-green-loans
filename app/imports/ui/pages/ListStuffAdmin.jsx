@@ -17,7 +17,11 @@ import PropTypes from 'prop-types';
 class ListStuffAdmin extends React.Component {
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    return this.props.ready ? (
+      this.renderPage()
+    ) : (
+      <Loader active>Getting data</Loader>
+    );
   }
 
   sending() {
@@ -58,7 +62,9 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">Records (Admin)</Header>
+        <Header as="h2" textAlign="center">
+          Records (Admin)
+        </Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -73,19 +79,37 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>#9</Table.HeaderCell>
               <Table.HeaderCell>Authorization</Table.HeaderCell>
               <Table.HeaderCell>View</Table.HeaderCell>
+              <Table.HeaderCell>Excel</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.props.accounts.map((stuff, index) => <StuffItemAdmin key={index}
-              stuff={stuff}
-              section1={this.props.db1.find(mydb1 => (mydb1.owner == stuff.username))}
-              section2={this.props.db2.find(mydb2 => (mydb2.owner == stuff.username))}
-              section6={this.props.db6.find(mydb6 => (mydb6.owner == stuff.username))}
-              section7={this.props.db7.find(mydb7 => (mydb7.owner == stuff.username))}
-              section8={this.props.db8.find(mydb8 => (mydb8.owner == stuff.username))}
-              section9={this.props.db9.find(mydb9 => (mydb9.owner == stuff.username))}
-              sectionAuthorization={this.props.dbauthorization.find(mydbAuth => (mydbAuth.owner == stuff.username))}
-            />)}
+            {this.props.accounts.map((stuff, index) => (
+              <StuffItemAdmin
+                key={index}
+                stuff={stuff}
+                section1={this.props.db1.find(
+                  mydb1 => mydb1.owner == stuff.username
+                )}
+                section2={this.props.db2.find(
+                  mydb2 => mydb2.owner == stuff.username
+                )}
+                section6={this.props.db6.find(
+                  mydb6 => mydb6.owner == stuff.username
+                )}
+                section7={this.props.db7.find(
+                  mydb7 => mydb7.owner == stuff.username
+                )}
+                section8={this.props.db8.find(
+                  mydb8 => mydb8.owner == stuff.username
+                )}
+                section9={this.props.db9.find(
+                  mydb9 => mydb9.owner == stuff.username
+                )}
+                sectionAuthorization={this.props.dbauthorization.find(
+                  mydbAuth => mydbAuth.owner == stuff.username
+                )}
+              />
+            ))}
           </Table.Body>
         </Table>
         <Button id="sendEmailButton">Send application reminder</Button>
@@ -104,7 +128,7 @@ ListStuffAdmin.propTypes = {
   db7: PropTypes.array,
   db8: PropTypes.array,
   db9: PropTypes.array,
-  dbauthorization: PropTypes.array,
+  dbauthorization: PropTypes.array
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */

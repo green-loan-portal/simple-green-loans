@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Button, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { collectdata } from '../../api/stuff/CsvScript';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 class StuffItemAdmin extends React.Component {
@@ -40,6 +41,9 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.section9 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell><a href=''><Icon name='external alternate' /></a></Table.Cell>
+        <Table.Cell> <Button onClick={collectdata} className='exportButton' basic color='green' content='Green' size='mini'>
+          Excel
+        </Button></Table.Cell>
       </Table.Row>
     );
   }

@@ -12,10 +12,7 @@ import { Section8DB } from './Section8DB';
 import { Section9DB } from './Section9DB';
 import { AuthorizationDB } from './AuthorizationDB';
 
-
-
- export const collectdata = function (props) {
-
+export const collectdata = function (props) {
 
   // Section!db
   const profile = Meteor.user() ? Meteor.user().username : null;
@@ -143,14 +140,8 @@ import { AuthorizationDB } from './AuthorizationDB';
   let timestamp = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'timestamp');
   let signature = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'signature');
 
-
-
   let Results = [
-    ['test'],
-    [howDidYouHearAboutCSV],
 
-    ['PRE-APPLICATION SURVEY'],
-    [],
     ['How did you hear about us?'],
     howDidYouHearAboutCSV,
     otherTestCSV,
@@ -177,53 +168,64 @@ import { AuthorizationDB } from './AuthorizationDB';
     assistanceFromOtherCSV,
     [],
     ['Is there anyone you know that could benefit from lowering their energy costs?'],
-    anyoneYouKnowNameCSV,
-    anyoneYouKnowPhoneCSV,
-    anyoneYouKnowEmailCSV,
+    ['Name', '', '', anyoneYouKnowNameCSV],
+    ['Phone Number', '', '', anyoneYouKnowPhoneCSV],
+    ['Email', '', '', anyoneYouKnowEmailCSV],
 
+    [],
+    ['NAME ON THE UTILITY BILL AND ACCOUNT NUMBER'],
     firstNameCSV,
     middleName,
     lastName,
     utilityAccountNumber,
+    [],
+    ['What GEM$ Approved Energy Improvement would you like to install? (Check all that apply)'],
     energyImprovementOptions,
+    [],
+    ['Have you met with a GEM$ Approved Contractor regarding installation?'],
     metWithApprovedContractor,
-    contractorName,
-    contactName,
-    streetAddress,
-    islandLocation,
-    residenceType,
+    ['Contractor Name', '', '', '', contractorName],
+    ['Contact Name', '', '', '', contractorName],
+    [],
+    ['INSTALLATION ADDRESS'],
 
-    income,
-    totalOccupants,
-    numAdults,
-    numRetired,
-    numChildrenBelow5,
-    numChildren6to12,
-    numChildren13to17,
-    membersNotHomeDay,
-    membersNotHomeNight,
-    membersHomeDay,
-    membersHomeWork,
-    employerName,
-    occupation,
-    workPhone,
+    ['Street Address', '', '', '', streetAddress],
+    ['Island', '', '', '', islandLocation],
+    ['Type of Residence', '', '', '', residenceType],
 
-    emailCsv,
-    phoneHome,
-    phoneMobile,
-    mailingAddress,
-    partiesNames,
-    otherOwner1,
-    otherOwnerRelationship1,
-    otherOwner2,
-    otherOwnerRelationship2,
+    [],
+    ['Annual Household Income', '', '', '', income],
+    ['Occupants in the home', '', '', '', totalOccupants],
+    ['Of this number how many are adults?', '', '', '', numAdults],
+    ['How many of the adults are retired', '', '', '', numRetired],
+    ['Amount of children age 5 or younger', '', '', '', numChildrenBelow5],
+    ['Amount of children ages 6 to 12', '', '', '', numChildren6to12],
+    ['Amount of children ages 13 to 17', '', '', '', numChildren13to17],
+    ['Number of HH members at work/school during the day', '', '', '', membersNotHomeDay],
+    ['Number of HH members at work/school during the night', '', '', '', membersNotHomeNight],
+    ['Number of HH members home during the day', '', '', '', membersHomeDay],
+    ['Number of HH members working from home', '', '', '', membersHomeWork],
+    ['Employer name', '', '', '', employerName],
+    ['Occupation/Position', '', '', '', occupation],
+    ['Work Phone Number', '', '', '', workPhone],
+    [],
 
-    taxCreditClaimer,
-    taxCreditClaimerRelationship,
+    ['Email', '', '', '', emailCsv],
+    ['Home Phone', '', '', '', phoneHome],
+    ['Mobile Phone', '', '', '', phoneMobile],
+    ['Mailing Address', '', '', '', mailingAddress],
+    ['All Parties Names', '', '', '', partiesNames],
+    ['Other Owner(s)', '', '', '', otherOwner1],
+    ['Relationship to Applicant', '', '', '', otherOwnerRelationship1],
+    ['Other Owner(s)', '', '', '', otherOwner2],
+    ['Relationship to Applicant', '', '', '', otherOwnerRelationship2],
+    [],
 
-    owner,
-    timestamp,
-    signature,
+    ['Name of Entity(ies) or Person(s) who will claim Tax Credit:', '', '', '', taxCreditClaimer],
+    ['Relationship to entities', '', '', '', taxCreditClaimerRelationship],
+    ['Name', '', '', '', owner],
+    ['Timestamp', '', '', '', timestamp],
+    ['Signature', '', '', signature, ''],
 
   ];
 
@@ -306,14 +308,14 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe(Section1DB);
-  const subscription2 = Meteor.subscribe(Section2DB);
-  const subscription3 = Meteor.subscribe(Section6DB);
-  const subscription4 = Meteor.subscribe(Section7DB);
-  const subscription5 = Meteor.subscribe(Section8DB);
-  const subscription6 = Meteor.subscribe(Section9DB);
+  const subscription1 = Meteor.subscribe('Form1');
+  const subscription2 = Meteor.subscribe('Form2');
+  const subscription3 = Meteor.subscribe('Form6');
+  const subscription4 = Meteor.subscribe('Form7');
+  const subscription5 = Meteor.subscribe('Form8');
+  const subscription6 = Meteor.subscribe('Form9');
 
-  const profile = Meteor.user() ? Meteor.user().username : null;
+  const profile = Meteor.user() ? Meteor.user().owner : null;
   return {
     doc1: Section1DB.findOne({ owner: profile }),
     doc2: Section2DB.findOne({ owner: profile }),
