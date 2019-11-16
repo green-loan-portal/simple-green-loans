@@ -121,8 +121,8 @@
 #LogoHome {
   border: none;
   box-shadow: none;
-  padding-right: 10px;
   padding-top: 20px;
+  padding-bottom: 40px;
 }
 
 .LogoTitle {
@@ -138,7 +138,7 @@
 }
 
 .hawaii-background {
-  background: url("https://images.unsplash.com/photo-1460355591219-452ee2548432?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80") bottom fixed;
+  background: url("https://images.unsplash.com/photo-1460355591219-452ee2548432?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80") no-repeat bottom fixed;
   background-size: auto;
   height: 500px;
   padding-top: 20px;
