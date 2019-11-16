@@ -14,6 +14,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section2DB, Section2DBSchemaWithoutOwner } from '../../api/stuff/Section2DB';
 import ProgressBar from '../components/ProgressBar';
+import { collectdata } from '../../api/stuff/CsvScript';
 
 
 class Form2 extends React.Component {
@@ -186,6 +187,9 @@ class Form2 extends React.Component {
             <SubmitField value='Submit' />
             <Button>
               <Link to="/form/6">Save & Next &gt;</Link>
+            </Button>
+            <Button onClick={collectdata} className='exportButton'>
+              Export to Excel
             </Button>
           </div>
         </AutoForm>

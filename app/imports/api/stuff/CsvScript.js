@@ -12,24 +12,17 @@ import { Section8DB } from './Section8DB';
 import { Section9DB } from './Section9DB';
 import { AuthorizationDB } from './AuthorizationDB';
 
-/**
- import { Section2DB } from './Section2DB';
- import { Section6DB } from './Section6DB';
- import { Section7DB } from './Section7DB';
- import { Section8DB } from './Section8DB';
- import { Section9DB } from './Section9DB';
- */
 
 
+ export const collectdata = function (props) {
 
-
-export const collectdata = function () {
 
   // Section!db
   const profile = Meteor.user() ? Meteor.user().username : null;
-  
+
   let howDidYouHearAboutCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'howDidYouHearAboutUs');
   let otherTestCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'otherHDYHA');
+  // let otherTestCSV = this.props.doc1.otherHDYHA;
   let washerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'washer');
   if (washerCSV[0] === true) {
     washerCSV[0] = 'Washer';
@@ -93,13 +86,13 @@ export const collectdata = function () {
     WIFICSV[0] = '';
   }
   let interestedInInstallingCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'interestedInInstalling');
+
   let otherInterestedInInstallingCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'otherInterestedInInstalling');
   let assistanceFromCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'assistanceFrom');
   let assistanceFromOtherCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'assistanceFromOther');
   let anyoneYouKnowNameCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowName');
   let anyoneYouKnowPhoneCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowPhone');
   let anyoneYouKnowEmailCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowEmail');
-
 
   // Section2DB
   let firstNameCSV = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'firstName');
@@ -114,7 +107,6 @@ export const collectdata = function () {
   let islandLocation = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'islandLocation');
   let residenceType = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'residenceType');
 
-  /**
   //Section6DB
   let income = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'income');
   let totalOccupants = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'totalOccupants');
@@ -132,7 +124,7 @@ export const collectdata = function () {
   let workPhone = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'workPhone');
 
   //Section7DB
-  let email = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'email');
+  let emailCsv = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'email');
   let phoneHome = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'phoneHome');
   let phoneMobile = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'phoneMobile');
   let mailingAddress = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'mailingAddress');
@@ -150,92 +142,88 @@ export const collectdata = function () {
   let owner = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'owner');
   let timestamp = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'timestamp');
   let signature = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'signature');
-*/
 
-  // let testVariable = {this.props.db1.find(mydb1 => (mydb1.owner == stuff.username))} { profile: email }
+
 
   let Results = [
     ['test'],
     [howDidYouHearAboutCSV],
 
-     ['PRE-APPLICATION SURVEY'],
-     [],
-     ['How did you hear about us?'],
-     howDidYouHearAboutCSV,
-     otherTestCSV,
-     [],
-     ['Which of these do you have in your home?'],
-     ['ITEM', 'AGE (years)'],
-     [washerCSV, ageOfWasherCSV],
-     [dryerCSV, ageOfDryerCSV],
-     [kitchenRefrigeratorCSV, ageOfKitchenRefrigeratorCSV],
-     [secondRefrigeratorCSV, ageOfSecondRefrigeratorCSV],
-     [chestFreezerCSV, ageOfChestFreezerCSV],
-     [solarHWHeaterCSV, ageOfSolarHWHeaterCSV],
-     [PVSystemCSV, ageOfPVSystemCSV],
-     LEDCFLBulbsCSV,
-     WIFICSV,
-     [],
-     ['Which energy savings product(s) would you most likely be ' +
-     'interested in installing within the next three (3) years?'],
-     interestedInInstallingCSV,
-     otherInterestedInInstallingCSV,
-     [],
-     ['Where are you most likely to go to get assistance or training regarding managing energy costs and finances?'],
-     assistanceFromCSV,
-     assistanceFromOtherCSV,
-     [],
-     ['Is there anyone you know that could benefit from lowering their energy costs?'],
-     anyoneYouKnowNameCSV,
-     anyoneYouKnowPhoneCSV,
-     anyoneYouKnowEmailCSV,
-      
-     firstNameCSV,
-     middleName,
-     lastName,
-     utilityAccountNumber,
-     energyImprovementOptions,
-     metWithApprovedContractor,
-     contractorName,
-     contactName,
-     streetAddress,
-     islandLocation,
-     residenceType,
+    ['PRE-APPLICATION SURVEY'],
+    [],
+    ['How did you hear about us?'],
+    howDidYouHearAboutCSV,
+    otherTestCSV,
+    [],
+    ['Which of these do you have in your home?'],
+    ['ITEM', 'AGE (years)'],
+    [washerCSV, ageOfWasherCSV],
+    [dryerCSV, ageOfDryerCSV],
+    [kitchenRefrigeratorCSV, ageOfKitchenRefrigeratorCSV],
+    [secondRefrigeratorCSV, ageOfSecondRefrigeratorCSV],
+    [chestFreezerCSV, ageOfChestFreezerCSV],
+    [solarHWHeaterCSV, ageOfSolarHWHeaterCSV],
+    [PVSystemCSV, ageOfPVSystemCSV],
+    LEDCFLBulbsCSV,
+    WIFICSV,
+    [],
+    ['Which energy savings product(s) would you most likely be ' +
+    'interested in installing within the next three (3) years?'],
+    interestedInInstallingCSV,
+    otherInterestedInInstallingCSV,
+    [],
+    ['Where are you most likely to go to get assistance or training regarding managing energy costs and finances?'],
+    assistanceFromCSV,
+    assistanceFromOtherCSV,
+    [],
+    ['Is there anyone you know that could benefit from lowering their energy costs?'],
+    anyoneYouKnowNameCSV,
+    anyoneYouKnowPhoneCSV,
+    anyoneYouKnowEmailCSV,
 
-        /**
-     income,
-     totalOccupants,
-     numAdults,
-     numRetired,
-     numChildrenBelow5,
-     numChildren6to12,
-     numChildren13to17,
-     membersNotHomeDay,
-     membersNotHomeNight,
-     membersHomeDay,
-     membersHomeWork,
-     employerName,
-     occupation,
-     workPhone,
+    firstNameCSV,
+    middleName,
+    lastName,
+    utilityAccountNumber,
+    energyImprovementOptions,
+    metWithApprovedContractor,
+    contractorName,
+    contactName,
+    streetAddress,
+    islandLocation,
+    residenceType,
 
+    income,
+    totalOccupants,
+    numAdults,
+    numRetired,
+    numChildrenBelow5,
+    numChildren6to12,
+    numChildren13to17,
+    membersNotHomeDay,
+    membersNotHomeNight,
+    membersHomeDay,
+    membersHomeWork,
+    employerName,
+    occupation,
+    workPhone,
 
-     email,
-     phoneHome,
-     phoneMobile,
-     mailingAddress,
-     partiesNames,
-     otherOwner1,
-     otherOwnerRelationship1,
-     otherOwner2,
-     otherOwnerRelationship2,
+    emailCsv,
+    phoneHome,
+    phoneMobile,
+    mailingAddress,
+    partiesNames,
+    otherOwner1,
+    otherOwnerRelationship1,
+    otherOwner2,
+    otherOwnerRelationship2,
 
-     taxCreditClaimer,
-     taxCreditClaimerRelationship,
+    taxCreditClaimer,
+    taxCreditClaimerRelationship,
 
-     owner,
-     timestamp,
-     signature,
-     */
+    owner,
+    timestamp,
+    signature,
 
   ];
 
@@ -302,13 +290,13 @@ export const collectdata = function () {
 
 
 // Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
-collectdata.propTypes = {
-  doc: PropTypes.object,
+collectdata.PropTypes = {
   doc1: PropTypes.object,
   doc2: PropTypes.object,
-  doc3: PropTypes.object,
-  doc4: PropTypes.object,
-  doc5: PropTypes.object,
+  doc6: PropTypes.object,
+  doc7: PropTypes.object,
+  doc8: PropTypes.object,
+  doc9: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
@@ -318,21 +306,21 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('Section1DB');
-  const subscription2 = Meteor.subscribe('Section2DB');
-  const subscription3 = Meteor.subscribe('Section6DB');
-  const subscription4 = Meteor.subscribe('Section7DB');
-  const subscription5 = Meteor.subscribe('Section8DB');
-  const subscription6 = Meteor.subscribe('Section9DB');
+  const subscription1 = Meteor.subscribe(Section1DB);
+  const subscription2 = Meteor.subscribe(Section2DB);
+  const subscription3 = Meteor.subscribe(Section6DB);
+  const subscription4 = Meteor.subscribe(Section7DB);
+  const subscription5 = Meteor.subscribe(Section8DB);
+  const subscription6 = Meteor.subscribe(Section9DB);
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
-    doc: Section1DB.findOne({ owner: profile }),
-    doc1: Section2DB.findOne({ owner: profile }),
-    doc2: Section6DB.findOne({ owner: profile }),
-    doc3: Section7DB.findOne({ owner: profile }),
-    doc4: Section8DB.findOne({ owner: profile }),
-    doc5: Section9DB.findOne({ owner: profile }),
+    doc1: Section1DB.findOne({ owner: profile }),
+    doc2: Section2DB.findOne({ owner: profile }),
+    doc6: Section6DB.findOne({ owner: profile }),
+    doc7: Section7DB.findOne({ owner: profile }),
+    doc8: Section8DB.findOne({ owner: profile }),
+    doc9: Section9DB.findOne({ owner: profile }),
     ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
         subscription4.ready() && subscription5.ready() && subscription6.ready(),
   };

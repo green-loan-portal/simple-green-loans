@@ -66,8 +66,8 @@ class Form1 extends React.Component {
           kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
           chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
           LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
-          assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
-        }
+          assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
+        },
       }, (error) => {
         if (error) {
           swal('Error', error.message, 'error');
