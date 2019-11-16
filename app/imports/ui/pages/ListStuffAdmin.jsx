@@ -1,15 +1,6 @@
 import React from "react";
 import { Meteor } from "meteor/meteor";
 import { Container, Table, Header, Loader } from "semantic-ui-react";
-import { Section1DB } from "../../api/stuff/Section1DB";
-import { Section2DB } from "../../api/stuff/Section2DB";
-import { Section6DB } from "../../api/stuff/Section6DB";
-import { Section7DB } from "../../api/stuff/Section7DB";
-import { Section8DB } from "../../api/stuff/Section8DB";
-import { Section9DB } from "../../api/stuff/Section9DB";
-import { AuthorizationDB } from "../../api/stuff/AuthorizationDB";
-
-import StuffItemAdmin from "../../ui/components/StuffItemAdmin";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Section1DB } from "../../api/stuff/Section1DB";
@@ -20,6 +11,7 @@ import { Section8DB } from "../../api/stuff/Section8DB";
 import { Section9DB } from "../../api/stuff/Section9DB";
 import { AuthorizationDB } from "../../api/stuff/AuthorizationDB";
 import StuffItemAdmin from "../../ui/components/StuffItemAdmin";
+
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
@@ -53,6 +45,7 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>Section 9</Table.HeaderCell>
               <Table.HeaderCell>Authorization</Table.HeaderCell>
               <Table.HeaderCell>View</Table.HeaderCell>
+              <Table.HeaderCell>Excel</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -106,13 +99,14 @@ ListStuffAdmin.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
 
-  const db1 = Meteor.subscribe("Section1DB");
-  const db2 = Meteor.subscribe("Section2DB");
-  const db6 = Meteor.subscribe("Section6DB");
-  const db7 = Meteor.subscribe("Section7DB");
-  const db8 = Meteor.subscribe("Section8DB");
-  const db9 = Meteor.subscribe("Section9DB");
+  const db1 = Meteor.subscribe("Form1");
+  const db2 = Meteor.subscribe("Form2");
+  const db6 = Meteor.subscribe("Form6");
+  const db7 = Meteor.subscribe("Form7");
+  const db8 = Meteor.subscribe("Form8");
+  const db9 = Meteor.subscribe("Form9");
   const dbauthorization = Meteor.subscribe("AuthorizationDB");
+
   return {
     accounts: Meteor.users.find({}).fetch(),
     db1: Section1DB.find({}).fetch(),
@@ -122,6 +116,7 @@ export default withTracker(() => {
     db8: Section8DB.find({}).fetch(),
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
-    ready: subscription.ready()
+    ready: db1.ready(),
   };
 })(ListStuffAdmin);
+''

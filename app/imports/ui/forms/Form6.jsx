@@ -142,6 +142,8 @@ class Form6 extends React.Component {
             />
           </div>
 
+          <br/>
+
           <Form.Group>
             <NumField
               className="ten wide field"
@@ -165,6 +167,8 @@ class Form6 extends React.Component {
               placeholder={"Total retired adults"}
             />
           </Form.Group>
+
+          <br/>
 
           <Form.Group>
             <NumField
@@ -190,6 +194,8 @@ class Form6 extends React.Component {
             />
           </Form.Group>
 
+          <br/>
+
           <Form.Group>
             <NumField
               className="ten wide field"
@@ -207,6 +213,8 @@ class Form6 extends React.Component {
             />
           </Form.Group>
 
+          <br/>
+
           <Form.Group>
             <NumField
               className="ten wide field"
@@ -223,6 +231,8 @@ class Form6 extends React.Component {
               placeholder={"# people work from home"}
             />
           </Form.Group>
+
+          <br/>
 
           <Form.Group>
             <div className="seven wide field">
