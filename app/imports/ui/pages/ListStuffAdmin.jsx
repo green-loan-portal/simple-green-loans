@@ -20,8 +20,8 @@ class ListStuffAdmin extends React.Component {
     return this.props.ready ? (
       this.renderPage()
     ) : (
-      <Loader active>Getting data</Loader>
-    );
+        <Loader active>Getting data</Loader>
+      );
   }
 
   sending() {
@@ -70,7 +70,6 @@ class ListStuffAdmin extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Customer Name</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
-              <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
               <Table.HeaderCell>#1</Table.HeaderCell>
               <Table.HeaderCell>#2-5</Table.HeaderCell>
               <Table.HeaderCell>#6</Table.HeaderCell>

@@ -12,7 +12,6 @@ class StuffItemAdmin extends React.Component {
       <Table.Row>
         <Table.Cell>{this.props.section2 ? `${this.props.section2.firstName ? this.props.section2.firstName : ''} ${this.props.section2.middleName ? this.props.section2.middleName : ''} ${this.props.section2.lastName ? this.props.section2.lastName : ''}` : ''}</Table.Cell>
         <Table.Cell><a href={'mailto:' + this.props.stuff.username}>{this.props.stuff.username}</a></Table.Cell>
-        <Table.Cell>{this.props.section1 ? this.props.section1.howDidYouHearAboutUs.join(", ") : ''}</Table.Cell>
         <Table.Cell>{this.props.section1 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section2 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section6 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
