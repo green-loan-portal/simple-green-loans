@@ -14,6 +14,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
 import ProgressBar from '../components/ProgressBar';
+import { collectdata } from '../../api/stuff/CsvScript';
 
 class Form9 extends React.Component {
 
@@ -134,6 +135,9 @@ class Form9 extends React.Component {
           <div className="align-right add-margin-top-20px">
             <Button as={NavLink} exact to="/form/8">&lt; Previous</Button>
             <Button as={NavLink} exact to="/authorization">Next &gt;</Button>
+            <Button onClick={collectdata} className='exportButton'>
+              Export to Excel
+            </Button>
             <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>

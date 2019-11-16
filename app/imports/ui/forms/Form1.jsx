@@ -56,7 +56,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 saved successfully', 'success');
+          // swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
     } else {
@@ -66,13 +66,13 @@ class Form1 extends React.Component {
           kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
           chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
           LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
-          assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
-        }
+          assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
+        },
       }, (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 updated successfully', 'success');
+          // swal('Success', 'Section #1 updated successfully', 'success');
         }
       });
     }
@@ -320,10 +320,10 @@ class Form1 extends React.Component {
           <div className="align-right add-margin-top-20px">
             <Button as={NavLink} exact to="/profile">&lt; Previous</Button>
             <Button as={NavLink} exact to="/form/2">Next &gt;</Button>
-            <SubmitField value="Save" className="green" />
             <Button onClick={collectdata} className='exportButton'>
               Export to Excel
             </Button>
+            <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
       </Container >

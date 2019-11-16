@@ -14,6 +14,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Section6DB, Section6DBSchemaWithoutOwner } from '../../api/stuff/Section6DB';
 import ProgressBar from '../components/ProgressBar';
+import { collectdata } from '../../api/stuff/CsvScript';
 
 /** Renders the Page for adding a document. */
 class Form6 extends React.Component {
@@ -141,6 +142,9 @@ class Form6 extends React.Component {
           <div className="align-right add-margin-top-20px">
             <Button as={NavLink} exact to="/form/2">&lt; Previous</Button>
             <Button as={NavLink} exact to="/form/7">Next &gt;</Button>
+            <Button onClick={collectdata} className='exportButton'>
+              Export to Excel
+            </Button>
             <SubmitField value="Save" className="green" />
           </div>
         </AutoForm>
