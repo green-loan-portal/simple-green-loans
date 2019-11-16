@@ -306,14 +306,14 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe(Section1DB);
-  const subscription2 = Meteor.subscribe(Section2DB);
-  const subscription3 = Meteor.subscribe(Section6DB);
-  const subscription4 = Meteor.subscribe(Section7DB);
-  const subscription5 = Meteor.subscribe(Section8DB);
-  const subscription6 = Meteor.subscribe(Section9DB);
+  const subscription1 = Meteor.subscribe('Form1');
+  const subscription2 = Meteor.subscribe('Form2');
+  const subscription3 = Meteor.subscribe('Form6');
+  const subscription4 = Meteor.subscribe('Form7');
+  const subscription5 = Meteor.subscribe('Form8');
+  const subscription6 = Meteor.subscribe('Form9');
 
-  const profile = Meteor.user() ? Meteor.user().username : null;
+  const profile = Meteor.user() ? Meteor.user().owner : null;
   return {
     doc1: Section1DB.findOne({ owner: profile }),
     doc2: Section2DB.findOne({ owner: profile }),
