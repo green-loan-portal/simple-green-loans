@@ -1,14 +1,19 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
-import { Stuffs } from '/imports/api/stuff/Stuff';
-import StuffItemAdmin from '/imports/ui/components/StuffItemAdmin';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Section1DB } from '../../api/stuff/Section1DB';
+import { Section2DB } from '../../api/stuff/Section2DB';
+import { Section6DB } from '../../api/stuff/Section6DB';
+import { Section7DB } from '../../api/stuff/Section7DB';
+import { Section8DB } from '../../api/stuff/Section8DB';
+import { Section9DB } from '../../api/stuff/Section9DB';
+import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
+import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
-
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -18,20 +23,35 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">List Stuff (Admin)</Header>
+          <Header as="h2" textAlign="center">Records (Admin)</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Condition</Table.HeaderCell>
+                <Table.HeaderCell>Customer Name</Table.HeaderCell>
+                <Table.HeaderCell>Email</Table.HeaderCell>
                 <Table.HeaderCell>How did you hear about GEMS?</Table.HeaderCell>
-                <Table.HeaderCell>otherHDYHA</Table.HeaderCell>
-                <Table.HeaderCell>Owner</Table.HeaderCell>
+                <Table.HeaderCell>Section 1</Table.HeaderCell>
+                <Table.HeaderCell>Section 2-5</Table.HeaderCell>
+                <Table.HeaderCell>Section 6</Table.HeaderCell>
+                <Table.HeaderCell>Section 7</Table.HeaderCell>
+                <Table.HeaderCell>Section 8</Table.HeaderCell>
+                <Table.HeaderCell>Section 9</Table.HeaderCell>
+                <Table.HeaderCell>Authorization</Table.HeaderCell>
+                <Table.HeaderCell>View</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
+              {this.props.accounts.map((stuff, index) =>
+                  <StuffItemAdmin key={index}
+                                  stuff={stuff}
+                                  section1={this.props.db1.find(mydb1 => (mydb1.owner == stuff.username))}
+                                  section2={this.props.db2.find(mydb2 => (mydb2.owner == stuff.username))}
+                                  section6={this.props.db6.find(mydb6 => (mydb6.owner == stuff.username))}
+                                  section7={this.props.db7.find(mydb7 => (mydb7.owner == stuff.username))}
+                                  section8={this.props.db8.find(mydb8 => (mydb8.owner == stuff.username))}
+                                  section9={this.props.db9.find(mydb9 => (mydb9.owner == stuff.username))}
+                                  sectionAuthorization={this.props.dbauthorization.find(mydbAuth => (mydbAuth.owner == stuff.username))}
+                  />)}
             </Table.Body>
           </Table>
         </Container>
@@ -41,16 +61,36 @@ class ListStuffAdmin extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 ListStuffAdmin.propTypes = {
-  stuffs: PropTypes.array.isRequired,
-  ready: PropTypes.bool.isRequired,
+  accounts: PropTypes.array.isRequired,
+  db1: PropTypes.array,
+  db2: PropTypes.array,
+  db6: PropTypes.array,
+  db7: PropTypes.array,
+  db8: PropTypes.array,
+  db9: PropTypes.array,
+  dbauthorization: PropTypes.array,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('StuffAdmin');
+
+  const db1 = Meteor.subscribe('Section1DB');
+  const db2 = Meteor.subscribe('Section2DB');
+  const db6 = Meteor.subscribe('Section6DB');
+  const db7 = Meteor.subscribe('Section7DB');
+  const db8 = Meteor.subscribe('Section8DB');
+  const db9 = Meteor.subscribe('Section9DB');
+  const dbauthorization = Meteor.subscribe('AuthorizationDB');
   return {
-    stuffs: Stuffs.find({}).fetch(),
-    ready: subscription.ready(),
+    accounts: Meteor.users.find({}).fetch(),
+    db1: Section1DB.find({}).fetch(),
+    db2: Section2DB.find({}).fetch(),
+    db6: Section6DB.find({}).fetch(),
+    db7: Section7DB.find({}).fetch(),
+    db8: Section8DB.find({}).fetch(),
+    db9: Section9DB.find({}).fetch(),
+    dbauthorization: AuthorizationDB.find({}).fetch(),
+    ready: db1.ready() && db2.ready() && db6.ready() && db7.ready() && db8.ready() && db9.ready() && dbauthorization
   };
 })(ListStuffAdmin);

@@ -56,7 +56,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 saved successfully', 'success');
+          // swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
     } else {
@@ -72,7 +72,7 @@ class Form1 extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Section #1 updated successfully', 'success');
+          // swal('Success', 'Section #1 updated successfully', 'success');
         }
       });
     }

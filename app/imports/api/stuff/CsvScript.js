@@ -1,125 +1,241 @@
 import { _ } from 'meteor/underscore';
-import { Section1DB } from './Section1DB';
 import { Loader } from 'semantic-ui-react';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { Section1DB } from './Section1DB';
+import { Section2DB } from './Section2DB';
+import { Section6DB } from './Section6DB';
+import { Section7DB } from './Section7DB';
+import { Section8DB } from './Section8DB';
+import { Section9DB } from './Section9DB';
+import { AuthorizationDB } from './AuthorizationDB';
+
+/**
+ import { Section2DB } from './Section2DB';
+ import { Section6DB } from './Section6DB';
+ import { Section7DB } from './Section7DB';
+ import { Section8DB } from './Section8DB';
+ import { Section9DB } from './Section9DB';
+ */
+
+
+
 
 export const collectdata = function () {
 
-  let howDidYouHearAboutCSV = _.pluck(Section1DB.find().fetch(), 'howDidYouHearAboutUs');
-  let otherTestCSV = _.pluck(Section1DB.find().fetch(), 'otherHDYHA');
-  let washerCSV = _.pluck(Section1DB.find().fetch(), 'washer');
+  // Section!db
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  
+  let howDidYouHearAboutCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'howDidYouHearAboutUs');
+  let otherTestCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'otherHDYHA');
+  let washerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'washer');
   if (washerCSV[0] === true) {
     washerCSV[0] = 'Washer';
-  }
-  else {
+  } else {
     washerCSV[0] = '';
   }
-  let ageOfWasherCSV = _.pluck(Section1DB.find().fetch(), 'ageOfWasher');
-  let dryerCSV = _.pluck(Section1DB.find().fetch(), 'dryer');
+  let ageOfWasherCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfWasher');
+  let dryerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'dryer');
   if (dryerCSV[0] === true) {
     dryerCSV[0] = 'Dryer';
-  }
-  else {
+  } else {
     dryerCSV[0] = '';
   }
 
-
-  let ageOfDryerCSV = _.pluck(Section1DB.find().fetch(), 'ageOfDryer');
-  let kitchenRefrigeratorCSV = _.pluck(Section1DB.find().fetch(), 'kitchenRefrigerator');
+  let ageOfDryerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfDryer');
+  let kitchenRefrigeratorCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'kitchenRefrigerator');
   if (kitchenRefrigeratorCSV[0] === true) {
     kitchenRefrigeratorCSV[0] = 'Kitchen Refrigerator';
-  }
-  else {
+  } else {
     kitchenRefrigeratorCSV[0] = '';
   }
-  let ageOfKitchenRefrigeratorCSV = _.pluck(Section1DB.find().fetch(), 'ageOfKitchenRefrigerator');
-  let secondRefrigeratorCSV = _.pluck(Section1DB.find().fetch(), 'secondRefrigerator');
+  let ageOfKitchenRefrigeratorCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfKitchenRefrigerator');
+  let secondRefrigeratorCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'secondRefrigerator');
   if (secondRefrigeratorCSV[0] === true) {
     secondRefrigeratorCSV[0] = 'Second Refrigerator';
-  }
-  else {
+  } else {
     secondRefrigeratorCSV[0] = '';
   }
-  let ageOfSecondRefrigeratorCSV = _.pluck(Section1DB.find().fetch(), 'ageOfSecondRefrigerator');
-  let chestFreezerCSV = _.pluck(Section1DB.find().fetch(), 'chestFreezer');
+  let ageOfSecondRefrigeratorCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfSecondRefrigerator');
+  let chestFreezerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'chestFreezer');
   if (chestFreezerCSV[0] === true) {
     chestFreezerCSV[0] = 'Chest Freezer';
-  }
-  else {
+  } else {
     chestFreezerCSV[0] = '';
   }
-  let ageOfChestFreezerCSV = _.pluck(Section1DB.find().fetch(), 'ageOfChestFreezer');
-  let solarHWHeaterCSV = _.pluck(Section1DB.find().fetch(), 'solarHWHeater');
+  let ageOfChestFreezerCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfChestFreezer');
+  let solarHWHeaterCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'solarHWHeater');
   if (solarHWHeaterCSV[0] === true) {
     solarHWHeaterCSV[0] = 'Solar H.W. Heater';
-  }
-  else {
+  } else {
     solarHWHeaterCSV[0] = '';
   }
-  let ageOfSolarHWHeaterCSV = _.pluck(Section1DB.find().fetch(), 'ageOfSolarHWHeater');
-  let PVSystemCSV = _.pluck(Section1DB.find().fetch(), 'PVSystem');
+  let ageOfSolarHWHeaterCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfSolarHWHeater');
+  let PVSystemCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'PVSystem');
   if (PVSystemCSV[0] === true) {
     PVSystemCSV[0] = 'PV System';
-  }
-  else {
+  } else {
     PVSystemCSV[0] = '';
   }
-  let ageOfPVSystemCSV = _.pluck(Section1DB.find().fetch(), 'ageOfPVSystem');
-  let LEDCFLBulbsCSV = _.pluck(Section1DB.find().fetch(), 'LEDCFLBulbs');
+  let ageOfPVSystemCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'ageOfPVSystem');
+  let LEDCFLBulbsCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'LEDCFLBulbs');
   if (LEDCFLBulbsCSV[0] === true) {
     LEDCFLBulbsCSV[0] = 'LED/CLF Bulbs';
-  }
-  else {
+  } else {
     LEDCFLBulbsCSV[0] = '';
   }
-  let WIFICSV = _.pluck(Section1DB.find().fetch(), 'WIFI');
+  let WIFICSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'WIFI');
   if (WIFICSV[0] === true) {
     WIFICSV[0] = 'WiFi';
-  }
-  else {
+  } else {
     WIFICSV[0] = '';
   }
-  let interestedInInstallingCSV = _.pluck(Section1DB.find().fetch(), 'interestedInInstalling');
-  let otherInterestedInInstallingCSV = _.pluck(Section1DB.find().fetch(), 'otherInterestedInInstalling');
-  let assistanceFromCSV = _.pluck(Section1DB.find().fetch(), 'assistanceFrom');
-  let assistanceFromOtherCSV = _.pluck(Section1DB.find().fetch(), 'assistanceFromOther');
-  let anyoneYouKnowNameCSV = _.pluck(Section1DB.find().fetch(), 'anyoneYouKnowName');
-  let anyoneYouKnowPhoneCSV = _.pluck(Section1DB.find().fetch(), 'anyoneYouKnowPhone');
-  let anyoneYouKnowEmailCSV = _.pluck(Section1DB.find().fetch(), 'anyoneYouKnowEmail');
+  let interestedInInstallingCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'interestedInInstalling');
+  let otherInterestedInInstallingCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'otherInterestedInInstalling');
+  let assistanceFromCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'assistanceFrom');
+  let assistanceFromOtherCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'assistanceFromOther');
+  let anyoneYouKnowNameCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowName');
+  let anyoneYouKnowPhoneCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowPhone');
+  let anyoneYouKnowEmailCSV = _.pluck(Section1DB.find({ owner: profile }).fetch(), 'anyoneYouKnowEmail');
+
+
+  // Section2DB
+  let firstNameCSV = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'firstName');
+  let middleName = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'middleName');
+  let lastName = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'lastName');
+  let utilityAccountNumber = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'utilityAccountNumber');
+  let energyImprovementOptions = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'energyImprovementOptions');
+  let metWithApprovedContractor = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'metWithApprovedContractor');
+  let contractorName = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'contractorName');
+  let contactName = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'contactName');
+  let streetAddress = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'streetAddress');
+  let islandLocation = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'islandLocation');
+  let residenceType = _.pluck(Section2DB.find({ owner: profile }).fetch(), 'residenceType');
+
+  /**
+  //Section6DB
+  let income = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'income');
+  let totalOccupants = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'totalOccupants');
+  let numAdults = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'numAdults');
+  let numRetired = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'numRetired');
+  let numChildrenBelow5 = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'numChildrenBelow5');
+  let numChildren6to12 = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'numChildren6to12');
+  let numChildren13to17 = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'numChildren13to17');
+  let membersNotHomeDay = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'membersNotHomeDay');
+  let membersNotHomeNight = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'membersNotHomeNight');
+  let membersHomeDay = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'membersHomeDay');
+  let membersHomeWork = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'membersHomeWork');
+  let employerName = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'employerName');
+  let occupation = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'occupation');
+  let workPhone = _.pluck(Section6DB.find({ owner: profile }).fetch(), 'workPhone');
+
+  //Section7DB
+  let email = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'email');
+  let phoneHome = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'phoneHome');
+  let phoneMobile = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'phoneMobile');
+  let mailingAddress = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'mailingAddress');
+  let partiesNames = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'partiesNames');
+  let otherOwner1 = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'otherOwner1');
+  let otherOwnerRelationship1 = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'otherOwnerRelationship1');
+  let otherOwner2 = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'otherOwner2');
+  let otherOwnerRelationship2 = _.pluck(Section7DB.find({ owner: profile }).fetch(), 'otherOwnerRelationship2');
+
+  // Section8DB
+  let taxCreditClaimer = _.pluck(Section8DB.find({ owner: profile }).fetch(), 'taxCreditClaimer');
+  let taxCreditClaimerRelationship = _.pluck(Section8DB.find({ owner: profile }).fetch(), 'taxCreditClaimerRelationship');
+
+  //Section9DB
+  let owner = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'owner');
+  let timestamp = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'timestamp');
+  let signature = _.pluck(Section9DB.find({ owner: profile }).fetch(), 'signature');
+*/
+
+  // let testVariable = {this.props.db1.find(mydb1 => (mydb1.owner == stuff.username))} { profile: email }
 
   let Results = [
-    ['PRE-APPLICATION SURVEY'],
-    [],
-    ['How did you hear about us?'],
-    howDidYouHearAboutCSV,
-    otherTestCSV,
-    [],
-    ['Which of these do you have in your home?'],
-    ['ITEM', 'AGE (years)'],
-    [washerCSV, ageOfWasherCSV],
-    [dryerCSV, ageOfDryerCSV],
-    [kitchenRefrigeratorCSV, ageOfKitchenRefrigeratorCSV],
-    [secondRefrigeratorCSV, ageOfSecondRefrigeratorCSV],
-    [chestFreezerCSV, ageOfChestFreezerCSV],
-    [solarHWHeaterCSV, ageOfSolarHWHeaterCSV],
-    [PVSystemCSV, ageOfPVSystemCSV],
-    LEDCFLBulbsCSV,
-    WIFICSV,
-    [],
-    ['Which energy savings product(s) would you most likely be ' +
-    'interested in installing within the next three (3) years?'],
-    interestedInInstallingCSV,
-    otherInterestedInInstallingCSV,
-    [],
-    ['Where are you most likely to go to get assistance or training regarding managing energy costs and finances?'],
-    assistanceFromCSV,
-    assistanceFromOtherCSV,
-    [],
-    ['Is there anyone you know that could benefit from lowering their energy costs?'],
-    anyoneYouKnowNameCSV,
-    anyoneYouKnowPhoneCSV,
-    anyoneYouKnowEmailCSV,
-    // nameOnUtilAccCSV,
+    ['test'],
+    [howDidYouHearAboutCSV],
+
+     ['PRE-APPLICATION SURVEY'],
+     [],
+     ['How did you hear about us?'],
+     howDidYouHearAboutCSV,
+     otherTestCSV,
+     [],
+     ['Which of these do you have in your home?'],
+     ['ITEM', 'AGE (years)'],
+     [washerCSV, ageOfWasherCSV],
+     [dryerCSV, ageOfDryerCSV],
+     [kitchenRefrigeratorCSV, ageOfKitchenRefrigeratorCSV],
+     [secondRefrigeratorCSV, ageOfSecondRefrigeratorCSV],
+     [chestFreezerCSV, ageOfChestFreezerCSV],
+     [solarHWHeaterCSV, ageOfSolarHWHeaterCSV],
+     [PVSystemCSV, ageOfPVSystemCSV],
+     LEDCFLBulbsCSV,
+     WIFICSV,
+     [],
+     ['Which energy savings product(s) would you most likely be ' +
+     'interested in installing within the next three (3) years?'],
+     interestedInInstallingCSV,
+     otherInterestedInInstallingCSV,
+     [],
+     ['Where are you most likely to go to get assistance or training regarding managing energy costs and finances?'],
+     assistanceFromCSV,
+     assistanceFromOtherCSV,
+     [],
+     ['Is there anyone you know that could benefit from lowering their energy costs?'],
+     anyoneYouKnowNameCSV,
+     anyoneYouKnowPhoneCSV,
+     anyoneYouKnowEmailCSV,
+      
+     firstNameCSV,
+     middleName,
+     lastName,
+     utilityAccountNumber,
+     energyImprovementOptions,
+     metWithApprovedContractor,
+     contractorName,
+     contactName,
+     streetAddress,
+     islandLocation,
+     residenceType,
+
+        /**
+     income,
+     totalOccupants,
+     numAdults,
+     numRetired,
+     numChildrenBelow5,
+     numChildren6to12,
+     numChildren13to17,
+     membersNotHomeDay,
+     membersNotHomeNight,
+     membersHomeDay,
+     membersHomeWork,
+     employerName,
+     occupation,
+     workPhone,
+
+
+     email,
+     phoneHome,
+     phoneMobile,
+     mailingAddress,
+     partiesNames,
+     otherOwner1,
+     otherOwnerRelationship1,
+     otherOwner2,
+     otherOwnerRelationship2,
+
+     taxCreditClaimer,
+     taxCreditClaimerRelationship,
+
+     owner,
+     timestamp,
+     signature,
+     */
 
   ];
 
@@ -146,3 +262,81 @@ export const collectdata = function () {
   return exportToCsv2();
 
 };
+
+/** Require an array of Stuff documents in the props.
+ collectdata.propTypes = {
+  accounts: PropTypes.array.isRequired,
+  db1: PropTypes.array,
+  db2: PropTypes.array,
+  db6: PropTypes.array,
+  db7: PropTypes.array,
+  db8: PropTypes.array,
+  db9: PropTypes.array,
+  dbauthorization: PropTypes.array,
+};
+
+ /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+ export default withTracker(() => {
+  // Get access to Stuff documents.
+  const db1 = Meteor.subscribe('Section1DB');
+  const db2 = Meteor.subscribe('Section2DB');
+  const db6 = Meteor.subscribe('Section6DB');
+  const db7 = Meteor.subscribe('Section7DB');
+  const db8 = Meteor.subscribe('Section8DB');
+  const db9 = Meteor.subscribe('Section9DB');
+  const dbauthorization = Meteor.subscribe('AuthorizationDB');
+  return {
+    accounts: Meteor.users.find({}).fetch(),
+    db1: Section1DB.find({}).fetch(),
+    db2: Section2DB.find({}).fetch(),
+    db6: Section6DB.find({}).fetch(),
+    db7: Section7DB.find({}).fetch(),
+    db8: Section8DB.find({}).fetch(),
+    db9: Section9DB.find({}).fetch(),
+    dbauthorization: AuthorizationDB.find({}).fetch(),
+    ready: db1.ready() && db2.ready() && db6.ready()
+        && db7.ready() && db8.ready() && db9.ready() && dbauthorization.ready(),
+  };
+})(collectdata);
+ */
+
+
+// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
+collectdata.propTypes = {
+  doc: PropTypes.object,
+  doc1: PropTypes.object,
+  doc2: PropTypes.object,
+  doc3: PropTypes.object,
+  doc4: PropTypes.object,
+  doc5: PropTypes.object,
+  model: PropTypes.object,
+  ready: PropTypes.bool.isRequired,
+};
+
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  // const documentId = Meteor.user().username;
+  // Get access to Stuff documents.
+  const subscription1 = Meteor.subscribe('Section1DB');
+  const subscription2 = Meteor.subscribe('Section2DB');
+  const subscription3 = Meteor.subscribe('Section6DB');
+  const subscription4 = Meteor.subscribe('Section7DB');
+  const subscription5 = Meteor.subscribe('Section8DB');
+  const subscription6 = Meteor.subscribe('Section9DB');
+
+  const profile = Meteor.user() ? Meteor.user().username : null;
+  return {
+    doc: Section1DB.findOne({ owner: profile }),
+    doc1: Section2DB.findOne({ owner: profile }),
+    doc2: Section6DB.findOne({ owner: profile }),
+    doc3: Section7DB.findOne({ owner: profile }),
+    doc4: Section8DB.findOne({ owner: profile }),
+    doc5: Section9DB.findOne({ owner: profile }),
+    ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
+        subscription4.ready() && subscription5.ready() && subscription6.ready(),
+  };
+
+})(collectdata);
+
+
