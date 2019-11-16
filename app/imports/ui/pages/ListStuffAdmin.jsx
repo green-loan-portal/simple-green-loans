@@ -8,7 +8,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
-
+import swal from 'sweetalert';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -32,6 +32,7 @@ class ListStuffAdmin extends React.Component {
     setTimeout(function () {
       let div = document.getElementById("sendEmailButton");
       div.addEventListener("click", function () {
+        let users = []
         accounts.forEach(function (stuff) {
           let missing = [];
           (!db1.find(mydb1 => (mydb1.owner == stuff.username))) ? missing.push(["Section 1", "Survey", "form/1"]) : '';
@@ -42,11 +43,13 @@ class ListStuffAdmin extends React.Component {
           (!db9.find(mydb9 => (mydb9.owner == stuff.username))) ? missing.push(["Section 9", "Disclosure", "form/9"]) : '';
           (!db10.find(mydb10 => (mydb10.owner == stuff.username))) ? missing.push(["Authorization Section", "Authorization", "authorization"]) : '';
           if (missing.length > 0) {
+            users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
-              console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+              console.log(error ? `Email: ${error}` : `Successfully sent email to ${stuff.username}`);
             });
           }
         });
+        swal('Success', `Successfully sent emails to ${users.join(", ")}`, 'success');
       });
     }, 200);
   }

@@ -30,13 +30,13 @@ Meteor.methods({
     myHTMLString += `Aloha,<br><br>`;
     myHTMLString += `Thank you for your interest toward <a href="https://gems.hawaii.gov">Hawaii GEM$ Loans</a>. In order for us to review your application, you must complete every form section. We are currently missing the following form section(s) from our database records:<br>`;
     error.forEach(ele => myHTMLString += `&#8226; <a href="http://localhost:3000/#/${ele[2]}">${ele[0]}</a>: ${ele[1]}<br>`);
-    myHTMLString += '<br />We are looking forward hearing you soon.<br><br>';
-    myHTMLString += 'Cheers,<br>GEMS Hawaii Team';
+    myHTMLString += `<br />If you have any trouble or question, please send us an email at <a href="mailto:dbedt.gems@hawaii.gov">dbedt.gems@hawaii.gov</a> or call us at (808) 587-3868. We are looking forward to hearing from you.<br><br>`;
+    myHTMLString += `Cheers,<br>GEMS Hawaii Team`;
     this.unblock();
     Email.send({
       to: recipientEmail,
       from: 'GEMS',
-      subject: 'GEMS - Unfinished Form Sections',
+      subject: 'GEMS - Unfinished Form Section(s)',
       html: myHTMLString,
     });
   },
