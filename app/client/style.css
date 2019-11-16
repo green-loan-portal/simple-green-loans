@@ -151,3 +151,7 @@
 .darkOutline {
   border: 1px dashed #021a40;
 }
+
+.headers {
+  font-size: 20px;
+}
