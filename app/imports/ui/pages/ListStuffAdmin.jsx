@@ -25,27 +25,27 @@ class ListStuffAdmin extends React.Component {
   }
 
   sending() {
-    let accounts = this.props.accounts;
-    let db1 = this.props.db1;
-    let db2 = this.props.db2;
-    let db6 = this.props.db6;
-    let db7 = this.props.db7;
-    let db8 = this.props.db8;
-    let db9 = this.props.db9;
-    let db10 = this.props.dbauthorization;
+    const accounts = this.props.accounts;
+    const db1 = this.props.db1;
+    const db2 = this.props.db2;
+    const db6 = this.props.db6;
+    const db7 = this.props.db7;
+    const db8 = this.props.db8;
+    const db9 = this.props.db9;
+    const db10 = this.props.dbauthorization;
     setTimeout(function () {
-      let div = document.getElementById("sendEmailButton");
-      div.addEventListener("click", function () {
+      let div = document.getElementById('sendEmailButton');
+      div.addEventListener('click', function () {
         let users = []
         accounts.forEach(function (stuff) {
           let missing = [];
-          (!db1.find(mydb1 => (mydb1.owner == stuff.username))) ? missing.push(["Section 1", "Survey", "form/1"]) : '';
-          (!db2.find(mydb2 => (mydb2.owner == stuff.username))) ? missing.push(["Section 2-5", "Installation", "form/2"]) : '';
-          (!db6.find(mydb6 => (mydb6.owner == stuff.username))) ? missing.push(["Section 6", "Data For Program Reporting Purposes", "form/6"]) : '';
-          (!db7.find(mydb7 => (mydb7.owner == stuff.username))) ? missing.push(["Section 7", "Application", "form/7"]) : '';
-          (!db8.find(mydb8 => (mydb8.owner == stuff.username))) ? missing.push(["Section 8", "System Owner", "form/8"]) : '';
-          (!db9.find(mydb9 => (mydb9.owner == stuff.username))) ? missing.push(["Section 9", "Disclosure", "form/9"]) : '';
-          (!db10.find(mydb10 => (mydb10.owner == stuff.username))) ? missing.push(["Authorization Section", "Authorization", "authorization"]) : '';
+          (!db1.find(mydb1 => (mydb1.owner === stuff.username))) ? missing.push(['Section 1', 'Survey', 'form/1']) : '';
+          (!db2.find(mydb2 => (mydb2.owner === stuff.username))) ? missing.push(['Section 2-5', 'Installation', 'form/2']) : '';
+          (!db6.find(mydb6 => (mydb6.owner === stuff.username))) ? missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']) : '';
+          (!db7.find(mydb7 => (mydb7.owner === stuff.username))) ? missing.push(['Section 7', 'Application', 'form/7']) : '';
+          (!db8.find(mydb8 => (mydb8.owner === stuff.username))) ? missing.push(['Section 8', 'System Owner', 'form/8']) : '';
+          (!db9.find(mydb9 => (mydb9.owner === stuff.username))) ? missing.push(['Section 9', 'Disclosure', 'form/9']) : '';
+          (!db10.find(mydb10 => (mydb10.owner === stuff.username))) ? missing.push(['Authorization Section', 'Authorization', 'authorization']) : '';
           if (missing.length > 0) {
             users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
@@ -53,7 +53,7 @@ class ListStuffAdmin extends React.Component {
             });
           }
         });
-        swal('Success', `Successfully sent emails to ${users.join(", ")}`, 'success');
+        swal('Success', `Successfully sent emails to ${users.join(', ')}`, 'success');
       });
     }, 200);
   }
@@ -62,7 +62,7 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">
+        <Header as='h2' textAlign='center'>
           Records (Admin)
         </Header>
         <Table celled>
@@ -87,31 +87,31 @@ class ListStuffAdmin extends React.Component {
                 key={index}
                 stuff={stuff}
                 section1={this.props.db1.find(
-                  mydb1 => mydb1.owner == stuff.username
+                  mydb1 => mydb1.owner === stuff.username
                 )}
                 section2={this.props.db2.find(
-                  mydb2 => mydb2.owner == stuff.username
+                  mydb2 => mydb2.owner === stuff.username
                 )}
                 section6={this.props.db6.find(
-                  mydb6 => mydb6.owner == stuff.username
+                  mydb6 => mydb6.owner === stuff.username
                 )}
                 section7={this.props.db7.find(
-                  mydb7 => mydb7.owner == stuff.username
+                  mydb7 => mydb7.owner === stuff.username
                 )}
                 section8={this.props.db8.find(
-                  mydb8 => mydb8.owner == stuff.username
+                  mydb8 => mydb8.owner === stuff.username
                 )}
                 section9={this.props.db9.find(
-                  mydb9 => mydb9.owner == stuff.username
+                  mydb9 => mydb9.owner === stuff.username
                 )}
                 sectionAuthorization={this.props.dbauthorization.find(
-                  mydbAuth => mydbAuth.owner == stuff.username
+                  mydbAuth => mydbAuth.owner === stuff.username
                 )}
               />
             ))}
           </Table.Body>
         </Table>
-        <Button id="sendEmailButton">Send application reminder</Button>
+        <Button id='sendEmailButton'>Send application reminder</Button>
         {this.sending()}
       </Container>
     );
@@ -151,6 +151,6 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready()
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
   };
 })(ListStuffAdmin);
