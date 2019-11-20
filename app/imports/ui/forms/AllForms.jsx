@@ -43,29 +43,13 @@ class AllForms extends React.Component {
 
   onClick() {
     var element = document.getElementById("clickbind");
-    console.log("works1");
     if (element) {
-      console.log("woo");
       element.addEventListener("click", function () {
 
         var pdf = new jsPDF('p', 'pt', 'a4');
         pdf.fromHTML(document.getElementById("root"), function () {
           pdf.save('test.pdf');
         });
-        // var pdf = new jsPDF('p', 'pt', 'a4');
-        // pdf.addHTML(document.body, function () {
-        //   pdf.save('web.pdf');
-        // });
-
-
-        // console.log(document.getElementById("root"));
-        // pdf.fromHTML(document.getElementById("root"), 1, 1, {
-        // var doc = new jsPDF();
-        // doc.fromHTML($('#lppresults')[0], 15, 15, {
-        //   width: 170
-        // }, function () {
-        //   doc.save('sample-file.pdf');
-        // });
       });
     }
   };
@@ -77,6 +61,7 @@ class AllForms extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     // eslint-disable-next-line max-len
+    console.log(this.props.doc);
     const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
     this.loadScript();
@@ -107,7 +92,7 @@ class AllForms extends React.Component {
               className='bool-field-style ui checkbox new-line'
               name='washer'
               label='Washer'
-              showInlineError={false} // ???????????????????????????wat this do
+              showInlineError={false}
             />
 
             <DisplayIf condition={context => context.model.washer}>
@@ -621,7 +606,6 @@ class AllForms extends React.Component {
         </Container>
 
         <Button id='clickbind' onClick={this.onClick}>Print</Button>
-        {/* {this.onClick()} */}
       </div >
     );
   }
@@ -642,8 +626,6 @@ AllForms.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  // const documentId = Meteor.user().username;
-  // Get access to Stuff documents.
   const subscription1 = Meteor.subscribe('Form1');
   const subscription2 = Meteor.subscribe('Form2');
   const subscription3 = Meteor.subscribe('Form6');
@@ -651,16 +633,23 @@ export default withTracker(({ match }) => {
   const subscription5 = Meteor.subscribe('Form8');
   const subscription6 = Meteor.subscribe('Form9');
 
-  const profile = Meteor.user() ? Meteor.user().username : null;
-  return {
-    doc: Section1DB.findOne({ owner: profile }),
-    doc1: Section2DB.findOne({ owner: profile }),
-    doc2: Section6DB.findOne({ owner: profile }),
-    doc3: Section7DB.findOne({ owner: profile }),
-    doc4: Section8DB.findOne({ owner: profile }),
-    doc5: Section9DB.findOne({ owner: profile }),
-    ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
-      subscription4.ready() && subscription5.ready() && subscription6.ready(),
-  };
+  const profile = Meteor.user() ? match.params.owner : null;
+
+  if (subscription1.ready() && subscription2.ready() && subscription3.ready() &&
+  subscription4.ready() && subscription5.ready() && subscription6.ready()) {
+    return {
+      doc: Section1DB.findOne({ owner: profile }),
+      doc1: Section2DB.findOne({ owner: profile }),
+      doc2: Section6DB.findOne({ owner: profile }),
+      doc3: Section7DB.findOne({ owner: profile }),
+      doc4: Section8DB.findOne({ owner: profile }),
+      doc5: Section9DB.findOne({ owner: profile }),
+      ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
+        subscription4.ready() && subscription5.ready() && subscription6.ready(),
+    };
+  }
+  else {
+    console.log("error");
+  }
 
 })(AllForms);

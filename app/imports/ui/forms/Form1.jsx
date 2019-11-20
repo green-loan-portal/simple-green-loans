@@ -342,12 +342,6 @@ export default withTracker(({ match }) => {
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe('Form1');
-  //const subscription1 = Meteor.subscribe('Form1');
-  const subscription2 = Meteor.subscribe('Form2');
-  const subscription3 = Meteor.subscribe('Form6');
-  const subscription4 = Meteor.subscribe('Form7');
-  const subscription5 = Meteor.subscribe('Form8');
-  const subscription6 = Meteor.subscribe('Form9');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
