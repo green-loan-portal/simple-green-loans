@@ -1,38 +1,38 @@
-import React from "react";
-import "semantic-ui-css/semantic.min.css";
-import { Form, Header, Container, Button, Loader } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import { ExpandCanvas } from "../js/userSignature";
-import AutoForm from "uniforms-semantic/AutoForm";
-import SubmitField from "uniforms-semantic/SubmitField";
-import ErrorsField from "uniforms-semantic/ErrorsField";
-import HiddenField from "uniforms-semantic/HiddenField";
-import swal from "sweetalert";
-import { Meteor } from "meteor/meteor";
-import "uniforms-bridge-simple-schema-2"; // required for Uniforms
-import { withTracker } from "meteor/react-meteor-data";
-import PropTypes from "prop-types";
+import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import { Form, Header, Container, Button, Loader } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import { ExpandCanvas } from '../js/userSignature';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import SubmitField from 'uniforms-semantic/SubmitField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
+import HiddenField from 'uniforms-semantic/HiddenField';
+import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
+import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import {
   Section9DB,
   Section9DBSchemaWithoutOwner
-} from "/imports/api/stuff/Section9DB";
-import ProgressBar from "../components/ProgressBar";
-import { collectdata } from "../../api/stuff/CsvScript";
+} from '/imports/api/stuff/Section9DB';
+import ProgressBar from '../components/ProgressBar';
+import { collectdata } from '../../api/stuff/CsvScript';
 
 class Form9 extends React.Component {
   submit(data) {
     const { timestamp } = data;
     let owner = Meteor.user().username;
-    let canvas = document.getElementById("sig-canvas");
+    let canvas = document.getElementById('sig-canvas');
     let signature = canvas.toDataURL();
 
-    const blank = document.createElement("canvas");
+    const blank = document.createElement('canvas');
     blank.width = canvas.width;
     blank.height = canvas.height;
 
     // check to see if the signature canvas is empty
     if (canvas.toDataURL() === blank.toDataURL()) {
-      swal("Error", "Please sign the form", "error");
+      swal('Error', 'Please sign the form', 'error');
       return;
     }
 
@@ -42,16 +42,16 @@ class Form9 extends React.Component {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
-      tmp = "not-defined";
+      tmp = 'not-defined';
     }
 
-    if (tmp === "not-defined") {
+    if (tmp === 'not-defined') {
       let owner = Meteor.user().username;
       Section9DB.insert({ owner, timestamp, signature }, error => {
         if (error) {
-          swal("Error", error.message, "error");
+          swal('Error', error.message, 'error');
         } else {
-          swal("Success", "Section #9 saved successfully", "success");
+          swal('Success', 'Section #9 saved successfully', 'success');
         }
       });
     } else {
@@ -62,9 +62,9 @@ class Form9 extends React.Component {
         },
         error => {
           if (error) {
-            swal("Error", error.message, "error");
+            swal('Error', error.message, 'error');
           } else {
-            swal("Success", "Section #9 updated successfully", "success");
+            swal('Success', 'Section #9 updated successfully', 'success');
           }
         }
       );
@@ -83,11 +83,11 @@ class Form9 extends React.Component {
     return (
       <Container>
         <ProgressBar />
-        <Header as="h2" className="dividing header">
+        <Header as='h2' className='dividing header'>
           9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION
         </Header>
 
-        <div className="legalDiscretion">
+        <div className='legalDiscretion'>
           <p>
             By completing and submitting an Application, I certify that I have
             read, understand, and agree to all of the terms and conditions of
@@ -157,11 +157,11 @@ class Form9 extends React.Component {
             The federal agency that administers compliance with this law
             concerning this creditor is the Federal Trade Commission Consumer
             Response Center Washington, DC 20580 1‐877‐FTC‐HELP (1‐877‐382‐4357)
-            TDD: 1‐866‐ 653‐4261{" "}
+            TDD: 1‐866‐ 653‐4261
             <a
-              href="https://www.ftc.gov"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://www.ftc.gov'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               www.ftc.gov
             </a>
@@ -180,34 +180,34 @@ class Form9 extends React.Component {
         <AutoForm
           schema={Section9DBSchemaWithoutOwner}
           onSubmit={data => this.submit(data)}
-          className="add-margin-top-10px"
+          className='add-margin-top-10px'
         >
           <Form.Group>
             <Form.Input
-              label="Applicant’s Signature"
+              label='Applicant’s Signature'
               width={12}
-              className="application-signature"
+              className='application-signature'
               required
             >
-              <canvas id="sig-canvas" className="set-canvas-width">
+              <canvas id='sig-canvas' className='set-canvas-width'>
                 Please use another browser in order to sign this form.
               </canvas>
             </Form.Input>
 
-            <div className="four wide field">
+            <div className='four wide field'>
               <Form.Input
-                label="Date"
-                type="date"
-                id="getDate"
+                label='Date'
+                type='date'
+                id='getDate'
                 width={16}
               ></Form.Input>
-              <HiddenField name="timestamp" value={new Date()} />
+              <HiddenField name='timestamp' value={new Date()} />
               <br />
               <Form.Input>
                 <Button
-                  type="button"
-                  className="green sixteen wide field require-margin"
-                  id="sig-clearBtn"
+                  type='button'
+                  className='green sixteen wide field require-margin'
+                  id='sig-clearBtn'
                 >
                   Clear Signature
                 </Button>
@@ -217,14 +217,14 @@ class Form9 extends React.Component {
 
           <ErrorsField />
 
-          <div className="align-right add-margin-top-20px">
-            <Button as={NavLink} exact to="/form/8">
+          <div className='align-right add-margin-top-20px'>
+            <Button as={NavLink} exact to='/form/8'>
               &lt; Previous
             </Button>
-            <Button as={NavLink} exact to="/authorization">
+            <Button as={NavLink} exact to='/authorization'>
               Next &gt;
             </Button>
-            <SubmitField value="Save" className="green" />
+            <SubmitField value='Save' className='green' />
           </div>
         </AutoForm>
 
@@ -241,7 +241,7 @@ Form9.propTypes = {
 };
 
 export default withTracker(({ match }) => {
-  const subscription = Meteor.subscribe("Form9");
+  const subscription = Meteor.subscribe('Form9');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {

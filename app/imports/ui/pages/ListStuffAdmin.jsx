@@ -1,6 +1,9 @@
 import React from 'react';
+import swal from 'sweetalert';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -8,10 +11,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
-import swal from 'sweetalert';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
@@ -25,27 +25,34 @@ class ListStuffAdmin extends React.Component {
   }
 
   sending() {
-    let accounts = this.props.accounts;
-    let db1 = this.props.db1;
-    let db2 = this.props.db2;
-    let db6 = this.props.db6;
-    let db7 = this.props.db7;
-    let db8 = this.props.db8;
-    let db9 = this.props.db9;
-    let db10 = this.props.dbauthorization;
+    const accounts = this.props.accounts;
+    const db1 = this.props.db1;
+    const db2 = this.props.db2;
+    const db6 = this.props.db6;
+    const db7 = this.props.db7;
+    const db8 = this.props.db8;
+    const db9 = this.props.db9;
+    const db10 = this.props.dbauthorization;
     setTimeout(function () {
-      let div = document.getElementById('sendEmailButton');
+      const div = document.getElementById('sendEmailButton');
       div.addEventListener('click', function () {
-        let users = [];
+        const users = [];
         accounts.forEach(function (stuff) {
-          let missing = [];
-          (!db1.find(mydb1 => (mydb1.owner === stuff.username))) ? missing.push(['Section 1', 'Survey', 'form/1']) : '';
-          (!db2.find(mydb2 => (mydb2.owner === stuff.username))) ? missing.push(['Section 2-5', 'Installation', 'form/2']) : '';
-          (!db6.find(mydb6 => (mydb6.owner === stuff.username))) ? missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']) : '';
-          (!db7.find(mydb7 => (mydb7.owner === stuff.username))) ? missing.push(['Section 7', 'Application', 'form/7']) : '';
-          (!db8.find(mydb8 => (mydb8.owner === stuff.username))) ? missing.push(['Section 8', 'System Owner', 'form/8']) : '';
-          (!db9.find(mydb9 => (mydb9.owner === stuff.username))) ? missing.push(['Section 9', 'Disclosure', 'form/9']) : '';
-          (!db10.find(mydb10 => (mydb10.owner === stuff.username))) ? missing.push(['Authorization Section', 'Authorization', 'authorization']) : '';
+          const missing = [];
+          (!db1.find(mydb1 => (mydb1.owner === stuff.username))) ?
+            missing.push(['Section 1', 'Survey', 'form/1']) : '';
+          (!db2.find(mydb2 => (mydb2.owner === stuff.username))) ?
+            missing.push(['Section 2-5', 'Installation', 'form/2']) : '';
+          (!db6.find(mydb6 => (mydb6.owner === stuff.username))) ?
+            missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']) : '';
+          (!db7.find(mydb7 => (mydb7.owner === stuff.username))) ?
+            missing.push(['Section 7', 'Application', 'form/7']) : '';
+          (!db8.find(mydb8 => (mydb8.owner === stuff.username))) ?
+            missing.push(['Section 8', 'System Owner', 'form/8']) : '';
+          (!db9.find(mydb9 => (mydb9.owner === stuff.username))) ?
+            missing.push(['Section 9', 'Disclosure', 'form/9']) : '';
+          (!db10.find(mydb10 => (mydb10.owner === stuff.username))) ?
+            missing.push(['Authorization Section', 'Authorization', 'authorization']) : '';
           if (missing.length > 0) {
             users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
@@ -151,6 +158,6 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready()
   };
 })(ListStuffAdmin);

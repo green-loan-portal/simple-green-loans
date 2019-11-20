@@ -23,7 +23,7 @@ import { Section9DB } from '/imports/api/stuff/Section9DB';
 /** Create a schema to specify the structure of the data to appear in the form. */
 
 /** Renders the Page for adding a document. */
-class AllForms extends React.Component {
+class AdminForms extends React.Component {
 
   loadScript() {
     function loadScript() {
@@ -61,7 +61,7 @@ class AllForms extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     // eslint-disable-next-line max-len
-    console.log(this.props.doc);
+    // console.log(this.props.doc);
     const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
     this.loadScript();
@@ -612,7 +612,7 @@ class AllForms extends React.Component {
 }
 
 /** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
-AllForms.propTypes = {
+AdminForms.propTypes = {
   doc: PropTypes.object,
   doc1: PropTypes.object,
   doc2: PropTypes.object,
@@ -626,30 +626,16 @@ AllForms.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const subscription1 = Meteor.subscribe('Form1');
-  const subscription2 = Meteor.subscribe('Form2');
-  const subscription3 = Meteor.subscribe('Form6');
-  const subscription4 = Meteor.subscribe('Form7');
-  const subscription5 = Meteor.subscribe('Form8');
-  const subscription6 = Meteor.subscribe('Form9');
+  const subscription = Meteor.subscribe('StuffAdmin');
 
-  const profile = Meteor.user() ? match.params.owner : null;
+  return {
+    doc: Section1DB.findOne({ owner: match.params.owner }),
+    doc1: Section2DB.findOne({ owner: match.params.owner }),
+    doc2: Section6DB.findOne({ owner: match.params.owner }),
+    doc3: Section7DB.findOne({ owner: match.params.owner }),
+    doc4: Section8DB.findOne({ owner: match.params.owner }),
+    doc5: Section9DB.findOne({ owner: match.params.owner }),
+    ready: subscription.ready()
+  };
 
-  if (subscription1.ready() && subscription2.ready() && subscription3.ready() &&
-  subscription4.ready() && subscription5.ready() && subscription6.ready()) {
-    return {
-      doc: Section1DB.findOne({ owner: profile }),
-      doc1: Section2DB.findOne({ owner: profile }),
-      doc2: Section6DB.findOne({ owner: profile }),
-      doc3: Section7DB.findOne({ owner: profile }),
-      doc4: Section8DB.findOne({ owner: profile }),
-      doc5: Section9DB.findOne({ owner: profile }),
-      ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
-        subscription4.ready() && subscription5.ready() && subscription6.ready(),
-    };
-  }
-  else {
-    console.log("error");
-  }
-
-})(AllForms);
+})(AdminForms);

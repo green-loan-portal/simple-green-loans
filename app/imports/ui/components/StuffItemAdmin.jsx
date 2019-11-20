@@ -22,7 +22,7 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         {/* <Table.Cell><Link to='/allforms'><Icon name='external alternate' /></Link></Table.Cell> */}
         <Table.Cell>
-          <Link to={`/allforms/${this.props.stuff.username}`}>
+          <Link to={`/adminforms/${this.props.stuff.username}`}>
             <Button className='exportButton' basic color='green' content='Green' size='mini'>
               PDF
             </Button>

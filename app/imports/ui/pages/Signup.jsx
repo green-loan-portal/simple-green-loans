@@ -43,6 +43,7 @@ class Signup extends React.Component {
   render() {
     return Meteor.user() ? <Redirect to={'/profile'} /> : this.renderPage();
   }
+
   /** Display the signup form. Redirect to add page after successful registration and login. */
   renderPage() {
     const { from } = this.props.location.state || { from: { pathname: '/profile' } };
@@ -78,13 +79,13 @@ class Signup extends React.Component {
                   onChange={this.handleChange}
                 />
                 <Form.Input
-                    label="Confirm Password"
-                    icon="lock"
-                    iconPosition="left"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    type="password"
-                    onChange={this.handleChange}
+                  label="Confirm Password"
+                  icon="lock"
+                  iconPosition="left"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  type="password"
+                  onChange={this.handleChange}
                 />
                 <Form.Button content="Submit" />
               </Segment>
