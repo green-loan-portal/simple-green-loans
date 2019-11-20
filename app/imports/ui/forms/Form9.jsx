@@ -1,38 +1,39 @@
-import React from "react";
-import "semantic-ui-css/semantic.min.css";
-import { Form, Header, Container, Button, Loader } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import { ExpandCanvas } from "../js/userSignature";
-import AutoForm from "uniforms-semantic/AutoForm";
-import SubmitField from "uniforms-semantic/SubmitField";
-import ErrorsField from "uniforms-semantic/ErrorsField";
-import HiddenField from "uniforms-semantic/HiddenField";
-import swal from "sweetalert";
-import { Meteor } from "meteor/meteor";
-import "uniforms-bridge-simple-schema-2"; // required for Uniforms
-import { withTracker } from "meteor/react-meteor-data";
-import PropTypes from "prop-types";
+import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import { Form, Header, Container, Button, Loader } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+
+import AutoForm from 'uniforms-semantic/AutoForm';
+import SubmitField from 'uniforms-semantic/SubmitField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
+import HiddenField from 'uniforms-semantic/HiddenField';
+import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
+import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import {
   Section9DB,
-  Section9DBSchemaWithoutOwner
-} from "/imports/api/stuff/Section9DB";
-import ProgressBar from "../components/ProgressBar";
-import { collectdata } from "../../api/stuff/CsvScript";
+  Section9DBSchemaWithoutOwner,
+} from '/imports/api/stuff/Section9DB';
+import ProgressBar from '../components/ProgressBar';
+import { collectdata } from '../../api/stuff/CsvScript';
+import { ExpandCanvas } from '../js/userSignature';
 
 class Form9 extends React.Component {
   submit(data) {
     const { timestamp } = data;
     let owner = Meteor.user().username;
-    let canvas = document.getElementById("sig-canvas");
+    let canvas = document.getElementById('sig-canvas');
     let signature = canvas.toDataURL();
 
-    const blank = document.createElement("canvas");
+    const blank = document.createElement('canvas');
     blank.width = canvas.width;
     blank.height = canvas.height;
 
     // check to see if the signature canvas is empty
     if (canvas.toDataURL() === blank.toDataURL()) {
-      swal("Error", "Please sign the form", "error");
+      swal('Error', 'Please sign the form', 'error');
       return;
     }
 
@@ -42,31 +43,31 @@ class Form9 extends React.Component {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
-      tmp = "not-defined";
+      tmp = 'not-defined';
     }
 
-    if (tmp === "not-defined") {
-      let owner = Meteor.user().username;
+    if (tmp === 'not-defined') {
+      owner = Meteor.user().username;
       Section9DB.insert({ owner, timestamp, signature }, error => {
         if (error) {
-          swal("Error", error.message, "error");
+          swal('Error', error.message, 'error');
         } else {
-          swal("Success", "Section #9 saved successfully", "success");
+          swal('Success', 'Section #9 saved successfully', 'success');
         }
       });
     } else {
       Section9DB.update(
         { _id: this.props.doc._id },
         {
-          $set: { owner, timestamp, signature }
+          $set: { owner, timestamp, signature },
         },
         error => {
           if (error) {
-            swal("Error", error.message, "error");
+            swal('Error', error.message, 'error');
           } else {
-            swal("Success", "Section #9 updated successfully", "success");
+            swal('Success', 'Section #9 updated successfully', 'success');
           }
-        }
+        },
       );
     }
   }
@@ -151,13 +152,13 @@ class Form9 extends React.Component {
             from discriminating against credit applicants on the basis of race,
             color, religion, national origin, sex, marital status, age (provided
             the applicant has the capacity to enter into a binding contract);
-            because all or part of the applicant's income derives from any
+            because all or part of the applicant&apos;s income derives from any
             public assistance program; or because the applicant has in good
             faith exercised any right under the Consumer Credit Protection Act.
             The federal agency that administers compliance with this law
             concerning this creditor is the Federal Trade Commission Consumer
             Response Center Washington, DC 20580 1‐877‐FTC‐HELP (1‐877‐382‐4357)
-            TDD: 1‐866‐ 653‐4261{" "}
+            TDD: 1‐866‐ 653‐4261{' '}
             <a
               href="https://www.ftc.gov"
               target="_blank"
@@ -237,15 +238,15 @@ class Form9 extends React.Component {
 Form9.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
-  ready: PropTypes.bool.isRequired
+  ready: PropTypes.bool.isRequired,
 };
 
 export default withTracker(({ match }) => {
-  const subscription = Meteor.subscribe("Form9");
+  const subscription = Meteor.subscribe('Form9');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
     doc: Section9DB.findOne({ owner: profile }),
-    ready: subscription.ready()
+    ready: subscription.ready(),
   };
 })(Form9);
