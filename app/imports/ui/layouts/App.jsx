@@ -44,7 +44,7 @@ class App extends React.Component {
             <ProtectedRoute exact path="/form/7" component={Form7} />
             <ProtectedRoute exact path="/form/8" component={Form8} />
             <ProtectedRoute exact path="/form/9" component={Form9} />
-            <ProtectedRoute exact path="/allforms" component={AllForms} />
+            <ProtectedRoute exact path="/allforms/:owner" component={AllForms} />
             <ProtectedRoute path="/authorization" component={AuthorizationPage} />
             <ProtectedRoute path="/list" component={ListStuff} />
             <ProtectedRoute path="/add" component={AddStuff} />
