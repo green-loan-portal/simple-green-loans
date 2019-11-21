@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import 'semantic-ui-css/semantic.css';
 import { Roles } from 'meteor/alanning:roles';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Footer from '../components/Footer';
 import HomePageHP from '../pages/HomePageHP';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
@@ -24,6 +23,7 @@ import AdminForms from '../forms/AdminForms';
 import ProfilePage from '../pages/ProfilePage';
 import AuthorizationPage from '../forms/AuthorizationPage';
 import NavBar from '../components/NavBar';
+import PlainFooter from '../components/PlainFooter';
 
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -53,7 +53,7 @@ class App extends React.Component {
             <ProtectedRoute path="/signout" component={Signout} />
             <Route component={NotFound} />
           </Switch>
-          <Footer />
+          <PlainFooter/>
         </div>
       </Router>
     );
