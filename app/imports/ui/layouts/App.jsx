@@ -21,6 +21,7 @@ import Form8 from '../forms/Form8';
 import Form9 from '../forms/Form9';
 import AdminForms from '../forms/AdminForms';
 import ProfilePage from '../pages/ProfilePage';
+import ProcessorProfilePage from '../pages/ProcessorProfilePage';
 import AuthorizationPage from '../forms/AuthorizationPage';
 import NavBar from '../components/NavBar';
 import PlainFooter from '../components/PlainFooter';
@@ -38,6 +39,7 @@ class App extends React.Component {
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <ProtectedRoute path="/profile" component={ProfilePage} />
+            <ProtectedRoute path="/processorHome" component={ProcessorProfilePage} />
             <ProtectedRoute exact path="/form/1" component={Form1} />
             <ProtectedRoute exact path="/form/2" component={Form2} />
             <ProtectedRoute exact path="/form/6" component={Form6} />
