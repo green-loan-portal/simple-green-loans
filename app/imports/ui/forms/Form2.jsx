@@ -1,30 +1,27 @@
-import React from "react";
+import React from 'react';
 import {
   Header,
   Container,
   Form,
   Button,
   Label,
-  Loader
-} from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-import AutoForm from "uniforms-semantic/AutoForm";
-import TextField from "uniforms-semantic/TextField";
-import SubmitField from "uniforms-semantic/SubmitField";
-import ErrorsField from "uniforms-semantic/ErrorsField";
-import SelectField from "uniforms-semantic/SelectField";
-import swal from "sweetalert";
-import { Meteor } from "meteor/meteor";
-import "uniforms-bridge-simple-schema-2"; // required for Uniforms
-import { withTracker } from "meteor/react-meteor-data";
-import PropTypes from "prop-types";
-import {
-  Section2DB,
-  Section2DBSchemaWithoutOwner
-} from "../../api/stuff/Section2DB";
-import ProgressBar from "../components/ProgressBar";
-import { collectdata } from "../../api/stuff/CsvScript";
+  Loader,
+} from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import TextField from 'uniforms-semantic/TextField';
+import SubmitField from 'uniforms-semantic/SubmitField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
+import SelectField from 'uniforms-semantic/SelectField';
+import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
+import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Section2DB, Section2DBSchemaWithoutOwner } from '../../api/stuff/Section2DB';
+import ProgressBar from '../components/ProgressBar';
+// import { collectdata } from '../../api/stuff/CsvScript';
 
 class Form2 extends React.Component {
   submit(data) {
@@ -49,11 +46,11 @@ class Form2 extends React.Component {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
-      tmp = "not-defined";
+      tmp = 'not-defined';
     }
 
-    if (tmp === "not-defined") {
-      let owner = Meteor.user().username;
+    if (tmp === 'not-defined') {
+      const owner = Meteor.user().username;
       Section2DB.insert(
         {
           owner,
@@ -67,15 +64,15 @@ class Form2 extends React.Component {
           contactName,
           streetAddress,
           islandLocation,
-          residenceType
+          residenceType,
         },
         error => {
           if (error) {
-            swal("Error", error.message, "error");
+            swal('Error', error.message, 'error');
           } else {
-            swal("Success", "Section #2 saved successfully", "success");
+            swal('Success', 'Section #2 saved successfully', 'success');
           }
-        }
+        },
       );
     } else {
       Section2DB.update(
@@ -92,16 +89,16 @@ class Form2 extends React.Component {
             contactName,
             streetAddress,
             islandLocation,
-            residenceType
-          }
+            residenceType,
+          },
         },
         error => {
           if (error) {
-            swal("Error", error.message, "error");
+            swal('Error', error.message, 'error');
           } else {
-            swal("Success", "Section #2 updated successfully", "success");
+            swal('Success', 'Section #2 updated successfully', 'success');
           }
-        }
+        },
       );
     }
   }
@@ -111,17 +108,17 @@ class Form2 extends React.Component {
     return this.props.ready ? (
       this.renderPage()
     ) : (
-      <Loader active>Getting data</Loader>
-    );
+        <Loader active>Getting data</Loader>
+      );
   }
 
   renderPage() {
     return (
       <Container>
         <ProgressBar />
-        <Header as="h2" className="dividing header">
+        <Header as='h2' className='dividing header'>
           2. RATEPAYER INFORMATION
-          <Label className="green">
+          <Label className='green'>
             Note: The person named on the electric utility account should be the
             Applicant
           </Label>
@@ -135,81 +132,84 @@ class Form2 extends React.Component {
           <strong>
             Please print name exactly as it appears on your utility bill.
           </strong>
-          <div className="add-margin-top-10px"></div>
+          <div className='add-margin-top-10px'></div>
           <Form.Group>
             <TextField
-              className="five wide field"
-              name="firstName"
+              className='five wide field'
               label={false}
-              placeholder={"First Name"}
+              placeholder={'First Name'}
+              name='firstName'
+              showInlineError={false}
+            />
+
+            <TextField
+              className='five wide field'
+              name='middleName'
+              label={false}
+              placeholder={'Middle Name'}
+            />
+
+            <TextField
+              className='five wide field'
+              label={false}
+              placeholder={'Last Name'}
+              name='lastName'
               showInlineError={false}
             />
             <TextField
-              className="five wide field"
-              name="middleName"
+              className='five wide field'
               label={false}
-              placeholder={"Middle Name"}
-            />
-            <TextField
-              className="five wide field"
-              name="lastName"
-              label={false}
-              placeholder={"Last Name"}
+              placeholder={'Utility Account Number'}
+              name='utilityAccountNumber'
               showInlineError={false}
-            />
-            <TextField
-              className="five wide field"
-              name="utilityAccountNumber"
-              label={false}
-              placeholder={"Utility Account Number"}
             />
           </Form.Group>
 
           {/* NEW SECTION */}
-          <div className="add-margin-top-40px"></div>
-          <Header as="h2" className="dividing header">
+          <div className='add-margin-top-40px'></div>
+          <Header as='h2' className='dividing header'>
             3. ENERGY IMPROVEMENT
           </Header>
           <SelectField
-            label="What GEM$ Approved Energy Improvement would you like to install? (Check all that apply)"
+            label='What GEM$ Approved Energy Improvement would you like to install? (Check all that apply)'
             checkboxes
             showInlineError={false}
-            name="energyImprovementOptions"
+            name='energyImprovementOptions'
           />
 
           {/* NEW SECTION */}
-          <div className="add-margin-top-40px"></div>
-          <Header as="h2" className="dividing header">
+          <div className='add-margin-top-40px'></div>
+          <Header as='h2' className='dividing header'>
             4. CONTRACTOR INFORMATION
           </Header>
           <SelectField
-            label="Have you met with a GEM$ Approved Contractor regarding installation?"
+            label='Have you met with a GEM$ Approved Contractor regarding installation?'
             checkboxes
             showInlineError={false}
-            name="metWithApprovedContractor"
+            name='metWithApprovedContractor'
           />
           <br />
           <div>If yes, please indicate below:</div>
           <Form.Group>
             <TextField
-              className="eight wide field"
-              name="contractorName"
+              className='eight wide field'
+              name='contractorName'
               label={false}
-              placeholder={"Contractor Name"}
+              placeholder={'Contractor Name'}
             />
             <TextField
-              className="eight wide field"
-              name="contactName"
+              className='eight wide field'
+              name='contactName'
               label={false}
-              placeholder={"Contact Name"}
+              placeholder={'Contact Name'}
             />
           </Form.Group>
 
           {/* NEW SECTION */}
-          <div className="add-margin-top-40px"></div>
-          <Header as="h2" className="dividing header">
+          <div className='add-margin-top-40px'></div>
+          <Header as='h2' className='dividing header'>
             5. INSTALLATION ADDRESS
-            <Label className="green">
+            <Label className='green'>
               Note: This is the address at which the proposed Energy Improvement
               will be installed
             </Label>
@@ -217,35 +217,35 @@ class Form2 extends React.Component {
 
           <Form.Group>
             <TextField
-              className="seven wide field"
-              label="Street Address"
-              placeholder="Street, City, State, Zip"
-              name="streetAddress"
+              className='seven wide field'
+              label='Street Address'
+              placeholder='Street, City, State, Zip'
+              name='streetAddress'
               showInlineError={false}
             />
             <SelectField
-              className="seven wide field"
-              label="On which island is this located?"
-              name="islandLocation"
+              className='seven wide field'
+              label='On which island is this located?'
+              name='islandLocation'
               showInlineError={false}
             />
             <SelectField
-              className="seven wide field"
-              label="Type of Residence"
-              name="residenceType"
+              className='seven wide field'
+              label='Type of Residence'
+              name='residenceType'
               showInlineError={false}
             />
           </Form.Group>
 
           <ErrorsField />
-          <div className="align-right add-margin-top-20px">
-            <Button as={NavLink} exact to="/form/1">
+          <div className='align-right add-margin-top-20px'>
+            <Button as={NavLink} exact to='/form/1'>
               &lt; Previous
             </Button>
-            <Button as={NavLink} exact to="/form/6">
+            <Button as={NavLink} exact to='/form/6'>
               Next &gt;
             </Button>
-            <SubmitField value="Save" className="green" />
+            <SubmitField value='Save' className='green' />
           </div>
         </AutoForm>
       </Container>
@@ -257,19 +257,19 @@ class Form2 extends React.Component {
 Form2.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
-  ready: PropTypes.bool.isRequired
+  ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(({ match }) => {
+export default withTracker(() => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe("Form2");
+  const subscription = Meteor.subscribe('Form2');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
     doc: Section2DB.findOne({ owner: profile }),
-    ready: subscription.ready()
+    ready: subscription.ready(),
   };
 })(Form2);

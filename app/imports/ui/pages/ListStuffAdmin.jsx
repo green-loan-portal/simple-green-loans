@@ -17,7 +17,7 @@ import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 class ListStuffAdmin extends React.Component {
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return this.props.ready ? (
+    return (this.props.ready) ? (
       this.renderPage()
     ) : (
         <Loader active>Getting data</Loader>
@@ -39,20 +39,31 @@ class ListStuffAdmin extends React.Component {
         const users = [];
         accounts.forEach(function (stuff) {
           const missing = [];
-          (!db1.find(mydb1 => (mydb1.owner === stuff.username))) ?
-            missing.push(['Section 1', 'Survey', 'form/1']) : '';
-          (!db2.find(mydb2 => (mydb2.owner === stuff.username))) ?
-            missing.push(['Section 2-5', 'Installation', 'form/2']) : '';
-          (!db6.find(mydb6 => (mydb6.owner === stuff.username))) ?
-            missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']) : '';
-          (!db7.find(mydb7 => (mydb7.owner === stuff.username))) ?
-            missing.push(['Section 7', 'Application', 'form/7']) : '';
-          (!db8.find(mydb8 => (mydb8.owner === stuff.username))) ?
-            missing.push(['Section 8', 'System Owner', 'form/8']) : '';
-          (!db9.find(mydb9 => (mydb9.owner === stuff.username))) ?
-            missing.push(['Section 9', 'Disclosure', 'form/9']) : '';
-          (!db10.find(mydb10 => (mydb10.owner === stuff.username))) ?
-            missing.push(['Authorization Section', 'Authorization', 'authorization']) : '';
+          if (!db1.find(mydb1 => (mydb1.owner === stuff.username))) {
+            missing.push(['Section 1', 'Survey', 'form/1']);
+          }
+          if (!db2.find(mydb2 => (mydb2.owner === stuff.username))) {
+            missing.push(['Section 2-5', 'Installation', 'form/2']);
+          }
+          if (!db6.find(mydb6 => (mydb6.owner === stuff.username))) {
+            missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']);
+          }
+          if (!db7.find(mydb7 => (mydb7.owner === stuff.username))) {
+            missing.push(['Section 7', 'Application', 'form/7']);
+          }
+          if (!db8.find(mydb8 => (mydb8.owner === stuff.username))) {
+            missing.push(['Section 8', 'System Owner', 'form/8']);
+          }
+          if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
+            missing.push(['Section 9', 'Disclosure', 'form/9']);
+          }
+          if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
+            missing.push(['Authorization Section', 'Authorization', 'authorization']);
+          }
+          if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
+            missing.push(['Section 9', 'Disclosure', 'form/9']);
+          }
+
           if (missing.length > 0) {
             users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
@@ -135,6 +146,7 @@ ListStuffAdmin.propTypes = {
   db8: PropTypes.array,
   db9: PropTypes.array,
   dbauthorization: PropTypes.array,
+  ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -158,6 +170,6 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready()
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
   };
 })(ListStuffAdmin);

@@ -2,7 +2,6 @@ import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Form, Header, Container, Button, Loader } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
-import { ExpandCanvas } from '../js/userSignature';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
@@ -12,19 +11,17 @@ import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {
-  Section9DB,
-  Section9DBSchemaWithoutOwner
-} from '/imports/api/stuff/Section9DB';
+import { ExpandCanvas } from '../js/userSignature';
+import { Section9DB, Section9DBSchemaWithoutOwner } from '/imports/api/stuff/Section9DB';
 import ProgressBar from '../components/ProgressBar';
-import { collectdata } from '../../api/stuff/CsvScript';
+// import { collectdata } from '../../api/stuff/CsvScript';
 
 class Form9 extends React.Component {
   submit(data) {
     const { timestamp } = data;
     let owner = Meteor.user().username;
-    let canvas = document.getElementById('sig-canvas');
-    let signature = canvas.toDataURL();
+    const canvas = document.getElementById('sig-canvas');
+    const signature = canvas.toDataURL();
 
     const blank = document.createElement('canvas');
     blank.width = canvas.width;
@@ -46,7 +43,7 @@ class Form9 extends React.Component {
     }
 
     if (tmp === 'not-defined') {
-      let owner = Meteor.user().username;
+      owner = Meteor.user().username;
       Section9DB.insert({ owner, timestamp, signature }, error => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -58,7 +55,7 @@ class Form9 extends React.Component {
       Section9DB.update(
         { _id: this.props.doc._id },
         {
-          $set: { owner, timestamp, signature }
+          $set: { owner, timestamp, signature },
         },
         error => {
           if (error) {
@@ -66,7 +63,7 @@ class Form9 extends React.Component {
           } else {
             swal('Success', 'Section #9 updated successfully', 'success');
           }
-        }
+        },
       );
     }
   }
@@ -75,8 +72,8 @@ class Form9 extends React.Component {
     return this.props.ready ? (
       this.renderPage()
     ) : (
-      <Loader active>Getting data</Loader>
-    );
+        <Loader active>Getting data</Loader>
+      );
   }
 
   renderPage() {
@@ -89,10 +86,10 @@ class Form9 extends React.Component {
 
         <div className='legalDiscretion'>
           <p>
-            By completing and submitting an Application, I certify that I have
+            By compconsting and submitting an Application, I certify that I have
             read, understand, and agree to all of the terms and conditions of
             the GEM$ Program. By signing below, I certify that all information
-            provided on this Application is true, correct and complete. If
+            provided on this Application is true, correct and compconste. If
             necessary, I further agree to provide additional information to HGIA
             to review this Application. I hereby authorize HGIA to retain this
             Application whether or not it is approved.
@@ -104,7 +101,7 @@ class Form9 extends React.Component {
             disclose orally and/or in writing, the following information
             regarding this Application: energy usage history; whether this
             Application has been pre-approved by HGIA and any additional items
-            requested by HGIA in order to complete the processing of my request;
+            requested by HGIA in order to compconste the processing of my request;
             whether this Application has been approved by HGIA so that my
             landlord and/or property manager and Contractor(s) can proceed with
             scheduling the work; and whether this Application has been denied so
@@ -119,7 +116,7 @@ class Form9 extends React.Component {
             that in no event will HGIA be liable for any technical, hardware or
             software failure of any kind, any interruption in the availability
             of this service, any delay in operation or transmission, any
-            incomplete transmission, computer virus, loss of data, or other
+            incompconste transmission, computer virus, loss of data, or other
             similar loss.
           </p>
           <p>
@@ -151,7 +148,7 @@ class Form9 extends React.Component {
             from discriminating against credit applicants on the basis of race,
             color, religion, national origin, sex, marital status, age (provided
             the applicant has the capacity to enter into a binding contract);
-            because all or part of the applicant's income derives from any
+            because all or part of the applicant&apos;s income derives from any
             public assistance program; or because the applicant has in good
             faith exercised any right under the Consumer Credit Protection Act.
             The federal agency that administers compliance with this law
@@ -237,15 +234,15 @@ class Form9 extends React.Component {
 Form9.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
-  ready: PropTypes.bool.isRequired
+  ready: PropTypes.bool.isRequired,
 };
 
-export default withTracker(({ match }) => {
+export default withTracker(() => {
   const subscription = Meteor.subscribe('Form9');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
     doc: Section9DB.findOne({ owner: profile }),
-    ready: subscription.ready()
+    ready: subscription.ready(),
   };
 })(Form9);

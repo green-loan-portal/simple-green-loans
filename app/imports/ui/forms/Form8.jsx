@@ -11,12 +11,9 @@ import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {
-  Section8DB,
-  Section8DBSchemaWithoutOwner
-} from '../../api/stuff/Section8DB';
+import { Section8DB, Section8DBSchemaWithoutOwner } from '../../api/stuff/Section8DB';
 import ProgressBar from '../components/ProgressBar';
-import { collectdata } from '../../api/stuff/CsvScript';
+// import { collectdata } from '../../api/stuff/CsvScript';
 
 class Form8 extends React.Component {
   submit(data) {
@@ -25,7 +22,7 @@ class Form8 extends React.Component {
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if ((typeof this.props.doc.owner) !== undefined) {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -33,7 +30,7 @@ class Form8 extends React.Component {
     }
 
     if (tmp === 'not-defined') {
-      let owner = Meteor.user().username;
+      const owner = Meteor.user().username;
       Section8DB.insert(
         { owner, taxCreditClaimer, taxCreditClaimerRelationship },
         error => {
@@ -42,13 +39,13 @@ class Form8 extends React.Component {
           } else {
             swal('Success', 'Section #8 saved successfully', 'success');
           }
-        }
+        },
       );
     } else {
       Section8DB.update(
         { _id: this.props.doc._id },
         {
-          $set: { taxCreditClaimer, taxCreditClaimerRelationship }
+          $set: { taxCreditClaimer, taxCreditClaimerRelationship },
         },
         error => {
           if (error) {
@@ -56,7 +53,7 @@ class Form8 extends React.Component {
           } else {
             swal('Success', 'Section #8 updated successfully', 'success');
           }
-        }
+        },
       );
     }
   }
@@ -65,8 +62,8 @@ class Form8 extends React.Component {
     return this.props.ready ? (
       this.renderPage()
     ) : (
-      <Loader active>Getting data</Loader>
-    );
+        <Loader active>Getting data</Loader>
+      );
   }
 
   renderPage() {
@@ -98,7 +95,8 @@ class Form8 extends React.Component {
           <TextField
             className='sixteen wide field'
             name='taxCreditClaimerRelationship'
-            label='If the entity(ies) or person(s) claiming the Tax Credit is not one of the Property Owner(s), please indicate relationship to Owner(s): '
+            label='If the entity(ies) or person(s) claiming the Tax Credit is not 
+            one of the Property Owner(s), please indicate relationship to Owner(s): '
             showInlineError={false}
           />
 
@@ -122,11 +120,11 @@ class Form8 extends React.Component {
 Form8.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
-  ready: PropTypes.bool.isRequired
+  ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(({ match }) => {
+export default withTracker(() => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
@@ -138,6 +136,6 @@ export default withTracker(({ match }) => {
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
     doc: Section8DB.findOne({ owner: profile }),
-    ready: subscription.ready()
+    ready: subscription.ready(),
   };
 })(Form8);
