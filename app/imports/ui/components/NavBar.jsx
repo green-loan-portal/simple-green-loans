@@ -15,12 +15,19 @@ class NavBar extends React.Component {
             <Image src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png' size='small'></Image>
           </Menu.Item>
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              [<Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/processorHome" key='profile'>Home</Menu.Item>])
-              : ''}
+              [<Menu.Item as={NavLink}
+                          activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>,
+                <Menu.Item as={NavLink}
+                           activeClassName="active" exact to="/processorHome" key='profile'>Home</Menu.Item>]) : ''}
           {Roles.userIsInRole(Meteor.userId(), 'user') ? (
-              [<Menu.Item as={NavLink} activeClassName="active" exact to="/form/1" key='form1'>My Application</Menu.Item>,
+              [<Menu.Item as={NavLink}
+                          activeClassName="active" exact to="/form/1" key='form1'>My Application</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/profile" key='profile'>Home</Menu.Item>]) : ''}
+          {Roles.userIsInRole(Meteor.userId(), 'contractor') ? (
+              [<Menu.Item as={NavLink}
+                          activeClassName="active" exact to="" key='form1'>Open Contracts</Menu.Item>,
+                <Menu.Item as={NavLink}
+                           activeClassName="active" exact to="" key='profile'>Home</Menu.Item>]) : ''}
 
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
