@@ -159,3 +159,12 @@
 .headers {
   font-size: 20px;
 }
+
+.processImage {
+  alignment: center;
+  padding-left: 5%;
+}
+
+.processImageTitle {
+  alignment: center;
+}
