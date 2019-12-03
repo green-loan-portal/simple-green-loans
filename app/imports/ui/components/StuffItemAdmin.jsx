@@ -22,6 +22,26 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         {/* <Table.Cell><Link to='/allforms'><Icon name='external alternate' /></Link></Table.Cell> */}
         <Table.Cell>
+          <Button className='Received' basic color='green' content='Green' size='mini'>
+            Received
+          </Button>
+        </Table.Cell>
+        <Table.Cell>
+          <Button className='Reviewed' basic color='green' content='Green' size='mini'>
+            Reviewed
+          </Button>
+        </Table.Cell>
+        <Table.Cell>
+          <Button className='Approved' basic color='green' content='Green' size='mini'>
+            Approved
+          </Button>
+        </Table.Cell>
+          <Table.Cell>
+          <Button className='Denied' basic color='red' content='Green' size='mini'>
+            Denied
+          </Button>
+        </Table.Cell>
+        <Table.Cell>
           <Link to={`/adminforms/${this.props.stuff.username}`}>
             <Button className='exportButton' basic color='green' content='Green' size='mini'>
               PDF

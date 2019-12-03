@@ -94,6 +94,10 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell width='1'>#8</Table.HeaderCell>
               <Table.HeaderCell width='1'>#9</Table.HeaderCell>
               <Table.HeaderCell width='1'>Authorization</Table.HeaderCell>
+              <Table.HeaderCell width='1'>HECO</Table.HeaderCell>
+              <Table.HeaderCell width='1'>Reviewed</Table.HeaderCell>
+              <Table.HeaderCell width='1'>Application Approved</Table.HeaderCell>
+              <Table.HeaderCell width='1'>Application Denied</Table.HeaderCell>
               <Table.HeaderCell width='1'>PDF</Table.HeaderCell>
               <Table.HeaderCell width='1'>Excel</Table.HeaderCell>
             </Table.Row>
