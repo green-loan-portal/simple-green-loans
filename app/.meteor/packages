@@ -20,7 +20,7 @@ shell-server@0.4.0               # Server-side component of the `meteor shell` c
 react-meteor-data@0.2.6-beta.16  # Support withTracker to connect Meteor data to React components.
 
 # Accounts
-accounts-password@1.5.1          # https://guide.meteor.com/accounts.html
+accounts-password          # https://guide.meteor.com/accounts.html
 
 # Collection support
 aldeed:collection2-core          # Integrate node simpl-schema with Meteor collections.

@@ -3,7 +3,9 @@
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "wileyb@hawaii.edu", "password": "changeme", "role": "admin" },
     { "email":  "ryoabs@hawaii.edu", "password":  "changeme"},
-    { "email": "default@foo.com", "password":  "test"}
+    { "email": "default@foo.com", "password":  "test",
+      "role": "contractor"
+    }
   ],
 
   "defaultData": [
