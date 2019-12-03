@@ -5,7 +5,7 @@ export default class Middle1HP extends React.Component {
   render() {
     const gridStyle = { margin: '35px 0' };
     return (
-        <div className={'introuction'}>
+        <div className={'introduction'}>
           <Container>
           <Grid style={gridStyle}>
             <Grid.Row columns="two">
