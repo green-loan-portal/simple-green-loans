@@ -4,6 +4,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Header, Container, Grid, Segment, Divider, Button } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import StatusBar from '../components/StatusBar';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
@@ -15,55 +17,55 @@ import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 
 class ProfilePage extends React.Component {
   render() {
-    return (
-        <Container>
+    return ((Roles.userIsInRole(Meteor.userId(), 'admin')) ? <Redirect to="/admin" /> :
+      <Container>
         <Header as="h1" textAlign="center">My Loan</Header>
-          <Segment placeholder>
-            <Grid columns={2} stackable textAlign='center'>
-              <Divider vertical>Or</Divider>
+        <Segment placeholder>
+          <Grid columns={2} stackable textAlign='center'>
+            <Divider vertical>Or</Divider>
 
-              <Grid.Row verticalAlign='middle'>
-                <Grid.Column>
-                  <Header as="h1">View/Finish Your Application</Header>
-                  <Button as={NavLink} exact to="/form/1">Click Here</Button>
-                </Grid.Column>
+            <Grid.Row verticalAlign='middle'>
+              <Grid.Column>
+                <Header as="h1">View/Finish Your Application</Header>
+                <Button as={NavLink} exact to="/form/1">Click Here</Button>
+              </Grid.Column>
 
-                <Grid.Column>
-                  <Header as="h1">Your Application Status</Header>
-                  {this.props.accounts.map((stuff, index) => (
-                      <StatusBar
-                          key={index}
-                          stuff={stuff}
-                          section1={this.props.db1.find(
-                              mydb1 => mydb1.owner === stuff.username,
-                          )}
-                          section2={this.props.db2.find(
-                              mydb2 => mydb2.owner === stuff.username,
-                          )}
-                          section6={this.props.db6.find(
-                              mydb6 => mydb6.owner === stuff.username,
-                          )}
-                          section7={this.props.db7.find(
-                              mydb7 => mydb7.owner === stuff.username,
-                          )}
-                          section8={this.props.db8.find(
-                              mydb8 => mydb8.owner === stuff.username,
-                          )}
-                          section9={this.props.db9.find(
-                              mydb9 => mydb9.owner === stuff.username,
-                          )}
-                          sectionAuthorization={this.props.dbauthorization.find(
-                              mydbAuth => mydbAuth.owner === stuff.username,
-                          )}
-                      />
-                  ))}
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Segment>
-        </Container>
+              <Grid.Column>
+                <Header as="h1">Your Application Status</Header>
+                {this.props.accounts.map((stuff, index) => (
+                  <StatusBar
+                    key={index}
+                    stuff={stuff}
+                    section1={this.props.db1.find(
+                      mydb1 => mydb1.owner === stuff.username,
+                    )}
+                    section2={this.props.db2.find(
+                      mydb2 => mydb2.owner === stuff.username,
+                    )}
+                    section6={this.props.db6.find(
+                      mydb6 => mydb6.owner === stuff.username,
+                    )}
+                    section7={this.props.db7.find(
+                      mydb7 => mydb7.owner === stuff.username,
+                    )}
+                    section8={this.props.db8.find(
+                      mydb8 => mydb8.owner === stuff.username,
+                    )}
+                    section9={this.props.db9.find(
+                      mydb9 => mydb9.owner === stuff.username,
+                    )}
+                    sectionAuthorization={this.props.dbauthorization.find(
+                      mydbAuth => mydbAuth.owner === stuff.username,
+                    )}
+                  />
+                ))}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+      </Container>
     );
-}
+  }
 }
 
 /** Require an array of Stuff documents in the props. */
@@ -99,6 +101,6 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-        subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
   };
 })(ProfilePage);

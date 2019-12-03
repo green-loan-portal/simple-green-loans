@@ -7,6 +7,8 @@ import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import HiddenField from 'uniforms-semantic/HiddenField';
 import swal from 'sweetalert';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
@@ -35,7 +37,7 @@ class Form9 extends React.Component {
 
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -69,11 +71,11 @@ class Form9 extends React.Component {
   }
 
   render() {
-    return this.props.ready ? (
-      this.renderPage()
-    ) : (
-        <Loader active>Getting data</Loader>
-      );
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      return <Redirect to="/admin" />;
+    }
+    return (this.props.ready) ? this.renderPage() :
+      <Loader active>Getting data</Loader>;
   }
 
   renderPage() {

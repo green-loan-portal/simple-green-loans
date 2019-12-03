@@ -1,9 +1,8 @@
 import React from 'react';
-import Meteor from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Form, Button, Header, Loader } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
-import { ExpandCanvas } from '../js/userSignature';
 import swal from 'sweetalert';
 import SelectField from 'uniforms-semantic/SelectField';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -12,10 +11,13 @@ import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import HiddenField from 'uniforms-semantic/HiddenField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { AuthorizationDB, AuthorizationDBWithoutOwner } from '/imports/api/stuff/AuthorizationDB';
 import ProgressBar from '../components/ProgressBar';
+import { ExpandCanvas } from '../js/userSignature';
 
 class AuthorizationPage extends React.Component {
 
@@ -43,7 +45,7 @@ class AuthorizationPage extends React.Component {
 
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -78,7 +80,11 @@ class AuthorizationPage extends React.Component {
   }
 
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      return <Redirect to="/admin" />;
+    }
+    return (this.props.ready) ? this.renderPage() :
+      <Loader active>Getting data</Loader>;
   }
 
   renderPage() {

@@ -8,6 +8,8 @@ import {
   Loader,
 } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import 'semantic-ui-css/semantic.min.css';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -36,13 +38,13 @@ class Form2 extends React.Component {
       contactName,
       streetAddress,
       islandLocation,
-      residenceType
+      residenceType,
     } = data;
 
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -105,11 +107,11 @@ class Form2 extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return this.props.ready ? (
-      this.renderPage()
-    ) : (
-        <Loader active>Getting data</Loader>
-      );
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      return <Redirect to="/admin" />;
+    }
+    return (this.props.ready) ? this.renderPage() :
+      <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
@@ -132,8 +134,7 @@ class Form2 extends React.Component {
           <strong>
             Please print name exactly as it appears on your utility bill.
           </strong>
-          <div className='add-margin-top-10px'></div>
-          <Form.Group>
+          <Form.Group className='add-margin-top-10px'>
             <TextField
               className='five wide field'
               label={false}
@@ -166,8 +167,7 @@ class Form2 extends React.Component {
           </Form.Group>
 
           {/* NEW SECTION */}
-          <div className='add-margin-top-40px'></div>
-          <Header as='h2' className='dividing header'>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
             3. ENERGY IMPROVEMENT
           </Header>
           <SelectField
@@ -178,8 +178,7 @@ class Form2 extends React.Component {
           />
 
           {/* NEW SECTION */}
-          <div className='add-margin-top-40px'></div>
-          <Header as='h2' className='dividing header'>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
             4. CONTRACTOR INFORMATION
           </Header>
           <SelectField
@@ -206,8 +205,7 @@ class Form2 extends React.Component {
           </Form.Group>
 
           {/* NEW SECTION */}
-          <div className='add-margin-top-40px'></div>
-          <Header as='h2' className='dividing header'>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
             5. INSTALLATION ADDRESS
             <Label className='green'>
               Note: This is the address at which the proposed Energy Improvement

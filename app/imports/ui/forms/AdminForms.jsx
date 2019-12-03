@@ -636,7 +636,9 @@ class AdminForms extends React.Component {
 
           <Grid.Row columns={2}>
             <Grid.Column>
-              {this.props.doc5 ? <Image className='darkOutline' src={this.props.doc5.signature} /> : <div className='ui red'>*No signature</div>}
+              {this.props.doc5 ?
+                <Image className='darkOutline' src={this.props.doc5.signature} /> :
+                <div className='ui red'>*No signature</div>}
             </Grid.Column>
             <Grid.Column>
               {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label='Date' type='date' id='getDate' width={16}></Form.Input>}
