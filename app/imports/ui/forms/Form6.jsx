@@ -9,6 +9,8 @@ import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -39,7 +41,7 @@ class Form6 extends React.Component {
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -107,11 +109,11 @@ class Form6 extends React.Component {
   }
 
   render() {
-    return this.props.ready ? (
-      this.renderPage()
-    ) : (
-        <Loader active>Getting data</Loader>
-      );
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      return <Redirect to="/admin" />;
+    }
+    return (this.props.ready) ? this.renderPage() :
+      <Loader active>Getting data</Loader>;
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */

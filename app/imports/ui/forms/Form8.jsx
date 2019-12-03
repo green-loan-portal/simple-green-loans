@@ -6,6 +6,8 @@ import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -22,7 +24,7 @@ class Form8 extends React.Component {
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if ((typeof this.props.doc.owner) !== undefined) {
+      if ((typeof this.props.doc.owner) !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -59,11 +61,11 @@ class Form8 extends React.Component {
   }
 
   render() {
-    return this.props.ready ? (
-      this.renderPage()
-    ) : (
-        <Loader active>Getting data</Loader>
-      );
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      return <Redirect to="/admin" />;
+    }
+    return (this.props.ready) ? this.renderPage() :
+      <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
@@ -95,7 +97,7 @@ class Form8 extends React.Component {
           <TextField
             className='sixteen wide field'
             name='taxCreditClaimerRelationship'
-            label='If the entity(ies) or person(s) claiming the Tax Credit is not 
+            label='If the entity(ies) or person(s) claiming the Tax Credit is not
             one of the Property Owner(s), please indicate relationship to Owner(s): '
             showInlineError={false}
           />

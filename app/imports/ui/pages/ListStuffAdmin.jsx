@@ -85,17 +85,17 @@ class ListStuffAdmin extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Customer Name</Table.HeaderCell>
-              <Table.HeaderCell>Email</Table.HeaderCell>
-              <Table.HeaderCell>#1</Table.HeaderCell>
-              <Table.HeaderCell>#2-5</Table.HeaderCell>
-              <Table.HeaderCell>#6</Table.HeaderCell>
-              <Table.HeaderCell>#7</Table.HeaderCell>
-              <Table.HeaderCell>#8</Table.HeaderCell>
-              <Table.HeaderCell>#9</Table.HeaderCell>
-              <Table.HeaderCell>Authorization</Table.HeaderCell>
-              <Table.HeaderCell>PDF</Table.HeaderCell>
-              <Table.HeaderCell>Excel</Table.HeaderCell>
+              <Table.HeaderCell width='4'>Customer Name</Table.HeaderCell>
+              <Table.HeaderCell width='3'>Email</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#1</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#2-5</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#6</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#7</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#8</Table.HeaderCell>
+              <Table.HeaderCell width='1'>#9</Table.HeaderCell>
+              <Table.HeaderCell width='1'>Authorization</Table.HeaderCell>
+              <Table.HeaderCell width='1'>PDF</Table.HeaderCell>
+              <Table.HeaderCell width='1'>Excel</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

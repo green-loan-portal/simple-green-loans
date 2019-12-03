@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-// import { Stuffs } from '/imports/api/stuff/Stuff';
 import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -9,6 +8,8 @@ import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import BoolField from 'uniforms-unstyled/BoolField';
 import swal from 'sweetalert';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { NavLink } from 'react-router-dom';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -37,7 +38,7 @@ class Form1 extends React.Component {
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
@@ -84,7 +85,7 @@ class Form1 extends React.Component {
     // eslint-disable-next-line max-len
     const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
-    return (
+    return ((Roles.userIsInRole(Meteor.userId(), 'admin')) ? <Redirect to="/admin" /> :
 
       <Container>
         <ProgressBar />
