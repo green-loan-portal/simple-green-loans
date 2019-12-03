@@ -17,7 +17,7 @@ import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 
 class ProfilePage extends React.Component {
   render() {
-    return ((Roles.userIsInRole(Meteor.userId(), 'admin')) ? <Redirect to="/admin" /> :
+    return ((Roles.userIsInRole(Meteor.userId(), 'admin')) ? <Redirect to="/processorHome" /> :
       <Container>
         <Header as="h1" textAlign="center">My Loan</Header>
         <Segment placeholder>
