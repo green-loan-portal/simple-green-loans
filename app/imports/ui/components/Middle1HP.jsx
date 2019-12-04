@@ -10,7 +10,7 @@ export default class Middle1HP extends React.Component {
           <Grid style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
-                <p className="headers">What is GEMS?</p>
+                <h1 className="headers">What is GEMS?</h1>
                 <hr/>
                 The Green Energy Market Securitization Program (GEMS) is an innovative, sustainable green financing
                 initiative designed by the Hawaii State Energy Office to make clean energy improvements more
@@ -19,7 +19,7 @@ export default class Middle1HP extends React.Component {
                 obtaining financing for these projects.
               </Grid.Column>
               <Grid.Column>
-                <p className="headers">Eligibility</p>
+                <h1 className="headers">Eligibility</h1>
                 <hr/>
                 <List bulleted>
                   <List.Item>Must be a Hawaiian Electric, Maui Electric, or Hawaiian Electric Light Company customer on

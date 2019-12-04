@@ -161,10 +161,8 @@
 }
 
 .processImage {
-  alignment: center;
   padding-left: 5%;
+  alignment: center;
+  text-align: center;
 }
 
-.processImageTitle {
-  alignment: center;
-}
