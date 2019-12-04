@@ -11,6 +11,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
+import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -85,21 +86,20 @@ class ListStuffAdmin extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width='4'>Customer Name</Table.HeaderCell>
-              <Table.HeaderCell width='3'>Email</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#1</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#2-5</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#6</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#7</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#8</Table.HeaderCell>
-              <Table.HeaderCell width='1'>#9</Table.HeaderCell>
-              <Table.HeaderCell width='1'>Authorization</Table.HeaderCell>
-              <Table.HeaderCell width='1'>HECO</Table.HeaderCell>
-              <Table.HeaderCell width='1'>Reviewed</Table.HeaderCell>
-              <Table.HeaderCell width='1'>Application Approved</Table.HeaderCell>
-              <Table.HeaderCell width='1'>Application Denied</Table.HeaderCell>
-              <Table.HeaderCell width='1'>PDF</Table.HeaderCell>
-              <Table.HeaderCell width='1'>Excel</Table.HeaderCell>
+              <Table.HeaderCell>Customer Name</Table.HeaderCell>
+              <Table.HeaderCell>Email</Table.HeaderCell>
+              <Table.HeaderCell>#1</Table.HeaderCell>
+              <Table.HeaderCell>#2-5</Table.HeaderCell>
+              <Table.HeaderCell>#6</Table.HeaderCell>
+              <Table.HeaderCell>#7</Table.HeaderCell>
+              <Table.HeaderCell>#8</Table.HeaderCell>
+              <Table.HeaderCell>#9</Table.HeaderCell>
+              <Table.HeaderCell>Auth</Table.HeaderCell>
+              <Table.HeaderCell>HECO</Table.HeaderCell>
+              <Table.HeaderCell>Reviewed</Table.HeaderCell>
+              <Table.HeaderCell>PDF</Table.HeaderCell>
+              <Table.HeaderCell>Excel</Table.HeaderCell>
+              <Table.HeaderCell>Application Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -149,6 +149,7 @@ ListStuffAdmin.propTypes = {
   db8: PropTypes.array,
   db9: PropTypes.array,
   dbauthorization: PropTypes.array,
+  applicationStatus: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -163,6 +164,8 @@ export default withTracker(() => {
   const subscription8 = Meteor.subscribe('Form8');
   const subscription9 = Meteor.subscribe('Form9');
   const subscription10 = Meteor.subscribe('AuthorizationDB');
+  const subscription11 = Meteor.subscribe('ApplicationStatusDB');
+
   return {
     accounts: Meteor.users.find({}).fetch(),
     db1: Section1DB.find({}).fetch(),
@@ -172,7 +175,9 @@ export default withTracker(() => {
     db8: Section8DB.find({}).fetch(),
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
+    applicationStatus: ApplicationStatusDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
+      subscription11.ready(),
   };
 })(ListStuffAdmin);

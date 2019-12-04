@@ -14,6 +14,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
+import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
 class ProfilePage extends React.Component {
   render() {
@@ -78,6 +79,8 @@ ProfilePage.propTypes = {
   db8: PropTypes.array,
   db9: PropTypes.array,
   dbauthorization: PropTypes.array,
+  applicationStatus: PropTypes.array,
+  ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -91,6 +94,8 @@ export default withTracker(() => {
   const subscription8 = Meteor.subscribe('Form8');
   const subscription9 = Meteor.subscribe('Form9');
   const subscription10 = Meteor.subscribe('AuthorizationDB');
+  const subscription11 = Meteor.subscribe('ApplicationStatusDB');
+
   return {
     accounts: Meteor.users.find({}).fetch(),
     db1: Section1DB.find({}).fetch(),
@@ -100,7 +105,9 @@ export default withTracker(() => {
     db8: Section8DB.find({}).fetch(),
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
+    applicationStatus: ApplicationStatusDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready(),
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
+      subscription11.ready(),
   };
 })(ProfilePage);
