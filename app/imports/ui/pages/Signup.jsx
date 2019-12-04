@@ -4,6 +4,18 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import swal from 'sweetalert';
+import { VerifyEmail } from '/imports/api/UnverifiedEmailsDB';
+
+getVerifiedCode = () => {
+  const length = 32;
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var result = '';
+  for (var i = length; i > 0; --i) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return result;
+}
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -32,8 +44,19 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
 
           // Send confirmation email if no errors occured when creating a new account
-          Meteor.call('sendConfirmationEmail', email, function (error) {
-            console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+          const verifiedCode = getVerifiedCode();
+          Meteor.call('sendConfirmationEmail', email, verifiedCode, function (error) {
+            if (error) {
+              console.log("error: ", error)
+            } else {
+              VerifyEmail.insert({ email, verifiedCode }, (error) => {
+                if (error) {
+                  swal('Error', error.message, 'error');
+                } else {
+                  swal('Success', `Successfully sent an email to ${email}. Please verify your account.`, 'success');
+                }
+              });
+            }
           });
         }
       });

@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
+import VerifyingEmail from '../pages/VerifyingEmail';
 import Form1 from '../forms/Form1';
 import Form2 from '../forms/Form2';
 import Form6 from '../forms/Form6';
@@ -36,6 +37,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomePageHP} />
+            <Route exact path="/verify/:verifiedCode" component={VerifyingEmail} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <ProtectedRoute path="/profile" component={ProfilePage} />

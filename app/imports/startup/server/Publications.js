@@ -8,6 +8,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
+import { VerifyEmail } from '../../api/UnverifiedEmailsDB';
 
 
 /** This subscription publishes only the documents associated with the logged in user */
@@ -30,6 +31,13 @@ Object.keys(forms).forEach(key => {
     }
     return this.ready();
   });
+});
+
+Meteor.publish('VerifyEmails', function publish() {
+  if (this.userId) {
+    return VerifyEmail.find();
+  }
+  return this.ready();
 });
 
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
