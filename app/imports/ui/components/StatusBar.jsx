@@ -13,6 +13,11 @@ class StatusBar extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
+    const approvedHeco = this.props.applicationApproval.heco ? 'completed' : '';
+    const approvedReviewed = this.props.applicationApproval.reviewed ? 'completed' : 'disabled';
+    const approvedApproved1 = this.props.applicationApproval.approved ? 'completed' : 'disabled';
+    const approvedApproved2 = this.props.applicationApproval.approved ? 'Approved' : 'Denied';
+    const approvedApproved3 = this.props.applicationApproval.approved ? 'has been Approved!' : 'has been Denied.';
     return (
       <div>
         <Step.Group vertical>
@@ -24,8 +29,7 @@ class StatusBar extends React.Component {
               <Step.Description>Complete your application and submit</Step.Description>
             </Step.Content>
           </Step>
-          <Step className={this.props.applicationApproval ?
-              (this.props.applicationApproval.heco ? 'completed' : '') : 'disabled'}>
+          <Step className={this.props.applicationApproval ? approvedHeco : 'disabled'}>
             <Icon name='info' />
             <Step.Content>
               <Step.Title>HECO</Step.Title>
@@ -34,8 +38,7 @@ class StatusBar extends React.Component {
               </Step.Description>
             </Step.Content>
           </Step>
-          <Step className={this.props.applicationApproval ?
-              (this.props.applicationApproval.reviewed ? 'completed' : 'disabled') : 'disabled'}>
+          <Step className={this.props.applicationApproval ? approvedReviewed : 'disabled'}>
             <Icon name='folder open' />
             <Step.Content>
               <Step.Title>Reviewing Information</Step.Title>
@@ -44,16 +47,12 @@ class StatusBar extends React.Component {
               </Step.Description>
             </Step.Content>
           </Step>
-          <Step className={this.props.applicationApproval ?
-            (this.props.applicationApproval.approved ? 'completed' : 'disabled') : 'disabled'}>
+          <Step className={this.props.applicationApproval ? approvedApproved1 : 'disabled'}>
             <Icon name='checkmark' />
             <Step.Content>
-              <Step.Title>{`${this.props.applicationApproval ? (this.props.applicationApproval.approved ?
-                'Approved' : 'Denied') : 'Approved/Denied'}`}</Step.Title>
+              <Step.Title>{`${this.props.applicationApproval ? approvedApproved2 : 'Approved/Denied'}`}</Step.Title>
               <Step.Description>
-                Your application {`${this.props.applicationApproval ?
-                  (this.props.applicationApproval.approved ? 'has been Approved!' : 'has been Denied.') :
-                  ' is being reviewed.'}`}
+                Your application {`${this.props.applicationApproval ? approvedApproved3 : ' is being reviewed.'}`}
               </Step.Description>
             </Step.Content>
           </Step>

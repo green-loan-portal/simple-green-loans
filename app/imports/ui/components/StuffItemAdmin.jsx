@@ -3,7 +3,7 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { withTracker } from 'meteor/react-meteor-data';
+// mport { withTracker } from 'meteor/react-meteor-data';
 import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
@@ -139,10 +139,10 @@ class StuffItemAdmin extends React.Component {
         </Table.Cell>
         <Table.Cell>
           <Button type='button' className={this.state.checkColor}
-            onClick={() => this.updateApprovalStatus(this.props.owner, true)} icon='check'></Button>
+    onClick={() => this.updateApprovalStatus(this.props.owner, true)} icon='check'/>
           /&nbsp;
           <Button type='button' className={this.state.cancelColor}
-            onClick={() => this.updateApprovalStatus(this.props.owner, false)} icon='cancel'></Button>
+    onClick={() => this.updateApprovalStatus(this.props.owner, false)} icon='cancel'/>
         </Table.Cell>
       </Table.Row>
     );
@@ -158,6 +158,7 @@ StuffItemAdmin.propTypes = {
   section7: PropTypes.object,
   section8: PropTypes.object,
   section9: PropTypes.object,
+  stuff: PropTypes.object,
   sectionAuthorization: PropTypes.object,
 };
 
