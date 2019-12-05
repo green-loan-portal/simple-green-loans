@@ -1,17 +1,16 @@
 import React from 'react';
-import { Icon, Button, Table, Loader } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import { collectdata } from '../../api/stuff/CsvScript';
-import { Link } from 'react-router-dom';
+import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 class StuffItemAdmin extends React.Component {
   constructor(props) {
     super(props);
-    const data = ApplicationStatusDB.findOne({ owner: this.props.stuff.username });
+    const data = ApplicationStatusDB.findOne({ owner: this.props.owner });
     if (!data) {
       this.state = { checkColor: '', cancelColor: 'red' };
     } else {
@@ -21,9 +20,9 @@ class StuffItemAdmin extends React.Component {
 
   updateApprovalStatus(emailOwner, boolean) {
     swal({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: `Set application status, ${boolean ? 'APPROVED' : 'DENIED'}, for ${emailOwner}.`,
-      icon: "warning",
+      icon: 'warning',
       buttons: true,
       dangerMode: true,
     })
@@ -42,7 +41,7 @@ class StuffItemAdmin extends React.Component {
               },
             );
           }
-          this.setState({ checkColor: boolean ? 'green' : '', cancelColor: boolean ? '' : 'red' })
+          this.setState({ checkColor: boolean ? 'green' : '', cancelColor: boolean ? '' : 'red' });
         }
       });
   }
@@ -53,10 +52,9 @@ class StuffItemAdmin extends React.Component {
       <Table.Row>
         <Table.Cell>
           {this.props.section2 ? `${this.props.section2.firstName ? this.props.section2.firstName : ''}
-          ${this.props.section2.middleName ? this.props.section2.middleName : ''}
           ${this.props.section2.lastName ? this.props.section2.lastName : ''}` : ''}
         </Table.Cell>
-        <Table.Cell><a href={'mailto:' + this.props.stuff.username}>{this.props.stuff.username}</a></Table.Cell>
+        <Table.Cell><a href={`mailto: ${this.props.owner}`}>{this.props.owner}</a></Table.Cell>
         <Table.Cell>{this.props.section1 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section2 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section6 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
@@ -76,7 +74,7 @@ class StuffItemAdmin extends React.Component {
           </Button>
         </Table.Cell>
         <Table.Cell>
-          <Link to={`/adminforms/${this.props.stuff.username}`}>
+          <Link to={`/adminforms/${this.props.owner}`}>
             <Button className='exportButton' basic color='green' content='Green' size='mini'>
               PDF
             </Button>
@@ -88,11 +86,11 @@ class StuffItemAdmin extends React.Component {
           </Button>
         </Table.Cell>
         <Table.Cell>
-          <Button type='button' className={this.state.checkColor} onClick={() =>
-            this.updateApprovalStatus(this.props.stuff.username, true)} icon='check'></Button>
+          <Button type='button' className={this.state.checkColor}
+            onClick={() => this.updateApprovalStatus(this.props.owner, true)} icon='check'></Button>
           /&nbsp;
-          <Button type='button' className={this.state.cancelColor} onClick={() =>
-            this.updateApprovalStatus(this.props.stuff.username, false)} icon='cancel'></Button>
+          <Button type='button' className={this.state.cancelColor}
+            onClick={() => this.updateApprovalStatus(this.props.owner, false)} icon='cancel'></Button>
         </Table.Cell>
       </Table.Row>
     );
@@ -101,7 +99,7 @@ class StuffItemAdmin extends React.Component {
 
 /** Require a document to be passed to this component. */
 StuffItemAdmin.propTypes = {
-  stuff: PropTypes.object.isRequired,
+  owner: PropTypes.string.isRequired,
   section1: PropTypes.object,
   section2: PropTypes.object,
   section6: PropTypes.object,
@@ -112,4 +110,3 @@ StuffItemAdmin.propTypes = {
 };
 
 export default (StuffItemAdmin);
-
