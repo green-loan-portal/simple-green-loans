@@ -152,7 +152,8 @@ class Form7 extends React.Component {
               className='sixteen wide field'
               name='partiesNames'
               label='All Parties Names'
-              placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
+              placeholder={`Please list all parties named on Title to the Installation
+              Address in Section 5 (including Trusts)`}
             />
 
             <Form.Group>

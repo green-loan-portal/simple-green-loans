@@ -2,7 +2,7 @@ import React from 'react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Button, Input } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
@@ -16,13 +16,12 @@ import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
-  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  render() {
-    return (this.props.ready) ? (
-      this.renderPage()
-    ) : (
-        <Loader active>Getting data</Loader>
-      );
+  /* Table originally shows all records unless user puts in an input (onChange). Uses `this.state.search` */
+  constructor(props) {
+    super(props);
+    if (this.props.ready) {
+      this.state = { search: [], userTextLength: 0 };
+    }
   }
 
   sending() {
@@ -76,6 +75,31 @@ class ListStuffAdmin extends React.Component {
     }, 200);
   }
 
+  userSearch = (e) => {
+    const mongoFields = [];
+    ['owner', 'firstName', 'lastName', 'fullName'].forEach(function (element) {
+      let tmp = {};
+      if ((element === 'fullName') && e.target.value.indexOf(' ') > 0) {
+        const [first, last] = e.target.value.split(' ');
+        tmp = { firstName: { $regex: new RegExp(first, 'i') }, lastName: { $regex: new RegExp(last, 'i') } };
+      } else {
+        tmp[element] = new RegExp(e.target.value, 'i');
+      }
+      mongoFields.push(tmp);
+    });
+
+    this.setState({ search: Section2DB.find({ $or: mongoFields }).fetch(), userTextLength: e.target.value.length });
+  }
+
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+  render() {
+    return (this.props.ready) ? (
+      this.renderPage()
+    ) : (
+        <Loader active>Getting data</Loader>
+      );
+  }
+
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
@@ -83,6 +107,14 @@ class ListStuffAdmin extends React.Component {
         <Header as='h2' textAlign='center'>
           Records (Admin)
         </Header>
+
+        <Input
+          icon={{ name: 'search', circular: false, link: true }}
+          iconPosition='left'
+          placeholder='Search...'
+          onChange={this.userSearch}
+        />
+
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -103,33 +135,59 @@ class ListStuffAdmin extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.props.accounts.map((stuff, index) => (
-              <StuffItemAdmin
+            {(this.state && this.state.userTextLength > 0) ?
+              (this.state.search.map((stuff, index) => <StuffItemAdmin
                 key={index}
-                stuff={stuff}
+                owner={stuff.owner}
                 section1={this.props.db1.find(
-                  mydb1 => mydb1.owner === stuff.username,
+                  mydb1 => mydb1.owner === stuff.owner,
                 )}
                 section2={this.props.db2.find(
-                  mydb2 => mydb2.owner === stuff.username,
+                  mydb2 => mydb2.owner === stuff.owner,
                 )}
                 section6={this.props.db6.find(
-                  mydb6 => mydb6.owner === stuff.username,
+                  mydb6 => mydb6.owner === stuff.owner,
                 )}
                 section7={this.props.db7.find(
-                  mydb7 => mydb7.owner === stuff.username,
+                  mydb7 => mydb7.owner === stuff.owner,
                 )}
                 section8={this.props.db8.find(
-                  mydb8 => mydb8.owner === stuff.username,
+                  mydb8 => mydb8.owner === stuff.owner,
                 )}
                 section9={this.props.db9.find(
-                  mydb9 => mydb9.owner === stuff.username,
+                  mydb9 => mydb9.owner === stuff.owner,
                 )}
                 sectionAuthorization={this.props.dbauthorization.find(
-                  mydbAuth => mydbAuth.owner === stuff.username,
+                  mydbAuth => mydbAuth.owner === stuff.owner,
                 )}
-              />
-            ))}
+              />)) :
+              (this.props.accounts.map((stuff, index) => (
+                <StuffItemAdmin
+                  key={index}
+                  owner={stuff.username}
+                  section1={this.props.db1.find(
+                    mydb1 => mydb1.owner === stuff.username,
+                  )}
+                  section2={this.props.db2.find(
+                    mydb2 => mydb2.owner === stuff.username,
+                  )}
+                  section6={this.props.db6.find(
+                    mydb6 => mydb6.owner === stuff.username,
+                  )}
+                  section7={this.props.db7.find(
+                    mydb7 => mydb7.owner === stuff.username,
+                  )}
+                  section8={this.props.db8.find(
+                    mydb8 => mydb8.owner === stuff.username,
+                  )}
+                  section9={this.props.db9.find(
+                    mydb9 => mydb9.owner === stuff.username,
+                  )}
+                  sectionAuthorization={this.props.dbauthorization.find(
+                    mydbAuth => mydbAuth.owner === stuff.username,
+                  )}
+                />))
+              )}
           </Table.Body>
         </Table>
         <Button id='sendEmailButton'>Send application reminder</Button>

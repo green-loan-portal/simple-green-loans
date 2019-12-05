@@ -18,8 +18,6 @@ import { Section7DBSchemaWithoutOwner, Section7DB } from '/imports/api/stuff/Sec
 import { Section8DBSchemaWithoutOwner, Section8DB } from '/imports/api/stuff/Section8DB';
 import { Section9DB } from '/imports/api/stuff/Section9DB';
 
-
-
 /** Create a schema to specify the structure of the data to appear in the form. */
 
 /** Renders the Page for adding a document. */
@@ -503,7 +501,8 @@ class AdminForms extends React.Component {
                 className='sixteen wide field'
                 name='partiesNames'
                 label='All Parties Names'
-                placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
+                placeholder={`Please list all parties named on Title to the
+                Installation Address in Section 5 (including Trusts)`}
               />
 
               <Form.Group>
@@ -556,7 +555,8 @@ class AdminForms extends React.Component {
             <TextField
               className='sixteen wide field'
               name='taxCreditClaimerRelationship'
-              label='If the entity(ies) or person(s) claiming the Tax Credit is not one of the Property Owner(s), please indicate relationship to Owner(s): '
+              label={`If the entity(ies) or person(s) claiming the Tax Credit is not one of the
+              Property Owner(s), please indicate relationship to Owner(s): `}
               showInlineError={false}
             />
           </AutoForm>
@@ -641,7 +641,8 @@ class AdminForms extends React.Component {
                 <div className='ui red'>*No signature</div>}
             </Grid.Column>
             <Grid.Column>
-              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label='Date' type='date' id='getDate' width={16}></Form.Input>}
+              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> :
+                <Form.Input label='Date' type='date' id='getDate' width={16}></Form.Input>}
             </Grid.Column>
           </Grid.Row>
         </Container>
