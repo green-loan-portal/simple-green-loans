@@ -1,7 +1,15 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
-// import { FeedbackAppFormValues } from './Stuff';
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ *Do we need this?? */
 
 /** Define a Mongo collection to hold the data. */
 const Feedback = new Mongo.Collection('Feedback');
