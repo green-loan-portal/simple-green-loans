@@ -3,6 +3,7 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
 import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
@@ -16,6 +17,59 @@ class StuffItemAdmin extends React.Component {
     } else {
       this.state = { checkColor: data.approved ? 'green' : '', cancelColor: data.approved ? '' : 'red' };
     }
+  }
+
+
+  updateHecoStatus(emailOwner, boolean) {
+    swal({
+      title: 'Information has been received by HECO',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+        .then((willContinue) => {
+          if (willContinue) {
+            const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
+            const owner = emailOwner;
+            const heco = boolean;
+            if (!currentUser) {
+              ApplicationStatusDB.insert({ owner, heco, reviewed: false, approved: false });
+            } else {
+              ApplicationStatusDB.update(
+                  { _id: currentUser._id },
+                  {
+                    $set: { owner, heco },
+                  },
+              );
+            }
+          }
+        });
+  }
+
+  updateReviewedStatus(emailOwner, boolean) {
+    swal({
+      title: 'Information has been reviewed',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+        .then((willContinue) => {
+          if (willContinue) {
+            const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
+            const owner = emailOwner;
+            const reviewed = boolean;
+            if (!currentUser) {
+              ApplicationStatusDB.insert({ owner, heco: true, reviewed, approved: false });
+            } else {
+              ApplicationStatusDB.update(
+                  { _id: currentUser._id },
+                  {
+                    $set: { owner, reviewed },
+                  },
+              );
+            }
+          }
+        });
   }
 
   updateApprovalStatus(emailOwner, boolean) {
@@ -32,7 +86,7 @@ class StuffItemAdmin extends React.Component {
           const owner = emailOwner;
           const approved = boolean;
           if (!currentUser) {
-            ApplicationStatusDB.insert({ owner, approved });
+            ApplicationStatusDB.insert({ owner, heco: false, reviewed: false, approved });
           } else {
             ApplicationStatusDB.update(
               { _id: currentUser._id },
@@ -64,14 +118,12 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         {/* <Table.Cell><Link to='/allforms'><Icon name='external alternate' /></Link></Table.Cell> */}
         <Table.Cell>
-          <Button className='Received' basic color='green' content='Green' size='mini'>
-            Received
-          </Button>
+          <Button className='Received' basic color='green' content='Green' size='mini'
+                  onClick={() => this.updateHecoStatus(this.props.stuff.username, true)}>Received</Button>
         </Table.Cell>
         <Table.Cell>
-          <Button className='Reviewed' basic color='green' content='Green' size='mini'>
-            Reviewed
-          </Button>
+          <Button className='Reviewed' basic color='green' content='Green' size='mini'
+                  onClick={() => this.updateReviewedStatus(this.props.stuff.username, true)}>Reviewed</Button>
         </Table.Cell>
         <Table.Cell>
           <Link to={`/adminforms/${this.props.owner}`}>

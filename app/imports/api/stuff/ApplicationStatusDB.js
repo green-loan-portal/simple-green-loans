@@ -7,9 +7,9 @@ const ApplicationStatusDB = new Mongo.Collection('ApplicationStatusDB');
 
 const ApplicationStatusDBSchema = new SimpleSchema({
   owner: String,
+  heco: Boolean,
+  reviewed: Boolean,
   approved: Boolean,
-  // heco: Boolean,
-  // reviewed: Boolean,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

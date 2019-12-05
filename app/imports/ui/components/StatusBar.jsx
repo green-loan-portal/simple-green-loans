@@ -1,8 +1,9 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Step, Icon, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { withTracker } from 'meteor/react-meteor-data';
+import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
 class StatusBar extends React.Component {
   render() {
@@ -23,22 +24,28 @@ class StatusBar extends React.Component {
               <Step.Description>Complete your application and submit</Step.Description>
             </Step.Content>
           </Step>
-          <Step>
+          <Step className={this.props.applicationApproval ?
+              (this.props.applicationApproval.heco ? 'completed' : '') : 'disabled'}>
             <Icon name='info' />
             <Step.Content>
               <Step.Title>HECO</Step.Title>
-              <Step.Description>Gathering information from HECO</Step.Description>
-            </Step.Content>
-          </Step>
-          <Step disabled>
-            <Icon name='folder open' />
-            <Step.Content>
-              <Step.Title>Reviewing information</Step.Title>
-              <Step.Description>We are currently reviewing your application</Step.Description>
+              <Step.Description>
+                We are currently gathering information from HECO
+              </Step.Description>
             </Step.Content>
           </Step>
           <Step className={this.props.applicationApproval ?
-            (this.props.applicationApproval.approved ? 'completed' : '') : 'disabled'}>
+              (this.props.applicationApproval.reviewed ? 'completed' : 'disabled') : 'disabled'}>
+            <Icon name='folder open' />
+            <Step.Content>
+              <Step.Title>Reviewing Information</Step.Title>
+              <Step.Description>
+                We are currently reviewing your application
+              </Step.Description>
+            </Step.Content>
+          </Step>
+          <Step className={this.props.applicationApproval ?
+            (this.props.applicationApproval.approved ? 'completed' : 'disabled') : 'disabled'}>
             <Icon name='checkmark' />
             <Step.Content>
               <Step.Title>{`${this.props.applicationApproval ? (this.props.applicationApproval.approved ?
