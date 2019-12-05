@@ -1,16 +1,18 @@
 import React from 'react';
-import { List, Grid, Container } from 'semantic-ui-react';
+import { List, Grid, Container, Header, Icon } from 'semantic-ui-react';
 
 export default class Middle1HP extends React.Component {
   render() {
     const gridStyle = { margin: '35px 0' };
     return (
-        <div className={'introuction'}>
+        <div className={'introduction'}>
           <Container>
           <Grid style={gridStyle}>
             <Grid.Row columns="two">
               <Grid.Column>
-                <p className="headers">What is GEMS?</p>
+                <Header as='h1'>
+                  What is GEMS?
+                </Header>
                 <hr/>
                 The Green Energy Market Securitization Program (GEMS) is an innovative, sustainable green financing
                 initiative designed by the Hawaii State Energy Office to make clean energy improvements more
@@ -19,7 +21,10 @@ export default class Middle1HP extends React.Component {
                 obtaining financing for these projects.
               </Grid.Column>
               <Grid.Column>
-                <p className="headers">Eligibility</p>
+                <Header as='h1'>
+                  <Icon name='tasks' />
+                  Eligibility
+                </Header>
                 <hr/>
                 <List bulleted>
                   <List.Item>Must be a Hawaiian Electric, Maui Electric, or Hawaiian Electric Light Company customer on

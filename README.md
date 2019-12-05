@@ -1,5 +1,7 @@
 # HGIA Loan Portal
 
+Application can be accessed at: http://simple-green-loans.meteorapp.com/#/
+
 ## Build
 
 1. Download Meteor (https://www.meteor.com/install)

@@ -18,21 +18,19 @@ import { Section7DBSchemaWithoutOwner, Section7DB } from '/imports/api/stuff/Sec
 import { Section8DBSchemaWithoutOwner, Section8DB } from '/imports/api/stuff/Section8DB';
 import { Section9DB } from '/imports/api/stuff/Section9DB';
 
-
-
 /** Create a schema to specify the structure of the data to appear in the form. */
 
 /** Renders the Page for adding a document. */
-class AllForms extends React.Component {
+class AdminForms extends React.Component {
 
   loadScript() {
     function loadScript() {
-      var script = document.createElement('script');
+      const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js';
       script.async = true;
       document.body.appendChild(script);
-      var script2 = document.createElement('script');
+      const script2 = document.createElement('script');
       script2.type = 'text/javascript';
       script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js';
       script2.async = true;
@@ -42,33 +40,17 @@ class AllForms extends React.Component {
   }
 
   onClick() {
-    var element = document.getElementById("clickbind");
-    console.log("works1");
+    const element = document.getElementById('clickbind');
     if (element) {
-      console.log("woo");
-      element.addEventListener("click", function () {
+      element.addEventListener('click', function () {
 
-        var pdf = new jsPDF('p', 'pt', 'a4');
-        pdf.fromHTML(document.getElementById("root"), function () {
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        pdf.fromHTML(document.getElementById('root'), function () {
           pdf.save('test.pdf');
         });
-        // var pdf = new jsPDF('p', 'pt', 'a4');
-        // pdf.addHTML(document.body, function () {
-        //   pdf.save('web.pdf');
-        // });
-
-
-        // console.log(document.getElementById("root"));
-        // pdf.fromHTML(document.getElementById("root"), 1, 1, {
-        // var doc = new jsPDF();
-        // doc.fromHTML($('#lppresults')[0], 15, 15, {
-        //   width: 170
-        // }, function () {
-        //   doc.save('sample-file.pdf');
-        // });
       });
     }
-  };
+  }
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -77,7 +59,8 @@ class AllForms extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     // eslint-disable-next-line max-len
-    const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
+    // console.log(this.props.doc);
+    const DisplayIf = ({ child, condition }, { uniforms }) => (condition(uniforms) ? Children.only(child) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
     this.loadScript();
     return (
@@ -107,7 +90,7 @@ class AllForms extends React.Component {
               className='bool-field-style ui checkbox new-line'
               name='washer'
               label='Washer'
-              showInlineError={false} // ???????????????????????????wat this do
+              showInlineError={false}
             />
 
             <DisplayIf condition={context => context.model.washer}>
@@ -293,10 +276,10 @@ class AllForms extends React.Component {
           </AutoForm>
         </Container >
 
-        <Container className="add-margin-top-40px">
+        <Container className='add-margin-top-40px'>
           <Header as='h2' className='dividing header'>
             2. RATEPAYER INFORMATION
-            <Label className="green">
+            <Label className='green'>
               Note: The person named on the electric utility account should be the Applicant
             </Label>
           </Header>
@@ -307,27 +290,27 @@ class AllForms extends React.Component {
             <div className='add-margin-top-10px'></div>
             <Form.Group>
               <TextField
-                className="five wide field"
+                className='five wide field'
                 name='firstName'
                 label={false}
                 placeholder={'First Name'}
                 showInlineError={false}
               />
               <TextField
-                className="five wide field"
+                className='five wide field'
                 name='middleName'
                 label={false}
                 placeholder={'Middle Name'}
               />
               <TextField
-                className="five wide field"
+                className='five wide field'
                 name='lastName'
                 label={false}
                 placeholder={'Last Name'}
                 showInlineError={false}
               />
               <TextField
-                className="five wide field"
+                className='five wide field'
                 name='utilityAccountNumber'
                 label={false}
                 placeholder={'Utility Account Number'}
@@ -335,7 +318,7 @@ class AllForms extends React.Component {
             </Form.Group>
 
             {/* NEW SECTION */}
-            <div className="add-margin-top-40px"></div>
+            <div className='add-margin-top-40px'></div>
             <Header as='h2' className='dividing header'>3. ENERGY IMPROVEMENT</Header>
             <SelectField
               label='What GEM$ Approved Energy Improvement would you like to install? (Check all that apply)'
@@ -344,7 +327,7 @@ class AllForms extends React.Component {
             />
 
             {/* NEW SECTION */}
-            <div className="add-margin-top-40px"></div>
+            <div className='add-margin-top-40px'></div>
             <Header as='h2' className='dividing header'>4. CONTRACTOR INFORMATION</Header>
             <SelectField
               label='Have you met with a GEM$ Approved Contractor regarding installation?'
@@ -356,13 +339,13 @@ class AllForms extends React.Component {
             <div>If yes, please indicate below:</div>
             <Form.Group>
               <TextField
-                className="eight wide field"
+                className='eight wide field'
                 name='contractorName'
                 label={false}
                 placeholder={'Contractor Name'}
               />
               <TextField
-                className="eight wide field"
+                className='eight wide field'
                 name='contactName'
                 label={false}
                 placeholder={'Contact Name'}
@@ -370,30 +353,30 @@ class AllForms extends React.Component {
             </Form.Group>
 
             {/* NEW SECTION */}
-            <div className="add-margin-top-40px"></div>
+            <div className='add-margin-top-40px'></div>
             <Header as='h2' className='dividing header'>
               5. INSTALLATION ADDRESS
-              <Label className="green">
+              <Label className='green'>
                 Note: This is the address at which the proposed Energy Improvement will be installed
               </Label>
             </Header>
 
             <Form.Group>
               <TextField
-                className="seven wide field"
+                className='seven wide field'
                 label='Street Address'
                 placeholder='Street, City, State, Zip'
                 name='streetAddress'
                 showInlineError={false}
               />
               <SelectField
-                className="seven wide field"
+                className='seven wide field'
                 label='On which island is this located?'
                 name='islandLocation'
                 showInlineError={false}
               />
               <SelectField
-                className="seven wide field"
+                className='seven wide field'
                 label='Type of Residence'
                 name='residenceType'
                 showInlineError={false}
@@ -403,10 +386,12 @@ class AllForms extends React.Component {
         </Container>
 
         <Container>
-          <Header as="h2" className="dividing header add-margin-top-40px">6. Data For Program Reporting Purposes</Header>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
+            6. Data For Program Reporting Purposes
+          </Header>
 
           <AutoForm schema={Section6DBSchemaWithoutOwner} model={this.props.doc2}>
-            <div className="sixteen wide field">
+            <div className='sixteen wide field'>
               <NumField
                 decimal={true}
                 name='income'
@@ -442,8 +427,12 @@ class AllForms extends React.Component {
               <NumField className='ten wide field'
                 decimal={false} name='membersNotHomeDay' showInlineError={false} placeholder={'# people not home day'}
               />
-              <NumField className='ten wide field'
-                decimal={false} name='membersNotHomeNight' showInlineError={false} placeholder={'# people not home night'}
+              <NumField
+                className='ten wide field'
+                decimal={false}
+                name='membersNotHomeNight'
+                showInlineError={false}
+                placeholder={'# people not home night'}
               />
             </Form.Group>
 
@@ -457,13 +446,13 @@ class AllForms extends React.Component {
             </Form.Group>
 
             <Form.Group>
-              <div className="seven wide field">
+              <div className='seven wide field'>
                 <TextField name='employerName' showInlineError={false} />
               </div>
-              <div className="seven wide field">
+              <div className='seven wide field'>
                 <TextField name='occupation' showInlineError={false} />
               </div>
-              <div className="seven wide field">
+              <div className='seven wide field'>
                 <NumField decimal={false} name='workPhone' showInlineError={false} />
               </div>
             </Form.Group>
@@ -471,9 +460,9 @@ class AllForms extends React.Component {
         </Container>
 
         <Container>
-          <Header as="h2" className="dividing header add-margin-top-40px">
+          <Header as='h2' className='dividing header add-margin-top-40px'>
             7. APPLICANT&#39;S INFORMATION
-          <Label className="green">
+          <Label className='green'>
               Note: The Applicant is the person named on the utility account named in Section 2.
           </Label>
           </Header>
@@ -481,7 +470,7 @@ class AllForms extends React.Component {
           <AutoForm schema={Section7DBSchemaWithoutOwner} model={this.props.doc3}>
 
             <Container>
-              <Form.Group widths="equal">
+              <Form.Group widths='equal'>
                 <TextField
                   name='email'
                   label='Email'
@@ -512,7 +501,8 @@ class AllForms extends React.Component {
                 className='sixteen wide field'
                 name='partiesNames'
                 label='All Parties Names'
-                placeholder='Please list all parties named on Title to the Installation Address in Section 5 (including Trusts)'
+                placeholder={`Please list all parties named on Title to the
+                Installation Address in Section 5 (including Trusts)`}
               />
 
               <Form.Group>
@@ -545,8 +535,13 @@ class AllForms extends React.Component {
         </Container>
 
         <Container>
-          <Header as="h2" className="dividing header add-margin-top-40px">8. SYSTEM OWNER (For Solar Tax Credits)</Header>
-          <Label color='red'>Please check with your tax advisor. Please also have the name of the system owner added to the EI contract (along with the utility account holder).</Label>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
+            8. SYSTEM OWNER (For Solar Tax Credits)
+          </Header>
+          <Label color='red'>
+            Please check with your tax advisor. Please also have the name of the system
+            owner added to the EI contract (along with the utility account holder).
+          </Label>
 
           <div className='add-margin-top-20px'></div>
           <AutoForm schema={Section8DBSchemaWithoutOwner} model={this.props.doc4}>
@@ -560,50 +555,79 @@ class AllForms extends React.Component {
             <TextField
               className='sixteen wide field'
               name='taxCreditClaimerRelationship'
-              label='If the entity(ies) or person(s) claiming the Tax Credit is not one of the Property Owner(s), please indicate relationship to Owner(s): '
+              label={`If the entity(ies) or person(s) claiming the Tax Credit is not one of the
+              Property Owner(s), please indicate relationship to Owner(s): `}
               showInlineError={false}
             />
-
           </AutoForm>
         </Container >
 
-
         <Container>
-          <Header as="h2" className="dividing header add-margin-top-40px">9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION</Header>
+          <Header as='h2' className='dividing header add-margin-top-40px'>
+            9. DISCLOSURE AND AGREEMENT REGARDING GEM$ APPLICATION
+          </Header>
 
           <div>
-            <p>By completing and submitting an Application, I certify that I have read, understand, and agree to all of the terms and conditions of the
-            GEM$ Program. By signing below, I certify that all information provided on this Application is true, correct and complete. If necessary, I
-            further agree to provide additional information to HGIA to review this Application. I hereby authorize HGIA to retain this Application
-        whether or not it is approved.</p>
-            <p>I further agree, that HGIA may communicate and share with my landlord and/or property manager and the Contractor identified in Section
-            4 above, or subsequently identified by me to HGIA, and disclose orally and/or in writing, the following information regarding this
-            Application: energy usage history; whether this Application has been pre-approved by HGIA and any additional items requested by HGIA
-            in order to complete the processing of my request; whether this Application has been approved by HGIA so that my landlord and/or
-            property manager and Contractor(s) can proceed with scheduling the work; and whether this Application has been denied so that the
-        landlord and/or property manager and Contractor(s) can determine if there are other financing available and whether I intend to proceed.</p>
-            <p>I understand and agree that HGIA does not guarantee the security of any data submitted electronically and will not be held responsible
-            or liable for interception by third parties. I understand and agree that in no event will HGIA be liable for any technical, hardware or software
-            failure of any kind, any interruption in the availability of this service, any delay in operation or transmission, any incomplete transmission,
-        computer virus, loss of data, or other similar loss.</p>
-            <p>As an agency of the State of Hawaii, HGIA is subject to section 92F-12(a)(8) of the Hawaii Revised Statutes, which requires agencies to
-            collect and make available upon request “the name, address and occupation of any person borrowing funds from a state or county loan
-        program and the amount, purpose, and current status of the loan.”</p>
-            <p>I also authorize and grant HGIA unrestricted permission to share the information provided on this Application and subsequent Program
-            information related to the on-bill obligation (OBO), which will be the amount financed by HGIA to install the approved Energy Improvement
-            until the OBO is paid in full, with HGIA’s Servicing Agent, HGIA’s Board of Directors, my electric utility, the Public Benefits Fund
-        Administrator (currently known as Hawaii Energy) and the State of Hawaii.</p>
-            <p>I understand I must meet all eligibility criteria and requirements, including at least an estimated 10% net utility bill savings for each Energy
-        Improvement requested, utilize a GEMS Approved Contractor and obtain permission from my landlord in order to participate in GEM$.</p>
-            <p>The federal Equal Credit Opportunity Act (ECOA) prohibits creditors from discriminating against credit applicants on the basis of race,
-            color, religion, national origin, sex, marital status, age (provided the applicant has the capacity to enter into a binding contract); because
-            all or part of the applicant's income derives from any public assistance program; or because the applicant has in good faith exercised any
-            right under the Consumer Credit Protection Act. The federal agency that administers compliance with this law concerning this creditor is
-            the Federal Trade Commission Consumer Response Center Washington, DC 20580 1‐877‐FTC‐HELP (1‐877‐382‐4357) TDD: 1‐866‐
-                  653‐4261 <a href="https://www.ftc.gov" target="_blank" rel="noopener noreferrer">www.ftc.gov</a>.</p>
-            <p>By signing this Application, I confirm that I have received HGIA’s Privacy Notice as part of this Application packet. I also agree that I may,
-            but am not required to, agree to and accept the terms of this Application by electronic means, and that my submission of this Application
-      by electronic means shall be sufficient evidence of my agreement to do so by electronic means.</p>
+            <p>
+              By completing and submitting an Application, I certify that I have read,understand, and
+              agree to all of the terms and conditions of the GEM$ Program. By signing below, I certify
+              that all information provided on this Application is true, correct and complete.
+              If necessary, I further agree to provide additional information to HGIA to review this
+              Application. I hereby authorize HGIA to retain this Application whether or not it is approved.
+            </p>
+            <p>
+              I further agree, that HGIA may communicate and share with my landlord and/or property
+              manager and the Contractor identified in Section 4 above, or subsequently identified by
+              me to HGIA, and disclose orally and/or in writing, the following information regarding this
+              Application: energy usage history; whether this Application has been pre-approved by HGIA
+              and any additional items requested by HGIA in order to complete the processing of my request;
+              whether this Application has been approved by HGIA so that my landlord and/or property manager
+              and Contractor(s) can proceed with scheduling the work; and whether this Application has been
+              denied so that the landlord and/or property manager and Contractor(s) can determine if there
+              are other financing available and whether I intend to proceed.
+            </p>
+            <p>
+              I understand and agree that HGIA does not guarantee the security of any data submitted
+              electronically and will not be held responsible or liable for interception by third parties.
+              I understand and agree that in no event will HGIA be liable for any technical, hardware or
+              software failure of any kind, any interruption in the availability of this service,
+              any delay in operation or transmission, any incomplete transmission, computer virus,
+              loss of data, or other similar loss.
+            </p>
+            <p>As an agency of the State of Hawaii, HGIA is subject to section 92F-12(a)(8) of the
+              Hawaii Revised Statutes, which requires agencies to collect and make available upon
+              request “the name, address and occupation of any person borrowing funds from a state
+              or county loan program and the amount, purpose, and current status of the loan.”
+            </p>
+            <p>I also authorize and grant HGIA unrestricted permission to share the information
+              provided on this Application and subsequent Program information related to the on-bill
+              obligation (OBO), which will be the amount financed by HGIA to install the approved
+              Energy Improvement until the OBO is paid in full, with HGIA’s Servicing Agent,
+              HGIA’s Board of Directors, my electric utility, the Public Benefits Fund
+              Administrator (currently known as Hawaii Energy) and the State of Hawaii.
+            </p>
+            <p>I understand I must meet all eligibility criteria and requirements, including at
+              least an estimated 10% net utility bill savings for each Energy Improvement requested,
+              utilize a GEMS Approved Contractor and obtain permission from my landlord in order
+              to participate in GEM$.
+            </p>
+            <p>The federal Equal Credit Opportunity Act (ECOA) prohibits creditors from
+              discriminating against credit applicants on the basis of race, color, religion,
+              national origin, sex, marital status, age (provided the applicant has the
+              capacity to enter into a binding contract); because all or part of the applicant&apos;s
+              income derives from any public assistance program; or because the applicant has
+              in good faith exercised any right under the Consumer Credit Protection Act.
+              The federal agency that administers compliance with this law concerning this creditor
+              is the Federal Trade Commission Consumer Response Center Washington, DC 20580
+              1‐877‐FTC‐HELP (1‐877‐382‐4357) TDD: 1‐866‐653‐4261
+              <a href='https://www.ftc.gov' target='_blank' rel='noopener noreferrer'>www.ftc.gov</a>.
+            </p>
+            <p>By signing this Application, I confirm that I have received HGIA’s Privacy Notice as
+              part of this Application packet. I also agree that I may, but am not required to,
+              agree to and accept the terms of this Application by electronic means, and that my
+              submission of this Application by electronic means shall be sufficient evidence
+              of my agreement to do so by electronic means.
+            </p>
           </div>
 
           <br />
@@ -612,23 +636,25 @@ class AllForms extends React.Component {
 
           <Grid.Row columns={2}>
             <Grid.Column>
-              {this.props.doc5 ? <Image className='darkOutline' src={this.props.doc5.signature} /> : <div className='ui red'>*No signature</div>}
+              {this.props.doc5 ?
+                <Image className='darkOutline' src={this.props.doc5.signature} /> :
+                <div className='ui red'>*No signature</div>}
             </Grid.Column>
             <Grid.Column>
-              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> : <Form.Input label="Date" type="date" id="getDate" width={16}></Form.Input>}
+              {this.props.doc5 ? <Form.Input value={this.props.doc5.timestamp} /> :
+                <Form.Input label='Date' type='date' id='getDate' width={16}></Form.Input>}
             </Grid.Column>
           </Grid.Row>
         </Container>
 
         <Button id='clickbind' onClick={this.onClick}>Print</Button>
-        {/* {this.onClick()} */}
       </div >
     );
   }
 }
 
 /** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
-AllForms.propTypes = {
+AdminForms.propTypes = {
   doc: PropTypes.object,
   doc1: PropTypes.object,
   doc2: PropTypes.object,
@@ -642,25 +668,16 @@ AllForms.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  // const documentId = Meteor.user().username;
-  // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('Form1');
-  const subscription2 = Meteor.subscribe('Form2');
-  const subscription3 = Meteor.subscribe('Form6');
-  const subscription4 = Meteor.subscribe('Form7');
-  const subscription5 = Meteor.subscribe('Form8');
-  const subscription6 = Meteor.subscribe('Form9');
+  const subscription = Meteor.subscribe('StuffAdmin');
 
-  const profile = Meteor.user() ? Meteor.user().username : null;
   return {
-    doc: Section1DB.findOne({ owner: profile }),
-    doc1: Section2DB.findOne({ owner: profile }),
-    doc2: Section6DB.findOne({ owner: profile }),
-    doc3: Section7DB.findOne({ owner: profile }),
-    doc4: Section8DB.findOne({ owner: profile }),
-    doc5: Section9DB.findOne({ owner: profile }),
-    ready: subscription1.ready() && subscription2.ready() && subscription3.ready() &&
-      subscription4.ready() && subscription5.ready() && subscription6.ready(),
+    doc: Section1DB.findOne({ owner: match.params.owner }),
+    doc1: Section2DB.findOne({ owner: match.params.owner }),
+    doc2: Section6DB.findOne({ owner: match.params.owner }),
+    doc3: Section7DB.findOne({ owner: match.params.owner }),
+    doc4: Section8DB.findOne({ owner: match.params.owner }),
+    doc5: Section9DB.findOne({ owner: match.params.owner }),
+    ready: subscription.ready(),
   };
 
-})(AllForms);
+})(AdminForms);

@@ -11,25 +11,36 @@ class ProgressBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '40px' };
     return (
-        <Container>
+      <Container>
         <Menu style={menuStyle} attached="top" borderless tabular fluid width={7}>
           {this.props.currentUser ? (
-              [
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/1" key='form1'>Survey</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/2" key='form2'>Installation</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/6" key='form6'>Data</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/7" key='form7'>Applicant</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/8" key='form8'>System Owner</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/form/9" key='form9'>Disclosure</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/authorization" key='AuthorizationPage'>Authorization</Menu.Item>,
-              ]
-              // <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>,
-              //  <Menu.Item as={NavLink} activeClassName='active' exact to='/authorization'
-              //  key='authorization'>Authorization</Menu.Item>]
+            [
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/1" key='form1'>
+                Survey
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/2" key='form2'>
+                Installation
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/6" key='form6'>
+                Data
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/7" key='form7'>
+                Applicant
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/8" key='form8'>
+                System Owner
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/form/9" key='form9'>
+                Disclosure
+                </Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/authorization" key='AuthorizationPage'>
+                Authorization
+                </Menu.Item>,
+            ]
           ) : ''}
 
         </Menu>
-        </Container>
+      </Container>
     );
   }
 }

@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
-// import { Stuffs } from '/imports/api/stuff/Stuff';
-import { Header, Form, Button, Container, Divider, Loader } from 'semantic-ui-react';
+import { Header, Form, Button, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import NumField from 'uniforms-semantic/NumField';
@@ -9,6 +8,8 @@ import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import BoolField from 'uniforms-unstyled/BoolField';
 import swal from 'sweetalert';
+import { Roles } from 'meteor/alanning:roles';
+import { Redirect } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { NavLink } from 'react-router-dom';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -16,9 +17,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { BaseField, nothing } from 'uniforms';
 import { Section1DBSchemaWithoutOwner, Section1DB } from '/imports/api/stuff/Section1DB';
-import { Section2DBSchemaWithoutOwner, Section2DB } from '../../api/stuff/Section2DB';
 import ProgressBar from '../components/ProgressBar';
-import { exportToCsv2, collectdata } from '../../api/stuff/CsvScript';
+// import { exportToCsv2, collectdata } from '../../api/stuff/CsvScript';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 
@@ -32,32 +32,32 @@ class Form1 extends React.Component {
       kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
       chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
       LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
-      assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
+      assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
     } = data;
 
     // check to see if account is already in the database.
     let tmp = null;
     try {
-      if (typeof this.props.doc.owner !== undefined) {
+      if (typeof this.props.doc.owner !== 'undefined') {
         tmp = this.props.doc.owner;
       }
     } catch (e) {
-      tmp = 'not-defined'
+      tmp = 'not-defined';
     }
 
     if (tmp === 'not-defined') {
-      let owner = Meteor.user().username;
+      const owner = Meteor.user().username;
       Section1DB.insert({
         owner, howDidYouHearAboutUs, otherHDYHA, washer, ageOfWasher, dryer, ageOfDryer,
         kitchenRefrigerator, ageOfKitchenRefrigerator, secondRefrigerator, ageOfSecondRefrigerator,
         chestFreezer, ageOfChestFreezer, solarHWHeater, ageOfSolarHWHeater, PVSystem, ageOfPVSystem,
         LEDCFLBulbs, WIFI, interestedInInstalling, otherInterestedInInstalling, assistanceFrom,
-        assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc
+        assistanceFromOther, anyoneYouKnowName, anyoneYouKnowPhone, anyoneYouKnowEmail, nameOnUtilAcc,
       }, (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          // swal('Success', 'Section #1 saved successfully', 'success');
+          swal('Success', 'Section #1 saved successfully', 'success');
         }
       });
     } else {
@@ -85,7 +85,7 @@ class Form1 extends React.Component {
     // eslint-disable-next-line max-len
     const DisplayIf = ({ children, condition }, { uniforms }) => (condition(uniforms) ? Children.only(children) : nothing);
     DisplayIf.contextTypes = BaseField.contextTypes;
-    return (
+    return ((Roles.userIsInRole(Meteor.userId(), 'admin')) ? <Redirect to="/admin" /> :
 
       <Container>
         <ProgressBar />
@@ -337,17 +337,11 @@ Form1.propTypes = {
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(({ match }) => {
+export default withTracker(() => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   // const documentId = Meteor.user().username;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe('Form1');
-  //const subscription1 = Meteor.subscribe('Form1');
-  const subscription2 = Meteor.subscribe('Form2');
-  const subscription3 = Meteor.subscribe('Form6');
-  const subscription4 = Meteor.subscribe('Form7');
-  const subscription5 = Meteor.subscribe('Form8');
-  const subscription6 = Meteor.subscribe('Form9');
 
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
