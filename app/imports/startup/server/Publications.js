@@ -8,7 +8,7 @@ import { Section7DB } from '../../api/stuff/Section7DB';
 import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
-
+import { Feedback } from '../../api/stuff/Feedback';
 
 /** This subscription publishes only the documents associated with the logged in user */
 let forms = {
@@ -19,6 +19,7 @@ let forms = {
   "Form7": Section7DB,
   "Form8": Section8DB,
   "Form9": Section9DB,
+  "Feedback": Feedback,
   "AuthorizationDB": AuthorizationDB,
 };
 
@@ -36,7 +37,7 @@ Object.keys(forms).forEach(key => {
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return [Meteor.users.find(), Section1DB.find(), Section2DB.find(), Section6DB.find(), Section7DB.find(), Section8DB.find(), Section9DB.find(), AuthorizationDB.find()];
+    return [Meteor.users.find(), Section1DB.find(), Section2DB.find(), Section6DB.find(), Section7DB.find(), Section8DB.find(), Section9DB.find(), AuthorizationDB.find(), Feedback.find()];
   }
   return this.ready();
 });
