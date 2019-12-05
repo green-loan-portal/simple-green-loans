@@ -146,6 +146,7 @@
   background-size: auto;
   height: 500px;
   padding-top: 20px;
+  background-position: center top;
 }
 
 .color-white {
