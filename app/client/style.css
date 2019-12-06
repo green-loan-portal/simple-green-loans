@@ -12,6 +12,7 @@
   box-shadow: none;
   background-color: #395878 !important;
   padding-bottom: 30px;
+  padding-top: 50px;
 }
 
 .gemsLogo {
@@ -145,7 +146,6 @@
   background: url("https://images.unsplash.com/photo-1460355591219-452ee2548432?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80") no-repeat bottom fixed;
   background-size: auto;
   height: 500px;
-  padding-top: 20px;
   background-position: center top;
 }
 
@@ -174,4 +174,8 @@
   alignment: center;
   text-align: center;
   padding-bottom: 100px;
+}
+
+.topmen {
+  padding-top: 50px;
 }

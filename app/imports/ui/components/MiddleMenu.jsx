@@ -1,12 +1,15 @@
 import React from 'react';
-import { Menu, Grid, Container } from 'semantic-ui-react';
+import { Menu, Grid, Container, Header } from 'semantic-ui-react';
 
 export default class MiddleMenu extends React.Component {
 
   render() {
     return (
-      <Container className='borderless top menu'>
-        <Menu fluid widths={5}>
+      <Container className='topmen'>
+        <Header as='h2'>
+          Additional Information:
+        </Header>
+        <Menu fluid widths={5} className='borderless top menu'>
           <Grid position='left' container>
             <Menu.Item href='https://gems.hawaii.gov/participate-now/for-homeowners/'>
               Residential
