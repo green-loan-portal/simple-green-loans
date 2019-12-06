@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Step, Icon, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { _ } from 'meteor/underscore';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
 
@@ -16,22 +15,6 @@ class StatusBar extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
-    // const approvedReviewed = (this.props.applicationApproval.reviewed ? 'completed' : 'disabled');
-    const profile = Meteor.user() ? Meteor.user().username : null;
-    const approvedReviewed = _.pluck(ApplicationStatusDB.find({ owner: profile }).fetch(),
-        'reviewed') ? 'completed' : 'disabled';
-    // const approvedApproved1 = this.props.applicationApproval.approved ? 'completed' : 'disabled';
-    const approvedApproved1 = _.pluck(ApplicationStatusDB.find({ owner: profile }).fetch(),
-        'approved') ? 'completed' : 'disabled';
-    // const approvedHeco = this.props.applicationApproval.heco ? 'completed' : '';
-    const approvedHeco = _.pluck(ApplicationStatusDB.find({ owner: profile }).fetch(),
-        'heco') ? 'completed' : '';
-    // const approvedApproved2 = this.props.applicationApproval.approved ? 'Approved' : 'Denied';
-    const approvedApproved2 = _.pluck(ApplicationStatusDB.find({ owner: profile }).fetch(),
-        'approved') ? 'Approved' : 'Denied';
-    // const approvedApproved3 = this.props.applicationApproval.approved ? 'has been Approved!' : 'has been Denied.';
-    const approvedApproved3 = _.pluck(ApplicationStatusDB.find({ owner: profile }).fetch(),
-        'approved') ? 'has been Approved!' : 'has been Denied.';
 
     return (
         <div>
@@ -44,8 +27,10 @@ class StatusBar extends React.Component {
                 <Step.Description>Complete your application and submit</Step.Description>
               </Step.Content>
             </Step>
-            <Step className={this.props.applicationApproval ? approvedHeco : 'disabled'}>
-              <Icon name='info'/>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            <Step className={this.props.applicationApproval ?
+                (this.props.applicationApproval.heco ? 'completed' : '') : 'disabled'}>
+              <Icon name='info' />
               <Step.Content>
                 <Step.Title>HECO</Step.Title>
                 <Step.Description>
@@ -53,8 +38,10 @@ class StatusBar extends React.Component {
                 </Step.Description>
               </Step.Content>
             </Step>
-            <Step className={this.props.applicationApproval ? approvedReviewed : 'disabled'}>
-              <Icon name='folder open'/>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            <Step className={this.props.applicationApproval ?
+                (this.props.applicationApproval.reviewed ? 'completed' : 'disabled') : 'disabled'}>
+              <Icon name='folder open' />
               <Step.Content>
                 <Step.Title>Reviewing Information</Step.Title>
                 <Step.Description>
@@ -62,12 +49,19 @@ class StatusBar extends React.Component {
                 </Step.Description>
               </Step.Content>
             </Step>
-            <Step className={this.props.applicationApproval ? approvedApproved1 : 'disabled'}>
-              <Icon name='checkmark'/>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            <Step className={this.props.applicationApproval ?
+                (this.props.applicationApproval.approved ? 'completed' : 'disabled') : 'disabled'}>
+              <Icon name='checkmark' />
               <Step.Content>
-                <Step.Title>{`${this.props.applicationApproval ? approvedApproved2 : 'Approved/Denied'}`}</Step.Title>
+                {/* eslint-disable-next-line no-nested-ternary */}
+                <Step.Title>{`${this.props.applicationApproval ? (this.props.applicationApproval.approved ?
+                    'Approved' : 'Denied') : 'Approved/Denied'}`}</Step.Title>
                 <Step.Description>
-                  Your application {`${this.props.applicationApproval ? approvedApproved3 : ' is being reviewed.'}`}
+                  {/* eslint-disable-next-line no-nested-ternary */}
+                  Your application {`${this.props.applicationApproval ?
+                    (this.props.applicationApproval.approved ? 'has been Approved!' : 'has been Denied.') :
+                    ' is being reviewed.'}`}
                 </Step.Description>
               </Step.Content>
             </Step>

@@ -119,11 +119,11 @@ class StuffItemAdmin extends React.Component {
         {/* <Table.Cell><Link to='/allforms'><Icon name='external alternate' /></Link></Table.Cell> */}
         <Table.Cell>
           <Button className='Received' basic color='green' content='Green' size='mini'
-                  onClick={() => this.updateHecoStatus(this.props.stuff.username, true)}>Received</Button>
+                  onClick={() => this.updateHecoStatus(this.props.owner, true)}>Received</Button>
         </Table.Cell>
         <Table.Cell>
           <Button className='Reviewed' basic color='green' content='Green' size='mini'
-                  onClick={() => this.updateReviewedStatus(this.props.stuff.username, true)}>Reviewed</Button>
+                  onClick={() => this.updateReviewedStatus(this.props.owner, true)}>Reviewed</Button>
         </Table.Cell>
         <Table.Cell>
           <Link to={`/adminforms/${this.props.owner}`}>
