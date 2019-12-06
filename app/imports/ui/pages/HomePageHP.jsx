@@ -5,6 +5,7 @@ import Middle1HP from '../components/Middle1HP';
 import MiddleMenu from '../components/MiddleMenu';
 import Footer from '../components/Footer';
 import Process from '../components/Process';
+import Fee from '../components/Fee';
 
 export default class HomePageHP extends React.Component {
 
@@ -15,6 +16,7 @@ export default class HomePageHP extends React.Component {
           <LogoHP/>
           <Middle1HP/>
           <Process/>
+          <Fee/>
           <SignupHP/>
           <Footer/>
         </div>
