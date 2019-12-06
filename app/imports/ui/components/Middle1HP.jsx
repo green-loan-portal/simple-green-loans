@@ -10,11 +10,17 @@ export default class Middle1HP extends React.Component {
             <Grid style={gridStyle}>
               <Grid.Row columns="two">
                 <Grid.Column>
-                  <Header as='h1' style={{ 'font-size': 50 }}>
+                  <Header as='h1'>
                     What is GEMS?
                   </Header>
                   <hr/>
                   The GEM$ provides flexible, alternative financing options to make green energy solutions possible.
+                  <List bulleted>
+                    <List.Item>GEM$ democratizes clean energy by enabling low-income households and renters to
+                      participate</List.Item>
+                    <List.Item>Provides immediate bill savings</List.Item>
+                    <List.Item>Eliminates credit barriers</List.Item>
+                  </List>
                 </Grid.Column>
                 <Grid.Column>
                   <Header as='h1'>
