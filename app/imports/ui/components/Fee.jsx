@@ -5,7 +5,7 @@ export default class Fee extends React.Component {
 
   render() {
     return (
-        <Container className='processImage'>
+        <Container className='feeImage'>
           <Header as='h1' textAlign='center'>
             <Icon name='money bill alternate outline' />
             <Header.Content>

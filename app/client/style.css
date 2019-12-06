@@ -162,7 +162,16 @@
 }
 
 .processImage {
+    padding-left: 5%;
+    alignment: center;
+    text-align: center;
+    padding-bottom: 100px;
+    padding-top: 50px;
+  }
+
+.feeImage {
   padding-left: 5%;
   alignment: center;
   text-align: center;
+  padding-bottom: 100px;
 }
