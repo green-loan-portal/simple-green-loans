@@ -51,8 +51,8 @@ class StatusBar extends React.Component {
             </Step>
             {/* eslint-disable-next-line no-nested-ternary */}
             <Step className={this.props.applicationApproval ?
-                (this.props.applicationApproval.approved ? 'completed' : 'disabled') : 'disabled'}>
-              <Icon name='checkmark' />
+                (this.props.applicationApproval.approved ? 'completed' : '') : 'disabled'}>
+              <Icon name='ban' />
               <Step.Content>
                 {/* eslint-disable-next-line no-nested-ternary */}
                 <Step.Title>{`${this.props.applicationApproval ? (this.props.applicationApproval.approved ?
