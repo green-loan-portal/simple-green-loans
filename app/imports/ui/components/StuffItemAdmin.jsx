@@ -1,9 +1,8 @@
 import React from 'react';
 import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { withTracker } from 'meteor/react-meteor-data';
 import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
@@ -13,7 +12,7 @@ class StuffItemAdmin extends React.Component {
     super(props);
     const data = ApplicationStatusDB.findOne({ owner: this.props.owner });
     if (!data) {
-      this.state = { hecoColor: 'red', reviewedColor: 'red', checkColor: '', cancelColor: 'red', };
+      this.state = { hecoColor: 'red', reviewedColor: 'red', checkColor: '', cancelColor: 'red' };
     } else {
       console.log('my data: ', data);
       this.state = {
@@ -24,18 +23,20 @@ class StuffItemAdmin extends React.Component {
   }
 
   updateStatus(updateType, ownerEmail, changeStatusTo) {
-    /* params: 
-        updateType    : only HECO, Reviewed, Approval 
+    /* params:
+        updateType    : only HECO, Reviewed, Approval
         ownerEmail    : used for DB purposes
         changeStatusTo: true/false based on updateType
     */
     let swalText;
     const owner = ownerEmail;
-    let heco = false, reviewed = false, approved = false;
+    let heco = false;
+    let reviewed = false;
+    let approved = false;
 
     if (updateType === 'HECO') {
       heco = true;
-      swalText = 'Notify the applicant that the information has been received by HECO.'
+      swalText = 'Notify the applicant that the information has been received by HECO.';
     } else if (updateType === 'Reviewed') {
       reviewed = true;
       swalText = 'Notify the applicant that the information has been reviewed.';
@@ -66,14 +67,14 @@ class StuffItemAdmin extends React.Component {
             });
           } else {
             if (heco) {
-              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, heco }, });
-              this.setState({ hecoColor: changeStatusTo ? 'green' : 'red', });
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, heco } });
+              this.setState({ hecoColor: changeStatusTo ? 'green' : 'red' });
             } else if (reviewed) {
-              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, reviewed }, });
-              this.setState({ reviewedColor: changeStatusTo ? 'green' : 'red', });
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, reviewed } });
+              this.setState({ reviewedColor: changeStatusTo ? 'green' : 'red' });
             } else if (approved) {
               approved = changeStatusTo;
-              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, approved }, });
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, approved } });
               this.setState({
                 checkColor: changeStatusTo ? 'green' : '',
                 cancelColor: changeStatusTo ? '' : 'red',
@@ -91,7 +92,6 @@ class StuffItemAdmin extends React.Component {
   }
 
   render() {
-    // const unfinishedSections = this.unfinishedSections();
     return (
       <Table.Row>
         <Table.Cell>

@@ -20,7 +20,7 @@ const forms = {
   'Form8': Section8DB,
   'Form9': Section9DB,
   'AuthorizationDB': AuthorizationDB,
-  'ApplicationStatusDBUser' : ApplicationStatusDB,
+  'ApplicationStatusDBUser': ApplicationStatusDB,
 };
 
 Object.keys(forms).forEach(key => {

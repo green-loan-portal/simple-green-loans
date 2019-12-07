@@ -13,7 +13,7 @@ import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
@@ -92,13 +92,14 @@ class ListStuffAdmin extends React.Component {
 
     // Adding owner field in Object
     const ownerObj = [];
-    Meteor.users.find({ username: new RegExp(e.target.value, 'i') }).fetch().forEach(ele =>
-      ownerObj.push(Object.assign({ owner: ele.username }, ele)));
+    Meteor.users.find({ username: new RegExp(e.target.value, 'i') }).fetch().forEach(
+      (ele) => ownerObj.push(Object.assign({ owner: ele.username }, ele)),
+    );
 
     const emails = [];
     const matchedPeople = [];
     const objectsList = Object.assign({}, Section2DB.find({ $or: mongoFields }).fetch(), ownerObj);
-    for (var key in objectsList) {
+    for (const key in objectsList) {
       if (!emails.includes(objectsList[key].owner)) {
         // console.log(emails);
         emails.push(objectsList[key].owner);
@@ -152,21 +153,20 @@ class ListStuffAdmin extends React.Component {
           </Table.Header>
           <Table.Body>
             {(this.state && this.state.userTextLength > 0) ?
-              (this.state.search.map((stuff, index) =>
+              (this.state.search.map((stuff) => <StuffItemAdmin
+                key={stuff.owner}
+                owner={stuff.owner}
+                section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.owner)}
+                section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.owner)}
+                section6={this.props.db6.find(mydb6 => mydb6.owner === stuff.owner)}
+                section7={this.props.db7.find(mydb7 => mydb7.owner === stuff.owner)}
+                section8={this.props.db8.find(mydb8 => mydb8.owner === stuff.owner)}
+                section9={this.props.db9.find(mydb9 => mydb9.owner === stuff.owner)}
+                sectionAuthorization={this.props.dbauthorization.find(mydbAuth => mydbAuth.owner === stuff.owner)}
+              />)) :
+              (this.props.accounts.map((stuff) => (
                 <StuffItemAdmin
-                  key={index}
-                  owner={stuff.owner}
-                  section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.owner)}
-                  section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.owner)}
-                  section6={this.props.db6.find(mydb6 => mydb6.owner === stuff.owner)}
-                  section7={this.props.db7.find(mydb7 => mydb7.owner === stuff.owner)}
-                  section8={this.props.db8.find(mydb8 => mydb8.owner === stuff.owner)}
-                  section9={this.props.db9.find(mydb9 => mydb9.owner === stuff.owner)}
-                  sectionAuthorization={this.props.dbauthorization.find(mydbAuth => mydbAuth.owner === stuff.owner)}
-                />)) :
-              (this.props.accounts.map((stuff, index) => (
-                <StuffItemAdmin
-                  key={index}
+                  key={stuff.owner}
                   owner={stuff.username}
                   section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.username)}
                   section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.username)}
