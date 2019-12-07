@@ -61,9 +61,6 @@ class ListStuffAdmin extends React.Component {
           if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
             missing.push(['Authorization Section', 'Authorization', 'authorization']);
           }
-          if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
-            missing.push(['Section 9', 'Disclosure', 'form/9']);
-          }
           if (missing.length > 0) {
             users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {

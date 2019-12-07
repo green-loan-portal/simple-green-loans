@@ -41,7 +41,8 @@ class StuffItemAdmin extends React.Component {
       swalText = 'Notify the applicant that the information has been reviewed.';
     } else if (updateType === 'Approval') {
       approved = true;
-      swalText = `Set application status, ${changeStatusTo ? 'APPROVED' : 'DENIED'}, for ${ownerEmail}.`
+      swalText = `Set the application status, ${changeStatusTo ? 'APPROVED' : 'DENIED'}, for ${ownerEmail}. `;
+      swalText += 'An email will also be sent to the applicant.';
     }
 
     if (!swalText) {
@@ -76,6 +77,12 @@ class StuffItemAdmin extends React.Component {
               this.setState({
                 checkColor: changeStatusTo ? 'green' : '',
                 cancelColor: changeStatusTo ? '' : 'red',
+              });
+
+              const recipientName = this.props.section2 ? this.props.section2.firstName : '';
+              const email = this.props.owner;
+              Meteor.call('sendApplicationStatus', email, recipientName, changeStatusTo, function (error) {
+                console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
               });
             }
           }
