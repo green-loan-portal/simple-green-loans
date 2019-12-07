@@ -101,7 +101,6 @@ class ListStuffAdmin extends React.Component {
     const objectsList = Object.assign({}, Section2DB.find({ $or: mongoFields }).fetch(), ownerObj);
     for (const key in objectsList) {
       if (!emails.includes(objectsList[key].owner)) {
-        // console.log(emails);
         emails.push(objectsList[key].owner);
         matchedPeople.push(objectsList[key]);
       }

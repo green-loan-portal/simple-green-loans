@@ -14,7 +14,6 @@ class StuffItemAdmin extends React.Component {
     if (!data) {
       this.state = { hecoColor: 'red', reviewedColor: 'red', checkColor: '', cancelColor: 'red' };
     } else {
-      console.log('my data: ', data);
       this.state = {
         hecoColor: data.heco ? 'green' : 'red', reviewedColor: data.reviewed ? 'green' : 'red',
         checkColor: data.approved ? 'green' : '', cancelColor: data.approved ? '' : 'red',
@@ -106,7 +105,6 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.section8 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section9 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        {console.log(this.props.owner, this.state)}
         <Table.Cell>
           <Button type='button' className={this.state.hecoColor} basic size='mini'
             onClick={() => this.updateStatus('HECO', this.props.owner, true)}>Received</Button>
