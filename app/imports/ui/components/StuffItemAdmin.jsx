@@ -1,9 +1,8 @@
 import React from 'react';
 import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-// mport { withTracker } from 'meteor/react-meteor-data';
 import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
@@ -13,95 +12,85 @@ class StuffItemAdmin extends React.Component {
     super(props);
     const data = ApplicationStatusDB.findOne({ owner: this.props.owner });
     if (!data) {
-      this.state = { checkColor: '', cancelColor: 'red' };
+      this.state = { hecoColor: 'red', reviewedColor: 'red', checkColor: '', cancelColor: 'red' };
     } else {
-      this.state = { checkColor: data.approved ? 'green' : '', cancelColor: data.approved ? '' : 'red' };
+      this.state = {
+        hecoColor: data.heco ? 'green' : 'red', reviewedColor: data.reviewed ? 'green' : 'red',
+        checkColor: data.approved ? 'green' : '', cancelColor: data.approved ? '' : 'red',
+      };
     }
   }
 
+  updateStatus(updateType, ownerEmail, changeStatusTo) {
+    /* params:
+        updateType    : only HECO, Reviewed, Approval
+        ownerEmail    : used for DB purposes
+        changeStatusTo: true/false based on updateType
+    */
+    let swalText;
+    const owner = ownerEmail;
+    let heco = false;
+    let reviewed = false;
+    let approved = false;
 
-  updateHecoStatus(emailOwner, boolean) {
-    swal({
-      title: 'Information has been received by HECO',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-        .then((willContinue) => {
-          if (willContinue) {
-            const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
-            const owner = emailOwner;
-            const heco = boolean;
-            if (!currentUser) {
-              ApplicationStatusDB.insert({ owner, heco, reviewed: false, approved: false });
-            } else {
-              ApplicationStatusDB.update(
-                  { _id: currentUser._id },
-                  {
-                    $set: { owner, heco },
-                  },
-              );
-            }
-          }
-        });
-  }
+    if (updateType === 'HECO') {
+      heco = true;
+      swalText = 'Notify the applicant that the information has been received by HECO.';
+    } else if (updateType === 'Reviewed') {
+      reviewed = true;
+      swalText = 'Notify the applicant that the information has been reviewed.';
+    } else if (updateType === 'Approval') {
+      approved = true;
+      swalText = `Set the application status, ${changeStatusTo ? 'APPROVED' : 'DENIED'}, for ${ownerEmail}. `;
+      swalText += 'An email will also be sent to the applicant.';
+    }
 
-  updateReviewedStatus(emailOwner, boolean) {
-    swal({
-      title: 'Information has been reviewed',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-        .then((willContinue) => {
-          if (willContinue) {
-            const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
-            const owner = emailOwner;
-            const reviewed = boolean;
-            if (!currentUser) {
-              ApplicationStatusDB.insert({ owner, heco: true, reviewed, approved: false });
-            } else {
-              ApplicationStatusDB.update(
-                  { _id: currentUser._id },
-                  {
-                    $set: { owner, reviewed },
-                  },
-              );
-            }
-          }
-        });
-  }
+    if (!swalText) {
+      swal('Error', 'Mismatched update type', 'error');
+      return;
+    }
 
-  updateApprovalStatus(emailOwner, boolean) {
     swal({
       title: 'Are you sure?',
-      text: `Set application status, ${boolean ? 'APPROVED' : 'DENIED'}, for ${emailOwner}.`,
+      text: swalText,
       icon: 'warning',
       buttons: true,
       dangerMode: true,
     })
       .then((willContinue) => {
         if (willContinue) {
-          const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
-          const owner = emailOwner;
-          const approved = boolean;
+          const currentUser = ApplicationStatusDB.findOne({ owner: ownerEmail });
           if (!currentUser) {
-            ApplicationStatusDB.insert({ owner, heco: false, reviewed: false, approved });
+            ApplicationStatusDB.insert({
+              owner, heco: heco, reviewed: reviewed, approved: approved,
+            });
           } else {
-            ApplicationStatusDB.update(
-              { _id: currentUser._id },
-              {
-                $set: { owner, approved },
-              },
-            );
+            if (heco) {
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, heco } });
+              this.setState({ hecoColor: changeStatusTo ? 'green' : 'red' });
+            } else if (reviewed) {
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, reviewed } });
+              this.setState({ reviewedColor: changeStatusTo ? 'green' : 'red' });
+            } else if (approved) {
+              approved = changeStatusTo;
+              ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, approved } });
+              this.setState({
+                checkColor: changeStatusTo ? 'green' : '',
+                cancelColor: changeStatusTo ? '' : 'red',
+              });
+
+              const recipientName = this.props.section2 ? this.props.section2.firstName : '';
+              const email = this.props.owner;
+              Meteor.call('sendApplicationStatus', email, recipientName, changeStatusTo, function (error) {
+                console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+              });
+            }
           }
-          this.setState({ checkColor: boolean ? 'green' : '', cancelColor: boolean ? '' : 'red' });
         }
       });
   }
 
   render() {
-    // const unfinishedSections = this.unfinishedSections();
     return (
       <Table.Row>
         <Table.Cell>
@@ -116,21 +105,13 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.section8 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section9 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        {/* <Table.Cell><Link to='/allforms'><Icon name='external alternate' /></Link></Table.Cell> */}
         <Table.Cell>
-          <Button className='Received' basic color='green' content='Green' size='mini'
-                  onClick={() => this.updateHecoStatus(this.props.owner, true)}>Received</Button>
+          <Button type='button' className={this.state.hecoColor} basic size='mini'
+            onClick={() => this.updateStatus('HECO', this.props.owner, true)}>Received</Button>
         </Table.Cell>
         <Table.Cell>
-          <Button className='Reviewed' basic color='green' content='Green' size='mini'
-                  onClick={() => this.updateReviewedStatus(this.props.owner, true)}>Reviewed</Button>
-        </Table.Cell>
-        <Table.Cell>
-          <Link to={`/adminforms/${this.props.owner}`}>
-            <Button className='exportButton' basic color='green' content='Green' size='mini'>
-              PDF
-            </Button>
-          </Link>
+          <Button type='button' className={this.state.reviewedColor} basic size='mini'
+            onClick={() => this.updateStatus('Reviewed', this.props.owner, true)}>Reviewed</Button>
         </Table.Cell>
         <Table.Cell>
           <Button onClick={collectdata} className='exportButton' basic color='green' content='Green' size='mini'>
@@ -139,10 +120,10 @@ class StuffItemAdmin extends React.Component {
         </Table.Cell>
         <Table.Cell>
           <Button type='button' className={this.state.checkColor}
-    onClick={() => this.updateApprovalStatus(this.props.owner, true)} icon='check'/>
+            onClick={() => this.updateStatus('Approval', this.props.owner, true)} icon='check'></Button>
           /&nbsp;
           <Button type='button' className={this.state.cancelColor}
-    onClick={() => this.updateApprovalStatus(this.props.owner, false)} icon='cancel'/>
+            onClick={() => this.updateStatus('Approval', this.props.owner, false)} icon='cancel'></Button>
         </Table.Cell>
       </Table.Row>
     );
