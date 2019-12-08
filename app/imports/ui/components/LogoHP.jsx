@@ -1,12 +1,12 @@
 import React from 'react';
-import { Image, Container, Grid, Header } from 'semantic-ui-react';
+import { Image, Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
 
 export default class LogoHP extends React.Component {
   render() {
     return (
         <div className="hawaii-background">
           <Container>
-            <Grid centered rows={3}>
+            <Grid centered rows={4}>
               <Grid.Row>
                 <Image id={'LogoHome'}
                        src='https://gems.hawaii.gov/wp-content/uploads/2015/01/GEMS-Logo.png'
@@ -17,6 +17,12 @@ export default class LogoHP extends React.Component {
               </Grid.Row>
               <Grid.Row className={'LogoTitle color-black'}>
                 <Header as='h1'>GEM$ Financing Program Loan Application Portal</Header>
+              </Grid.Row>
+              <Grid.Row>
+                <Button size='huge' color='green'>
+                  <Icon name='edit' />
+                  Sign Up Today!
+                </Button>
               </Grid.Row>
             </Grid>
           </Container>
