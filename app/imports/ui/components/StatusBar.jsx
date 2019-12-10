@@ -4,6 +4,7 @@ import { Step, Icon, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
+import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 
 
 class StatusBar extends React.Component {
@@ -50,17 +51,17 @@ class StatusBar extends React.Component {
               </Step.Content>
             </Step>
             {/* eslint-disable-next-line no-nested-ternary */}
-            <Step className={this.props.applicationApproval ?
-                (this.props.applicationApproval.approved ? 'completed' : 'disabled') : 'disabled'}>
+            <Step className={this.props.applicationApproval2 ?
+                (this.props.applicationApproval2.approved ? 'completed' : 'disabled') : 'disabled'}>
               <Icon name='checkmark' />
               <Step.Content>
                 {/* eslint-disable-next-line no-nested-ternary */}
-                <Step.Title>{`${this.props.applicationApproval ? (this.props.applicationApproval.approved ?
+                <Step.Title>{`${this.props.applicationApproval2 ? (this.props.applicationApproval2.approved ?
                     'Approved' : 'Denied') : 'Approved/Denied'}`}</Step.Title>
                 <Step.Description>
                   {/* eslint-disable-next-line no-nested-ternary */}
-                  Your application {`${this.props.applicationApproval ?
-                    (this.props.applicationApproval.approved ? 'has been Approved!' : 'has been Denied.') :
+                  Your application {`${this.props.applicationApproval2 ?
+                    (this.props.applicationApproval2.approved ? 'has been Approved!' : 'has been Denied.') :
                     ' is being reviewed.'}`}
                 </Step.Description>
               </Step.Content>
@@ -81,6 +82,7 @@ StatusBar.propTypes = {
   section9: PropTypes.object,
   sectionAuthorization: PropTypes.object,
   applicationApproval: PropTypes.object,
+  applicationApproval2: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -88,9 +90,11 @@ StatusBar.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe('ApplicationStatusDBUser');
+  const subscription2 = Meteor.subscribe('ApplicationApprovalDBUser');
   const profile = Meteor.user() ? Meteor.user().username : null;
   return {
     applicationApproval: ApplicationStatusDB.findOne({ owner: profile }),
-    ready: subscription.ready(),
+    applicationApproval2: ApplicationApprovalDB.findOne({ owner: profile }),
+    ready: subscription.ready() && subscription2.ready(),
   };
 })(StatusBar);
