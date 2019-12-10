@@ -24,7 +24,6 @@ import ProfilePage from '../pages/ProfilePage';
 import ProcessorProfilePage from '../pages/ProcessorProfilePage';
 import AuthorizationPage from '../forms/AuthorizationPage';
 import NavBar from '../components/NavBar';
-import PlainFooter from '../components/PlainFooter';
 
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */

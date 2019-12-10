@@ -115,15 +115,13 @@ class StuffItemAdmin extends React.Component {
             ApplicationStatusDB.insert({
               owner, heco: heco, reviewed: reviewed,
             });
-          } else {
-            if (heco) {
+          } else if (heco) {
               ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, heco } });
               this.setState({ hecoColor: changeStatusTo ? 'green' : 'red' });
             } else if (reviewed) {
               ApplicationStatusDB.update({ _id: currentUser._id }, { $set: { owner, reviewed } });
               this.setState({ reviewedColor: changeStatusTo ? 'green' : 'red' });
             }
-          }
         }
       });
   }
