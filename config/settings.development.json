@@ -4,6 +4,7 @@
     { "email": "wileyb@hawaii.edu", "password": "changeme", "role": "admin" },
     { "email":  "ryoabs@hawaii.edu", "password":  "changeme"},
     { "email":  "john@foo.com", "password":  "changeme"},
+    { "email":  "trey.sumida@gmail.com", "password":  "changeme"},
     { "email": "default@foo.com", "password":  "test",
       "role": "contractor"
     }

@@ -12,7 +12,9 @@ import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
+import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
+// import { _ } from 'meteor/underscore';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
@@ -60,9 +62,6 @@ class ListStuffAdmin extends React.Component {
           if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
             missing.push(['Authorization Section', 'Authorization', 'authorization']);
           }
-          if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
-            missing.push(['Section 9', 'Disclosure', 'form/9']);
-          }
           if (missing.length > 0) {
             users.push(stuff.username);
             Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
@@ -76,6 +75,10 @@ class ListStuffAdmin extends React.Component {
   }
 
   userSearch = (e) => {
+    /* This method uses the user's input to match with the database fields (partial search by Regex).
+    Section2DB and Meteor.users must be combined and must be unique because in some cases, an applicant
+    signs up with an email but hasn't filled out form 2. Form 2 therefore misses an email of the applicant.
+    */
     const mongoFields = [];
     ['owner', 'firstName', 'lastName', 'fullName'].forEach(function (element) {
       let tmp = {};
@@ -88,7 +91,23 @@ class ListStuffAdmin extends React.Component {
       mongoFields.push(tmp);
     });
 
-    this.setState({ search: Section2DB.find({ $or: mongoFields }).fetch(), userTextLength: e.target.value.length });
+    // Adding owner field in Object
+    const ownerObj = [];
+    Meteor.users.find({ username: new RegExp(e.target.value, 'i') }).fetch().forEach(
+      (ele) => ownerObj.push(Object.assign({ owner: ele.username }, ele)),
+    );
+
+    const emails = [];
+    const matchedPeople = [];
+    const objectsList = Object.assign({}, Section2DB.find({ $or: mongoFields }).fetch(), ownerObj);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in objectsList) {
+      if (!emails.includes(objectsList[key].owner)) {
+        emails.push(objectsList[key].owner);
+        matchedPeople.push(objectsList[key]);
+      }
+    }
+    this.setState({ search: matchedPeople, userTextLength: e.target.value.length });
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -129,63 +148,34 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>Auth</Table.HeaderCell>
               <Table.HeaderCell>HECO</Table.HeaderCell>
               <Table.HeaderCell>Reviewed</Table.HeaderCell>
-              <Table.HeaderCell>PDF</Table.HeaderCell>
               <Table.HeaderCell>Excel</Table.HeaderCell>
               <Table.HeaderCell>Application Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {(this.state && this.state.userTextLength > 0) ?
-              (this.state.search.map((stuff, index) => <StuffItemAdmin
-                key={index}
+              (this.state.search.map((stuff) => <StuffItemAdmin
+                key={stuff.owner}
                 owner={stuff.owner}
-                section1={this.props.db1.find(
-                  mydb1 => mydb1.owner === stuff.owner,
-                )}
-                section2={this.props.db2.find(
-                  mydb2 => mydb2.owner === stuff.owner,
-                )}
-                section6={this.props.db6.find(
-                  mydb6 => mydb6.owner === stuff.owner,
-                )}
-                section7={this.props.db7.find(
-                  mydb7 => mydb7.owner === stuff.owner,
-                )}
-                section8={this.props.db8.find(
-                  mydb8 => mydb8.owner === stuff.owner,
-                )}
-                section9={this.props.db9.find(
-                  mydb9 => mydb9.owner === stuff.owner,
-                )}
-                sectionAuthorization={this.props.dbauthorization.find(
-                  mydbAuth => mydbAuth.owner === stuff.owner,
-                )}
+                section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.owner)}
+                section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.owner)}
+                section6={this.props.db6.find(mydb6 => mydb6.owner === stuff.owner)}
+                section7={this.props.db7.find(mydb7 => mydb7.owner === stuff.owner)}
+                section8={this.props.db8.find(mydb8 => mydb8.owner === stuff.owner)}
+                section9={this.props.db9.find(mydb9 => mydb9.owner === stuff.owner)}
+                sectionAuthorization={this.props.dbauthorization.find(mydbAuth => mydbAuth.owner === stuff.owner)}
               />)) :
-              (this.props.accounts.map((stuff, index) => (
+              (this.props.accounts.map((stuff) => (
                 <StuffItemAdmin
-                  key={index}
+                  key={stuff.owner}
                   owner={stuff.username}
-                  section1={this.props.db1.find(
-                    mydb1 => mydb1.owner === stuff.username,
-                  )}
-                  section2={this.props.db2.find(
-                    mydb2 => mydb2.owner === stuff.username,
-                  )}
-                  section6={this.props.db6.find(
-                    mydb6 => mydb6.owner === stuff.username,
-                  )}
-                  section7={this.props.db7.find(
-                    mydb7 => mydb7.owner === stuff.username,
-                  )}
-                  section8={this.props.db8.find(
-                    mydb8 => mydb8.owner === stuff.username,
-                  )}
-                  section9={this.props.db9.find(
-                    mydb9 => mydb9.owner === stuff.username,
-                  )}
-                  sectionAuthorization={this.props.dbauthorization.find(
-                    mydbAuth => mydbAuth.owner === stuff.username,
-                  )}
+                  section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.username)}
+                  section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.username)}
+                  section6={this.props.db6.find(mydb6 => mydb6.owner === stuff.username)}
+                  section7={this.props.db7.find(mydb7 => mydb7.owner === stuff.username)}
+                  section8={this.props.db8.find(mydb8 => mydb8.owner === stuff.username)}
+                  section9={this.props.db9.find(mydb9 => mydb9.owner === stuff.username)}
+                  sectionAuthorization={this.props.dbauthorization.find(mydbAuth => mydbAuth.owner === stuff.username)}
                 />))
               )}
           </Table.Body>
@@ -208,6 +198,7 @@ ListStuffAdmin.propTypes = {
   db9: PropTypes.array,
   dbauthorization: PropTypes.array,
   applicationStatus: PropTypes.array,
+  applicationStatus2: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -223,6 +214,7 @@ export default withTracker(() => {
   const subscription9 = Meteor.subscribe('Form9');
   const subscription10 = Meteor.subscribe('AuthorizationDB');
   const subscription11 = Meteor.subscribe('ApplicationStatusDB');
+  const subscription12 = Meteor.subscribe('ApplicationApprovalDB');
 
   return {
     accounts: Meteor.users.find({}).fetch(),
@@ -234,8 +226,9 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
+    applicationStatus2: ApplicationApprovalDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
       subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-      subscription11.ready(),
+      subscription11.ready() && subscription12.ready(),
   };
 })(ListStuffAdmin);

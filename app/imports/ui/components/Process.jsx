@@ -7,12 +7,13 @@ export default class Process extends React.Component {
     return (
         <Container className='processImage'>
           <Header as='h1' textAlign='center'>
-            <Icon name='settings' />
+            <Icon name='settings'/>
             <Header.Content>
-            How it works
+              How it works
             </Header.Content>
           </Header>
-          <Image src="http://energy.hawaii.gov/wp-content/uploads/2014/11/GEMSinfographic_Nov2014.png" size='massive'/>
+          <Image size='massive'
+                 src="http://energy.hawaii.gov/wp-content/uploads/2014/11/GEMSinfographic_Nov2014.png"/>
         </Container>
     );
   }

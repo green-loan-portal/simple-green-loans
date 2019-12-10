@@ -15,6 +15,7 @@ import { Section8DB } from '../../api/stuff/Section8DB';
 import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
+import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 
 class ProfilePage extends React.Component {
   render() {
@@ -80,6 +81,7 @@ ProfilePage.propTypes = {
   db9: PropTypes.array,
   dbauthorization: PropTypes.array,
   applicationStatus: PropTypes.array,
+  applicationApproval: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -95,6 +97,7 @@ export default withTracker(() => {
   const subscription9 = Meteor.subscribe('Form9');
   const subscription10 = Meteor.subscribe('AuthorizationDB');
   const subscription11 = Meteor.subscribe('ApplicationStatusDB');
+  const subscription12 = Meteor.subscribe('ApplicationApprovalDB');
 
   return {
     accounts: Meteor.users.find({}).fetch(),
@@ -106,8 +109,9 @@ export default withTracker(() => {
     db9: Section9DB.find({}).fetch(),
     dbauthorization: AuthorizationDB.find({}).fetch(),
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
+    applicationApproval: ApplicationApprovalDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
       subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-      subscription11.ready(),
+      subscription11.ready() && subscription12.ready(),
   };
 })(ProfilePage);
