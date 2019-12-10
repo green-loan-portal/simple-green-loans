@@ -44,6 +44,7 @@ class AdminForms extends React.Component {
     if (element) {
       element.addEventListener('click', function () {
 
+        // eslint-disable-next-line new-cap,no-undef
         const pdf = new jsPDF('p', 'pt', 'a4');
         pdf.fromHTML(document.getElementById('root'), function () {
           pdf.save('test.pdf');

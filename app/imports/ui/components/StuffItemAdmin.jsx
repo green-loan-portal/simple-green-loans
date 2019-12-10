@@ -139,6 +139,7 @@ StuffItemAdmin.propTypes = {
   section7: PropTypes.object,
   section8: PropTypes.object,
   section9: PropTypes.object,
+  stuff: PropTypes.object,
   sectionAuthorization: PropTypes.object,
 };
 

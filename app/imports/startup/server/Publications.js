@@ -12,15 +12,15 @@ import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 
 /** This subscription publishes only the documents associated with the logged in user */
 const forms = {
-  'Stuff': Stuffs,
-  'Form1': Section1DB,
-  'Form2': Section2DB,
-  'Form6': Section6DB,
-  'Form7': Section7DB,
-  'Form8': Section8DB,
-  'Form9': Section9DB,
-  'AuthorizationDB': AuthorizationDB,
-  'ApplicationStatusDBUser': ApplicationStatusDB,
+  Stuff: Stuffs,
+  Form1: Section1DB,
+  Form2: Section2DB,
+  Form6: Section6DB,
+  Form7: Section7DB,
+  Form8: Section8DB,
+  Form9: Section9DB,
+  AuthorizationDB: AuthorizationDB,
+  ApplicationStatusDBUser: ApplicationStatusDB,
 };
 
 Object.keys(forms).forEach(key => {
@@ -43,8 +43,16 @@ Meteor.publish('ApplicationStatusDB', function publish() {
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return [Meteor.users.find(), Section1DB.find(), Section2DB.find(), Section6DB.find(),
-    Section7DB.find(), Section8DB.find(), Section9DB.find(), AuthorizationDB.find()];
+    return [
+      Meteor.users.find(),
+      Section1DB.find(),
+      Section2DB.find(),
+      Section6DB.find(),
+      Section7DB.find(),
+      Section8DB.find(),
+      Section9DB.find(),
+      AuthorizationDB.find(),
+    ];
   }
   return this.ready();
 });
