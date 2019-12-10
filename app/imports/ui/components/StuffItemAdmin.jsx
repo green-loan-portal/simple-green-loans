@@ -3,15 +3,15 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// mport { withTracker } from 'meteor/react-meteor-data';
 import { collectdata } from '../../api/stuff/CsvScript';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
+import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 class StuffItemAdmin extends React.Component {
   constructor(props) {
     super(props);
-    const data = ApplicationStatusDB.findOne({ owner: this.props.owner });
+    const data = ApplicationApprovalDB.findOne({ owner: this.props.owner });
     if (!data) {
       this.state = { checkColor: '', cancelColor: 'red' };
     } else {
@@ -82,13 +82,13 @@ class StuffItemAdmin extends React.Component {
     })
       .then((willContinue) => {
         if (willContinue) {
-          const currentUser = ApplicationStatusDB.findOne({ owner: emailOwner });
+          const currentUser = ApplicationApprovalDB.findOne({ owner: emailOwner });
           const owner = emailOwner;
           const approved = boolean;
           if (!currentUser) {
-            ApplicationStatusDB.insert({ owner, heco: false, reviewed: false, approved });
+            ApplicationApprovalDB.insert({ owner, heco: false, reviewed: false, approved });
           } else {
-            ApplicationStatusDB.update(
+            ApplicationApprovalDB.update(
               { _id: currentUser._id },
               {
                 $set: { owner, approved },
