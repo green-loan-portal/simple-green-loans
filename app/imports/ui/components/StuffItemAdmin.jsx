@@ -97,7 +97,7 @@ class StuffItemAdmin extends React.Component {
           {this.props.section2 ? `${this.props.section2.firstName ? this.props.section2.firstName : ''}
           ${this.props.section2.lastName ? this.props.section2.lastName : ''}` : ''}
         </Table.Cell>
-        <Table.Cell><a href={`mailto: ${this.props.owner}`}>{this.props.owner}</a></Table.Cell>
+        <Table.Cell><a href={`mailto:${this.props.owner}`}>{this.props.owner}</a></Table.Cell>
         <Table.Cell>{this.props.section1 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section2 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
         <Table.Cell>{this.props.section6 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
