@@ -1,5 +1,3 @@
-
-
 export function ExpandCanvas() {
   // eslint-disable-next-line no-unused-vars
   window.requestAnimFrame = (function (callback) {
