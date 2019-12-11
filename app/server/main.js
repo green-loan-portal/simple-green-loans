@@ -73,5 +73,5 @@ Meteor.methods({
     } else {
       Roles.addUsersToRoles(id, 'user');
     }
-  }
+  },
 });

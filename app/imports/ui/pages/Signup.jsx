@@ -34,12 +34,11 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
 
           // Send confirmation email if no errors occured when creating a new account
-          // Meteor.call('sendConfirmationEmail', email, function (error) {
-          //   console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
-          // });
+          Meteor.call('sendConfirmationEmail', email, function (error) {
+            console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+          });
         }
       });
-      console.log(Meteor.user())
     }
   }
 
@@ -50,10 +49,9 @@ class Signup extends React.Component {
       const contractorRole = Roles.userIsInRole(Meteor.userId(), 'contractor');
       if (userRole || adminRole || contractorRole) {
         return <Redirect to={'/profile'} />;
-      } else if (!userRole) {
-        Meteor.call('updateUserRole', Meteor.userId(), 'user', function (error) {
-          console.log(error ? `not work` : `worked`);
-        });
+      }
+      if (!userRole) {
+        Meteor.call('updateUserRole', Meteor.userId(), 'user');
       }
     }
     return this.renderPage();
