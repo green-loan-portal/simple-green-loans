@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
+
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -32,16 +34,29 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
 
           // Send confirmation email if no errors occured when creating a new account
-          Meteor.call('sendConfirmationEmail', email, function (error) {
-            console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
-          });
+          // Meteor.call('sendConfirmationEmail', email, function (error) {
+          //   console.log(error ? `Email: ${error}` : `Successfully sent email to ${email}`);
+          // });
         }
       });
+      console.log(Meteor.user())
     }
   }
 
   render() {
-    return Meteor.user() ? <Redirect to={'/profile'} /> : this.renderPage();
+    if (Meteor.user()) {
+      const userRole = Roles.userIsInRole(Meteor.userId(), 'user');
+      const adminRole = Roles.userIsInRole(Meteor.userId(), 'admin');
+      const contractorRole = Roles.userIsInRole(Meteor.userId(), 'contractor');
+      if (userRole || adminRole || contractorRole) {
+        return <Redirect to={'/profile'} />;
+      } else if (!userRole) {
+        Meteor.call('updateUserRole', Meteor.userId(), 'user', function (error) {
+          console.log(error ? `not work` : `worked`);
+        });
+      }
+    }
+    return this.renderPage();
   }
 
   /** Display the signup form. Redirect to add page after successful registration and login. */

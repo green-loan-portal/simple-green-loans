@@ -3,6 +3,7 @@ import '/imports/startup/server/Publications';
 import '/imports/startup/server/Mongo';
 import { Meteor } from 'meteor/meteor';
 import { Email } from 'meteor/email';
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
   sendConfirmationEmail: function (recipientEmail) {
@@ -63,4 +64,14 @@ Meteor.methods({
       html: myHTMLString,
     });
   },
+
+  updateUserRole: function (id, role) {
+    if (role === 'admin') {
+      Roles.addUsersToRoles(id, 'admin');
+    } else if (role === 'contractor') {
+      Roles.addUsersToRoles(id, 'contractor');
+    } else {
+      Roles.addUsersToRoles(id, 'user');
+    }
+  }
 });
