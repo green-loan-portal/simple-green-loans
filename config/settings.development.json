@@ -2,12 +2,11 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "wileyb@hawaii.edu", "password": "changeme", "role": "admin" },
-    { "email":  "ryoabs@hawaii.edu", "password":  "changeme", "role": "user"},
-    { "email":  "john@foo.com", "password":  "changeme"},
-    { "email":  "trey.sumida@gmail.com", "password":  "changeme"},
-    { "email": "default@foo.com", "password":  "test",
-      "role": "contractor"
-    }
+    { "email": "ryoabs@hawaii.edu", "password":  "changeme", "role": "admin"},
+    { "email": "trey.sumida@gmail.com", "password":  "changeme", "role": "admin"},
+    { "email": "default@foo.com", "password":  "test", "role": "contractor"},
+    { "email": "john@foo.com", "password":  "changeme", "role": "user"},
+    { "email": "17buih@gmail.com", "password":  "changeme", "role": "user"}
   ],
 
   "defaultData": [
