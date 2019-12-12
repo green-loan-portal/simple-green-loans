@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBar />
+          <NavBar/>
           <Switch>
             <Route exact path="/" component={HomePageHP} />
             <Route path="/signin" component={Signin} />
