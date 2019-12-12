@@ -2,8 +2,9 @@ import React from 'react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button, Input } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Button, Input, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { NavLink } from 'react-router-dom';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -180,8 +181,8 @@ class ListStuffAdmin extends React.Component {
               )}
           </Table.Body>
         </Table>
-        <Button id='sendEmailButton'>Send application reminder</Button>
-        {this.sending()}
+        <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">Send application reminders
+          <Icon name='arrow alternate circle right'/></Button>
       </Container>
     );
   }
