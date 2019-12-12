@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
+import { Image, Container, Grid, Header, Button, Icon, Menu } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 
 export default class LogoHP extends React.Component {
   render() {
@@ -19,7 +20,7 @@ export default class LogoHP extends React.Component {
                 <Header as='h1'>GEM$ Financing Program Loan Application Portal</Header>
               </Grid.Row>
               <Grid.Row>
-                <Button size='huge' color='green'>
+                <Button as={NavLink} activeClassName="" exact to="/signup" size='huge' color='green'>
                   <Icon name='edit' />
                   Sign Up Today!
                 </Button>
