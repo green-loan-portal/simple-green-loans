@@ -8,7 +8,8 @@ const UnfinishedApplications = new Mongo.Collection('UnfinishedApplications');
 /** Define a schema to specify the structure of each document in the collection. */
 const UnfinishedApplicationsSchema = new SimpleSchema({
   owner: String,
-  applicants: Array,
+  applicants: { type: Array },
+  'applicants.$': { type: String },
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
