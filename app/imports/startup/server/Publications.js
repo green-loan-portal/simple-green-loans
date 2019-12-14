@@ -10,6 +10,7 @@ import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
+import { UnfinishedApplications } from '../../api/stuff/UnfinishedApplications';
 
 /** This subscription publishes only the documents associated with the logged in user */
 const forms = {
@@ -49,7 +50,6 @@ Meteor.publish('ApplicationApprovalDB', function publish() {
   return this.ready();
 });
 
-
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
 Meteor.publish('StuffAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
@@ -62,6 +62,7 @@ Meteor.publish('StuffAdmin', function publish() {
       Section8DB.find(),
       Section9DB.find(),
       AuthorizationDB.find(),
+      UnfinishedApplications.find(),
     ];
   }
   return this.ready();

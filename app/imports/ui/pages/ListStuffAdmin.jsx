@@ -15,6 +15,7 @@ import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
+import { UnfinishedApplications } from '../../api/stuff/UnfinishedApplications';
 // import { _ } from 'meteor/underscore';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -25,6 +26,46 @@ class ListStuffAdmin extends React.Component {
     if (this.props.ready) {
       this.state = { search: [], userTextLength: 0 };
     }
+  }
+
+  onRendered() {
+
+    const accounts = this.props.accounts;
+    const db1 = this.props.db1;
+    const db2 = this.props.db2;
+    const db6 = this.props.db6;
+    const db7 = this.props.db7;
+    const db8 = this.props.db8;
+    const db9 = this.props.db9;
+    const db10 = this.props.dbauthorization;
+    const users = [];
+    accounts.forEach(function (stuff) {
+      const missing = [];
+      if (!db1.find(mydb1 => (mydb1.owner === stuff.username))) {
+        missing.push(['Section 1', 'Survey', 'form/1']);
+      }
+      if (!db2.find(mydb2 => (mydb2.owner === stuff.username))) {
+        missing.push(['Section 2-5', 'Installation', 'form/2']);
+      }
+      if (!db6.find(mydb6 => (mydb6.owner === stuff.username))) {
+        missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']);
+      }
+      if (!db7.find(mydb7 => (mydb7.owner === stuff.username))) {
+        missing.push(['Section 7', 'Application', 'form/7']);
+      }
+      if (!db8.find(mydb8 => (mydb8.owner === stuff.username))) {
+        missing.push(['Section 8', 'System Owner', 'form/8']);
+      }
+      if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
+        missing.push(['Section 9', 'Disclosure', 'form/9']);
+      }
+      if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
+        missing.push(['Authorization Section', 'Authorization', 'authorization']);
+      }
+      if (missing.length > 0) {
+        this.unfinishedApplications.update({ $push: { applicants: stuff.username } });
+      }
+    });
   }
 
   sending() {
@@ -183,6 +224,7 @@ class ListStuffAdmin extends React.Component {
         </Table>
         <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">Send application reminders
           <Icon name='arrow alternate circle right'/></Button>
+        {this.onRendered()}
       </Container>
     );
   }
@@ -200,6 +242,7 @@ ListStuffAdmin.propTypes = {
   dbauthorization: PropTypes.array,
   applicationStatus: PropTypes.array,
   applicationStatus2: PropTypes.array,
+  unfinishedApplications: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -216,6 +259,7 @@ export default withTracker(() => {
   const subscription10 = Meteor.subscribe('AuthorizationDB');
   const subscription11 = Meteor.subscribe('ApplicationStatusDB');
   const subscription12 = Meteor.subscribe('ApplicationApprovalDB');
+  const subscription13 = Meteor.subscribe('UnfinishedApplications');
 
   return {
     accounts: Meteor.users.find({}).fetch(),
@@ -228,8 +272,9 @@ export default withTracker(() => {
     dbauthorization: AuthorizationDB.find({}).fetch(),
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
     applicationStatus2: ApplicationApprovalDB.find({}).fetch(),
+    unfinishedApplications: UnfinishedApplications.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
       subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-      subscription11.ready() && subscription12.ready(),
+      subscription11.ready() && subscription12.ready() && subscription13.ready(),
   };
 })(ListStuffAdmin);
