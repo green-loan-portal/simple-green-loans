@@ -150,7 +150,7 @@ class StuffItemAdmin extends React.Component {
             onClick={() => this.updateStatus('Reviewed', this.props.owner, true)}>Reviewed</Button>
         </Table.Cell>
         <Table.Cell>
-          <Button onClick={collectdata} className='exportButton' basic color='green' content='Green' size='mini'>
+          <Button onClick={collectdata} className='exportButton' basic color='green' size='mini'>
             Excel
           </Button>
         </Table.Cell>

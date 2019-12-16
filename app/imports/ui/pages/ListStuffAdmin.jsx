@@ -63,9 +63,10 @@ class ListStuffAdmin extends React.Component {
         missing.push(['Authorization Section', 'Authorization', 'authorization']);
       }
       if (missing.length > 0) {
-        this.unfinishedApplications.update({ $push: { applicants: stuff.username } });
+        users.push(stuff.username);
       }
     });
+    UnfinishedApplications.insert({ owner: 'admin@foo.com', applicants: users });
   }
 
   sending() {
@@ -153,6 +154,7 @@ class ListStuffAdmin extends React.Component {
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+  /*
   render() {
     return (this.props.ready) ? (
       this.renderPage()
@@ -160,9 +162,9 @@ class ListStuffAdmin extends React.Component {
         <Loader active>Getting data</Loader>
       );
   }
-
+*/
   /** Render the page once subscriptions have been received. */
-  renderPage() {
+  render() {
     return (
       <Container>
         <Header as='h2' textAlign='center'>
@@ -224,7 +226,6 @@ class ListStuffAdmin extends React.Component {
         </Table>
         <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">Send application reminders
           <Icon name='arrow alternate circle right'/></Button>
-        {this.onRendered()}
       </Container>
     );
   }
