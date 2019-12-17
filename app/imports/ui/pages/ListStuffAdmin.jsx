@@ -211,7 +211,7 @@ class ListStuffAdmin extends React.Component {
               />)) :
               (this.props.accounts.map((stuff) => (
                 <StuffItemAdmin
-                  key={stuff.owner}
+                  key={stuff.username}
                   owner={stuff.username}
                   section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.username)}
                   section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.username)}

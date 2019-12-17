@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { List, Container, Header, Loader } from 'semantic-ui-react';
+import { List, Container, Header, Loader, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Section1DB } from '../../api/stuff/Section1DB';
@@ -12,41 +12,74 @@ import { Section9DB } from '../../api/stuff/Section9DB';
 import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
-import ARPComponent from '../components/ARPComponent';
 
 class ApplicationReminderPage extends React.Component {
 
   constructor(props) {
     super(props);
-    if (this.props.ready) {
-      this.state = { unfinished: [] };
-    }
+    this.state = { unfinishedUsers: {} };
   }
 
   render() {
     return (this.props.ready) ? (
-        this.renderPage()
+      this.renderPage()
     ) : (
         <Loader active>Getting data</Loader>
-    );
+      );
+  }
+
+  handleChange(e) {
+    console.log(e.target.name, e.target.checked)
+    return;
+    // const { name } = e.target;
+    // this.setState(prevState => ({
+    //   unfinishedUsers: {
+    //     ...prevState.unfinishedUsers,
+    //     [name]: !prevState.unfinishedUsers[name]
+    //   }
+    // }));
+    // console.log(this.state)
+  }
+
+  /* Go through all databases to check if the each user is in each database. If the user is in all databases,
+   * do nothing, otherwise, push it into `returnValues` array since their application is unfished. */
+  listOfUnfinishedApplicants() {
+    let i = 0;
+    let returnValues = [];
+    for (i; i < this.props.accounts.length; i++) {
+      const db1 = this.props.db1.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db2 = this.props.db2.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db6 = this.props.db6.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db7 = this.props.db7.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db8 = this.props.db8.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db9 = this.props.db9.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db0 = this.props.dbauthorization.find(mydb => mydb.owner === this.props.accounts[i].username)
+
+      if (!(db1 && db2 && db6 && db7 && db8 && db9 && db0)) {
+        const ownerEmail = this.props.accounts[i].username;
+        returnValues.push(
+          <List.Item key={ownerEmail}>
+            <Checkbox
+              label={ownerEmail}
+              onChange={this.handleChange}
+            />
+          </List.Item>
+        )
+      }
+    }
+    return returnValues;
   }
 
   renderPage() {
-
     return (
-        <Container>
-
+      <Container>
         <Header>Select Application To Send Reminder Email</Header>
-
         <div>
           <List>
-            {this.state.unfinished.map((stuff) => <ARPComponent
-                key = {stuff.owner}
-                owner = {stuff.owner}
-                />)}
+            {this.listOfUnfinishedApplicants()}
           </List>
         </div>
-        </Container>
+      </Container>
     );
   }
 }
@@ -91,7 +124,7 @@ export default withTracker(() => {
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
     applicationStatus2: ApplicationApprovalDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-        subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-        subscription11.ready() && subscription12.ready(),
+      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
+      subscription11.ready() && subscription12.ready(),
   };
 })(ApplicationReminderPage);
