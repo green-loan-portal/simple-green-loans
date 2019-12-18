@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { List, Container, Header, Loader, Checkbox, Button } from 'semantic-ui-react';
+import { List, Container, Header, Loader, Checkbox, Button, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import swal from 'sweetalert';
@@ -132,16 +132,22 @@ class ApplicationReminderPage extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header>Select Application To Send Reminder Email</Header>
+          <Header size='huge' dividing textAlign='center'>Select Applicants To Send Reminder Email</Header>
+          <Grid textAlign='center'>
           <div>
-            <List>
+            <List relaxed size='massive'>
+              <List.Item>
               <Checkbox label='Select All'
                         onClick={this.toggle}/>
+              </List.Item>
               {this.listOfUnfinishedApplicants()}
+              <List.Item>
               <Button id='SendReminderButton' className="ui button">Send Reminder(s)</Button>
               {this.sending()}
+              </List.Item>
             </List>
           </div>
+          </Grid>
         </Container>
     );
   }
