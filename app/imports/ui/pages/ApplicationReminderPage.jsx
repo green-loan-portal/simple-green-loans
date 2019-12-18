@@ -1,8 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { List, Container, Header, Loader, Checkbox } from 'semantic-ui-react';
+import { List, Container, Header, Loader, Checkbox, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import swal from 'sweetalert';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -15,21 +16,78 @@ import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 
 class ApplicationReminderPage extends React.Component {
 
+  state = { checked: false }
+
+  toggle = () => this.setState((prevState) => ({ checked: !prevState.checked }))
+
   constructor(props) {
     super(props);
     this.state = { unfinishedUsers: {} };
   }
 
+  sending() {
+    const accounts = this.listOfUnfinishedApplicants();
+  const db1 = this.props.db1;
+  const db2 = this.props.db2;
+  const db6 = this.props.db6;
+  const db7 = this.props.db7;
+  const db8 = this.props.db8;
+  const db9 = this.props.db9;
+  const db10 = this.props.dbauthorization;
+
+  for (let i = 1; i < accounts.length; i++) {
+    if (accounts[i].checked === false) {
+      accounts[i].pop();
+    }
+  }
+  setTimeout(function () {
+    const div = document.getElementById('SendReminderButton');
+    div.addEventListener('click', function () {
+      accounts.forEach(function (stuff) {
+        const missing = [];
+        if (!db1.find(mydb1 => (mydb1.owner === stuff.username))) {
+          missing.push(['Section 1', 'Survey', 'form/1']);
+        }
+        if (!db2.find(mydb2 => (mydb2.owner === stuff.username))) {
+          missing.push(['Section 2-5', 'Installation', 'form/2']);
+        }
+        if (!db6.find(mydb6 => (mydb6.owner === stuff.username))) {
+          missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']);
+        }
+        if (!db7.find(mydb7 => (mydb7.owner === stuff.username))) {
+          missing.push(['Section 7', 'Application', 'form/7']);
+        }
+        if (!db8.find(mydb8 => (mydb8.owner === stuff.username))) {
+          missing.push(['Section 8', 'System Owner', 'form/8']);
+        }
+        if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
+          missing.push(['Section 9', 'Disclosure', 'form/9']);
+        }
+        if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
+          missing.push(['Authorization Section', 'Authorization', 'authorization']);
+        }
+        if (missing.length > 0) {
+          Meteor.call('sendUnfinishedApplications', stuff.username, missing, function (error) {
+            console.log(error ? `Email: ${error}` : `Successfully sent email to ${stuff.username}`);
+          });
+        }
+      });
+      swal('Success', `Successfully sent emails to ${accounts.join(', ')}`, 'success');
+    });
+  }, 200);
+}
+
   render() {
     return (this.props.ready) ? (
-      this.renderPage()
+        this.renderPage()
     ) : (
         <Loader active>Getting data</Loader>
-      );
+    );
   }
 
   handleChange(e) {
     console.log(e.target.name, e.target.checked)
+    e.checked = !e.checked;
     return;
     // const { name } = e.target;
     // this.setState(prevState => ({
@@ -45,26 +103,27 @@ class ApplicationReminderPage extends React.Component {
    * do nothing, otherwise, push it into `returnValues` array since their application is unfished. */
   listOfUnfinishedApplicants() {
     let i = 0;
-    let returnValues = [];
+    const returnValues = [];
     for (i; i < this.props.accounts.length; i++) {
-      const db1 = this.props.db1.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db2 = this.props.db2.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db6 = this.props.db6.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db7 = this.props.db7.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db8 = this.props.db8.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db9 = this.props.db9.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db0 = this.props.dbauthorization.find(mydb => mydb.owner === this.props.accounts[i].username)
+      const db1 = this.props.db1.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db2 = this.props.db2.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db6 = this.props.db6.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db7 = this.props.db7.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db8 = this.props.db8.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db9 = this.props.db9.find(mydb => mydb.owner === this.props.accounts[i].username);
+      const db0 = this.props.dbauthorization.find(mydb => mydb.owner === this.props.accounts[i].username);
 
       if (!(db1 && db2 && db6 && db7 && db8 && db9 && db0)) {
         const ownerEmail = this.props.accounts[i].username;
         returnValues.push(
-          <List.Item key={ownerEmail}>
-            <Checkbox
-              label={ownerEmail}
-              onChange={this.handleChange}
-            />
-          </List.Item>
-        )
+            <List.Item key={ownerEmail}>
+              <Checkbox
+                  label={ownerEmail}
+                  onChange={this.handleChange}
+                  checked={this.state.checked}
+              />
+            </List.Item>,
+        );
       }
     }
     return returnValues;
@@ -72,14 +131,18 @@ class ApplicationReminderPage extends React.Component {
 
   renderPage() {
     return (
-      <Container>
-        <Header>Select Application To Send Reminder Email</Header>
-        <div>
-          <List>
-            {this.listOfUnfinishedApplicants()}
-          </List>
-        </div>
-      </Container>
+        <Container>
+          <Header>Select Application To Send Reminder Email</Header>
+          <div>
+            <List>
+              <Checkbox label='Select All'
+                        onClick={this.toggle}/>
+              {this.listOfUnfinishedApplicants()}
+              <Button id='SendReminderButton' className="ui button">Send Reminder(s)</Button>
+              {this.sending()}
+            </List>
+          </div>
+        </Container>
     );
   }
 }
@@ -124,7 +187,7 @@ export default withTracker(() => {
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
     applicationStatus2: ApplicationApprovalDB.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
-      subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-      subscription11.ready() && subscription12.ready(),
+        subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
+        subscription11.ready() && subscription12.ready(),
   };
 })(ApplicationReminderPage);
