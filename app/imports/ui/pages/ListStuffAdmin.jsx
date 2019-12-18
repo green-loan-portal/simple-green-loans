@@ -224,8 +224,10 @@ class ListStuffAdmin extends React.Component {
               )}
           </Table.Body>
         </Table>
-        <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">Send application reminders
-          <Icon name='arrow alternate circle right'/></Button>
+        <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">
+          Send application reminders
+          <Icon name='arrow alternate circle right' />
+        </Button>
       </Container>
     );
   }

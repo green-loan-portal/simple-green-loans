@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { List, Container, Header, Loader, Checkbox } from 'semantic-ui-react';
+import { List, Container, Header, Loader, Checkbox, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Section1DB } from '../../api/stuff/Section1DB';
@@ -17,7 +17,8 @@ class ApplicationReminderPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { unfinishedUsers: {} };
+    this.state = {};
+    this.userAlreadySent = [];
   }
 
   render() {
@@ -28,20 +29,51 @@ class ApplicationReminderPage extends React.Component {
       );
   }
 
-  handleChange(e) {
-    console.log(e.target.name, e.target.checked)
-    return;
-    // const { name } = e.target;
-    // this.setState(prevState => ({
-    //   unfinishedUsers: {
-    //     ...prevState.unfinishedUsers,
-    //     [name]: !prevState.unfinishedUsers[name]
-    //   }
-    // }));
-    // console.log(this.state)
+  checkboxChangeHandler = (event, data) => {
+    this.setState({
+      [data.label]: data.checked
+    });
+  };
+
+  sending() {
+    /* If the user has already received an email, it should not send an email again. Therefore, we
+     * used `this.userAlreadySent` to help with this.
+    */
+    const outsideThis = this;
+    setTimeout(function () {
+      const div = document.getElementById('sendEmailButton');
+      div.addEventListener('click', function () {
+        const users = [];
+        outsideThis.alive = true;
+        for (const property in outsideThis.state) {
+          if (!(outsideThis.userAlreadySent.includes(property)) && (outsideThis.state[property])) {
+            outsideThis.userAlreadySent.push(property);
+            users.push(property);
+          }
+        }
+        if (users.length > 0) {
+          swal({
+            title: 'Are you sure?',
+            text: `Sending email notification(s) to ${users.join(', ')}`,
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+          })
+            .then((willContinue) => {
+              if (willContinue) {
+                for (let i = 0; i < users.length; i++) {
+                  Meteor.call('sendUnfinishedApplications', users[i], function (error) {
+                    console.log(error ? `Email: ${error}` : `Successfully sent email to ${users[i]}`);
+                  });
+                }
+              }
+            });
+        }
+      });
+    }, 200);
   }
 
-  /* Go through all databases to check if the each user is in each database. If the user is in all databases,
+  /* Go through all databases to check if each user is in each one. If the user is in all databases,
    * do nothing, otherwise, push it into `returnValues` array since their application is unfished. */
   listOfUnfinishedApplicants() {
     let i = 0;
@@ -61,7 +93,7 @@ class ApplicationReminderPage extends React.Component {
           <List.Item key={ownerEmail}>
             <Checkbox
               label={ownerEmail}
-              onChange={this.handleChange}
+              onChange={this.checkboxChangeHandler}
             />
           </List.Item>
         )
@@ -79,6 +111,8 @@ class ApplicationReminderPage extends React.Component {
             {this.listOfUnfinishedApplicants()}
           </List>
         </div>
+        <Button id='sendEmailButton'>Send application reminder</Button>
+        {this.sending()}
       </Container>
     );
   }
