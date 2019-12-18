@@ -1,6 +1,7 @@
 import React from 'react';
+import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { List, Container, Header, Loader, Checkbox, Button } from 'semantic-ui-react';
+import { List, Container, Header, Loader, Checkbox, Button, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Section1DB } from '../../api/stuff/Section1DB';
@@ -31,7 +32,7 @@ class ApplicationReminderPage extends React.Component {
 
   checkboxChangeHandler = (event, data) => {
     this.setState({
-      [data.label]: data.checked
+      [data.label]: data.checked,
     });
   };
 
@@ -45,6 +46,7 @@ class ApplicationReminderPage extends React.Component {
       div.addEventListener('click', function () {
         const users = [];
         outsideThis.alive = true;
+        // eslint-disable-next-line no-restricted-syntax
         for (const property in outsideThis.state) {
           if (!(outsideThis.userAlreadySent.includes(property)) && (outsideThis.state[property])) {
             outsideThis.userAlreadySent.push(property);
@@ -77,15 +79,22 @@ class ApplicationReminderPage extends React.Component {
    * do nothing, otherwise, push it into `returnValues` array since their application is unfished. */
   listOfUnfinishedApplicants() {
     let i = 0;
-    let returnValues = [];
+    const returnValues = [];
     for (i; i < this.props.accounts.length; i++) {
-      const db1 = this.props.db1.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db2 = this.props.db2.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db6 = this.props.db6.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db7 = this.props.db7.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db8 = this.props.db8.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db9 = this.props.db9.find(mydb => mydb.owner === this.props.accounts[i].username)
-      const db0 = this.props.dbauthorization.find(mydb => mydb.owner === this.props.accounts[i].username)
+      // eslint-disable-next-line no-loop-func
+      const db1 = this.props.db1.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db2 = this.props.db2.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db6 = this.props.db6.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db7 = this.props.db7.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db8 = this.props.db8.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db9 = this.props.db9.find(mydb => mydb.owner === this.props.accounts[i].username);
+      // eslint-disable-next-line no-loop-func
+      const db0 = this.props.dbauthorization.find(mydb => mydb.owner === this.props.accounts[i].username);
 
       if (!(db1 && db2 && db6 && db7 && db8 && db9 && db0)) {
         const ownerEmail = this.props.accounts[i].username;
@@ -95,8 +104,8 @@ class ApplicationReminderPage extends React.Component {
               label={ownerEmail}
               onChange={this.checkboxChangeHandler}
             />
-          </List.Item>
-        )
+          </List.Item>,
+        );
       }
     }
     return returnValues;
@@ -105,14 +114,18 @@ class ApplicationReminderPage extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header>Select Application To Send Reminder Email</Header>
+        <Header dividing textAlign='center' size='huge'>Select Applicants To Send Reminder Email</Header>
+        <Grid textAlign='center'>
         <div>
-          <List>
+          <List relaxed size='massive'>
             {this.listOfUnfinishedApplicants()}
           </List>
         </div>
+          <Grid.Row>
         <Button id='sendEmailButton'>Send application reminder</Button>
         {this.sending()}
+          </Grid.Row>
+        </Grid>
       </Container>
     );
   }
