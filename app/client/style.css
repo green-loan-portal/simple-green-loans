@@ -179,3 +179,12 @@
 .topmen {
   padding-top: 50px;
 }
+
+
+/* START: Home page edits */
+
+a#LogoHome.ui.image {
+  padding: 0px;
+}
+
+

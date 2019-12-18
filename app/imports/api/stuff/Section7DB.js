@@ -10,7 +10,7 @@ const Section7DBSchemaWithoutOwner = new SimpleSchema({
   email: String,
   phoneHome: { type: Number, optional: true },
   phoneMobile: { type: Number, optional: true },
-  mailingAddress: { type: String, optional: true },
+  mailingAddress: { type: String, required: true },
   partiesNames: { type: String, optional: true },
   otherOwner1: { type: String, optional: true },
   otherOwnerRelationship1: { type: String, optional: true },

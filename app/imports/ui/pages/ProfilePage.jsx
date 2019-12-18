@@ -28,7 +28,7 @@ class ProfilePage extends React.Component {
 
             <Grid.Row verticalAlign='middle'>
               <Grid.Column>
-                <Header as="h1">View/Finish Your Application</Header>
+                <Header as="h1">Start/Edit Your Application</Header>
                 <Button as={NavLink} exact to="/form/1">Click Here</Button>
               </Grid.Column>
 

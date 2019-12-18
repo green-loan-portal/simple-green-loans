@@ -7,8 +7,8 @@ const Section8DB = new Mongo.Collection('Section8DB');
 
 /** Define a schema to specify the structure of each document in the collection; without owner */
 const Section8DBSchemaWithoutOwner = new SimpleSchema({
-  taxCreditClaimer: String,
-  taxCreditClaimerRelationship: { type: String, required: false },
+  taxCreditClaimer: { type: String, optional: false },
+  taxCreditClaimerRelationship: { type: String, optional: true },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */

@@ -20,7 +20,7 @@ const AuthorizationDBWithoutOwner = new SimpleSchema({
   customerTermCondition: { type: String, allowedValues: AppFormValues.customerTermCondition },
   utility: { type: Array, required: true },
   'utility.$': { type: String, allowedValues: AppFormValues.utility },
-  utilityAccountNumber: String,
+  utilityAccountNumber: { type: Number },
 }, { tracker: Tracker });
 
 /** Define a schema to specify the structure of each document in the collection. */
