@@ -2,8 +2,9 @@ import React from 'react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button, Input } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Button, Input, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { NavLink } from 'react-router-dom';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -14,6 +15,7 @@ import { AuthorizationDB } from '../../api/stuff/AuthorizationDB';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
+import { UnfinishedApplications } from '../../api/stuff/UnfinishedApplications';
 // import { _ } from 'meteor/underscore';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -111,6 +113,7 @@ class ListStuffAdmin extends React.Component {
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+ /*
   render() {
     return (this.props.ready) ? (
       this.renderPage()
@@ -118,9 +121,9 @@ class ListStuffAdmin extends React.Component {
         <Loader active>Getting data</Loader>
       );
   }
-
+*/
   /** Render the page once subscriptions have been received. */
-  renderPage() {
+  render() {
     return (
       <Container>
         <Header as='h2' textAlign='center'>
@@ -167,7 +170,7 @@ class ListStuffAdmin extends React.Component {
               />)) :
               (this.props.accounts.map((stuff) => (
                 <StuffItemAdmin
-                  key={stuff.owner}
+                  key={stuff.username}
                   owner={stuff.username}
                   section1={this.props.db1.find(mydb1 => mydb1.owner === stuff.username)}
                   section2={this.props.db2.find(mydb2 => mydb2.owner === stuff.username)}
@@ -180,8 +183,10 @@ class ListStuffAdmin extends React.Component {
               )}
           </Table.Body>
         </Table>
-        <Button id='sendEmailButton'>Send application reminder</Button>
-        {this.sending()}
+        <Button as={NavLink} activeClassName="" exact to="/ApplicationReminders">
+          Send application reminders
+          <Icon name='arrow alternate circle right' />
+        </Button>
       </Container>
     );
   }
@@ -199,6 +204,7 @@ ListStuffAdmin.propTypes = {
   dbauthorization: PropTypes.array,
   applicationStatus: PropTypes.array,
   applicationStatus2: PropTypes.array,
+  unfinishedApplications: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -215,6 +221,7 @@ export default withTracker(() => {
   const subscription10 = Meteor.subscribe('AuthorizationDB');
   const subscription11 = Meteor.subscribe('ApplicationStatusDB');
   const subscription12 = Meteor.subscribe('ApplicationApprovalDB');
+  const subscription13 = Meteor.subscribe('UnfinishedApplications');
 
   return {
     accounts: Meteor.users.find({}).fetch(),
@@ -227,8 +234,9 @@ export default withTracker(() => {
     dbauthorization: AuthorizationDB.find({}).fetch(),
     applicationStatus: ApplicationStatusDB.find({}).fetch(),
     applicationStatus2: ApplicationApprovalDB.find({}).fetch(),
+    unfinishedApplications: UnfinishedApplications.find({}).fetch(),
     ready: subscription.ready() && subscription1.ready() && subscription2.ready() && subscription6.ready() &&
       subscription7.ready() && subscription8.ready() && subscription9.ready() && subscription10.ready() &&
-      subscription11.ready() && subscription12.ready(),
+      subscription11.ready() && subscription12.ready() && subscription13.ready(),
   };
 })(ListStuffAdmin);

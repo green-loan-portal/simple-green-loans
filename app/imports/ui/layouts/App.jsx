@@ -21,6 +21,7 @@ import Form8 from '../forms/Form8';
 import Form9 from '../forms/Form9';
 import AdminForms from '../forms/AdminForms';
 import ProfilePage from '../pages/ProfilePage';
+import ApplicationReminderPage from '../pages/ApplicationReminderPage';
 import ProcessorProfilePage from '../pages/ProcessorProfilePage';
 import AuthorizationPage from '../forms/AuthorizationPage';
 import NavBar from '../components/NavBar';
@@ -52,6 +53,7 @@ class App extends React.Component {
             <ProtectedRoute path="/edit/:_id" component={EditStuff} />
             <ProtectedRoute path="/edit/:_id" component={EditStuff} />
             <ProtectedRoute path="/admin" component={ListStuffAdmin} />
+            <ProtectedRoute path="/ApplicationReminders" component={ApplicationReminderPage} />
             <ProtectedRoute path="/signout" component={Signout} />
             <Route component={NotFound} />
           </Switch>
