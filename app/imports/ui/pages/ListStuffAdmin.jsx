@@ -28,47 +28,6 @@ class ListStuffAdmin extends React.Component {
     }
   }
 
-  onRendered() {
-
-    const accounts = this.props.accounts;
-    const db1 = this.props.db1;
-    const db2 = this.props.db2;
-    const db6 = this.props.db6;
-    const db7 = this.props.db7;
-    const db8 = this.props.db8;
-    const db9 = this.props.db9;
-    const db10 = this.props.dbauthorization;
-    const users = [];
-    accounts.forEach(function (stuff) {
-      const missing = [];
-      if (!db1.find(mydb1 => (mydb1.owner === stuff.username))) {
-        missing.push(['Section 1', 'Survey', 'form/1']);
-      }
-      if (!db2.find(mydb2 => (mydb2.owner === stuff.username))) {
-        missing.push(['Section 2-5', 'Installation', 'form/2']);
-      }
-      if (!db6.find(mydb6 => (mydb6.owner === stuff.username))) {
-        missing.push(['Section 6', 'Data For Program Reporting Purposes', 'form/6']);
-      }
-      if (!db7.find(mydb7 => (mydb7.owner === stuff.username))) {
-        missing.push(['Section 7', 'Application', 'form/7']);
-      }
-      if (!db8.find(mydb8 => (mydb8.owner === stuff.username))) {
-        missing.push(['Section 8', 'System Owner', 'form/8']);
-      }
-      if (!db9.find(mydb9 => (mydb9.owner === stuff.username))) {
-        missing.push(['Section 9', 'Disclosure', 'form/9']);
-      }
-      if (!db10.find(mydb10 => (mydb10.owner === stuff.username))) {
-        missing.push(['Authorization Section', 'Authorization', 'authorization']);
-      }
-      if (missing.length > 0) {
-        users.push(stuff.username);
-      }
-    });
-    UnfinishedApplications.insert({ owner: 'admin@foo.com', applicants: users });
-  }
-
   sending() {
     const accounts = this.props.accounts;
     const db1 = this.props.db1;
@@ -154,7 +113,6 @@ class ListStuffAdmin extends React.Component {
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  /*
   render() {
     return (this.props.ready) ? (
       this.renderPage()
@@ -162,9 +120,9 @@ class ListStuffAdmin extends React.Component {
         <Loader active>Getting data</Loader>
       );
   }
-*/
+
   /** Render the page once subscriptions have been received. */
-  render() {
+  renderPage() {
     return (
       <Container>
         <Header as='h2' textAlign='center'>
