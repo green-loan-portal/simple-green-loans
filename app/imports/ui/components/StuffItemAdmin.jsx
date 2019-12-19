@@ -4,9 +4,9 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 // import { collectdata } from '../../api/stuff/CsvScript';
+import { _ } from 'meteor/underscore';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
-import { _ } from 'meteor/underscore';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -392,36 +392,37 @@ class StuffItemAdmin extends React.Component {
           <Table.Cell>
             {this.props.section2 ? `${this.props.section2.firstName ? this.props.section2.firstName : ''}
           ${this.props.section2.lastName ? this.props.section2.lastName : ''}` : ''}
-        </Table.Cell>
-        <Table.Cell><a href={`mailto: ${this.props.owner}`}>{this.props.owner}</a></Table.Cell>
-        <Table.Cell>{this.props.section1 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.section2 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.section6 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.section7 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.section8 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.section9 ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green' /> : ''}</Table.Cell>
-        <Table.Cell>
-          <Button type='button' className={this.state.hecoColor} basic size='mini'
-            onClick={() => this.updateStatus('HECO', this.props.owner, true)}>Received</Button>
-        </Table.Cell>
-        <Table.Cell>
-          <Button type='button' className={this.state.reviewedColor} basic size='mini'
-            onClick={() => this.updateStatus('Reviewed', this.props.owner, true)}>Reviewed</Button>
-        </Table.Cell>
-        <Table.Cell>
-          <Button onClick={collectdata} className='exportButton' basic color='green' size='mini'>
-            Excel
-          </Button>
-        </Table.Cell>
-        <Table.Cell>
-          <Button type='button' className={this.state.checkColor}
-            onClick={() => this.updateApproval(this.props.owner, true)} icon='check'></Button>
-          /&nbsp;
-          <Button type='button' className={this.state.cancelColor}
-            onClick={() => this.updateApproval(this.props.owner, false)} icon='cancel'></Button>
-        </Table.Cell>
-      </Table.Row>
+          </Table.Cell>
+          <Table.Cell><a href={`mailto: ${this.props.owner}`}>{this.props.owner}</a></Table.Cell>
+          <Table.Cell>{this.props.section1 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.section2 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.section6 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.section7 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.section8 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.section9 ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>{this.props.sectionAuthorization ? <Icon name='check' className='green'/> : ''}</Table.Cell>
+          <Table.Cell>
+            <Button type='button' className={this.state.hecoColor} basic size='mini'
+                    onClick={() => this.updateStatus('HECO', this.props.owner, true)}>Received</Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Button type='button' className={this.state.reviewedColor} basic size='mini'
+                    onClick={() => this.updateStatus('Reviewed', this.props.owner, true)}>Reviewed</Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Button onClick={() => this.collectdata(this.props.owner)} className='exportButton' basic color='green'
+                    content='Green' size='mini'>
+              Excel
+            </Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Button type='button' className={this.state.checkColor}
+                    onClick={() => this.updateApproval(this.props.owner, true)} icon='check'/>
+            /&nbsp;
+            <Button type='button' className={this.state.cancelColor}
+                    onClick={() => this.updateApproval(this.props.owner, false)} icon='cancel'/>
+          </Table.Cell>
+        </Table.Row>
     );
   }
 }
