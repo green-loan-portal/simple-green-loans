@@ -3,10 +3,9 @@ import { Icon, Button, Table } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-// import { collectdata } from '../../api/stuff/CsvScript';
+import { _ } from 'meteor/underscore';
 import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
-import { _ } from 'meteor/underscore';
 import { Section1DB } from '../../api/stuff/Section1DB';
 import { Section2DB } from '../../api/stuff/Section2DB';
 import { Section6DB } from '../../api/stuff/Section6DB';
@@ -410,7 +409,7 @@ class StuffItemAdmin extends React.Component {
             onClick={() => this.updateStatus('Reviewed', this.props.owner, true)}>Reviewed</Button>
         </Table.Cell>
         <Table.Cell>
-          <Button onClick={collectdata} className='exportButton' basic color='green' size='mini'>
+          <Button onClick={this.collectdata()} className='exportButton' basic color='green' size='mini'>
             Excel
           </Button>
         </Table.Cell>

@@ -2,7 +2,7 @@ import React from 'react';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button, Input, Icon } from 'semantic-ui-react';
+import { Container, Table, Header, Button, Input, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Section1DB } from '../../api/stuff/Section1DB';
@@ -16,7 +16,6 @@ import { ApplicationStatusDB } from '../../api/stuff/ApplicationStatusDB';
 import { ApplicationApprovalDB } from '../../api/stuff/ApplicationApprovalDB';
 import StuffItemAdmin from '../../ui/components/StuffItemAdmin';
 import { UnfinishedApplications } from '../../api/stuff/UnfinishedApplications';
-// import { _ } from 'meteor/underscore';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {

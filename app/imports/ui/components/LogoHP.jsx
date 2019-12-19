@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Container, Grid, Header, Button, Icon, Menu } from 'semantic-ui-react';
+import { Image, Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
 export default class LogoHP extends React.Component {
